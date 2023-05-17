@@ -3,7 +3,7 @@
 
 CREATE TABLE Evenement(
     idEvenement int NOT NULL AUTO_INCREMENT,
-    nomChallenge varchar(64) NOT NULL,
+    nomEvenement varchar(64) NOT NULL,
     dateDebut date,
     dateFin date,
     typeEvenement varchar(30),
@@ -21,6 +21,7 @@ CREATE TABLE ProjetData(
     idDataChallenge int NOT NULL,
     idEntreprise int NOT NULL,
     nomProjet varchar(512) NOT NULL,
+    description varchar(1024),
     image varchar(1024),
     urlFichier varchar(1024),
     urlVideo varchar(1024),
@@ -29,19 +30,11 @@ CREATE TABLE ProjetData(
     FOREIGN KEY (idEntreprise) REFERENCES Entreprise(idEntreprise)
 );
 
-CREATE TABLE DataBattle(
-    idDataBattle int NOT NULL AUTO_INCREMENT,
-    idEntreprise int NOT NULL,
-    nomDataBattle varchar(512) NOT NULL,
-    PRIMARY KEY (idDataBattle),
-    FOREIGN KEY (idEntreprise) REFERENCES Entreprise(idEntreprise)
-);
-
 CREATE TABLE Questionnaire(
     idQuestionnaire int NOT NULL AUTO_INCREMENT,
     idDataBattle int NOT NULL,
     PRIMARY KEY (idQuestionnaire),
-    FOREIGN KEY (idDataBattle) REFERENCES DataBattle(idDataBattle)
+    FOREIGN KEY (idDataBattle) REFERENCES Evenement(idEvenement)
 );
 
 CREATE TABLE Question(
@@ -93,7 +86,7 @@ CREATE TABLE Reponse(
     idReponse int NOT NULL AUTO_INCREMENT,
     idQuestion int NOT NULL,
     idEquipe int NOT NULL,
-    reponse varchar(5000),
+    reponse varchar(4096),
     note tinyint,
     PRIMARY KEY (idReponse),
     FOREIGN KEY (idQuestion) REFERENCES Questionnaire(idQuestionnaire),
