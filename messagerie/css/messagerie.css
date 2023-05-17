@@ -1,0 +1,247 @@
+body{
+    display: flex;
+    position: relative;
+    flex-direction: row;
+}
+
+#aaaeaeae{
+    height: 50px;
+}
+
+#messagerie-container{
+    /* margin-top: 5px; */
+
+
+    display: flex;
+    flex-direction: row;
+    background: rgb(113, 113, 198);
+    border: 1px solid rgb(44, 44, 75);
+    box-shadow: 5px 5px 5px #0000008f;
+
+
+    width: 600px;
+    height: 700px;
+
+
+
+    color :#000000;
+}
+
+#les-discussions{
+    width: 45%;
+}
+
+#select-discussion{
+    width: 100%;
+    height: 100%;
+
+    background: rgb(180, 216, 255);
+}
+#select-discussion option{
+    width: 100%;
+    height: 2em;
+
+    cursor: pointer;
+
+    text-align: center;
+    border: 1px solid rgb(44, 44, 75);
+}
+
+#la-discussion{
+    display: flex;
+    flex-direction: column;
+
+
+
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+#message-zone{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    overflow: auto;
+
+    padding: 10px;
+
+    height: 95%;
+}
+.message{
+    width: 60%;
+    /* height: 5em; */
+
+    padding: 2px;
+
+    background: rgb(180, 216, 255);
+}
+.systeme{
+    align-self: center;
+    border-radius: 10px 10px 10px 10px;
+}
+.recu{
+    align-self: flex-start;
+    border-radius: 10px 10px 10px 0px;
+}
+.envoye{
+    align-self: flex-end;
+    border-radius: 10px 10px 0px 10px;
+}
+.message p{
+    margin: 0;
+}
+.premiere-ligne{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.plus{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap:2px;
+
+    cursor: pointer;
+
+    margin-right: 2%;
+    margin-top: 2%;
+
+    height: 1.4em;
+    width: 1.4em;
+    background:  grey;
+    border-radius: 100%;
+    border: 1px solid black;
+
+    transition: 300ms ease-in-out;
+}
+.plus:hover{
+  transform: scale(110%);
+}
+
+.plus div{
+    width: 4px;
+    height: 4px;
+    background:  black;
+    border-radius: 100%;
+}
+.auteur{
+    font-weight: 700;
+    font-size: 1em;
+}
+.infos{
+    font-size: 0.7em;
+}
+.text{
+    width: auto;
+    overflow: auto;
+}
+
+#bas-messagerie{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    height :auto;
+}
+
+#nouv-message{
+    margin: 5px;
+    width: 100%;
+    height :auto;
+}
+
+#button-bloque{
+    text-align: center;
+}
+
+.hidden{
+    display: none !important;
+}
+
+#option-plus{
+    position: absolute;
+    top: 0px ;
+    left: 0px;
+
+    background: burlywood;
+    border: 2px solid #000000;
+    border-radius: 3px;
+}
+#supprimer{
+    cursor: pointer;
+
+    padding: 2px;
+    background: burlywood;
+
+}
+#signaler{
+    cursor: pointer;
+
+    padding: 2px;
+    background: burlywood;
+
+}
+.b:hover{
+  text-decoration:  underline black;
+}
+
+#signalement{
+  display : flex;
+  flex-direction: column;
+
+  position: absolute;
+  top: 50% ;
+  left: 50%;
+  transform: translate(-50%,-50%);
+
+  font-size: 0.85em;
+
+  background: burlywood;
+  border: 2px solid #000000;
+  border-radius: 3px;
+}
+#signalement p {
+  margin-top :5px ;
+  margin-bottom: 0;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+#signalement #les-boutons{
+  display : flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+#les-boutons div{
+  cursor: pointer;
+
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 1px;
+  padding: 2px;
+}
+#description{
+  height : 150px;
+  max-width: 500px;
+  max-height: 300px;
+
+}
+
+.button-bloque-debloque{
+    cursor: pointer;
+
+    vertical-align:baseline;
+    text-align: center;
+
+    margin:5px;
+
+    background: rgb(163, 163, 254);
+    border: 2px solid #000000;
+    border-radius: 3px;
+}
