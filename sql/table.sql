@@ -1,5 +1,6 @@
--- CREATE DATABASE IF NOT EXISTS projetIaPau;
--- USE projetIaPau;
+-- DROP DATABASE IF EXISTS projetIaPau
+CREATE DATABASE IF NOT EXISTS projetIaPau;
+USE projetIaPau;
 
 CREATE TABLE Evenement(
     idEvenement int NOT NULL AUTO_INCREMENT,
@@ -45,20 +46,18 @@ CREATE TABLE Question(
     FOREIGN KEY (idQuestionnaire) REFERENCES Questionnaire(idQuestionnaire)
 );
 
-
-
 CREATE TABLE Utilisateur(
     idUtilisateur int NOT NULL AUTO_INCREMENT,
+    email varchar(64) NOT NULL,
     motDePasse varchar(255) NOT NULL,
     type varchar(30) NOT NULL,
     nomUtilisateur varchar(30) NOT NULL,
     prenomUtilisateur varchar(30) NOT NULL,
-    idEntrepreprise int,
     numeroTel int NOT NULL,
-    email varchar(64) NOT NULL,
     niveauEtude varchar(2),
     ecole varchar(30),
     ville varchar(30),
+    idEntrepreprise int,
     PRIMARY KEY (idUtilisateur),
     FOREIGN KEY (idEntreprise) REFERENCES Entreprise(idEntrepreprise)
     UNIQUE (email)
