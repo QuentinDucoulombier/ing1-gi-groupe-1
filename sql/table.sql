@@ -4,7 +4,10 @@
 CREATE TABLE Evenement(
     idEvenement int NOT NULL AUTO_INCREMENT,
     nomChallenge varchar(64) NOT NULL,
-    PRIMARY KEY (idDataChallenge)
+    dateDebut date,
+    dateFin date,
+    typeEvenement varchar(30),
+    PRIMARY KEY (idEvenement)
 );
 
 CREATE TABLE Entreprise(
