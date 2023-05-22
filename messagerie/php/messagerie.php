@@ -11,6 +11,9 @@
     
         <!--TODO rajouter signalement-->
         <div id="messagerie-container">
+            <div id="name">
+
+            </div> 
             <div id="les-discussions">
 
                 <select id="select-discussion" size="5">
@@ -31,7 +34,7 @@
                         $result = mysqli_query($cnx,$query);
                         if ($result) {
                             while($row = mysqli_fetch_assoc($result)){
-                                echo '<option onclick=newDestinataire("'.$row['prenom'].' '. $row['nom'].'") value="'.$row['prenom'].' '. $row['nom'].'">'.$row['prenom'].' '. $row['nom'].'</option>' ;
+                                echo '<option onclick=newDestinataire("'.$row['id_user'].'") value="'.$row['prenom'].' '. $row['nom'].'">'.$row['prenom'].' '. $row['nom'].'</option>' ;
                             }
                         } else {
                             echo "Erreur lors de l'exécution de la requête : " . mysqli_error($cnx);
@@ -73,6 +76,9 @@
                 </div>
             </div>
 
+        </div>
+        <div id="test">
+            
         </div>
 
 </body>

@@ -2,12 +2,7 @@ DROP DATABASE IF EXISTS messagerie;
 CREATE DATABASE messagerie;
 USE messagerie;
 
-
-/*On pourra rajouter:
-supprime TINYINT(1)
-et le statut de destinataire et auteur*/
-
-/*Table user */
+/* Table users */
 CREATE TABLE User (
   id_user INT AUTO_INCREMENT PRIMARY KEY,
   prenom VARCHAR(255),
@@ -15,32 +10,41 @@ CREATE TABLE User (
   email VARCHAR(255)
 );
 
-/* Table auteurs*/
+/* Ajout d'utilisateurs */
+INSERT INTO User (prenom, nom, email)
+VALUES ('prenomA', 'nomA', 'emailA'), ('prenomD', 'nomD', 'emailD');
+
+
+/* Table auteurs */
 CREATE TABLE Auteur (
   id_auteur INT AUTO_INCREMENT PRIMARY KEY,
-  prenom VARCHAR(255),
-  nom VARCHAR(255),
-  email VARCHAR(255)
+  id_user INT,
+  FOREIGN KEY (id_user) REFERENCES User(id_user)
 );
 
-/*Table destinations*/
-CREATE TABLE Destinateur (
-  id_destinateur INT AUTO_INCREMENT PRIMARY KEY,
-  prenom VARCHAR(255),
-  nom VARCHAR(255),
-  email VARCHAR(255)
+/* Table destinataires */
+CREATE TABLE Destinataire (
+  id_destinataire INT AUTO_INCREMENT PRIMARY KEY,
+  id_user INT,
+  FOREIGN KEY (id_user) REFERENCES User(id_user)
 );
 
-
-/*Table messages*/
+/* Table messages */
 CREATE TABLE Messages (
   id_message INT AUTO_INCREMENT PRIMARY KEY,
   id_auteur INT,
-  id_destinateur INT,
+  id_destinataire INT,
   message TEXT,
   date_envoi DATETIME,
   lu TINYINT(1),
   FOREIGN KEY (id_auteur) REFERENCES Auteur(id_auteur),
-  FOREIGN KEY (id_destinateur) REFERENCES Destinateur(id_destinateur)
+  FOREIGN KEY (id_destinataire) REFERENCES Destinataire(id_destinataire)
 );
 
+/* Ajout auteur de base */
+INSERT INTO Auteur (id_user)
+VALUES (1);
+
+/* Ajout destinataire de base */
+INSERT INTO Destinataire (id_user)
+VALUES (2);

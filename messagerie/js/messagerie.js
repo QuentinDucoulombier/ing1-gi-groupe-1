@@ -1,10 +1,11 @@
-const nouv_autre = (nom,prenom,mail,statut) => {
+/*Change le destinataire*/
+function newDestinataire(id) {
 
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            is_blocked = parseInt(this.responseText);
+            /*is_blocked = parseInt(this.responseText);
             var button_bloque = document.getElementById("button-bloque");
             var button_debloque = document.getElementById("button-debloque");
 
@@ -17,11 +18,96 @@ const nouv_autre = (nom,prenom,mail,statut) => {
                 button_debloque.classList.add("hidden");
             }
             id_dernier_message = -1;
-            recup_messages();
+            recup_messages();*/
+            console.log(this.responseText);
+            document.getElementById("name").innerHTML = this.responseText;
         }
     }
+    console.log(id);
+
+    xhttp.open("POST", "../php/newDestinataire.php", true);
+    xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhttp.send("id="+id);
+}
+
+/*TODO:getMsg() and newMsg() and displayMsg()*/
+function displayMsg(message) {
+
+    let message_zone = document.getElementById("message-zone");
+
+    let nv_message = document.createElement("div");
+    nv_message.classList.add("message");
+
+    let id = document.createElement("p");
+    id.classList.add("hidden");
+    id.innerHTML = message["id_message"];
+
+
+    let prem_ligne = document.createElement("div");
+    prem_ligne.classList.add("premiere-ligne");
+
+    let p_auteur = document.createElement("p");
+    p_auteur.classList.add("auteur");
+    //p_auteur.innerHTML = message["auteur"]["nom"] + " " + message["auteur"]["prenom"];
+
+    prem_ligne.appendChild(p_auteur );
+
+    let plus = document.createElement("div");
+    plus.classList.add("plus");
+    plus.innerHTML = "<div></div><div></div><div></div>";
+
+
+
+    let p_infos = document.createElement("p");
+    p_infos.classList.add("infos");
+    p_infos.innerHTML = message["date_envoi"];
+
+    let p_text = document.createElement("p");
+    p_text.classList.add("text");
+
+
+    nv_message.appendChild(prem_ligne);
+    nv_message.appendChild(p_infos);
+    nv_message.appendChild(p_text);
+    nv_message.appendChild(id);
+
+    message_zone.appendChild(nv_message);
+}
+    
+
+
+
+function getMsg() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+
+        }
+    };
+
+    xhttp.open("GET", "../php/getMsg.php", true);
+    xhttp.send();
+}
+
+
+
+function newMsg() {
+    let message = document.getElementById("message-text").value;
+    //if(!is_blocked){
+    var xhttp = new XMLHttpRequest();
+
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            console.log(this.responseText);
+            //recup_messages();
+        }
+    };
 
     xhttp.open("POST", "../php/newMessage.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhttp.send("nom="+nom +"&prenom="+prenom +"&mail="+mail +"&statut="+statut);
+    xhttp.send("message="+message);
+    //}
+
 }
