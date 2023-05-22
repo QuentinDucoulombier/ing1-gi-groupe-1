@@ -179,16 +179,16 @@
     }
 
     /*
-    * Permet d'inscrire un gestionnaire externe à IA PAU sur le site
+    * Permet de récupérer les infos d'un utilisateur
     * @param mail : mail de l'utilisateur
-    * @param pass : Mot de passe
     */
-    function getEtudiant($conn, $mail){
+    function getUser($conn, $mail){
         try{
-            $sqlQuery = "SELECT email, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville FROM Utilisateur WHERE email LIKE :email";
+            $sqlQuery = "SELECT email, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville, nomEntreprise FROM Utilisateur WHERE email LIKE :email";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':email', $mail);
-            $result = $statement->execute();
+            $statement->execute();
+            $result = $statement->fetchAll();
             return $result;
         }
         
@@ -197,6 +197,47 @@
             die('Erreur : '.$e->getMessage());
         }
     }
+
+    /*
+    * Permet de modifier le type d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param type : nouveau type de l'utilisateur
+    */
+    function SetStatus($conn, $mail, $type){
+        try{
+            $sqlQuery = "UPDATE Utilisateur SET type = :type WHERE email LIKE :mail";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':type', $type);
+            $statement->execute();
+        }
+        
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+
+    /*
+    * Permet de modifier le type d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param type : nouveau type de l'utilisateur
+    */
+    function SetGestionnaire($conn, $mail, $type){
+        try{
+            $sqlQuery = "UPDATE Utilisateur SET type = :type WHERE email LIKE :mail";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':type', $type);
+            $statement->execute();
+        }
+        
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+   
 
     /*
     * Permet de modifier le mdp d'un utilisateur
@@ -341,6 +382,26 @@
     }
 
     /*
+    * Permet de modifier la ville d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param ville : nouvelle ville de l'utilisateur
+    */
+    function modifyEntreprise($conn, $mail, $entreprise){
+        try{
+            $sqlQuery = "UPDATE Utilisateur SET entreprise = :entreprise WHERE email LIKE :mail";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':entreprise', $entreprise);
+            $statement->execute();
+        }
+        
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+
+    /*
     * Permet d'ajouter un evenement (date battle/challenge)
     * @param mail : mail de l'utilisateur
     * @param pass : Mot de passe
@@ -352,11 +413,12 @@
     function addEvent($conn, $nom, $dateDebut, $dateFin, $type){
         try{
             $sqlQuery = "INSERT INTO Evenement (nomEvenement, dateDebut, dateFin, typeEvenement) 
-                    VALUES (:nom, :dateD, dateF)";
+                    VALUES (:nom, :dateD, :dateF, :type)";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':nom', $nom);
             $statement->bindParam(':dateD', $dateDebut);
             $statement->bindParam(':dateF', $dateFin);
+            $statement->bindParam(':type', $type);
             $statement->execute();
         }
         
@@ -365,8 +427,27 @@
             die('Erreur : '.$e->getMessage());
         }
     }
-
-
-   
+    
+    
+    /*
+    * Permet d'ajouter un questionnaire 
+    * @param iddatabattle : id data battle lié au questionnaire
+    * @param dateDebut : date de début du questionnaire
+    * @param dateFin : date de Fin du questionnaire
+    */
+    function addQuestionnaire($conn,$iddatabattle,$dateDebut,$dateFin){
+        try{
+            $sqlQuery="INSERT INTO Questionnaire(idDataBattle,dateDebut,dateFin) VALUES (:iddatabattle,:dateDebut,;dateFin)";
+            $statement=$conn->prepare($sqlQuery);
+            $statement->bindParam(':idDataBattle',$iddatabattle);
+            $statement->bindParam(':dateDebut', $dateDebut);
+            $statement->bindParam(':dateFin', $dateFin);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }    
+    }
+ 
 
 ?>
