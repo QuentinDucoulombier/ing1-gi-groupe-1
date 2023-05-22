@@ -34,9 +34,6 @@ if (!isset($_GET["page"])){
                 <?php include "component/header.php"; ?>
             </div>
             <div id="middle">
-                <div id="nav">
-                    <?php include "component/nav.php"; ?>
-                </div>
                 <div id="content">
                     <?php
 
