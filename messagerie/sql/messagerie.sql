@@ -32,8 +32,8 @@ CREATE TABLE Destinataire (
 /* Table messages */
 CREATE TABLE Messages (
   id_message INT AUTO_INCREMENT PRIMARY KEY,
-  id_auteur INT,
-  id_destinataire INT,
+  id_auteur INT DEFAULT 1,
+  id_destinataire INT DEFAULT 1,
   message TEXT,
   date_envoi DATETIME,
   lu TINYINT(1),

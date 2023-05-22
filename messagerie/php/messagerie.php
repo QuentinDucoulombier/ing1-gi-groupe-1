@@ -66,7 +66,7 @@
             <div id="bas-messagerie">
                 <div id="nouv-message">
                     <input id="message-text" type="text" value="">
-                    <button onclick="nouveau_message()">Envoyer</button>
+                    <button onclick="newMsg()">Envoyer</button>
                 </div>
                 <div class="button-bloque-debloque b" id="button-bloque" onclick="bloquer_utilisateur()">
                     Bloquer l'utilisateur
@@ -75,6 +75,8 @@
                     Débloquer l'utilisateur
                 </div>
             </div>
+
+            
 
         </div>
         <div id="test">

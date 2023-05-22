@@ -32,7 +32,6 @@ function newDestinataire(id) {
 
 /*TODO:getMsg() and newMsg() and displayMsg()*/
 function displayMsg(message) {
-
     let message_zone = document.getElementById("message-zone");
 
     let nv_message = document.createElement("div");
@@ -42,21 +41,18 @@ function displayMsg(message) {
     id.classList.add("hidden");
     id.innerHTML = message["id_message"];
 
-
     let prem_ligne = document.createElement("div");
     prem_ligne.classList.add("premiere-ligne");
 
     let p_auteur = document.createElement("p");
     p_auteur.classList.add("auteur");
-    //p_auteur.innerHTML = message["auteur"]["nom"] + " " + message["auteur"]["prenom"];
+    p_auteur.innerHTML = message["prenom"] + " " + message["nom"];
 
-    prem_ligne.appendChild(p_auteur );
+    prem_ligne.appendChild(p_auteur);
 
     let plus = document.createElement("div");
     plus.classList.add("plus");
     plus.innerHTML = "<div></div><div></div><div></div>";
-
-
 
     let p_infos = document.createElement("p");
     p_infos.classList.add("infos");
@@ -64,7 +60,7 @@ function displayMsg(message) {
 
     let p_text = document.createElement("p");
     p_text.classList.add("text");
-
+    p_text.innerHTML = message["message"];
 
     nv_message.appendChild(prem_ligne);
     nv_message.appendChild(p_infos);
@@ -73,20 +69,30 @@ function displayMsg(message) {
 
     message_zone.appendChild(nv_message);
 }
+
     
+const recup_messages = () => {
+    // Créez une variable pour stocker l'ID du dernier message récupéré
+    let lastMessageId = 1; // Remplacez par la valeur de l'ID du dernier message récupéré précédemment
 
-
-
-function getMsg() {
-    var xhttp = new XMLHttpRequest();
-
-    xhttp.onreadystatechange = function () {
+    // Effectuez une requête Ajax pour récupérer les messages
+    let xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            let messages = JSON.parse(this.responseText);
 
+            messages.forEach(message => {
+                let id = message["id"];
+                console.log(message);
+                //if (id > lastMessageId) {
+                    displayMsg(message);
+                    lastMessageId = id;
+                //}
+            });
         }
     };
 
-    xhttp.open("GET", "../php/getMsg.php", true);
+    xhttp.open("GET", "fetch_message.php?lastMessageId=" + lastMessageId, true);
     xhttp.send();
 }
 
@@ -101,7 +107,7 @@ function newMsg() {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             console.log(this.responseText);
-            //recup_messages();
+            recup_messages();
         }
     };
 

@@ -10,9 +10,20 @@
     }
 
     $message = $_POST["message"];
+
     $dbname = "messagerie";
     mysqli_select_db($cnx, $dbname);
+    $query = "INSERT INTO Messages(message,date_envoi)
+    VALUES ('$message', NOW())";
+
+
+    if(mysqli_query($cnx,$query)) {
+    echo "Enregistrement inséré avec succés";
+    } else {
+    echo "Erreur lors de l'insertion de l'enregistrement : " . mysqli_error($cnx);
+    }
     
 
-    
+    mysqli_close($cnx);
+
 ?>
