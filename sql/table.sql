@@ -57,9 +57,9 @@ CREATE TABLE Utilisateur(
     niveauEtude varchar(2),
     ecole varchar(30),
     ville varchar(30),
-    idEntrepreprise int,
+    nomEntreprise int,
     PRIMARY KEY (idUtilisateur),
-    FOREIGN KEY (idEntreprise) REFERENCES Entreprise(idEntrepreprise)
+    FOREIGN KEY (nomEntreprise) REFERENCES Entreprise(nomEntreprise)
     UNIQUE (email)
 );
 
