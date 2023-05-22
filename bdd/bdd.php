@@ -141,16 +141,18 @@
     * @param tel
     * @param entreprise
     */
-    function addGestionnaireExterne($conn, $mail, $password, $nom, $prenom, $tel, $entreprise){
+    function addGestionnaireExterne($conn, $mail, $password, $nom, $prenom, $tel, $entreprise, $dateD, $dateF){
         try{
-            $sqlQuery = "INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel, nomEntreprise) 
-                    VALUES (:mail, :pass, Gestinnaire, :nom ,  :prenom , :tel, '".$entreprise."')";
+            $sqlQuery = "INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel, nomEntreprise, dateDebutUtilisateur, dateFinUtilisateur) 
+                    VALUES (:mail, :pass, Gestinnaire, :nom ,  :prenom , :tel, '".$entreprise."', :dateD, :dateF )";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
             $statement->bindParam(':pass', $password);
             $statement->bindParam(':prenom', $prenom);
             $statement->bindParam(':nom', $nom);
             $statement->bindParam(':tel', $tel);
+            $statement->bindParam(':dateD', $dateD);
+            $statement->bindParam(':dateF', $dateF);
             $statement->execute();
         }
         
@@ -217,28 +219,7 @@
             die('Erreur : '.$e->getMessage());
         }
     }
-
-    /*
-    * Permet de modifier le type d'un utilisateur
-    * @param mail : mail de l'utilisateur
-    * @param type : nouveau type de l'utilisateur
-    */
-    function SetGestionnaire($conn, $mail, $type){
-        try{
-            $sqlQuery = "UPDATE Utilisateur SET type = :type WHERE email LIKE :mail";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->bindParam(':mail', $mail);
-            $statement->bindParam(':type', $type);
-            $statement->execute();
-        }
-        
-        catch(Exception $e)
-        {
-            die('Erreur : '.$e->getMessage());
-        }
-    }
-   
-
+ 
     /*
     * Permet de modifier le mdp d'un utilisateur
     * @param mail : mail de l'utilisateur
@@ -427,13 +408,10 @@
             die('Erreur : '.$e->getMessage());
         }
     }
-<<<<<<< HEAD
-=======
-    
     
     /*
     * Permet d'ajouter un questionnaire 
-    * @param iddatabattle : id data battle lié au questionnaire
+    * @param idDataBattle : id data battle lié au questionnaire
     * @param dateDebut : date de début du questionnaire
     * @param dateFin : date de Fin du questionnaire
     */
@@ -451,6 +429,163 @@
         }    
     }
  
->>>>>>> 4c5a681e0c78a0ab53af126f1f6700734c3d37ca
+    /*
+    * Permet d'ajouter une question à un questionnaire 
+    * @param idQuestionnaire : id questionnaire lié à la question
+    * @param intitule : intitulé de la question
+    */
+    function addQuestion($conn,$idQuestionnaire,$intitule){
+        try{
+            $sqlQuery="INSERT INTO Question(idQuestionnaire,intituleQuestion) VALUES (:idQuestionnaire,:intitule)";
+            $statement=$conn->prepare($sqlQuery);
+            $statement->bindParam(':idQuestionnaire',$idQuestionnaire);
+            $statement->bindParam(':intitule', $intitule);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }    
+    }
+ 
+    /*
+    * Permet de récupérer les questions d'un questionnaire 
+    * @param idQuestionnaire : id questionnaire lié à la question
+    * @param intitule : intitulé de la question
+    */
+    function getQuestion($conn,$idQuestionnaire){
+        try{
+            $sqlQuery="SELECT intituleQuestion FROM Question WHERE idQuestionnaire=:idQuestionnaire";
+            $statement=$conn->prepare($sqlQuery);
+            $statement->bindParam(':idQuestionnaire',$idQuestionnaire);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }    
+    }
+    /*
+    * Permet de récupérer les réponses d'une équipe à un questionnaire 
+    * @param idQuestion : id question lié à la réponse
+    * @param idEquipe : id Equipe qui a répondu au questionnaire
+    */
+    function setReponse($conn,$idEquipe,$idQuestion,$reponse){
+        try{
+            $sqlQuery="UPDATE TABLE reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe SET reponse = :reponse";
+            $statement=$conn->prepare($sqlQuery);
+            $statement->bindParam(':idQuestion',$idQuestion);
+            $statement->bindParam(':idEquipe',$idEquipe);
+            $statement->bindParam(':idEquipe',$idEquipe);
+            $statement->bindParam(':reponse',$reponse);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }    
+    }    
+    /*
+    * Permet de récupérer les réponses d'une équipe à un questionnaire 
+    * @param idQuestion : id question lié à la réponse
+    * @param idEquipe : id Equipe qui a répondu au questionnaire
+    */
+    function getReponse($conn,$idEquipe,$idQuestion){
+        try{
+            $sqlQuery="SELECT reponse FROM Reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe";
+            $statement=$conn->prepare($sqlQuery);
+            $statement->bindParam(':idQuestion',$idQuestion);
+            $statement->bindParam(':idEquipe',$idEquipe);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }    
+    }
+    /*
+    * Permet de noter une réponse d'une équipe à un questionnaire 
+    * @param idQuestion : id question lié à la réponse
+    * @param idEquipe : id Equipe qui a répondu au questionnaire
+    * @param note : note attribué à la réponse
+    */
+    function noterReponse($conn,$idEquipe,$idQuestion,$note){
+        try{
+            $sqlQuery="UPDATE TABLE Reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe SET note=:note";
+            $statement=$conn->prepare($sqlQuery);
+            $statement->bindParam(':idQuestion',$idQuestion);
+            $statement->bindParam(':idEquipe',$idEquipe);
+            $statement->bindParam(':note',$note);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }    
+    }
 
+    function getNoteEquipe($conn,$idEquipe,$idQuestionnaire){
+        try{
+            $sqlQuery="Select SUM(note) FROM Reponse R,Question Q WHERE idEquipe =:idEquipe AND R.idQuestion=Q.idQuestion AND Q.idQuestionnaire=:idQuestionnaire";
+            $statement=$conn->prepare($sqlQuery);
+            $statement->bindParam(':idQuestionnaire',$idQuestionnaire);
+            $statement->bindParam(':idEquipe',$idEquipe);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }    
+    }
+
+        /*
+    * Permet d'ajouter un projet Data
+    * @param mail : mail de l'utilisateur
+    * @param pass : Mot de passe
+    * @param nom
+    * @param prenom
+    * @param tel
+    * @param entreprise
+    */
+    function addProjetData($conn, $idEvenement, $nomProjet, $description, $image, $urlFichier, $urlVideo){
+        try{
+            $sqlQuery = "INSERT INTO ProjetData (idEvenement, nomProjet, description, image, urlFichier, urlVideo) 
+                    VALUES (:id, :nom, :desc, :img, :fichier, :video)";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':id', $idEvenement);
+            $statement->bindParam(':nom', $nomProjet);
+            $statement->bindParam(':desc', $description);
+            $statement->bindParam(':img', $image);
+            $statement->bindParam(':fichier', $urlFichier);
+            $statement->bindParam(':video', $urlVideo);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+    
+    /*
+    * Permet de récupérer les infos liées à un projet Data 
+    * @param nomEvenement : nom de l'evenement correspondant
+    */
+    function getProjetData($conn, $nomEvenement){
+        try{
+            $sqlQuery = "SELECT * FROM ProjetData INNER JOIN Evenement ON Evenement.idEvenement = ProjetData.idEvenement WHERE Evenement.nomEvenement LIKE :event";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':event', $nomEvenement);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+
+    
 ?>
