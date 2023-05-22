@@ -179,14 +179,158 @@
     }
 
     /*
-    * Permet de supprimer un utilisateur du site
+    * Permet d'inscrire un gestionnaire externe à IA PAU sur le site
     * @param mail : mail de l'utilisateur
+    * @param pass : Mot de passe
     */
-    function modifyPassword($conn, $mail, $newPass){
+    function getEtudiant($conn, $mail){
         try{
-            $sqlQuery = "UPDATE Utilisateur SET newPass = email LIKE :mail";
+            $sqlQuery = "SELECT email, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville FROM Utilisateur WHERE email LIKE :email";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':email', $mail);
+            $result = $statement->execute();
+            return $result;
+        }
+        
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+
+    /*
+    * Permet de modifier le mdp d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param oldPass : ancien password de l'utilisateur
+    * @param newPass : nouveau password de l'utilisateur
+    */
+    function modifyPassword($conn, $mail, $oldPass, $newPass){
+        try{
+            $sqlQuery = "UPDATE Utilisateur SET motDePasse = :newPass WHERE email LIKE :mail AND motDePasse = :oldPass";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':oldPass', $oldPass);
+            $statement->bindParam(':newPass', $newPass);
+            $statement->execute();
+        }
+        
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+
+    /*
+    * Permet de modifier le prénom d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param username : nouveau prénom de l'utilisateur
+    */
+    function modifyUsername($conn, $mail, $username){
+        try{
+            $sqlQuery = "UPDATE Utilisateur SET prenomUtilisateur = :username WHERE email LIKE :mail";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':username', $username);
+            $statement->execute();
+        }
+        
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+
+    /*
+    * Permet de modifier le nom de famille d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param name : nouveau nom de l'utilisateur
+    */
+    function modifyName($conn, $mail, $name){
+        try{
+            $sqlQuery = "UPDATE Utilisateur SET nomUtilisateur = :name WHERE email LIKE :mail";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':name', $name);
+            $statement->execute();
+        }
+        
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+
+    /*
+    * Permet de modifier le num de tel d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param tel : nouveau num de tel de l'utilisateur
+    */
+    function modifyTel($conn, $mail, $tel){
+        try{
+            $sqlQuery = "UPDATE Utilisateur SET tel = :tel WHERE email LIKE :mail";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':tel', $tel);
+            $statement->execute();
+        }
+        
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+
+    /*
+    * Permet de modifier le niveau d'étude d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param lvl : nouveau niveau d'étude de l'utilisateur
+    */
+    function modifyLvl($conn, $mail, $lvl){
+        try{
+            $sqlQuery = "UPDATE Utilisateur SET niveauEtude = :lvl WHERE email LIKE :mail";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':lvl', $lvl);
+            $statement->execute();
+        }
+        
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+
+    /*
+    * Permet de modifier le l'ecole d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param ecole : nouvelle école de l'utilisateur
+    */
+    function modifyEcole($conn, $mail, $ecole){
+        try{
+            $sqlQuery = "UPDATE Utilisateur SET ecole = :ecole WHERE email LIKE :mail";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':ecole', $ecole);
+            $statement->execute();
+        }
+        
+        catch(Exception $e)
+        {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
+
+    /*
+    * Permet de modifier la ville d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param ville : nouvelle ville de l'utilisateur
+    */
+    function modifyVille($conn, $mail, $ville){
+        try{
+            $sqlQuery = "UPDATE Utilisateur SET ville = :ville WHERE email LIKE :mail";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':ville', $ville);
             $statement->execute();
         }
         
