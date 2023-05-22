@@ -7,7 +7,7 @@ INSERT INTO Evenement(nomEvenement,dateDebut,dateFin,typeEvenement) VALUES ("Cha
 INSERT INTO Evenement(nomEvenement,dateDebut,dateFin,typeEvenement) VALUES ("Data Battle Juin 2023",2023-06-01,2023-07-01,"DataBattle");
 INSERT INTO Evenement(nomEvenement,dateDebut,dateFin,typeEvenement) VALUES ("Challenge Avril 2023",2023-04-01,2022-05-01,"DataChallenge");
 
-INSERT INTO Questionnaire(idDataBattle) VALUES (1);
+INSERT INTO Questionnaire(idDataBattle,dateDebut,dateFin) VALUES (2,2023-06-01,2023-06-08);
 INSERT INTO Question(idQuestionnaire,intituleQuestion) VALUES (1,"Quoi?");
 INSERT INTO Question(idQuestionnaire,intituleQuestion) VALUES (1,"Qui?");
 INSERT INTO Question(idQuestionnaire,intituleQuestion) VALUES (1,"Comment?");

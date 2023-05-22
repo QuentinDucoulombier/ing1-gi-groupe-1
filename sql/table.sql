@@ -34,6 +34,8 @@ CREATE TABLE ProjetData(
 CREATE TABLE Questionnaire(
     idQuestionnaire int NOT NULL AUTO_INCREMENT,
     idDataBattle int NOT NULL,
+    dateDebut date,
+    dateFin date,
     PRIMARY KEY (idQuestionnaire),
     FOREIGN KEY (idDataBattle) REFERENCES Evenement(idEvenement)
 );
@@ -58,6 +60,8 @@ CREATE TABLE Utilisateur(
     ecole varchar(30),
     ville varchar(30),
     nomEntreprise int,
+    dateDebutUtilisateur date,
+    dateFinUtilisateur date,
     PRIMARY KEY (idUtilisateur),
     FOREIGN KEY (nomEntreprise) REFERENCES Entreprise(nomEntreprise)
     UNIQUE (email)
