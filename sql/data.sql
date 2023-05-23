@@ -7,7 +7,7 @@ INSERT INTO Utilisateur(motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntr
 INSERT INTO Utilisateur(motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) 
     VALUES ("7110eda4d09e062aa5e4a390b0a572ac0d2c0220","Admninistrateur","Admin","istrateur",NULL,"0000000000","admin@ia.pau",NULL,NULL,"Pau");
 
-INSERT INTO Evenement(nomEvenement,dateDebut,dateFin,typeEvenement) VALUES ("Challenge Mai 2023","2023-05-17","2023-05-19","DataChallenge");
+INSERT INTO Evenement(nomEvenement,dateDebut,dateFin,typeEvenement, descriptionEvent, imageEvent) VALUES ("Challenge Mai 2023","2023-05-17","2023-05-19","DataChallenge", "Les sujets abordés concernent le sport, l'énergie et le traitement de la langue. Des prix ont été décernés aux trois...", NULL);
 INSERT INTO Evenement(nomEvenement,dateDebut,dateFin,typeEvenement) VALUES ("Data Battle Juin 2023","2023-06-01","2023-07-01","DataBattle");
 INSERT INTO Evenement(nomEvenement,dateDebut,dateFin,typeEvenement) VALUES ("Challenge Avril 2023","2023-04-01","2022-05-01","DataChallenge");
 
