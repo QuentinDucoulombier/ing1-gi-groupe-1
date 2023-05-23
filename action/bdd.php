@@ -612,6 +612,42 @@
     }
     
     /*
+    * Permet de récupérer la liste des data Challenge
+    * @return tableau de tableau de challenge
+    */
+    function getChallenge(){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE dataChallenge";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+
+    /*
+    * Permet de récupérer la liste des data Battle
+    * @return tableau de tableau de battle
+    */
+    function getBattle(){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE dataBattle";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+
+    /*
     * Permet de récupérer les infos liées à un projet Data 
     * @param nomEvenement : nom de l'evenement correspondant
     */
