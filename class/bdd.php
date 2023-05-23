@@ -407,7 +407,25 @@
             die('Erreur : '.$e->getMessage());
         }
     }
-    
+    /*
+    * Permet d'ajouter un questionnaire 
+    * @param idDataBattle : id data battle lié au questionnaire
+    * @param dateDebut : date de début du questionnaire
+    * @param dateFin : date de Fin du questionnaire
+    */
+    function addEquipe($conn,$nom,$idcapitaine,$idprojet){
+        try{
+            $sqlQuery="INSERT INTO Equipe(nomEquipe,idCapitaine,idProjetData) VALUES (:nom,:idcapitaine,:idprojet)";
+            $statement=$conn->prepare($sqlQuery);
+            $statement->bindParam(':nom',$nom);
+            $statement->bindParam(':idcapitaine', $idcapitaine);
+            $statement->bindParam(':idprojet', $idprojet);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }    
+    }
     /*
     * Permet d'ajouter un questionnaire 
     * @param idDataBattle : id data battle lié au questionnaire
@@ -416,7 +434,7 @@
     */
     function addQuestionnaire($conn,$iddatabattle,$dateDebut,$dateFin){
         try{
-            $sqlQuery="INSERT INTO Questionnaire(idDataBattle,dateDebut,dateFin) VALUES (:iddatabattle,:dateDebut,;dateFin)";
+            $sqlQuery="INSERT INTO Questionnaire(idDataBattle,dateDebut,dateFin) VALUES (:iddatabattle,:dateDebut,:dateFin)";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':idDataBattle',$iddatabattle);
             $statement->bindParam(':dateDebut', $dateDebut);
