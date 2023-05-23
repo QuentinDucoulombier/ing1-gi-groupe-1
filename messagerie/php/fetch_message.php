@@ -106,11 +106,10 @@ while ($row = mysqli_fetch_assoc($result)) {
             "message" => $row["message"],
             "date_envoi" => $row["date_envoi"],
             "statut" => $statut
-            //"supprime" => ($row["lu"] == 1) // Si le message est marqué comme "lu", alors il est supprimé
         );
     }
     else{
-        $message = array();
+        $message = 1;
     }
 
     // Ajouter le message au tableau des messages

@@ -25,6 +25,8 @@ function newDestinataire(id) {
             recup_messages();*/
             console.log(this.responseText);
             document.getElementById("name").innerHTML = this.responseText;
+            lastMessageId = 1;
+            recup_messages()
         }
     }
     console.log(id);
@@ -36,58 +38,52 @@ function newDestinataire(id) {
 
 /*TODO:getMsg() and newMsg() and displayMsg()*/
 function displayMsg(message) {
-    if(message.length == 0) {
-        console.log("here");
-        return;
-    }
-    else {
-
     
-        let message_zone = document.getElementById("message-zone");
+    let message_zone = document.getElementById("message-zone");
 
-        let nv_message = document.createElement("div");
-        nv_message.classList.add("message");
-        nv_message.classList.add(message["statut"]);
+    let nv_message = document.createElement("div");
+    nv_message.classList.add("message");
+    nv_message.classList.add(message["statut"]);
 
 
-        let id = document.createElement("p");
-        id.classList.add("hidden");
-        id.innerHTML = message["id_message"];
+    let id = document.createElement("p");
+    id.classList.add("hidden");
+    id.innerHTML = message["id_message"];
 
-        let prem_ligne = document.createElement("div");
-        prem_ligne.classList.add("premiere-ligne");
+    let prem_ligne = document.createElement("div");
+    prem_ligne.classList.add("premiere-ligne");
 
-        let p_auteur = document.createElement("p");
-        p_auteur.classList.add("auteur");
-        p_auteur.innerHTML = message["prenom"] + " " + message["nom"];
+    let p_auteur = document.createElement("p");
+    p_auteur.classList.add("auteur");
+    p_auteur.innerHTML = message["prenom"] + " " + message["nom"];
 
-        prem_ligne.appendChild(p_auteur);
+    prem_ligne.appendChild(p_auteur);
 
-        let plus = document.createElement("div");
-        plus.classList.add("plus");
-        plus.innerHTML = "<div></div><div></div><div></div>";
+    let plus = document.createElement("div");
+    plus.classList.add("plus");
+    plus.innerHTML = "<div></div><div></div><div></div>";
 
-        let p_infos = document.createElement("p");
-        p_infos.classList.add("infos");
-        p_infos.innerHTML = message["date_envoi"];
+    let p_infos = document.createElement("p");
+    p_infos.classList.add("infos");
+    p_infos.innerHTML = message["date_envoi"];
 
-        let p_text = document.createElement("p");
-        p_text.classList.add("text");
-        p_text.innerHTML = message["message"];
+    let p_text = document.createElement("p");
+    p_text.classList.add("text");
+    p_text.innerHTML = message["message"];
 
-        nv_message.appendChild(prem_ligne);
-        nv_message.appendChild(p_infos);
-        nv_message.appendChild(p_text);
-        nv_message.appendChild(id);
+    nv_message.appendChild(prem_ligne);
+    nv_message.appendChild(p_infos);
+    nv_message.appendChild(p_text);
+    nv_message.appendChild(id);
 
-        message_zone.appendChild(nv_message);
-    }
+    message_zone.appendChild(nv_message);
+    
 }
 
 const recup_messages = () => {
 
     console.log(lastMessageId);
-    if(lastMessageId == 0){
+    if(lastMessageId == 1){
         document.getElementById("message-zone").innerHTML = "";
     }
     // Effectuez une requête Ajax pour récupérer les messages
@@ -102,6 +98,7 @@ const recup_messages = () => {
                 console.log("id "+id);
                 console.log("last id "+lastMessageId);
                 console.log(message);
+
                 if (id > lastMessageId) {
                     console.log("ici");
                     displayMsg(message);
