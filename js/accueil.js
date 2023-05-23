@@ -37,11 +37,12 @@ function login() {
             }
         }
     };
-    xhr.open("POST", "/php/connexion.php", true);
+    xhr.open("POST", "/action/connexion.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    var username = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
-    var data = "username=" + encodeURIComponent(username) + "&password=" + encodeURIComponent(password);
+    var email = document.getElementById("email").value;
+    var motDePasse = document.getElementById("motDePasse").value;
+    alert(motDePasse);
+    var data = "email=" + encodeURIComponent(email) + "&motDePasse=" + encodeURIComponent(motDePasse);
     xhr.send(data);
 }
 function inscrire() {
@@ -61,14 +62,21 @@ function inscrire() {
         }
     };
 
-    xhr.open("POST", "/php/inscription.php", true);
+    xhr.open("POST", "/action/inscription.php", true);
     xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    var username2 = document.getElementById("username2").value;
-    var password2 = document.getElementById("password2").value;
-    var confirm_password = document.getElementById("confirm_password").value;
+    var email = document.getElementById("email2").value;
+    var prenomUtilisateur = document.getElementById("prenomUtilisateur").value;
+    var nomUtilisateur = document.getElementById("nomUtilisateur").value;
+    var numeroTel = document.getElementById("numeroTel").value;
+    var niveauEtude = document.getElementById("niveauEtude").value;
+    var ecole = document.getElementById("ecole").value;
+    var ville = document.getElementById("ville").value;
+    var motDePasse = document.getElementById("motDePasse2").value;
+    var confirm_motDePasse = document.getElementById("confirm_motDePasse").value;
+    // afficher les valeurs
 
-    if (password2 === confirm_password) {
-        var data = "username2=" + encodeURIComponent(username2) + "&password2=" + encodeURIComponent(password2) + "&confirm_password=" + encodeURIComponent(confirm_password);
+    if (motDePasse === confirm_motDePasse) {
+        var data = "email=" + encodeURIComponent(email) + "&prenomUtilisateur=" + encodeURIComponent(prenomUtilisateur) + "&nomUtilisateur=" + encodeURIComponent(nomUtilisateur) + "&numeroTel=" + encodeURIComponent(numeroTel) + "&niveauEtude=" + encodeURIComponent(niveauEtude) + "&ecole=" + encodeURIComponent(ecole) + "&ville=" + encodeURIComponent(ville) + "&motDePasse=" + encodeURIComponent(motDePasse) + "&confirm_motDePasse=" + encodeURIComponent(confirm_motDePasse);
         xhr.send(data);
     } else {
         alert("Les mots de passe ne correspondent pas.");
@@ -88,6 +96,6 @@ function deconnexion() {
             }
         }
     };
-    xhr.open("GET", "/php/deconnexion.php", true);
+    xhr.open("GET", "/action/deconnexion.php", true);
     xhr.send();
 }

@@ -41,6 +41,6 @@
     /* Ajoutez cette propriété pour ajouter une marge entre les éléments */
 }
 
-.modal {
+#modifierModal {
     display: none;
 }
