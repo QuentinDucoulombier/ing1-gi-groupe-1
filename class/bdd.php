@@ -41,8 +41,9 @@
     * @param connexion : variable de connexion
     * @return tableau de valeurs
     */
-    function request($connexion, $req){
+    function request($req){
         try {
+            $connexion = connect();
             $sqlQuery = $req;
             $statement = $connexion->prepare($sqlQuery);
             $statement->execute();
@@ -61,7 +62,8 @@
     * @param pass : Mot de passe
     * @return true si le nom d'utilisateur est associé au mdp
     */
-    function isUser($conn, $mail, $pass){
+    function isUser($mail, $pass){
+        $conn = connect();
         $sqlQuery = "select `email`, `motDePasse` FROM Utilisateur WHERE email LIKE :mail AND motDePasse LIKE :pass;";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':mail', $mail);
@@ -83,8 +85,9 @@
     * @param ecole
     * @param ville
     */
-    function addEtudiant($conn, $mail, $password, $nom, $prenom, $tel, $niv, $ecole, $ville){
+    function addEtudiant($mail, $password, $nom, $prenom, $tel, $niv, $ecole, $ville){
         try{
+            $conn = connect();
             $sqlQuery = "INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville) 
                     VALUES (:mail, :pass, Etudiant, :nom ,  :prenom , :tel, :niveau ,'" . $ecole . "','". $ville ."')";
             $statement = $conn->prepare($sqlQuery);
@@ -112,8 +115,9 @@
     * @param prenom
     * @param tel
     */
-    function addGestionnaireInterne($conn, $mail, $password, $nom, $prenom, $tel){
+    function addGestionnaireInterne($mail, $password, $nom, $prenom, $tel){
         try{
+            $conn = connect();
             $sqlQuery = "INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel) 
                     VALUES (:mail, :pass, Gestinnaire, :nom ,  :prenom , :tel)";
             $statement = $conn->prepare($sqlQuery);
@@ -140,8 +144,9 @@
     * @param tel
     * @param entreprise
     */
-    function addGestionnaireExterne($conn, $mail, $password, $nom, $prenom, $tel, $entreprise, $dateD, $dateF){
+    function addGestionnaireExterne($mail, $password, $nom, $prenom, $tel, $entreprise, $dateD, $dateF){
         try{
+            $conn = connect();
             $sqlQuery = "INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel, nomEntreprise, dateDebutUtilisateur, dateFinUtilisateur) 
                     VALUES (:mail, :pass, Gestinnaire, :nom ,  :prenom , :tel, '".$entreprise."', :dateD, :dateF )";
             $statement = $conn->prepare($sqlQuery);
@@ -165,8 +170,9 @@
     * Permet de supprimer un utilisateur du site
     * @param mail : mail de l'utilisateur
     */
-    function deleteUser($conn, $mail){
+    function deleteUser($mail){
         try{
+            $conn = connect();
             $sqlQuery = "DELETE FROM Utilisateur WHERE email LIKE :mail";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
@@ -183,8 +189,9 @@
     * Permet de récupérer les infos d'un utilisateur
     * @param mail : mail de l'utilisateur
     */
-    function getUser($conn, $mail){
+    function getUser($mail){
         try{
+            $conn = connect();
             $sqlQuery = "SELECT email, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville, nomEntreprise FROM Utilisateur WHERE email LIKE :email";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':email', $mail);
@@ -204,8 +211,9 @@
     * @param mail : mail de l'utilisateur
     * @param type : nouveau type de l'utilisateur
     */
-    function SetStatus($conn, $mail, $type){
+    function SetStatus($mail, $type){
         try{
+            $conn = connect();
             $sqlQuery = "UPDATE Utilisateur SET type = :type WHERE email LIKE :mail";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
@@ -225,8 +233,9 @@
     * @param oldPass : ancien password de l'utilisateur
     * @param newPass : nouveau password de l'utilisateur
     */
-    function modifyPassword($conn, $mail, $oldPass, $newPass){
+    function modifyPassword($mail, $oldPass, $newPass){
         try{
+            $conn = connect();
             $sqlQuery = "UPDATE Utilisateur SET motDePasse = :newPass WHERE email LIKE :mail AND motDePasse = :oldPass";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
@@ -246,8 +255,9 @@
     * @param mail : mail de l'utilisateur
     * @param username : nouveau prénom de l'utilisateur
     */
-    function modifyUsername($conn, $mail, $username){
+    function modifyUsername($mail, $username){
         try{
+            $conn = connect();
             $sqlQuery = "UPDATE Utilisateur SET prenomUtilisateur = :username WHERE email LIKE :mail";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
@@ -266,8 +276,9 @@
     * @param mail : mail de l'utilisateur
     * @param name : nouveau nom de l'utilisateur
     */
-    function modifyName($conn, $mail, $name){
+    function modifyName($mail, $name){
         try{
+            $conn = connect();
             $sqlQuery = "UPDATE Utilisateur SET nomUtilisateur = :name WHERE email LIKE :mail";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
@@ -286,8 +297,9 @@
     * @param mail : mail de l'utilisateur
     * @param tel : nouveau num de tel de l'utilisateur
     */
-    function modifyTel($conn, $mail, $tel){
+    function modifyTel($mail, $tel){
         try{
+            $conn = connect();
             $sqlQuery = "UPDATE Utilisateur SET tel = :tel WHERE email LIKE :mail";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
@@ -306,8 +318,9 @@
     * @param mail : mail de l'utilisateur
     * @param lvl : nouveau niveau d'étude de l'utilisateur
     */
-    function modifyLvl($conn, $mail, $lvl){
+    function modifyLvl($mail, $lvl){
         try{
+            $conn = connect();
             $sqlQuery = "UPDATE Utilisateur SET niveauEtude = :lvl WHERE email LIKE :mail";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
@@ -326,8 +339,9 @@
     * @param mail : mail de l'utilisateur
     * @param ecole : nouvelle école de l'utilisateur
     */
-    function modifyEcole($conn, $mail, $ecole){
+    function modifyEcole($mail, $ecole){
         try{
+            $conn = connect();
             $sqlQuery = "UPDATE Utilisateur SET ecole = :ecole WHERE email LIKE :mail";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
@@ -346,8 +360,9 @@
     * @param mail : mail de l'utilisateur
     * @param ville : nouvelle ville de l'utilisateur
     */
-    function modifyVille($conn, $mail, $ville){
+    function modifyVille($mail, $ville){
         try{
+            $conn = connect();
             $sqlQuery = "UPDATE Utilisateur SET ville = :ville WHERE email LIKE :mail";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
@@ -366,8 +381,9 @@
     * @param mail : mail de l'utilisateur
     * @param ville : nouvelle ville de l'utilisateur
     */
-    function modifyEntreprise($conn, $mail, $entreprise){
+    function modifyEntreprise($mail, $entreprise){
         try{
+            $conn = connect();
             $sqlQuery = "UPDATE Utilisateur SET entreprise = :entreprise WHERE email LIKE :mail";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
@@ -390,8 +406,9 @@
     * @param tel
     * @param entreprise
     */
-    function addEvent($conn, $nom, $dateDebut, $dateFin, $type){
+    function addEvent($nom, $dateDebut, $dateFin, $type){
         try{
+            $conn = connect();
             $sqlQuery = "INSERT INTO Evenement (nomEvenement, dateDebut, dateFin, typeEvenement) 
                     VALUES (:nom, :dateD, :dateF, :type)";
             $statement = $conn->prepare($sqlQuery);
@@ -413,8 +430,9 @@
     * @param dateDebut : date de début du questionnaire
     * @param dateFin : date de Fin du questionnaire
     */
-    function addEquipe($conn,$nom,$idcapitaine,$idprojet){
+    function addEquipe($nom,$idcapitaine,$idprojet){
         try{
+            $conn = connect();
             $sqlQuery="INSERT INTO Equipe(nomEquipe,idCapitaine,idProjetData) VALUES (:nom,:idcapitaine,:idprojet)";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':nom',$nom);
@@ -432,8 +450,9 @@
     * @param dateDebut : date de début du questionnaire
     * @param dateFin : date de Fin du questionnaire
     */
-    function addQuestionnaire($conn,$iddatabattle,$dateDebut,$dateFin){
+    function addQuestionnaire($iddatabattle,$dateDebut,$dateFin){
         try{
+            $conn = connect();
             $sqlQuery="INSERT INTO Questionnaire(idDataBattle,dateDebut,dateFin) VALUES (:iddatabattle,:dateDebut,:dateFin)";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':idDataBattle',$iddatabattle);
@@ -451,8 +470,9 @@
     * @param idQuestionnaire : id questionnaire lié à la question
     * @param intitule : intitulé de la question
     */
-    function addQuestion($conn,$idQuestionnaire,$intitule){
+    function addQuestion($idQuestionnaire,$intitule){
         try{
+            $conn = connect();
             $sqlQuery="INSERT INTO Question(idQuestionnaire,intituleQuestion) VALUES (:idQuestionnaire,:intitule)";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':idQuestionnaire',$idQuestionnaire);
@@ -469,8 +489,9 @@
     * @param idQuestionnaire : id questionnaire lié à la question
     * @param intitule : intitulé de la question
     */
-    function getQuestion($conn,$idQuestionnaire){
+    function getQuestion($idQuestionnaire){
         try{
+            $conn = connect();
             $sqlQuery="SELECT intituleQuestion FROM Question WHERE idQuestionnaire=:idQuestionnaire";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':idQuestionnaire',$idQuestionnaire);
@@ -487,8 +508,9 @@
     * @param idQuestion : id question lié à la réponse
     * @param idEquipe : id Equipe qui a répondu au questionnaire
     */
-    function setReponse($conn,$idEquipe,$idQuestion,$reponse){
+    function setReponse($idEquipe,$idQuestion,$reponse){
         try{
+            $conn = connect();
             $sqlQuery="UPDATE TABLE reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe SET reponse = :reponse";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':idQuestion',$idQuestion);
@@ -506,8 +528,9 @@
     * @param idQuestion : id question lié à la réponse
     * @param idEquipe : id Equipe qui a répondu au questionnaire
     */
-    function getReponse($conn,$idEquipe,$idQuestion){
+    function getReponse($idEquipe,$idQuestion){
         try{
+            $conn = connect();
             $sqlQuery="SELECT reponse FROM Reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':idQuestion',$idQuestion);
@@ -526,8 +549,9 @@
     * @param idEquipe : id Equipe qui a répondu au questionnaire
     * @param note : note attribué à la réponse
     */
-    function noterReponse($conn,$idEquipe,$idQuestion,$note){
+    function noterReponse($idEquipe,$idQuestion,$note){
         try{
+            $conn = connect();
             $sqlQuery="UPDATE TABLE Reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe SET note=:note";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':idQuestion',$idQuestion);
@@ -540,8 +564,9 @@
         }    
     }
 
-    function getNoteEquipe($conn,$idEquipe,$idQuestionnaire){
+    function getNoteEquipe($idEquipe,$idQuestionnaire){
         try{
+            $conn = connect();
             $sqlQuery="Select SUM(note) FROM Reponse R,Question Q WHERE idEquipe =:idEquipe AND R.idQuestion=Q.idQuestion AND Q.idQuestionnaire=:idQuestionnaire";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':idQuestionnaire',$idQuestionnaire);
@@ -564,8 +589,9 @@
     * @param tel
     * @param entreprise
     */
-    function addProjetData($conn, $idEvenement, $nomProjet, $description, $image, $urlFichier, $urlVideo){
+    function addProjetData($idEvenement, $nomProjet, $description, $image, $urlFichier, $urlVideo){
         try{
+            $conn = connect();
             $sqlQuery = "INSERT INTO ProjetData (idEvenement, nomProjet, description, image, urlFichier, urlVideo) 
                     VALUES (:id, :nom, :desc, :img, :fichier, :video)";
             $statement = $conn->prepare($sqlQuery);
@@ -590,8 +616,9 @@
     * Permet de récupérer les infos liées à un projet Data 
     * @param nomEvenement : nom de l'evenement correspondant
     */
-    function getProjetData($conn, $nomEvenement){
+    function getProjetData($nomEvenement){
         try{
+            $conn = connect();
             $sqlQuery = "SELECT * FROM ProjetData INNER JOIN Evenement ON Evenement.idEvenement = ProjetData.idEvenement WHERE Evenement.nomEvenement LIKE :event";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':event', $nomEvenement);
