@@ -1,12 +1,5 @@
-<?php
-
-require('../action/bdd.php');
-require('accueil.php');
-$connexion = connect();
-?>
 <!DOCTYPE html>
 <?php
-
 if (isset($_SESSION['email'])) {
 
     $email = $_SESSION['email'];
@@ -18,67 +11,78 @@ if (isset($_SESSION['email'])) {
 
     ?>
     <html lang="en">
-
+<!--
     <head>
+        
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="/css/profil.css" />
-        <script defer src="../js/profil.js"></script>
+        <script defer src="../scripts/profil.js"></script>
 
 
         <title>Profil</title>
     </head>
+-->
  
     <body>
+
         <div class="prenomUtilisateur">
             <h2> Nom : </h2>
             <?php
             echo "<h2>" . $prenomUtilisateur . "</h2>";
             ?>
         </div>
+
         <div class="mdp">
             <h2> Modifier le mot de passe :</h2>
             <li class="buttonC" class="boutonmodalMdp">
                 <div onclick="openMdpModal()">Modifier votre mot de passe</div>
             </li>
         </div>
+
         <div class="nomUtilisateur">
             <h2> Prénom : </h2>
             <?php
             echo "<h2>" . $infos[0]['nomUtilisateur'] . "</h2>";
             ?>
         </div>
+
         <div class="email">
             <h2> Email : </h2>
             <?php
             echo "<h2>" . $infos[0]['email'] . "</h2>";
             ?>
         </div>
+
         <div class="numeroTel">
             <h2> Numéro de téléphone : </h2>
             <?php
             echo "<h2>" . $infos[0]['numeroTel'] . "</h2>";
             ?>
         </div>
+
         <div class="niveauEtude">
             <h2> Niveau d'étude : </h2>
             <?php
             echo "<h2>" . $infos[0]['niveauEtude'] . "</h2>";
             ?>
         </div>
+
         <div class="ecole">
             <h2> Ecole : </h2>
             <?php
             echo "<h2>" . $infos[0]['ecole'] . "</h2>";
             ?>
         </div>
+
         <div class="ville">
             <h2> Ville : </h2>
             <?php
             echo "<h2>" . $infos[0]['ville'] . "</h2>";
             ?>
         </div>
+        
         <div class="modifier">
             <li class="buttonC" class="boutonmodifier">
                 <div onclick="openModifierModal()">Modifier vos informations</div>
@@ -148,8 +152,9 @@ if (isset($_SESSION['email'])) {
     }
 
 } 
-// <?php
-// else {
+
+else {
+    echo 'error';
 //     header('Location: /index.php');
-// }
-// ?>
+}
+?>

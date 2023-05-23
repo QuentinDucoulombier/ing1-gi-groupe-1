@@ -1,12 +1,12 @@
 <?php
 session_start();
 
-include "class/database_login.php";
-include "class/bdd.php";
-include "class/router.php";
+include "action/database_login.php";
+include "action/bdd.php";
+include "action/router.php";
 
 if (!isset($_GET["page"])){
-    $_GET["page"] = "acceuil";
+    $_GET["page"] = "accueil";
 }
 ?>
 <!DOCTYPE html>
@@ -14,17 +14,25 @@ if (!isset($_GET["page"])){
     <head>
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <meta charset="utf-8">
+
+<!--        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
     
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     
-        <title>Titre - <?php echo router::get_page(); ?></title>
+        <title>Projet - <?php echo router::get_page(); ?></title>
         <link rel="stylesheet" href="styles/global.css" />
 
         <link rel="stylesheet" href="styles/component/header.css" />
         <link rel="stylesheet" href="styles/component/footer.css" />
-        <link rel="stylesheet" href="styles/component/nav.css" />
+        <link rel="stylesheet" href="styles/component/accueil.css" />
+        <link rel="stylesheet" href="styles/component/profil.css" />
+
+                
 
         <script src="scripts/main.js" defer></script>
+        <script src="scripts/profil.js" defer></script>
+
     </head>
     <body>
     
@@ -49,4 +57,4 @@ if (!isset($_GET["page"])){
         </div>
     
     </body>
-</html
+</html>

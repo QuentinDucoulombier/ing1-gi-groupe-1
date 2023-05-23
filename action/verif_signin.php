@@ -1,10 +1,10 @@
 <?php
 session_start();
 require('bdd.php');
-$connexion = connect();
 
 // Si des données ont été soumises via le formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
   // Récupération des données POST envoyées par le formulaire
   $email = htmlspecialchars($_POST['email']);
   $prenom = htmlspecialchars($_POST['prenomUtilisateur']);
@@ -42,12 +42,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   } else {
     // Ecriture du nouvel utilisateur dans la base de données
-    addEtudiant($connexion, $email, $motDePasse, $nom, $prenom, $tel, $niv, $ecole, $ville);
+    addEtudiant($email, $motDePasse, $nom, $prenom, $tel, $niv, $ecole, $ville);
 
     echo "success";
     
   }
 }
 
-header ('Location: /pages/accueil.php');
+header ('Location: /?page=accueil');
 ?>
