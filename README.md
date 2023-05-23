@@ -41,8 +41,3 @@ Mot de passe : 1234
 
 *Accès Admin*   
 email : admin@ia.pau
-<<<<<<< HEAD
-Mot de passe : 1234
-=======
-Mot de passe : 1234
->>>>>>> mise a jour readme
