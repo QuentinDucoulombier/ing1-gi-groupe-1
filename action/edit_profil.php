@@ -1,7 +1,7 @@
 <?php
+
 session_start();
 require('bdd.php');
-$connexion = connect();
 
 //on recupere l'email de l'utilisateur connecté
 $email = $_SESSION['email'];
@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Vérification que le nom rentre bien dans la base de donnée
             $error = "prenom trop long";
         } 
-        modifyUsername($connexion, $email, $prenom);
+        modifyUsername($email, $prenom);
     }
     //si le nom a été saisie dans le formulaire
     if (!empty($_POST['nomUtilisateur'])) {
@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Vérification que le nom rentre bien dans la base de donnée
             $error = "nom trop long";
         } 
-        modifyName($connexion, $email, $nom);
+        modifyName($email, $nom);
     }
     //si le numero de telephone a été saisie dans le formulaire
     if (!empty($_POST['numeroTel'])) {
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Vérification que le nom rentre bien dans la base de donnée
             $error = "numero de telephone trop long";
         } 
-        modifyTel($connexion, $email, $tel);
+        modifyTel($email, $tel);
     }
     //si le niveau d'etude a été saisie dans le formulaire
     if (!empty($_POST['niveauEtude'])) {
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Vérification que le nom rentre bien dans la base de donnée
             $error = "niveau d'etude trop long";
         } 
-        modifyLvl($connexion, $email, $niv);
+        modifyLvl($email, $niv);
     }
     //si l'ecole a été saisie dans le formulaire
     if (!empty($_POST['ecole'])) {
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Vérification que le nom rentre bien dans la base de donnée
             $error = "ecole trop long";
         } 
-        modifyEcole($connexion, $email, $ecole);
+        modifyEcole($email, $ecole);
     }
     //si la ville a été saisie dans le formulaire
     if (!empty($_POST['ville'])) {
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Vérification que le nom rentre bien dans la base de donnée
             $error = "ville trop long";
         } 
-        modifyVille($connexion, $email, $ville);
+        modifyVille($email, $ville);
     }
     //si l'ancien mot de passe, le nouveau mot de passe et la confirmation du nouveau mot de passe ont été saisie dans le formulaire
     if (!empty($_POST['AncienPassword']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])) {
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nouveauMdp = sha1($_POST['password']);
         $confirmationMdp = sha1($_POST['confirm_password']);
         
-        modifyPassword($connexion, $email, $ancienMdp, $nouveauMdp);
+        modifyPassword($email, $ancienMdp, $nouveauMdp);
         
     } else {
         $error = "L'ancien mot de passe, le nouveau mot de passe et la confirmation du nouveau mot de passe doivent être remplis";
