@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require('../action/bdd.php');
 require('accueil.php');
 $connexion = connect();
@@ -73,6 +73,12 @@ if (isset($_SESSION['email'])) {
             echo "<h2>" . $infos[0]['ecole'] . "</h2>";
             ?>
         </div>
+        <div class="ville">
+            <h2> Ville : </h2>
+            <?php
+            echo "<h2>" . $infos[0]['ville'] . "</h2>";
+            ?>
+        </div>
         <div class="modifier">
             <li class="buttonC" class="boutonmodifier">
                 <div onclick="openModifierModal()">Modifier vos informations</div>
@@ -112,6 +118,8 @@ if (isset($_SESSION['email'])) {
             <input type="text" id="niveauEtude" name="niveauEtude"><br>
             <label for="ecole">Ecole:</label><br>
             <input type="text" id="ecole" name="ecole"><br>
+            <label for="ville">Ville:</label><br>
+            <input type="text" id="ville" name="ville"><br>
             <label for="AncienPassword">Ancien mot de passe:</label><br>
             <input type="password" id="AncienPassword" name="AncienPassword"><br>
             <label for="password">Nouveau mot de passe:</label><br>

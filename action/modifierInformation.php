@@ -63,24 +63,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } 
         modifyEcole($connexion, $email, $ecole);
     }
-    //si l'ancien mot de passe et le nouveau mot de passe et la confirmation du nouveau mot de passe ont été saisie dans le formulaire
-    if (!empty($_POST['ancienMdp']) && !empty($_POST['nouveauMdp']) && !empty($_POST['confirmationMdp'])) {
+    //si la ville a été saisie dans le formulaire
+    if (!empty($_POST['ville'])) {
         // Récupération des données POST envoyées par le formulaire
-        $ancienMdp = $_POST['ancienMdp'];
-        $nouveauMdp = $_POST['nouveauMdp'];
-        $confirmationMdp = $_POST['confirmationMdp'];
-        //on verifie que le nouveau mot de passe et la confirmation du nouveau mot de passe sont identiques
-        if ($nouveauMdp == $confirmationMdp) {
-            //on verifie que l'ancien mot de passe est correct
-            modifyPassword($connexion, $email, $ancienMdp, $neaouveauMdp);
+        $ville = htmlspecialchars($_POST['ville']);
+        
+        if (strlen($ville) > 100) {
+            // Vérification que le nom rentre bien dans la base de donnée
+            $error = "ville trop long";
+        } 
+        modifyVille($connexion, $email, $ville);
+    }
+    //si l'ancien mot de passe, le nouveau mot de passe et la confirmation du nouveau mot de passe ont été saisie dans le formulaire
+    if (!empty($_POST['AncienPassword']) && !empty($_POST['password']) && !empty($_POST['confirm_password'])) {
+        // Récupération des données POST envoyées par le formulaire
+        $ancienMdp = sha1($_POST['AncienPassword']);
+        $nouveauMdp = sha1($_POST['password']);
+        $confirmationMdp = sha1($_POST['confirm_password']);
+        
+        modifyPassword($connexion, $email, $ancienMdp, $nouveauMdp);
+        
+    } else {
+        $error = "L'ancien mot de passe, le nouveau mot de passe et la confirmation du nouveau mot de passe doivent être remplis";
+    }
 
-            } else {
-                $error = "ancien mot de passe incorrect";
-            }
-        } else {
-            $error = "nouveau mot de passe et confirmation du nouveau mot de passe différents";
-        }
- }
+
+}
 
 header('Location: ../pages/profil.php');
 ?>

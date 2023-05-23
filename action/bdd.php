@@ -227,7 +227,7 @@
     */
     function modifyPassword($conn, $mail, $oldPass, $newPass){
         try{
-            $sqlQuery = "UPDATE Utilisateur SET motDePasse = :newPass WHERE email LIKE :mail AND motDePasse LIKE :oldPass";
+            $sqlQuery = "UPDATE Utilisateur SET motDePasse = :newPass WHERE email = :mail AND motDePasse = :oldPass";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
             $statement->bindParam(':oldPass', $oldPass);
