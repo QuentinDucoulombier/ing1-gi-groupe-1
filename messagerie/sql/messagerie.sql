@@ -36,9 +36,7 @@ CREATE TABLE Messages (
   id_destinataire INT,
   message TEXT,
   date_envoi DATETIME,
-  lu TINYINT(1),
-  FOREIGN KEY (id_auteur) REFERENCES Auteur(id_auteur),
-  FOREIGN KEY (id_destinataire) REFERENCES Destinataire(id_destinataire)
+  lu TINYINT(1)
 );
 
 /* Ajout auteur de base on modifiera en fonction de la suite */

@@ -13,7 +13,7 @@
     $idUser = $_POST["id"];
    
 
-    $queryDestinataire = "UPDATE Destinataire SET id_user = '$idUser' WHERE id_destinataire = 1";
+    $queryDestinataire = "UPDATE Destinataire SET id_user = '$idUser'";
     $dbname = "messagerie";
     mysqli_select_db($cnx, $dbname);
 
