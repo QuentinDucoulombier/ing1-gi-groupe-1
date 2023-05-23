@@ -1,7 +1,7 @@
-INSERT INTO Utilisateur(motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) VALUES (1234,"Etudiant","Farret","Aventin",NULL,0110011001,"farretaven@cy-tech.fr","L1","CY Tech","Pau");
-INSERT INTO Utilisateur (motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) VALUES (1234,"Etudiant","Toto","tata",NULL,0220020301,"toto@tata.titi","M1","CY Tech","Pau");
-INSERT INTO Utilisateur (motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) VALUES (1234,"Gestionnaire","Naire","Gestio","euralis",1111111111,"gestionnaire@test.fr",NULL,NULL,"Pau");
-INSERT INTO Utilisateur (motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) VALUES (1234,"Administrateur","Admin","istrateur",NULL,0000000000,"admin@ia.pau",NULL,NULL,"Pau");
+INSERT INTO Utilisateur(motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) VALUES (1234,"Etudiant","Farret","Aventin",NULL,"0110011001","farretaven@cy-tech.fr","L1","CY Tech","Pau");
+INSERT INTO Utilisateur (motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) VALUES (1234,"Etudiant","Toto","tata",NULL,"0220020301","toto@tata.titi","M1","CY Tech","Pau");
+INSERT INTO Utilisateur (motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) VALUES (1234,"Gestionnaire","Naire","Gestio","euralis","1111111111","gestionnaire@test.fr",NULL,NULL,"Pau");
+INSERT INTO Utilisateur (motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) VALUES (1234,"Admninistrateur","Admin","istrateur",NULL,"0000000000","admin@ia.pau",NULL,NULL,"Pau");
 
 INSERT INTO Evenement(nomEvenement,dateDebut,dateFin,typeEvenement) VALUES ("Challenge Mai 2023","2023-05-17","2023-05-19","DataChallenge");
 INSERT INTO Evenement(nomEvenement,dateDebut,dateFin,typeEvenement) VALUES ("Data Battle Juin 2023","2023-06-01","2023-07-01","DataBattle");

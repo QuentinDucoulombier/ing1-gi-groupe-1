@@ -3,7 +3,7 @@ CREATE DATABASE IF NOT EXISTS projetIaPau;
 USE projetIaPau;
 
 CREATE TABLE Evenement(
-    idEvenement int PRIMARY KEY AUTO_INCREMENT,
+    idEvenement int AUTO_INCREMENT,
     nomEvenement varchar(64) NOT NULL,
     dateDebut date,
     dateFin date,
@@ -66,9 +66,9 @@ CREATE TABLE Utilisateur(
     PRIMARY KEY (idUtilisateur),
 --    FOREIGN KEY (nomEntreprise) REFERENCES Entreprise(nomEntreprise),
     UNIQUE (email),
-    CONSTRAINT check_numerotel CHECK (numerotel like '[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]'),
+    CONSTRAINT check_numerotel CHECK (numeroTel REGEXP '^[0-9]{10}$'),
     CONSTRAINT check_niveauEtude CHECK (niveauEtude IN ('L1', 'L2', 'L3', 'M1', 'M2', 'D')),
-    CONSTRAINT check_type CHECK (type IN ('Etudiant', 'Gestionnaire', 'Admninistateur'))
+    CONSTRAINT check_type CHECK (type IN ('Etudiant', 'Gestionnaire', 'Admninistrateur'))
 );
 
 CREATE TABLE Equipe(
