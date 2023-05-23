@@ -1,3 +1,7 @@
+var lastMessageId = 0;
+
+
+
 /*Change le destinataire*/
 function newDestinataire(id) {
 
@@ -32,49 +36,60 @@ function newDestinataire(id) {
 
 /*TODO:getMsg() and newMsg() and displayMsg()*/
 function displayMsg(message) {
-    let message_zone = document.getElementById("message-zone");
-
-    let nv_message = document.createElement("div");
-    nv_message.classList.add("message");
-
-    let id = document.createElement("p");
-    id.classList.add("hidden");
-    id.innerHTML = message["id_message"];
-
-    let prem_ligne = document.createElement("div");
-    prem_ligne.classList.add("premiere-ligne");
-
-    let p_auteur = document.createElement("p");
-    p_auteur.classList.add("auteur");
-    p_auteur.innerHTML = message["prenom"] + " " + message["nom"];
-
-    prem_ligne.appendChild(p_auteur);
-
-    let plus = document.createElement("div");
-    plus.classList.add("plus");
-    plus.innerHTML = "<div></div><div></div><div></div>";
-
-    let p_infos = document.createElement("p");
-    p_infos.classList.add("infos");
-    p_infos.innerHTML = message["date_envoi"];
-
-    let p_text = document.createElement("p");
-    p_text.classList.add("text");
-    p_text.innerHTML = message["message"];
-
-    nv_message.appendChild(prem_ligne);
-    nv_message.appendChild(p_infos);
-    nv_message.appendChild(p_text);
-    nv_message.appendChild(id);
-
-    message_zone.appendChild(nv_message);
-}
+    if(message.length == 0) {
+        console.log("here");
+        return;
+    }
+    else {
 
     
-const recup_messages = () => {
-    // Créez une variable pour stocker l'ID du dernier message récupéré
-    let lastMessageId = 1; // Remplacez par la valeur de l'ID du dernier message récupéré précédemment
+        let message_zone = document.getElementById("message-zone");
 
+        let nv_message = document.createElement("div");
+        nv_message.classList.add("message");
+        nv_message.classList.add(message["statut"]);
+
+
+        let id = document.createElement("p");
+        id.classList.add("hidden");
+        id.innerHTML = message["id_message"];
+
+        let prem_ligne = document.createElement("div");
+        prem_ligne.classList.add("premiere-ligne");
+
+        let p_auteur = document.createElement("p");
+        p_auteur.classList.add("auteur");
+        p_auteur.innerHTML = message["prenom"] + " " + message["nom"];
+
+        prem_ligne.appendChild(p_auteur);
+
+        let plus = document.createElement("div");
+        plus.classList.add("plus");
+        plus.innerHTML = "<div></div><div></div><div></div>";
+
+        let p_infos = document.createElement("p");
+        p_infos.classList.add("infos");
+        p_infos.innerHTML = message["date_envoi"];
+
+        let p_text = document.createElement("p");
+        p_text.classList.add("text");
+        p_text.innerHTML = message["message"];
+
+        nv_message.appendChild(prem_ligne);
+        nv_message.appendChild(p_infos);
+        nv_message.appendChild(p_text);
+        nv_message.appendChild(id);
+
+        message_zone.appendChild(nv_message);
+    }
+}
+
+const recup_messages = () => {
+
+    console.log(lastMessageId);
+    if(lastMessageId == 0){
+        document.getElementById("message-zone").innerHTML = "";
+    }
     // Effectuez une requête Ajax pour récupérer les messages
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -82,12 +97,16 @@ const recup_messages = () => {
             let messages = JSON.parse(this.responseText);
 
             messages.forEach(message => {
-                let id = message["id"];
+                var id = message["id"];
+
+                console.log("id "+id);
+                console.log("last id "+lastMessageId);
                 console.log(message);
-                //if (id > lastMessageId) {
+                if (id > lastMessageId) {
+                    console.log("ici");
                     displayMsg(message);
                     lastMessageId = id;
-                //}
+                }
             });
         }
     };

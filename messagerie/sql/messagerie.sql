@@ -12,7 +12,7 @@ CREATE TABLE User (
 
 /* Ajout d'utilisateurs */
 INSERT INTO User (prenom, nom, email)
-VALUES ('prenomA', 'nomA', 'emailA'), ('prenomD', 'nomD', 'emailD');
+VALUES ('prenomA', 'nomA', 'emailA'), ('prenomD', 'nomD', 'emailD'), ('monsieur', 'test', 'test@gmail.com');
 
 
 /* Table auteurs */
@@ -41,7 +41,7 @@ CREATE TABLE Messages (
   FOREIGN KEY (id_destinataire) REFERENCES Destinataire(id_destinataire)
 );
 
-/* Ajout auteur de base */
+/* Ajout auteur de base on modifiera en fonction de la suite */
 INSERT INTO Auteur (id_user)
 VALUES (1);
 
