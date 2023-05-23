@@ -45,8 +45,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     addEtudiant($connexion, $email, $motDePasse, $nom, $prenom, $tel, $niv, $ecole, $ville);
 
     echo "success";
-    exit;
+    
   }
 }
 
+header ('Location: /pages/accueil.php');
 ?>

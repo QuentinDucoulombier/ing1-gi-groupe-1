@@ -28,4 +28,6 @@ if (isset($_POST['email']) && isset($_POST['motDePasse'])) {
 
   }
 }
+header ('Location: /pages/accueil.php');
+
 ?>
