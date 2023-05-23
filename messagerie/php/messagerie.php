@@ -9,6 +9,7 @@
 </head>
 <body>
     
+        
         <!--TODO rajouter signalement-->
         <div id="messagerie-container">
             <div id="name">
@@ -68,12 +69,7 @@
                     <input id="message-text" type="text" value="">
                     <button onclick="newMsg()">Envoyer</button>
                 </div>
-                <div class="button-bloque-debloque b" id="button-bloque" onclick="bloquer_utilisateur()">
-                    Bloquer l'utilisateur
-                </div>
-                <div class="button-bloque-debloque hidden b" id="button-debloque" onclick="debloquer_utilisateur()">
-                    Débloquer l'utilisateur
-                </div>
+                
             </div>
 
             
@@ -94,7 +90,7 @@
             async function verification_message() {
                 recup_messages();
                 //console.log(id_dernier_message);
-                await sleep(1000);
+                await sleep(5000);
                 verification_message();
             }
             verification_message();

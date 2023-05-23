@@ -1,5 +1,13 @@
-var lastMessageId = 0;
+/**TODO:
+ * [~]Clean code
+ * []fix bugs
+ * []add group message
+ * []Transformer les requetes get en post
+ * []Rajouter le fait d'ajouter un systeme de notif
+ **/
 
+var lastMessageId = 0;
+var id = 1;
 
 
 /*Change le destinataire*/
@@ -9,20 +17,7 @@ function newDestinataire(id) {
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            /*is_blocked = parseInt(this.responseText);
-            var button_bloque = document.getElementById("button-bloque");
-            var button_debloque = document.getElementById("button-debloque");
-
-            if(is_blocked){
-
-                button_bloque.classList.add("hidden");
-                button_debloque.classList.remove("hidden");
-            }else{
-                button_bloque.classList.remove("hidden");
-                button_debloque.classList.add("hidden");
-            }
-            id_dernier_message = -1;
-            recup_messages();*/
+            
             console.log(this.responseText);
             document.getElementById("name").innerHTML = this.responseText;
             lastMessageId = 1;
@@ -36,7 +31,6 @@ function newDestinataire(id) {
     xhttp.send("id="+id);
 }
 
-/*TODO:getMsg() and newMsg() and displayMsg()*/
 function displayMsg(message) {
     
     let message_zone = document.getElementById("message-zone");
@@ -86,14 +80,13 @@ const recup_messages = () => {
     if(lastMessageId == 1){
         document.getElementById("message-zone").innerHTML = "";
     }
-    // Effectuez une requête Ajax pour récupérer les messages
     let xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             let messages = JSON.parse(this.responseText);
 
             messages.forEach(message => {
-                var id = message["id"];
+                id = message["id"];
 
                 console.log("id "+id);
                 console.log("last id "+lastMessageId);
@@ -103,6 +96,13 @@ const recup_messages = () => {
                     console.log("ici");
                     displayMsg(message);
                     lastMessageId = id;
+                }
+                else{
+                    if(lastMessageId == 9)
+                    {
+                        lastMessageId = id;
+                    }
+                    console.log("ici 2");
                 }
             });
         }
