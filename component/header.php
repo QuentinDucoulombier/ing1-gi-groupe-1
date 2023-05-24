@@ -14,8 +14,21 @@
                 <div class="MonCompte">
                     <h3 id="buttonC2">Mon Compte</h3>
                     <ul id="MonCompteMenu" class="MonCompteMenu">
-                    <?php if (isset($_SESSION['email'])) { ?>
-                        <li class="buttonC"><a href="/?page=profil">Mon Profil </a></li>
+                    <?php if (isset($_SESSION['email'])) { 
+                        $infos = getUser($_SESSION['email']);
+                        
+                        if ($infos[0]['type'] == "Etudiant") {
+                        ?>
+                        <li class="buttonC"><a href="/?page=profilEtudiant">Mon Profil </a></li>
+                        <?php
+                        } else if ($infos[0]['type'] == "Gestionnaire") {
+                        ?>
+                        <li class="buttonC"><a href="/?page=profilGestionnaire">Mon Profil </a></li>
+                        <?php
+                        } else if ($infos[0]['type'] == "Admninistrateur") {
+                        ?>
+                        <li class="buttonC"><a href="/?page=profilAdmin">Mon Profil </a></li>
+                        <?php } ?>
                         <li class="buttonC"><a href="../action/logout.php">Déconnexion </a> </li>
                     <?php } else { ?>
                         <li class="buttonC" ><a href="/?page=connexion">Connexion</a></li>
