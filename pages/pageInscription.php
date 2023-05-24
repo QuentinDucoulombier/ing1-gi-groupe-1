@@ -17,7 +17,7 @@ require('accueil.php');
         <h2>Inscription</h2>
         <form id="modifierForm" action="../action/inscription.php" method="POST">
         <label for="email2">Email:</label><br>
-        <input type="email" id="email2" name="email2" required><br>
+        <input type="email" id="email" name="email" required><br>
         <label for="prenomUtilisateur">Prénom:</label><br>
         <input type="text" id="prenomUtilisateur" name="prenomUtilisateur" required><br>
         <label for="nomUtilisateur">Nom:</label><br>
@@ -30,8 +30,8 @@ require('accueil.php');
         <input type="text" id="ecole" name="ecole" required><br>
         <label for="ville">Ville:</label><br>
         <input type="text" id="ville" name="ville" required><br>
-        <label for="motDePasse2">Mot de passe:</label><br>
-        <input type="password" id="motDePasse2" name="motDePasse2" required><br>
+        <label for="motDePasse">Mot de passe:</label><br>
+        <input type="password" id="motDePasse" name="motDePasse" required><br>
         <label for="confirm_motDePasse">Confirmer mot de passe:</label><br>
         <input type="password" id="confirm_motDePasse" name="confirm_motDePasse" required><br>
         <input type="submit" value="S'inscrire">

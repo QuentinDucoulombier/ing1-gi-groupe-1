@@ -43,11 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   } else {
     // Ecriture du nouvel utilisateur dans la base de données
     addEtudiant($connexion, $email, $motDePasse, $nom, $prenom, $tel, $niv, $ecole, $ville);
-
+    header ('Location: /pages/accueil.php');
     echo "success";
     
   }
 }
 
-header ('Location: /pages/accueil.php');
+
 ?>
