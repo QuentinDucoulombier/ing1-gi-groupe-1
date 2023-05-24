@@ -10,25 +10,6 @@
     /* Ajoutez cette propriété pour ajouter une marge entre les éléments */
 }
 
-.buttonC {
-    background-color: #208997;
-    border: none;
-    color: white;
-    padding: 8px 16px;
-    text-decoration: none;
-    list-style: none;
-    font-size: 13px;
-    margin: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    text-align: center;
-}
-
-.buttonC:hover {
-    background-color: #208997;
-    color: white;
-}
-
 .nomUtilisateur {
     display: flex;
     /* Ajoutez cette propriété pour aligner les éléments côte à côte */
