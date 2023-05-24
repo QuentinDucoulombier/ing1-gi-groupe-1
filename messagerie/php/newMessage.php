@@ -11,13 +11,13 @@
 
     $message = $_POST["message"];
 
-    $dbname = "messagerie";
+    $dbname = "projetIaPau";
     
     mysqli_select_db($cnx, $dbname);
 
 
     /*-------------------Auteur------------------*/
-    $queryAut = "SELECT id_user FROM Auteur";
+    $queryAut = "SELECT idUtilisateur FROM Auteur";
     $resultAut = mysqli_query($cnx, $queryAut);
 
     // Vérifier si la requête a réussi
@@ -41,7 +41,7 @@
 
 
     /*----------------Destinataire----------------*/
-    $queryDest = "SELECT id_user FROM Destinataire";
+    $queryDest = "SELECT idUtilisateur FROM Destinataire";
     $resultDest = mysqli_query($cnx, $queryDest);
 
     // Vérifier si la requête a réussi

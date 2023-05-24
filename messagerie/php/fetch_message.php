@@ -2,7 +2,7 @@
 $serveur = "localhost";
 $user = "quentin";
 $pass = "*noeDu64*";
-$dbname = "messagerie";
+$dbname = "projetIaPau";
 $conn = mysqli_connect($serveur, $user, $pass, $dbname);
 
 // Vérifier la connexion
@@ -27,7 +27,7 @@ function verifDestAuteur($auteur_msg, $destinataire_msg, $aut, $dest) {
 }
 
 /*-------------------Auteur------------------*/
-$queryAut = "SELECT id_user FROM Auteur";
+$queryAut = "SELECT idUtilisateur FROM Auteur";
 $resultAut = mysqli_query($conn, $queryAut);
 
 // Vérifier si la requête a réussi
@@ -51,7 +51,7 @@ mysqli_free_result($resultAut);
 
 
 /*----------------Destinataire----------------*/
-$queryDest = "SELECT id_user FROM Destinataire";
+$queryDest = "SELECT idUtilisateur FROM Destinataire";
 $resultDest = mysqli_query($conn, $queryDest);
 
 // Vérifier si la requête a réussi
@@ -74,11 +74,20 @@ mysqli_free_result($resultDest);
 
 
 // Requête pour récupérer les messages
+/**FIXME: 
+ * Faire la meme chose pour les destinatiare
+ * Changer la requete sql comme ci dessous si le message est de type recu
+ * SELECT Messages.id_message, Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Messages.message, Messages.date_envoi, Messages.lu, Messages.id_auteur, Messages.id_destinataire     
+ * FROM Messages
+   JOIN Destinataire ON Destinataire.id_destinataire = Messages.id_destinataire     
+   JOIN Utilisateur ON Utilisateur.idUtilisateur = Destinataire.idUtilisateur     
+   ORDER BY Messages.id_message ASC;
+ * */
 $query = "
-    SELECT Messages.id_message, User.prenom, User.nom, Messages.message, Messages.date_envoi, Messages.lu, Messages.id_auteur, Messages.id_destinataire
+    SELECT Messages.id_message, Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Messages.message, Messages.date_envoi, Messages.lu, Messages.id_auteur, Messages.id_destinataire
     FROM Messages
     JOIN Auteur ON Auteur.id_auteur = Messages.id_auteur
-    JOIN User ON User.id_user = Auteur.id_user
+    JOIN Utilisateur ON Utilisateur.idUtilisateur = Auteur.idUtilisateur
     ORDER BY Messages.id_message ASC
 ";
 
@@ -101,8 +110,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     
         $message = array(
             "id" => $row["id_message"],
-            "prenom" => $row["prenom"],
-            "nom" => $row["nom"],
+            "prenom" => $row["prenomUtilisateur"],
+            "nom" => $row["nomUtilisateur"],
             "message" => $row["message"],
             "date_envoi" => $row["date_envoi"],
             "statut" => $statut

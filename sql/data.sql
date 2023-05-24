@@ -32,3 +32,12 @@ INSERT INTO Reponse(idQuestion,idEquipe,reponse,note) VALUES (4,1,"oui",4);
 INSERT INTO Reponse(idQuestion,idEquipe,reponse,note) VALUES (5,1,"oui",4);
 
 INSERT INTO Superviser(idProjetData,idGestionnaire) VALUES (1,3);
+
+
+/* Ajout auteur de base on modifiera en fonction de la connexion par la suite */
+INSERT INTO Auteur (idUtilisateur)
+VALUES (1);
+
+/* Ajout destinataire de base */
+INSERT INTO Destinataire (idUtilisateur)
+VALUES (2);

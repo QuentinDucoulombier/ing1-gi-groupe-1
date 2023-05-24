@@ -13,17 +13,17 @@
     $idUser = $_POST["id"];
    
 
-    $queryDestinataire = "UPDATE Destinataire SET id_user = '$idUser'";
-    $dbname = "messagerie";
+    $queryDestinataire = "UPDATE Destinataire SET idUtilisateur = '$idUser'";
+    $dbname = "projetIaPau";
     mysqli_select_db($cnx, $dbname);
 
     if(mysqli_query($cnx, $queryDestinataire)) {
         //echo "Les valeurs du destinataire ont été modifiées avec succès";
-        $query = "select prenom,nom from User Inner join Destinataire ON Destinataire.id_user = User.id_user";
+        $query = "select prenomUtilisateur,nomUtilisateur from Utilisateur Inner join Destinataire ON Destinataire.idUtilisateur = Utilisateur.idUtilisateur";
         $result = mysqli_query($cnx,$query);
         if($result){
             while($row = mysqli_fetch_assoc($result)){
-                echo ''.$row['prenom'].' '.$row['nom'].'';
+                echo ''.$row['prenomUtilisateur'].' '.$row['nomUtilisateur'].'';
             }
         }
         else {
@@ -37,7 +37,5 @@
 
 
     mysqli_close($cnx);
-
-    //echo $prenomD." ".$nomD;
 
 ?>

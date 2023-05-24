@@ -8,6 +8,19 @@
   
 </head>
 <body>
+        <?php
+            $serveur = "localhost";
+            $user = "quentin";
+            $pass = "*noeDu64*";
+            $cnx = mysqli_connect($serveur, $user, $pass);
+            if (mysqli_connect_errno($cnx)) {
+                echo "Erreur de connexion a MySQL: " . mysqli_connect_error();
+                exit();
+            }
+            $dbname = "projetIaPau";
+
+            
+        ?>
     
         
         <!--TODO rajouter signalement-->
@@ -20,27 +33,21 @@
                 <select id="select-discussion" size="5">
                     
                     <?php
-                        $serveur = "localhost";
-                        $user = "quentin";
-                        $pass = "*noeDu64*";
-                        $cnx = mysqli_connect($serveur, $user, $pass);
+                        
                 
-                        if (mysqli_connect_errno($cnx)) {
-                            echo "Erreur de connexion a MySQL: " . mysqli_connect_error();
-                            exit();
-                        }
-                        $dbname = "messagerie";
+                        
                         mysqli_select_db($cnx, $dbname);
-                        $query = "SELECT * FROM User";
+                        $query = "SELECT idUtilisateur,nomUtilisateur,prenomUtilisateur FROM Utilisateur";
                         $result = mysqli_query($cnx,$query);
                         if ($result) {
                             while($row = mysqli_fetch_assoc($result)){
-                                echo '<option onclick=newDestinataire("'.$row['id_user'].'") value="'.$row['prenom'].' '. $row['nom'].'">'.$row['prenom'].' '. $row['nom'].'</option>' ;
+                                echo '<option onclick=newDestinataire("'.$row['idUtilisateur'].'") value="'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'">'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'</option>' ;
                             }
                         } else {
                             echo "Erreur lors de l'exécution de la requête : " . mysqli_error($cnx);
                         }
-                        
+                        mysqli_close($cnx);
+
                     
                     ?>
                         
@@ -80,19 +87,20 @@
         </div>
 
 </body>
+<!--
+    <script>
 
-<script>
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
 
-            function sleep(ms) {
-                return new Promise(resolve => setTimeout(resolve, ms));
-            }
-
-            async function verification_message() {
-                recup_messages();
-                //console.log(id_dernier_message);
-                await sleep(5000);
-                verification_message();
-            }
+        async function verification_message() {
+            recup_messages();
+            //console.log(id_dernier_message);
+            await sleep(5000);
             verification_message();
-        </script>
+        }
+        verification_message();
+    </script>
+-->
 </html>
