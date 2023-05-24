@@ -191,7 +191,7 @@
     function getUser($mail){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT email, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville, nomEntreprise FROM Utilisateur WHERE email LIKE :email";
+            $sqlQuery = "SELECT email, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville, nomEntreprise, dateFinUtilisateur FROM Utilisateur WHERE email LIKE :email";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':email', $mail);
             $statement->execute();
@@ -375,6 +375,24 @@
         }
     }
 
+    /*
+    * Permet de modifier la date de fin d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param dateFinUtilisateur : nouvelle date de fin de l'utilisateur
+    */
+    function modifyDateFinUtilisateur($email, $dateFinUtilisateur){
+        try {
+            $conn = connect();
+            $sqlQuery = "UPDATE Utilisateur SET dateFinUtilisateur = :dateFinUtilisateur WHERE email LIKE :email";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':email', $email);
+            $statement->bindParam(':dateFinUtilisateur', $dateFinUtilisateur);
+            $statement->execute();
+        }
+        catch(Exception $e) {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
     /*
     * Permet de modifier la ville d'un utilisateur
     * @param mail : mail de l'utilisateur

@@ -65,8 +65,9 @@ if (isset($_SESSION['email'])) {
         <div class="dateFinUtilisateur">
             <h2> Date de fin d'utilisateur : </h2>
             <?php
-            echo "<h2>" . $infos[0]['dateFinUtilisateur'] . "</h2>";
-            ?>
+            $dateFinUtilisateur = date('d F Y', strtotime($infos[0]['dateFinUtilisateur']));
+            echo "<h2>" . $dateFinUtilisateur . "</h2>";
+            ?>, 
         </div>
         
         <div class="modifier">

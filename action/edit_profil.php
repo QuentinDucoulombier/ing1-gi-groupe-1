@@ -44,12 +44,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         modifyEntreprise($email, $nomEntreprise);
     }
 
-    // if ($type == "Gestionnaire" && !empty($_POST['dateFinUtilisateur'])) {
-    //     // Récupération des données POST envoyées par le formulaire
-    //     $dateFinUtilisateur = htmlspecialchars($_POST['dateFinUtilisateur']);
+    if ($type == "Gestionnaire" && !empty($_POST['dateFinUtilisateur'])) {
+        // Récupération des données POST envoyées par le formulaire
+        $dateFinUtilisateur = htmlspecialchars($_POST['dateFinUtilisateur']);
 
-    //     modifyDateFinUtilisateur($email, $dateFinUtilisateur);
-    // }
+        modifyDateFinUtilisateur($email, $dateFinUtilisateur);
+    }
 
 
     //si le niveau d'etude a été saisie dans le formulaire
