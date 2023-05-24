@@ -7,6 +7,8 @@ CREATE TABLE Evenement(
     nomEvenement varchar(64) NOT NULL,
     dateDebut date,
     dateFin date,
+    descriptionEvent varchar(264),
+    imageEvent varchar(1024),
     typeEvenement varchar(30),
     PRIMARY KEY (idEvenement),
     CONSTRAINT check_typeEvenement CHECK (typeEvenement IN ('dataBattle', 'dataChallenge'))
