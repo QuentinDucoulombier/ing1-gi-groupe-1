@@ -6,7 +6,7 @@ if (isset($_SESSION['email'])) {
     // recuperer les données de l'utilisateur connecté a partir de son email
     
     
-    $infos = getUser($connexion, $email);
+    $infos = getUser($email);
     $prenomUtilisateur = $infos[0]['prenomUtilisateur'];
 
     ?>
