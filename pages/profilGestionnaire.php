@@ -34,13 +34,6 @@ if (isset($_SESSION['email'])) {
             ?>
         </div>
 
-        <div class="mdp">
-            <h2> Modifier le mot de passe :</h2>
-            <li class="buttonC" class="boutonmodalMdp">
-                <div onclick="openMdpModal()">Modifier votre mot de passe</div>
-            </li>
-        </div>
-
         <div class="nomUtilisateur">
             <h2> Prénom : </h2>
             <?php
@@ -62,24 +55,17 @@ if (isset($_SESSION['email'])) {
             ?>
         </div>
 
-        <div class="niveauEtude">
-            <h2> Niveau d'étude : </h2>
+        <div class="entreprise">
+            <h2> Entreprise : </h2>
             <?php
-            echo "<h2>" . $infos[0]['niveauEtude'] . "</h2>";
+            echo "<h2>" . $infos[0]['nomEntreprise'] . "</h2>";
             ?>
         </div>
 
-        <div class="ecole">
-            <h2> Ecole : </h2>
+        <div class="dateFinUtilisateur">
+            <h2> Date de fin d'utilisateur : </h2>
             <?php
-            echo "<h2>" . $infos[0]['ecole'] . "</h2>";
-            ?>
-        </div>
-
-        <div class="ville">
-            <h2> Ville : </h2>
-            <?php
-            echo "<h2>" . $infos[0]['ville'] . "</h2>";
+            echo "<h2>" . $infos[0]['dateFinUtilisateur'] . "</h2>";
             ?>
         </div>
         
@@ -87,29 +73,23 @@ if (isset($_SESSION['email'])) {
             <li class="buttonC" class="boutonmodifier">
                 <div onclick="openModifierModal()">Modifier vos informations</div>
             </li>
+
+        </div>
+
+        <div class="projet_gestionnaire">
+            <h2> Vos projets à gérer: </h2>
+
+        </div>
+    
     </body>
 
     </html>
-    <!-- <div id="mdpModal" class="modal">
-        <div class="modal-content">
-            <span id="closeMdp" onclick="closeMdpModal()">&times;</span>
-            <h2>Modifier votre mot de passe</h2>
-            <form id="loginForm" onsubmit="inscrire(); return false;">
-                <label for="username2">Mot de passe:</label><br>
-                <input type="password" id="passwordmdf" name="password" required><br>
-                <label for="password2">Nouveau mot de passe:</label><br>
-                <input type="password" id="newPassword" name="newPassword" required><br>
-                <label for="confirm_password">Confirmer nouveau mot de passe:</label><br>
-                <input type="password" id="confirm_passwordmdf" name="confirm_password" required><br>
-                <input type="submit" value="Valider">
-            </form>
-        </div>
-    </div> -->
+
     <div id="modifierModal">
     <div class="modal-content">
         <span id="closeModifier" onclick="closeModifierModal()">&times;</span>
         <h2>Modifier vos informations</h2>
-        <form id="modifierForm" action="../action/modifierInformation.php" method="POST">
+        <form id="modifierForm" action="../action/edit_profil.php" method="POST">
             <label for="prenomUtilisateur">Prénom:</label><br>
             <input type="text" id="prenomUtilisateur" name="prenomUtilisateur"><br>
             <label for="nomUtilisateur">Nom:</label><br>
@@ -118,12 +98,10 @@ if (isset($_SESSION['email'])) {
             <input type="email" id="email" name="email"><br>
             <label for="numeroTel">Numéro de téléphone:</label><br>
             <input type="tel" id="numeroTel" name="numeroTel"><br>
-            <label for="niveauEtude">Niveau d'étude:</label><br>
-            <input type="text" id="niveauEtude" name="niveauEtude"><br>
-            <label for="ecole">Ecole:</label><br>
-            <input type="text" id="ecole" name="ecole"><br>
-            <label for="ville">Ville:</label><br>
-            <input type="text" id="ville" name="ville"><br>
+            <label for="nomEntreprise">Entreprise:</label><br>
+            <input type="text" id="nomEntreprise" name="nomEntreprise"><br>
+            <label for="dateFinUtilisateur">Date de fin d'utilisateur:</label><br>
+            <input type="date" id="dateFinUtilisateur" name="dateFinUtilisateur"><br>
             <label for="AncienPassword">Ancien mot de passe:</label><br>
             <input type="password" id="AncienPassword" name="AncienPassword"><br>
             <label for="password">Nouveau mot de passe:</label><br>
@@ -133,24 +111,11 @@ if (isset($_SESSION['email'])) {
             <input type="submit" value="Valider">
         </form>
     </div>
-</div>
 
 
-    <?php
+
     
-    if ($infos[0]['type'] == "Etudiant") {
-      
-    ?>
-        <div class="info etudiant">
-            <h2> Informations : </h2>
-            <h3> Vous êtes un étudiant </h3>
-            <h3> Vous n'avez pas encore de groupe </h3>
-        </div>
-
-
 <?php
-    }
-
 } 
 
 else {

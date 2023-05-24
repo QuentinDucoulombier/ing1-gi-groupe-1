@@ -26,8 +26,16 @@ require('accueil.php');
                 <input type="tel" id="numeroTel" name="numeroTel" placeholder="Numéro de téléphone" required>
             </div>
             
-            <div class = "niveauEtude">
-                <input type="text" id="niveauEtude" name="niveauEtude" placeholder="Niveau d'étude" required>
+            <div class="radioniveauEtude">
+            <label for="niveauEtude" class="titreniveauEtude">niveauEtude</label>
+            <div class="categorie">
+              <input type="radio" id="niveauEtude" name="niveauEtude" value="L1" > L1
+              <input type="radio" id="niveauEtude" name="niveauEtude" value="L2" > L2
+              <input type="radio" id="niveauEtude" name="niveauEtude" value="L3" > L3
+              <input type="radio" id="niveauEtude" name="niveauEtude" value="M1" > M1
+              <input type="radio" id="niveauEtude" name="niveauEtude" value="M2" > M2
+              <input type="radio" id="niveauEtude" name="niveauEtude" value="D" > D
+            </div>
             </div>
             
             <div class = "ecole">
