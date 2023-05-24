@@ -16,36 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $motDePasse = sha1($_POST['motDePasse']);
   $confirm_motDePasse = sha1($_POST['confirm_motDePasse']);
 
-  // // Vérification si les champs sont remplis
-  if (empty($email) || empty($motDePasse) || empty($confirm_motDePasse)) {
-    $error = "Tous les champs sont obligatoires.";
-  } else if ($motDePasse !== $confirm_motDePasse) {
-    $error = "Les deux mots de passe ne correspondent pas.";
-  } else if (strlen($email) > 100) {
-    // Vérification que le nom rentre bien dans la base de donnée
-    $error = "Nom utilisateur trop long";
-  } else {
-
-  }
-
-
-  // On regarde si l'email est déjà utilisé
-  $sqlQuery = "select `email` FROM Utilisateur WHERE email LIKE :email";
-  $statement = $connexion->prepare($sqlQuery);
-  $statement->bindParam(':email', $email);
-  $statement->execute();
-  $result = $statement->rowCount();
-
-  if ($result > 0) {
-    echo "utilise";
+  if ($motDePasse !== $confirm_motDePasse) {
+    $error = "mot de passe non égale a confirm mot de passe";
     exit;
-
   } else {
-    // Ecriture du nouvel utilisateur dans la base de données
     addEtudiant($email, $motDePasse, $nom, $prenom, $tel, $niv, $ecole, $ville);
-
-    echo "success";
-    
   }
 }
 

@@ -27,6 +27,8 @@ if (!isset($_GET["page"])){
         <link rel="stylesheet" href="styles/component/footer.css" />
         <link rel="stylesheet" href="styles/component/accueil.css" />
         <link rel="stylesheet" href="styles/component/profil.css" />
+        <link rel="stylesheet" href="styles/component/form.css" />
+
 
                 
 

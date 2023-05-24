@@ -70,12 +70,12 @@ CREATE TABLE Utilisateur(
     UNIQUE (email),
     CONSTRAINT check_numerotel CHECK (numeroTel REGEXP '^[0-9]{10}$'),
     CONSTRAINT check_niveauEtude CHECK (niveauEtude IN ('L1', 'L2', 'L3', 'M1', 'M2', 'D')),
-    CONSTRAINT check_type CHECK (type IN ('Etudiant', 'Gestionnaire', 'Admninistrateur'))
+    CONSTRAINT check_type CHECK (type IN ('Etudiant', 'Gestionnaire', 'Administrateur'))
 );
 
 CREATE TABLE Equipe(
     idEquipe int NOT NULL AUTO_INCREMENT,
-    nomEquipe int NOT NULL,
+    nomEquipe varchar(255) NOT NULL,
     idCapitaine int NOT NULL,
     idProjetData int NOT NULL,
     PRIMARY KEY (idEquipe),
