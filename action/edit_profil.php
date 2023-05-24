@@ -97,7 +97,7 @@ if ($type == "Etudiant") {
     header('Location: /?page=profilEtudiant');
 } else if ($type == "Gestionnaire") {
     header('Location: /?page=profilGestionnaire');
-} else if ($type == "Admninistrateur") {
+} else if ($type == "Administrateur") {
     header('Location: /?page=profilAdmin');
 } else {
     echo 'error';

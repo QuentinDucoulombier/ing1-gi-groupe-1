@@ -118,7 +118,7 @@
         try{
             $conn = connect();
             $sqlQuery = "INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel) 
-                    VALUES (:mail, :pass, 'Gestinnaire', :nom ,  :prenom , :tel)";
+                    VALUES (:mail, :pass, 'Gestionnaire', :nom ,  :prenom , :tel)";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
             $statement->bindParam(':pass', $password);
@@ -147,7 +147,7 @@
         try{
             $conn = connect();
             $sqlQuery = "INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel, nomEntreprise, dateDebutUtilisateur, dateFinUtilisateur) 
-                    VALUES (:mail, :pass, Gestinnaire, :nom ,  :prenom , :tel, '".$entreprise."', :dateD, :dateF )";
+                    VALUES (:mail, :pass, 'Gestionnaire', :nom ,  :prenom , :tel, '".$entreprise."', :dateD, :dateF )";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
             $statement->bindParam(':pass', $password);

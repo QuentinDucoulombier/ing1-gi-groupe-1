@@ -23,7 +23,7 @@
             ?>
             <li class="buttonC"><a href="/?page=profilGestionnaire">Mon Profil </a></li>
             <?php
-            } else if ($infos[0]['type'] == "Admninistrateur") {
+            } else if ($infos[0]['type'] == "Administrateur") {
             ?>
             <li class="buttonC"><a href="/?page=profilAdmin">Mon Profil </a></li>
             <?php } ?>
