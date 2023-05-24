@@ -1,0 +1,83 @@
+/*
+* Liste challenge
+*/
+#liste-challenge {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.title {
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: 700;
+    font-size: 28;
+    color: #192231 !important;
+    line-height: 1.2em;
+  }
+/*
+* Card
+*/
+.card {
+    width: calc(23% - 0px);
+    margin: 20px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 5px rgb(51, 51, 51);
+}
+
+@media only screen and (max-width: 768px) {
+    .card {
+      width: 100%;
+    }
+}
+  
+.event-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.event-details {
+    padding: 10px;
+    text-align: center;
+}
+
+.event-date{
+    color: #0e8769 !important;
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif;
+}
+.event-name{
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 20px;
+    color: #192231 !important;
+}
+
+.more-link{
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: 700;
+    text-decoration: underline;
+    color: #0e8769 !important;
+}
+
+.button-projet button {
+    display: flex;
+    justify-content: center;
+    border-width: 0px !important;
+    font-size: 16px;
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif !important;
+    background-color: #0e8769;
+    color: white;
+
+  
+}
+
+.button-projet:hover button{
+    background-color: #004b38;
+}
+/*CSS DES BOUTONS A UNIFORMISER
+*/
+
+
