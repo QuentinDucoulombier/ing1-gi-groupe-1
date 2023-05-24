@@ -618,9 +618,7 @@
     function getChallenge(){
         try{
             $conn = connect();
-
-            $sqlQuery = "SELECT nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataChallenge'";
-
+            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataChallenge'";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
             $result = $statement->fetchAll();
