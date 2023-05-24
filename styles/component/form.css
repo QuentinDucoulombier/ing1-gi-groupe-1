@@ -1,3 +1,4 @@
+
 .formInscription ,.formConnexion{
     background-color: #fff;
     padding-top: 50px;
@@ -10,6 +11,7 @@
     line-height: 1.4em;
 }
 
+
 .formInscription input ,.formConnexion input{
     border-width: 1px;
     border-color: rgba(0,0,0,0.12);
@@ -19,12 +21,15 @@
     background-color: #ffffff00;
 }
 
+
 .formInscription input:focus ,.formConnexion input:focus{
     outline: #333;
 
 }
 
-.formInscription .submit ,.formConnexion .submit{
+
+.formInscription .submit {
+
     color: #ffffff !important;
     border-width: 12px !important;
     border-color: #0e8769;
@@ -40,4 +45,5 @@
     cursor: pointer;
     border: 0 solid #333 !important;
     border-color: rgba(0, 0, 0, 0) !important;
+
 }
