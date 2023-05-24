@@ -75,7 +75,7 @@ CREATE TABLE Utilisateur(
 
 CREATE TABLE Equipe(
     idEquipe int NOT NULL AUTO_INCREMENT,
-    nomEquipe int NOT NULL,
+    nomEquipe varchar(255) NOT NULL,
     idCapitaine int NOT NULL,
     idProjetData int NOT NULL,
     PRIMARY KEY (idEquipe),
