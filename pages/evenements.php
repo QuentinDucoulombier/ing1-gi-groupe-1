@@ -5,11 +5,12 @@
     <?php
         $challenges = getChallenge();
         $battles = getBattle();
+        $user = getUser($_SESSION['email']);
     ?>
 
     
-    <div>
-        <p>Liste des Data Challenge</p>
+    <div class=title>
+        <h1>Liste des Data Challenge</h1>
     </div>
     <div id=liste-challenge>
         <?php
@@ -21,13 +22,18 @@
                 echo '      </div>';
                 echo '      <div class = "event-details">';
                 echo '          <div class="event-name">'.$challenge['nomEvenement'].'</div>';
-                echo '          <div class="event-date"> Du '.$challenge['dateDebut'] .' Au '. $challenge['dateFin'].'</div>';
+                $dateD = date( 'j F', strtotime($challenge['dateDebut']));
+                $dateF = date( 'j F', strtotime($challenge['dateFin']));
+                echo '          <div class="event-date"> Du '.$dateD .' Au '. $dateF.'</div>';
                 echo '          <div class="event-description">'.$challenge['descriptionEvent'].'</div>';
                 echo '      </div>';
-                echo '      <div class="button">';
-                echo '          <a href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'"> <button name="voirplus"> Voir Plus </button> </a>';
-                //if (isset($_SESSION['email'])){
-                //    echo `      <a href=""> <button name="sinscrire"> S'inscrire </button> </a>`;
+                echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'"> Lire Plus </a>';
+                echo '      <div class="button-projet">';
+                if ($user[0]['type'] == "Etudiant") {
+                    echo '      <a href=""> <button name="sinscrire"> S\'inscrire </button> </a>';
+                }
+                //if ($user[0]['type'] == "Etudiant") {
+                //    echo '      <a href=""> <button name="monProjet"> Mon projet </button> </a>';
                 //}
                 echo '      </div>';
                 echo ' </div>';
@@ -35,8 +41,8 @@
         ?>
     </div>
 
-    <div>
-        <p>Liste des Data Battle</p>
+    <div class="title">
+        <h1>Liste des Data Battle</h1>
     </div>
 
     <div id=liste-battle>
@@ -52,10 +58,13 @@
                 echo '          <div class="event-date"> Du '.$battle['dateDebut'] .' Au '. $battle['dateFin'].'</div>';
                 echo '          <div class="event-description">'.$battle['descriptionEvent'].'</div>';
                 echo '      </div>';
-                echo '      <div class="button">';
-                echo '          <a href=""> <button name="voirplus"> Voir Plus </button> </a>';
-                //if (isset($_SESSION['email'])){
-                //    echo `      <a href=""> <button name="sinscrire"> S'inscrire </button> </a>`;
+                echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'"> Lire Plus </a>';
+                echo '      <div class="button-projet">';
+                if ($user[0]['type'] == "Etudiant") {
+                    echo '      <a href=""> <button name="sinscrire"> S\'inscrire </button> </a>';
+                }
+                //if ($user[0]['type'] == "Etudiant") {
+                //    echo '      <a href=""> <button name="monProjet"> Mon projet </button> </a>';
                 //}
                 echo '      </div>';
                 echo ' </div>';
