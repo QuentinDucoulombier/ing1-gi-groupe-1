@@ -14,10 +14,9 @@ if (isset($_POST['email']) && isset($_POST['motDePasse'])) {
     echo "error";
     exit;
   }
-  echo $email ;
-  echo $motDePasse ;
-  $found = isUser($email, $motDePasse);
+ 
 
+  $found = isUser($email, $motDePasse);
 
   // Envoi de la réponse au client
   if ($found == 1) {
@@ -28,6 +27,7 @@ if (isset($_POST['email']) && isset($_POST['motDePasse'])) {
 
   } else {
     echo "error";
+    exit;
 
   }
 }

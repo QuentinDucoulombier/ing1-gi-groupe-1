@@ -1,0 +1,61 @@
+
+#modifierForm {
+
+    background-color: #fff;
+    margin-left: 70vh;
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    max-width: 450px;
+    font-family: 'Poppins',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: 600;
+    line-height: 1.4em;
+}
+
+.formInscription ,.formConnexion {
+    background-image: linear-gradient(100deg,#0e8769 0%,#0c71c3 100%) !important;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.formInscription input ,.formConnexion input{
+
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.12);
+    border: 1 solid #333;
+    padding: 5px;
+    margin: 5px;
+    background-color: #ffffff00;
+}
+
+
+.formInscription input:focus ,.formConnexion input:focus{
+
+    outline: #333;
+
+}
+
+
+.formInscription .submit {
+
+
+    color: #ffffff !important;
+    border-width: 12px !important;
+    border-color: #0e8769;
+    border-radius: 15px;
+    letter-spacing: 2px;
+    font-size: 14px;
+    font-family: 'Poppins',Helvetica,Arial,Lucida,sans-serif !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    background-color: #0e8769 !important;
+    display: inline-block;
+    margin: 0 0 0 18px;
+    cursor: pointer;
+    border: 0 solid #333 !important;
+    border-color: rgba(0, 0, 0, 0) !important;
+
+
+}

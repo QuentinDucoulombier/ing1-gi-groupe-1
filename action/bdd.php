@@ -88,7 +88,7 @@
         try{
             $conn = connect();
             $sqlQuery = "INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville) 
-                    VALUES (:mail, :pass, Etudiant, :nom ,  :prenom , :tel, :niveau ,'" . $ecole . "','". $ville ."')";
+                    VALUES (:mail, :pass, 'Etudiant', :nom ,  :prenom , :tel, :niveau ,'" . $ecole . "','". $ville ."')";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
             $statement->bindParam(':pass', $password);
@@ -118,7 +118,7 @@
         try{
             $conn = connect();
             $sqlQuery = "INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel) 
-                    VALUES (:mail, :pass, Gestinnaire, :nom ,  :prenom , :tel)";
+                    VALUES (:mail, :pass, 'Gestionnaire', :nom ,  :prenom , :tel)";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
             $statement->bindParam(':pass', $password);
@@ -147,7 +147,7 @@
         try{
             $conn = connect();
             $sqlQuery = "INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel, nomEntreprise, dateDebutUtilisateur, dateFinUtilisateur) 
-                    VALUES (:mail, :pass, Gestinnaire, :nom ,  :prenom , :tel, '".$entreprise."', :dateD, :dateF )";
+                    VALUES (:mail, :pass, 'Gestionnaire', :nom ,  :prenom , :tel, '".$entreprise."', :dateD, :dateF )";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':mail', $mail);
             $statement->bindParam(':pass', $password);
@@ -191,7 +191,7 @@
     function getUser($mail){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT email, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville, nomEntreprise FROM Utilisateur WHERE email LIKE :email";
+            $sqlQuery = "SELECT email, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville, nomEntreprise, dateFinUtilisateur FROM Utilisateur WHERE email LIKE :email";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':email', $mail);
             $statement->execute();
@@ -375,6 +375,24 @@
         }
     }
 
+    /*
+    * Permet de modifier la date de fin d'un utilisateur
+    * @param mail : mail de l'utilisateur
+    * @param dateFinUtilisateur : nouvelle date de fin de l'utilisateur
+    */
+    function modifyDateFinUtilisateur($email, $dateFinUtilisateur){
+        try {
+            $conn = connect();
+            $sqlQuery = "UPDATE Utilisateur SET dateFinUtilisateur = :dateFinUtilisateur WHERE email LIKE :email";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':email', $email);
+            $statement->bindParam(':dateFinUtilisateur', $dateFinUtilisateur);
+            $statement->execute();
+        }
+        catch(Exception $e) {
+            die('Erreur : '.$e->getMessage());
+        }
+    }
     /*
     * Permet de modifier la ville d'un utilisateur
     * @param mail : mail de l'utilisateur
@@ -618,7 +636,7 @@
     function getChallenge(){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE dataChallenge";
+            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataChallenge'";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -636,7 +654,9 @@
     function getBattle(){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE dataBattle";
+
+            $sqlQuery = "SELECT nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataBattle'";
+
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -666,5 +686,92 @@
         } 
     }
 
+    /*
+    * Permet de récupérer les équipes de l'utilisateur 
+    * @param mail : 
+    */
+    function getMembreEquipe($mail){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT Equipe.nomEquipe FROM Equipe 
+                        INNER JOIN Composer ON Equipe.idEquipe = Composer.idEquipe 
+                        INNER JOIN Utilisateur ON Composer.idEtudiant = Utilisateur.idUtilisateur 
+                        WHERE Utilisateur.email = :mail";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+
+        /*
+    * Permet de récupérer les membres d'une équipe
+    * @param mail : 
+    */
+    function getMembre($equipe){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur FROM Utilisateur 
+                        INNER JOIN Composer ON Utilisateur.idUtilisateur = Composer.idEtudiant 
+                        INNER JOIN Equipe ON Composer.idEquipe = Equipe.idEquipe 
+                        WHERE Equipe.nomEquipe = :equipe";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':equipe', $equipe);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+
+    /*
+    * Permet de récupérer le gestionnaire d'une équipe
+    * @param mail : 
+    */
+    function getSuperviseur($equipe){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Utilisateur.email FROM Utilisateur
+                        INNER JOIN Superviser ON Utilisateur.idUtilisateur = Superviser.idGestionnaire
+                        INNER JOIN ProjetData ON Superviser.idProjetData = ProjetData.idProjetData
+                        WHERE ProjetData.nomProjet = :equipe;";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':equipe', $equipe);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+    /*
+    * Permet de récupérer le gestionnaire d'une équipe
+    * @param mail : 
+    */
+    function getGestionnaireEquipe($gestio){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT ProjetData.nomProjet
+                        FROM ProjetData
+                        INNER JOIN Superviser ON ProjetData.idProjetData = Superviser.idProjetData
+                        INNER JOIN Utilisateur ON Superviser.idGestionnaire = Utilisateur.idUtilisateur
+                        WHERE Utilisateur.nomUtilisateur = :gestio;";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':gestio', $gestio);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
     
 ?>

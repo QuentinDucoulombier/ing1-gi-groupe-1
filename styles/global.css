@@ -5,10 +5,11 @@ body {
     min-height: 100%;
     font-family: Open Sans,Arial,sans-serif;
     font-size: 14px;
-    color: #666;
+    color: #2b2b2b;
     line-height: 1.7em;
     font-weight: 500;
     background-color: rgb(216, 216, 216);
+    
 }
 
 html {
@@ -25,8 +26,10 @@ html {
 
   #content {
     margin: 0 auto;
+    margin-top: 20px;
     padding-top: 100px;
     width: 100%;
+    
   }
   
   #content h1 {
