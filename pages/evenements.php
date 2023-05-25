@@ -22,9 +22,7 @@
                 echo '      </div>';
                 echo '      <div class = "event-details">';
                 echo '          <div class="event-name">'.$challenge['nomEvenement'].'</div>';
-                $dateD = date( 'j F', strtotime($challenge['dateDebut']));
-                $dateF = date( 'j F', strtotime($challenge['dateFin']));
-                echo '          <div class="event-date"> Du '.$dateD .' Au '. $dateF.'</div>';
+                echo '          <div class="event-date"> Du '.$challenge['dateD'] .' Au '. $challenge['dateF'].'</div>';
                 echo '          <div class="event-description">'.$challenge['descriptionEvent'].'</div>';
                 echo '      </div>';
                 echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'"> Lire Plus </a>';

@@ -32,7 +32,7 @@ if(isset($_GET['challenge'])){
         echo ' </div>';
         echo ' <div class="contact-projet">';
         echo '      <h3> Ressources du projet </h3>';
-        echo '      <p>URL d’accès aux fichiers de description et des données du data challenge: </p>';
+        echo '      <p>URL d\'accès aux fichiers de description et des données du data challenge: </p>';
         echo '      <a href ='.$projet['urlFichier'].'>Description du projet</a>';
         echo '      <p>URL vidéo de présentation du projet.</p>';
         echo '      <a href ='.$projet['urlVideo'].'>Vidéo du projet</a>';
