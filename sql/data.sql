@@ -73,6 +73,7 @@ VALUES
 INSERT INTO Utilisateur(motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) 
 VALUES ("7110eda4d09e062aa5e4a390b0a572ac0d2c0220","Etudiant","Toto","tata",NULL,"0220020301","toto@tata.titi","M1","CY Tech","Pau");
 INSERT INTO Utilisateur(motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) 
+
 VALUES ("7110eda4d09e062aa5e4a390b0a572ac0d2c0220","Etudiant","Farret","Aventin",NULL,"0110011001","farretaven@cy-tech.fr","L1","CY Tech","Pau");
 INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude)
 VALUES 
@@ -81,6 +82,7 @@ VALUES
     ('etudiant3@example.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'Etudiant', 'Lefevre', 'Julien', '9876543210', 'D'),
     ('etudiant4@example.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'Etudiant', 'Dubois', 'Emma', '0123456789','L1'),
     ('etudiant5@example.com', '7110eda4d09e062aa5e4a390b0a572ac0d2c0220', 'Etudiant', 'Garcia', 'Léa', '4567890123','M2');
+
 
 INSERT INTO Utilisateur(motDePasse,type,nomUtilisateur,prenomUtilisateur,nomEntreprise,numeroTel,email,niveauEtude,ecole,ville) 
 VALUES ("7110eda4d09e062aa5e4a390b0a572ac0d2c0220","Gestionnaire","Naire","Gestio","euralis","1111111111","gestionnaire@test.fr",NULL,NULL,"Pau");
