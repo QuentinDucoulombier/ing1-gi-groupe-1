@@ -8,7 +8,7 @@
                 <a href="/?page=accueil">Accueil</a>
             </li>
             <li>
-                <a href="/?page=contact">Contact</a>
+                <a href="/?page=evenements">Evenements</a>
             </li>
             <li>
             
