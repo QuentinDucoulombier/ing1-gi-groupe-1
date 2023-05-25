@@ -2,30 +2,6 @@
         
     session_start();
 
-/*
-    $prenom =  $_SESSION["prenom"];
-    $nom = $_SESSION["nom"];
-    $status = $_SESSION["status"];
-    $img = $_SESSION["image"];
-    $email = $_SESSION["email"];
-    $prenomA =  "Test";
-    $nomA = "Ducou";
-    $emailA = "test";
-
-    $_SESSION["auteur"] = '{
-        "nom":"'.$nomA.'",
-        "prenom":"'.$prenomA.'",
-        "adresse_mail":"'.$emailA.'"
-    }';
-    $_SESSION["prenom"] = $prenomA;
-    $_SESSION["nom"] = $nomA;
-    $_SESSION["email"] = $emailA;
-
-
-    $prenomD =  "TestD";
-    $nomD = "NomD";
-    $emailD = "TestD";
-*/
 
     $serveur = "localhost";
     $user = "quentin";

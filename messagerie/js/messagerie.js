@@ -9,8 +9,11 @@
 var lastMessageId = 0;
 var id = 1;
 
-
-/*Change le destinataire*/
+/**
+ * @fn function newDestinataire()
+ * @param id identifiant de l'utilisateur
+ * @brief permet de choisir un nouveau destinataire lorsque l'on clique sur la liste
+ */
 function newDestinataire(id) {
 
     var xhttp = new XMLHttpRequest();
@@ -21,7 +24,7 @@ function newDestinataire(id) {
             console.log(this.responseText);
             document.getElementById("name").innerHTML = this.responseText;
             lastMessageId = 1;
-            recup_messages()
+            recup_messages();
         }
     }
     console.log(id);
@@ -31,6 +34,11 @@ function newDestinataire(id) {
     xhttp.send("id="+id);
 }
 
+/**
+ * @fn function displayMsg(message)
+ * @param message objet contenant les informations du message à afficher
+ * @brief affiche un message dans la zone de messages
+ */
 function displayMsg(message) {
     
     let message_zone = document.getElementById("message-zone");
@@ -74,6 +82,10 @@ function displayMsg(message) {
     
 }
 
+/**
+ * @fn const recup_messages()
+ * @brief récupère les nouveaux messages depuis le serveur
+ */
 const recup_messages = () => {
 
     console.log(lastMessageId);
@@ -112,8 +124,10 @@ const recup_messages = () => {
     xhttp.send();
 }
 
-
-
+/**
+ * @fn function newMsg()
+ * @brief envoie un nouveau message au serveur
+ */
 function newMsg() {
     let message = document.getElementById("message-text").value;
     //if(!is_blocked){

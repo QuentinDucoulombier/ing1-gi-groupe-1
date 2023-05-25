@@ -123,6 +123,17 @@ VALUES
     (2, 4, 'Oui, nous avons déjà participé à plusieurs défis de données auparavant.', 1),
     (3, 4, "Nous sommes intéressés par les projets liés à l'apprentissage automatique.", 4);
 
+INSERT INTO Superviser(idProjetData,idGestionnaire) VALUES (1,3);
+
+
+/* Ajout auteur de base on modifiera en fonction de la connexion par la suite */
+INSERT INTO Auteur (idUtilisateur)
+VALUES (1);
+
+/* Ajout destinataire de base */
+INSERT INTO Destinataire (idUtilisateur)
+VALUES (2);
+
 INSERT INTO Superviser (idProjetData, idGestionnaire)
 VALUES 
     (1, 8),
