@@ -1,4 +1,6 @@
+
 <!DOCTYPE html>
+
 <?php
 if (isset($_SESSION['email'])) {
 
@@ -10,6 +12,7 @@ if (isset($_SESSION['email'])) {
     $prenomUtilisateur = $infos[0]['prenomUtilisateur'];
 
     ?>
+
     <html lang="en">
 <!--
     <head>

@@ -3,12 +3,11 @@ require('accueil.php');
 
 ?>
 
-<body>
-    <div class="formInscription">
 
-        <h2>Inscription</h2>
+<div class="formInscription">
 
-        <form id="modifierForm" action="../action/verif_signin.php" method="POST">
+    <h2>Inscription</h2>
+
 
             <div class = "mail">
                 <input type="email" id="email" name="email" placeholder="Email" required>
@@ -54,11 +53,11 @@ require('accueil.php');
                 <input type="password" id="confirm_motDePasse" name="confirm_motDePasse" placeholder="Confirmer mot de passe" required>
             </div>
 
-            <div class="submit">
-                <input type="submit" value="S'inscrire">
-            </div>
+        <div class="submit">
+            <input type="submit" value="S'inscrire">
+        </div>
 
-        </form>
-    </div>
-</body>
+    </form>
+</div>
+
 

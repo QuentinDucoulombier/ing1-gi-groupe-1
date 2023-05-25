@@ -636,7 +636,7 @@
     function getChallenge(){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE dataChallenge";
+            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataChallenge'";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -654,7 +654,9 @@
     function getBattle(){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE dataBattle";
+
+            $sqlQuery = "SELECT nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataBattle'";
+
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -684,5 +686,92 @@
         } 
     }
 
+    /*
+    * Permet de récupérer les équipes de l'utilisateur 
+    * @param mail : 
+    */
+    function getMembreEquipe($mail){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT Equipe.nomEquipe FROM Equipe 
+                        INNER JOIN Composer ON Equipe.idEquipe = Composer.idEquipe 
+                        INNER JOIN Utilisateur ON Composer.idEtudiant = Utilisateur.idUtilisateur 
+                        WHERE Utilisateur.email = :mail";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+
+        /*
+    * Permet de récupérer les membres d'une équipe
+    * @param mail : 
+    */
+    function getMembre($equipe){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur FROM Utilisateur 
+                        INNER JOIN Composer ON Utilisateur.idUtilisateur = Composer.idEtudiant 
+                        INNER JOIN Equipe ON Composer.idEquipe = Equipe.idEquipe 
+                        WHERE Equipe.nomEquipe = :equipe";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':equipe', $equipe);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+
+    /*
+    * Permet de récupérer le gestionnaire d'une équipe
+    * @param mail : 
+    */
+    function getSuperviseur($equipe){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Utilisateur.email FROM Utilisateur
+                        INNER JOIN Superviser ON Utilisateur.idUtilisateur = Superviser.idGestionnaire
+                        INNER JOIN ProjetData ON Superviser.idProjetData = ProjetData.idProjetData
+                        WHERE ProjetData.nomProjet = :equipe;";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':equipe', $equipe);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+    /*
+    * Permet de récupérer le gestionnaire d'une équipe
+    * @param mail : 
+    */
+    function getGestionnaireEquipe($gestio){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT ProjetData.nomProjet
+                        FROM ProjetData
+                        INNER JOIN Superviser ON ProjetData.idProjetData = Superviser.idProjetData
+                        INNER JOIN Utilisateur ON Superviser.idGestionnaire = Utilisateur.idUtilisateur
+                        WHERE Utilisateur.nomUtilisateur = :gestio;";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':gestio', $gestio);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
     
 ?>

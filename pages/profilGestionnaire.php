@@ -10,6 +10,8 @@ if (isset($_SESSION['email'])) {
     $prenomUtilisateur = $infos[0]['prenomUtilisateur'];
 
     ?>
+
+
     <html lang="en">
 <!--
     <head>
@@ -112,6 +114,7 @@ if (isset($_SESSION['email'])) {
             <input type="submit" value="Valider">
         </form>
     </div>
+
 
 
 
