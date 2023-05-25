@@ -133,5 +133,5 @@ CREATE TABLE Messages (
   id_destinataire INT,
   message TEXT,
   date_envoi DATETIME,
-  lu TINYINT(1)
+  lu TINYINT(1) DEFAULT 0
 );

@@ -10,16 +10,20 @@ if (!$conn) {
     die("La connexion à la base de données a échoué : " . mysqli_connect_error());
 }
 
-/*TODO: Verifier si le msg est un msg recu ou envoyé*/
-//$statut peut etre égale a envoye, recu ou false
-//envoye si c'est l'auteur qui l'a envoyer et le destinataire qui l'a recu
-//recu si c'est le destinaire qui l'a recu et l'auteur qui l'a envoyer
-//false dans les autres cas
+/**
+ * @fn function verifDestAuteur($auteur_msg, $destinataire_msg, $aut, $dest) 
+ * @param $auteur_msg l'identifiant de l'auteur du message
+ * @param $destinataire_msg l'identifiant du destinataire du message
+ * @param $aut l'identifiant de l'auteur actuel
+ * @param $dest l'identifiant du destinataire actuel
+ * @return string le statut du message (envoye, recu ou false)
+ * @brief vérifie si l'auteur et le destinataire du message correspondent aux identifiants actuels
+ */
 function verifDestAuteur($auteur_msg, $destinataire_msg, $aut, $dest) {
     if ($auteur_msg == $aut && $destinataire_msg == $dest) {
 
         return "envoye";
-    }elseif($auteur_msg == $dest &&  $destinataire_msg == $auteur_msg){
+    }elseif($auteur_msg == $dest &&  $destinataire_msg == $aut){
         return "recu";
     }else{
         return "false";
@@ -76,19 +80,23 @@ mysqli_free_result($resultDest);
 // Requête pour récupérer les messages
 /**FIXME: 
  * Faire la meme chose pour les destinatiare
- * Changer la requete sql comme ci dessous si le message est de type recu
- * SELECT Messages.id_message, Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Messages.message, Messages.date_envoi, Messages.lu, Messages.id_auteur, Messages.id_destinataire     
- * FROM Messages
-   JOIN Destinataire ON Destinataire.id_destinataire = Messages.id_destinataire     
-   JOIN Utilisateur ON Utilisateur.idUtilisateur = Destinataire.idUtilisateur     
-   ORDER BY Messages.id_message ASC;
+ * Changer le nom de l'auteur dans le cas de recu
  * */
 $query = "
-    SELECT Messages.id_message, Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Messages.message, Messages.date_envoi, Messages.lu, Messages.id_auteur, Messages.id_destinataire
-    FROM Messages
-    JOIN Auteur ON Auteur.id_auteur = Messages.id_auteur
-    JOIN Utilisateur ON Utilisateur.idUtilisateur = Auteur.idUtilisateur
-    ORDER BY Messages.id_message ASC
+SELECT Messages.id_message, Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Messages.message, Messages.date_envoi, Messages.lu, Messages.id_auteur, Messages.id_destinataire
+FROM Messages
+JOIN Auteur ON Auteur.idUtilisateur = Messages.id_auteur
+JOIN Utilisateur ON Utilisateur.idUtilisateur = Auteur.idUtilisateur
+
+UNION
+
+SELECT Messages.id_message, Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Messages.message, Messages.date_envoi, Messages.lu, Messages.id_auteur, Messages.id_destinataire
+FROM Messages
+JOIN Auteur ON Auteur.idUtilisateur = Messages.id_destinataire
+JOIN Utilisateur ON Utilisateur.idUtilisateur = Auteur.idUtilisateur
+
+ORDER BY id_message ASC
+
 ";
 
 // Exécuter la requête
@@ -105,6 +113,7 @@ $messages = array();
 // Parcourir les résultats et construire le tableau des messages
 while ($row = mysqli_fetch_assoc($result)) {
     $statut = verifDestAuteur($row["id_auteur"], $row["id_destinataire"],$idAut,$idDest);
+    
     if ($statut != "false") {
 
     
