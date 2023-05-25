@@ -1,19 +1,20 @@
-.mdp {
-    display: flex;
-    /* Ajoutez cette propriété pour aligner les éléments côte à côte */
-    align-items: center;
-    /* Ajoutez cette propriété pour centrer les éléments verticalement */
+
+.profil_block {
+    background-color: #fff;
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    max-width: 450px;
+    font-family: 'Poppins',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: 600;
+    line-height: 1.4em;
 }
 
-.mdp h2 {
-    margin-right: 10px;
-    /* Ajoutez cette propriété pour ajouter une marge entre les éléments */
-}
-
-.nomUtilisateur {
-    display: flex;
+.profil h2{
+    display: inline-table;
     /* Ajoutez cette propriété pour aligner les éléments côte à côte */
-    align-items: center;
+    /*align-items: center;
     /* Ajoutez cette propriété pour centrer les éléments verticalement */
 }
 

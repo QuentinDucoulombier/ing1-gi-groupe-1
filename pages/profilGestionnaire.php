@@ -11,6 +11,7 @@ if (isset($_SESSION['email'])) {
 
     ?>
 
+<<<<<<< HEAD
 
     <html lang="en">
 <!--
@@ -83,6 +84,63 @@ if (isset($_SESSION['email'])) {
             <h2> Vos projets à gérer: </h2>
 
         </div>
+=======
+<div class="profil_block">
+    <div class="prenomUtilisateur profil">
+        <h2> Nom : </h2>
+        <?php
+        echo "<h2>" . $prenomUtilisateur . "</h2>";
+        ?>
+    </div>
+
+    <div class="nomUtilisateur profil">
+        <h2> Prénom : </h2>
+        <?php
+        echo "<h2>" . $infos[0]['nomUtilisateur'] . "</h2>";
+        ?>
+    </div>
+
+    <div class="email profil">
+        <h2> Email : </h2>
+        <?php
+        echo "<h2>" . $infos[0]['email'] . "</h2>";
+        ?>
+    </div>
+
+    <div class="numeroTel profil">
+        <h2> Numéro de téléphone : </h2>
+        <?php
+        echo "<h2>" . $infos[0]['numeroTel'] . "</h2>";
+        ?>
+    </div>
+
+    <div class="entreprise profil">
+        <h2> Entreprise : </h2>
+        <?php
+        echo "<h2>" . $infos[0]['nomEntreprise'] . "</h2>";
+        ?>
+    </div>
+
+    <div class="dateFinUtilisateur profil">
+        <h2> Date de fin d'utilisateur : </h2>
+        <?php
+        echo "<h2>" . $infos[0]['dateFinUtilisateur'] . "</h2>";
+        ?>
+    </div>
+
+    <div class="modifier profil">
+        <li class="buttonC" class="boutonmodifier">
+            <div onclick="openModifierModal()">Modifier vos informations</div>
+        </li>
+
+    </div>
+
+    <div class="projet_gestionnaire profil">
+        <h2> Vos projets à gérer: </h2>
+
+    </div>
+</div>
+>>>>>>> update css profil
     
     </body>
 
