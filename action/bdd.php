@@ -655,7 +655,7 @@
         try{
             $conn = connect();
 
-            $sqlQuery = "SELECT nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataBattle'";
+            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataBattle'";
 
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
@@ -690,7 +690,7 @@
     * Permet de récupérer les équipes de l'utilisateur 
     * @param mail : 
     */
-    function getMembreEquipe($mail){
+    function getEquipe($mail){
         try{
             $conn = connect();
             $sqlQuery = "SELECT Equipe.nomEquipe FROM Equipe 
@@ -731,18 +731,18 @@
     }
 
     /*
-    * Permet de récupérer le gestionnaire d'une équipe
+    * Permet de récupérer le gestionnaire d'un projet
     * @param mail : 
     */
-    function getSuperviseur($equipe){
+    function getSuperviseur($projet){
         try{
             $conn = connect();
             $sqlQuery = "SELECT Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Utilisateur.email FROM Utilisateur
                         INNER JOIN Superviser ON Utilisateur.idUtilisateur = Superviser.idGestionnaire
                         INNER JOIN ProjetData ON Superviser.idProjetData = ProjetData.idProjetData
-                        WHERE ProjetData.nomProjet = :equipe;";
+                        WHERE ProjetData.nomProjet LIKE '".$projet."' ;";
             $statement = $conn->prepare($sqlQuery);
-            $statement->bindParam(':equipe', $equipe);
+            $statement->bindParam(':projet', $projet);
             $statement->execute();
             $result = $statement->fetchAll();
             return $result;
@@ -752,10 +752,10 @@
         } 
     }
     /*
-    * Permet de récupérer le gestionnaire d'une équipe
+    * Permet de récupérer les projets gérés par un gestionnaire
     * @param mail : 
     */
-    function getGestionnaireEquipe($gestio){
+    function getGestionnaireProjet($gestio){
         try{
             $conn = connect();
             $sqlQuery = "SELECT ProjetData.nomProjet

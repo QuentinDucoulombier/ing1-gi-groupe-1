@@ -110,3 +110,30 @@ CREATE TABLE Superviser(
     FOREIGN KEY (idProjetData) REFERENCES ProjetData(idProjetData),
     FOREIGN KEY (idGestionnaire) REFERENCES Utilisateur(idUtilisateur)
 );
+
+
+/* Table auteurs */
+CREATE TABLE Auteur (
+  id_auteur INT AUTO_INCREMENT PRIMARY KEY,
+  idUtilisateur INT,
+  FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur)
+);
+
+/* Table destinataires */
+CREATE TABLE Destinataire (
+  id_destinataire INT AUTO_INCREMENT PRIMARY KEY,
+  idUtilisateur INT,
+  FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur)
+);
+
+/* Table messages */
+CREATE TABLE Messages (
+  id_message INT AUTO_INCREMENT PRIMARY KEY,
+  id_auteur INT,
+  id_destinataire INT,
+  message TEXT,
+  date_envoi DATETIME,
+  lu TINYINT(1) DEFAULT 0
+
+ 
+);

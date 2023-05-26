@@ -1,9 +1,10 @@
 /*
 * Liste challenge
 */
-#liste-challenge {
+#liste-challenge, #liste-battle {
     display: flex;
     flex-wrap: wrap;
+    margin: 20px 200px;
 }
 
 .title {
@@ -17,8 +18,9 @@
 * Card
 */
 .card {
-    width: calc(23% - 0px);
-    margin: 20px;
+    max-width: 25%;
+    min-width: 50px;
+    margin: 30px;
     border: 1px solid #ccc;
     display: inline-block;
     box-sizing: border-box;
