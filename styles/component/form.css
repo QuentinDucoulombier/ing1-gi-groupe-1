@@ -13,6 +13,20 @@
     line-height: 1.4em;
 }
 
+.formConnexion label {
+  color: #414141;
+  display: flex;
+  justify-content: baseline;
+  text-align: center;
+  cursor: pointer;
+  font-weight:normal;
+  padding: 2px;
+  padding-right: 2.5px;
+  padding-left: 2.5px;
+  letter-spacing: 1px;
+}
+
+
 .formInscription ,.formConnexion {
     background-image: linear-gradient(100deg,#0e8769 0%,#0c71c3 100%) !important;
     padding: 50px;
@@ -38,7 +52,7 @@
 }
 
 
-.formInscription .submit input {
+.formInscription .submit input ,.formConnexion .submit input{
 
     padding: 12px;
     color: #ffffff !important;
@@ -60,7 +74,7 @@
 
 
 }
-.formInscription .submit {
+.formInscription .submit ,.formConnexion .submit {
   display: flex;
     justify-content: flex-end;
     margin-top: 30px;
@@ -73,7 +87,7 @@ input[type=radio] {
   display: none;
 }
 
-label {
+.radioniveauEtude label {
   color: #868686;
   display: inline-block;
   text-align: center;
