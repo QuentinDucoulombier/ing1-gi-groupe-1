@@ -26,9 +26,9 @@ img {
 
 
 header {
-
-    max-width: 800px;
-    margin: 0px 400px 0px 400px;
+    display: flex;
+    justify-content: space-around;
+    
 }
 
 header a {
@@ -52,4 +52,12 @@ header li {
     display: inline-block;
     font-size: 14px;
     padding-right: 22px;
+}
+
+#nav {
+    margin-right: 25%;
+}
+
+.logo {
+    margin-left: 15%;
 }
