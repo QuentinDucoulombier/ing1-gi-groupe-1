@@ -33,8 +33,13 @@ http://localhost:8080
 ## Connexion sur le site web
 
 *Accès Utilisateur*   
-email : toto@tata.titi
-Mot de passe : 1234
+email : toto@tata.titi  
+Mot de passe : 1234  
+- idUtilisateur = 1  
+- Chef et membre des équipes d'id 1 (Equipe A) et 2 (Equipe B)
+- L'équipe A est inscrite au projetData 1 (Projet A) qui compose la data battle 1 (id1)
+- L'equipe B est inscrite au Projet Data 4 (Projet C) qui compose le data challenge 1 (id3)
+
 
 *Accès Gestionnaire*   
 email : gestionnaire@test.fr
