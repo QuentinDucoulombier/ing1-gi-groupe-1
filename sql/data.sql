@@ -127,3 +127,4 @@ INSERT INTO Superviser (idProjetData, idGestionnaire)
 VALUES 
     (1, 8),
     (3, 8);
+    (3, 7);

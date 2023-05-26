@@ -1,8 +1,8 @@
 <?php
 
 
-if(isset($_GET['challenge'])){
-        $nomChallenge = $_GET['challenge'];
+if(isset($_GET['battle'])){
+        $nomBattle = $_GET['battle'];
     }
 
     /*Rediriger vers la page 404 à la place de ceci?*/ 
@@ -11,30 +11,29 @@ if(isset($_GET['challenge'])){
         exit();
     }
 
-    echo '<h1>'. $nomChallenge . '</h3>';
+
+
+    echo '<h1>'. $nomBattle . '</h3>';
     echo '<p>'. $nomChallenge . '</p>';
 
-    $projets = getProjetData($nomChallenge);
+    $projet = getProjetData($nomBattle);
 
     echo '<div class=projet>';
 
-    foreach ($projets as $projet){
         echo ' <div class = "title">';
-        echo '      <h2>'. $projet['nomProjet'] . '</h2>';
+        echo '      <h2>'. $projet[0]['nomProjet'] . '</h2>';
         echo ' </div>';
         echo ' <div class = "description">';
-        echo        $projet['description'];
+        echo        $projet[0]['description'];
         echo ' </div>';
 
-        $gestionnaires = getSuperviseur($projet['nomProjet']);
+        $gestionnaire = getSuperviseur($projet[0]['nomProjet']);
         echo ' <div class="contact-projet">';
         echo '      <h3> Coordonnées contact </h3>';
-        foreach ($gestionnaires as $gestionnaire){
-            echo '  <div class = "contact-gestionnaire">';
-            echo '<p>'.$gestionnaire['prenomUtilisateur'].' ' . $gestionnaire['nomUtilisateur'].'</p>';
-            echo '<p> Mail : ' .$gestionnaire['email'] .' Tel :'. $gestionnaire['numeroTel'] .'</p>';
-            echo '  </div>';
-        }
+        echo '      <div class = "contact-gestionnaire">';
+        echo '          <p>'.$gestionnaire[0]['prenomUtilisateur'].' ' . $gestionnaire[0]['nomUtilisateur'].'</p>';
+        echo '          <p> Mail : ' .$gestionnaire[0]['email'] .' Tel :'. $gestionnaire[0]['numeroTel'] .'</p>';
+        echo '      </div>';
         echo ' </div>';
         echo ' <div class="ressources-projet">';
         echo '      <h3> Ressources du projet </h3>';
@@ -46,7 +45,6 @@ if(isset($_GET['challenge'])){
         echo '          <img src="'.$projet['imageEvent'].'" alt="'.$projet['nomEvenement'].'">';
         echo '      </div>';
         echo '      </div>';
-    }
     echo '</div>';
 
 
