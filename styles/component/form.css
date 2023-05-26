@@ -59,3 +59,42 @@
 
 
 }
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+label {
+  color: #868686;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  font-weight:normal;
+  padding: 2px;
+  padding-right: 2.5px;
+  padding-left: 2.5px;
+  letter-spacing: 1px;
+  width: 35.57px;
+  
+}
+
+
+
+
+input[type=radio]:checked + label{
+  background: #e7e7e7;
+}
+
+label + input[type=radio] + label {
+  border-left: solid 2px #e7e7e7;
+  margin-left: -4px;
+}
+.radioniveauEtude {
+  border: solid 1.5px #e7e7e7;
+  display: inline-block;
+  margin: 5px;
+  border-radius: 2px;
+  overflow: hidden;
+}
