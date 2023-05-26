@@ -636,7 +636,7 @@
     function getChallenge(){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataChallenge'";
+            $sqlQuery = "SELECT idEvenement, nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataChallenge'";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -655,7 +655,7 @@
         try{
             $conn = connect();
 
-            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataBattle'";
+            $sqlQuery = "SELECT idEvenement, nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataBattle'";
 
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
@@ -772,6 +772,40 @@
         catch(Exception $e){
             die('Erreur : '.$e->getMessage());
         } 
+    }
+
+    /*
+    * Permet de récupérer les projets gérés par un gestionnaire
+    * @param mail : 
+    */
+    function checkInscription($mail, $evenement){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT COUNT(*) AS count
+                        FROM Utilisateur AS u
+                        INNER JOIN Composer AS c ON u.idUtilisateur = c.idEtudiant
+                        INNER JOIN Equipe AS e ON c.idEquipe = e.idEquipe
+                        INNER JOIN ProjetData AS pd ON e.idProjetData = pd.idProjetData
+                        INNER JOIN Evenement AS ev ON pd.idEvenement = ev.idEvenement
+                        WHERE u.email = :mail AND ev.nomEvenement = :evenement";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':evenement', $evenement);
+            $statement->execute();
+
+            $result = $statement->fetchAll();
+            $count = $result['count'];
+            // Vérification de l'inscription
+            if ($count > 0) {
+                return true; // L'étudiant est inscrit au projet
+            } else {
+                return false; // L'étudiant n'est pas inscrit au projet
+            }
+        }
+        catch(Exception $e){
+            echo 'Erreur : ' . $e->getMessage();
+            return false; // En cas d'erreur, renvoyer false
+        }
     }
     
 ?>
