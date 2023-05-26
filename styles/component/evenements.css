@@ -64,22 +64,23 @@
     color: #0e8769 !important;
 }
 
-.button-projet button {
+.button-projet {
     display: flex;
     justify-content: center;
-    border-width: 0px !important;
-    font-size: 16px;
-    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif !important;
+}
+
+button {
     background-color: #0e8769;
     color: white;
-
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    transition: color 0.3s ease;    
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif !important;
+    
+  }
   
-}
-
-.button-projet:hover button{
-    background-color: #004b38;
-}
-/*CSS DES BOUTONS A UNIFORMISER
-*/
-
-
+  button:hover {
+    color: #b7b7b7;
+  }
+  

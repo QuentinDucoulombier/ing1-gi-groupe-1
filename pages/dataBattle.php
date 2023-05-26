@@ -42,6 +42,7 @@ if(isset($_GET['battle'])){
         echo '      <p>URL vidéo de présentation du projet.</p>';
         echo '      <a href ='.$projet['urlVideo'].'>Vidéo du projet</a>';
         echo ' </div>';
+        echo ' <div>';
         echo '          <img src="'.$projet['imageEvent'].'" alt="'.$projet['nomEvenement'].'">';
         echo '      </div>';
         echo '      </div>';

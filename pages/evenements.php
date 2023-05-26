@@ -5,7 +5,9 @@
     <?php
         $challenges = getChallenge();
         $battles = getBattle();
-        $user = getUser($_SESSION['email']);
+        if (isset($_SESSION['email'])){
+            $user = getUser($_SESSION['email']);
+        }
     ?>
 
     
@@ -18,7 +20,7 @@
             foreach ($challenges as $challenge){
                 echo ' <div class = "card">';
                 echo '      <div class="event-image">';
-                echo '          <a class ="more-link" href="/?page=dataBattle&battle='.$challenge['nomEvenement'].'">';
+                echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'">';
                 echo '              <img src="'.$challenge['imageEvent'].'" alt="'.$challenge['nomEvenement'].'">';
                 echo '          </a>';
                 echo '      </div>';
@@ -29,11 +31,25 @@
                 echo '      </div>';
                 echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
+                if (!isset($_SESSION['email'])){
+                    echo '          <a href="/?page=connexion"> S\'inscrire';
+                    echo '              <button name="sinscrire"> </button>';
+                    echo '          </a>';
+                }
                 if ($user[0]['type'] == "Etudiant" && !checkInscription($user[0]['email'], $challenge['nomEvenement'])) {
-                    echo '      <button name="sinscrire"> <a href="/?page=inscriptionChallenge&evenement='.$challenge['idEvenement'].'">  S\'inscrire </a> </button>';
+                    echo '          <a href="/?page=inscriptionChallenge&evenement='.$challenge['idEvenement'].'">';
+                    echo '              <button name="sinscrire"> S\'inscrire </button>';
+                    echo '          </a> ';
                 }
                 if ($user[0]['type'] == "Etudiant" && checkInscription($user[0]['email'], $challenge['nomEvenement'])) {
-                    echo '      <a href=""> <button name="monProjet"> Mon projet </button> </a>';
+                    echo '          <a href="/?page=monProjet&projet='.$challenge['idEvenement'].'"> ';
+                    echo '              <button name="monProjet"> Mon projet </button> ';
+                    echo '          </a>';
+                }
+                if ($user[0]['type'] == "Administrateur") {
+                    echo '          <a href="/?page=gererChallenge&projet='.$challenge['idEvenement'].'"> ';
+                    echo '              <button name="gestion"> Gérer le challenge </button> ';
+                    echo '          </a>';
                 }
                 echo '      </div>';
                 echo ' </div>';
@@ -62,11 +78,26 @@
                 echo '      </div>';
                 echo '          <a class ="more-link" href="/?page=dataBattle&battle='.$battle['nomEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
+                if (!isset($_SESSION['email'])){
+                    echo '          <a href="/?page=connexion"> S\'inscrire';
+                    echo '              <button name="sinscrire"> </button>';
+                    echo '          </a>';
+                }
                 if ($user[0]['type'] == "Etudiant" && !checkInscription($user[0]['email'], $battle['nomEvenement'])) {
-                    echo '      <a href="/?page=inscriptionChallenge&evenement='.$battle['idEvenement'].'&type=dataChallenge"> <button name="sinscrire"> S\'inscrire </button> </a>';
+                    echo '          <a href="/?page=inscriptionChallenge&evenement='.$battle['idEvenement'].'">';
+                    echo '              <button name="sinscrire"> S\'inscrire </button>';
+                    echo '          </a> ';
                 }
                 if ($user[0]['type'] == "Etudiant" && checkInscription($user[0]['email'], $battle['nomEvenement'])) {
-                    echo '      <a href=""> <button name="monProjet"> Mon projet </button> </a>';
+                    echo '          <a href="/?page=monProjet&projet='.$battle['idEvenement'].'"> ';
+                    echo '              <button name="monProjet"> Mon projet </button> ';
+                                        
+                    echo '          </a>';
+                }
+                if ($user[0]['type'] == "Administrateur") {
+                    echo '          <a href="/?page=gererChallenge&projet='.$battle['idEvenement'].'"> ';
+                    echo '              <button name="gestion"> Gérer la battle </button> ';
+                    echo '          </a>';
                 }
                 echo '      </div>';
                 echo ' </div>';
