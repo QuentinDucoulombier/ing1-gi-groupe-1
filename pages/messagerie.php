@@ -2,9 +2,9 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../css/messagerie.css" />
+    <link rel="stylesheet" href="../styles/component/messagerie.css" />
     <title>messagerie</title>
-    <script type="text/javascript" src="../js/messagerie.js"></script>
+    <script type="text/javascript" src="../scripts/messagerie.js"></script>
   
 </head>
 <body>
@@ -23,7 +23,6 @@
         ?>
     
         
-        <!--TODO rajouter signalement-->
         <div id="messagerie-container">
             <div id="name">
 

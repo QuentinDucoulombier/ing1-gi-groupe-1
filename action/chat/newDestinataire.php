@@ -16,6 +16,28 @@
     $dbname = "projetIaPau";
     mysqli_select_db($cnx, $dbname);
 
+    /*-------------------Auteur------------------*/
+    $queryAut = "SELECT idUtilisateur FROM Auteur";
+    $resultAut = mysqli_query($cnx, $queryAut);
+
+    // Vérifier si la requête a réussi
+    if (!$resultAut) {
+        die("Erreur lors de l'exécution de la requête : " . mysqli_error($cnx));
+    }
+
+    $rowAut = mysqli_fetch_row($resultAut);
+
+    // Vérifier s'il y a une ligne de résultat
+    if ($rowAut) {
+        // Récupérer la première colonne (le nombre)
+        $idAut = $rowAut[0];
+    } else {
+        // Aucun résultat trouvé, définir $id sur une valeur par défaut ou afficher un message d'erreur
+        $idAut = null; // ou une autre valeur par défaut de votre choix
+    }
+
+    // Libérer la mémoire du résultat
+    mysqli_free_result($resultAut);
 
     /*Modification du Destinataire*/
     $queryDestinataire = "UPDATE Destinataire SET idUtilisateur = '$idUser'";
@@ -37,10 +59,12 @@
 
 
     /*Modifie le fait que l'utilisateur a vu le message*/
+    /*TODO rajouter sql pour avoir l'auteur et remplacer le destinataire par $idUser*/
 
     $queryLu = "UPDATE Messages
-    JOIN Auteur ON Auteur.idUtilisateur = Messages.id_auteur
-    SET Messages.lu = 1;";
+    SET Messages.lu = 1
+    WHERE Messages.id_destinataire = $idAut AND Messages.id_auteur = $idUser;
+    ";
     if(!(mysqli_query($cnx, $queryLu))) {
         echo "Erreur lors de la modification du vu : " . mysqli_error($cnx);
     }

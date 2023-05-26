@@ -123,6 +123,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             "nom" => $row["nomUtilisateur"],
             "message" => $row["message"],
             "date_envoi" => $row["date_envoi"],
+            "vu" => $row["lu"],
             "statut" => $statut
         );
     }

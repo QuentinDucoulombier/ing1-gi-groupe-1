@@ -1,0 +1,5 @@
+# Messagerie
+[]Changer l'architecture de la bdd du chat pour correspondre a bdd.php
+[]Rajouter le fait d'avoir le nom en couleur quand le msg n'est pas encore vu
+[]Fix bugs
+[]Changer nom auteur msg quand recu
