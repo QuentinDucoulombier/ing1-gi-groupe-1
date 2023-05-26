@@ -29,7 +29,7 @@ function newDestinataire(id) {
     }
     console.log(id);
 
-    xhttp.open("POST", "../php/newDestinataire.php", true);
+    xhttp.open("POST", "../action/chat/newDestinataire.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send("id="+id);
 }
@@ -120,7 +120,7 @@ const recup_messages = () => {
         }
     };
 
-    xhttp.open("GET", "fetch_message.php?lastMessageId=" + lastMessageId, true);
+    xhttp.open("GET", "../action/chat/fetch_message.php?lastMessageId=" + lastMessageId, true);
     xhttp.send();
 }
 
@@ -141,7 +141,7 @@ function newMsg() {
         }
     };
 
-    xhttp.open("POST", "../php/newMessage.php", true);
+    xhttp.open("POST", "../action/chat/newMessage.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send("message="+message);
     //}
