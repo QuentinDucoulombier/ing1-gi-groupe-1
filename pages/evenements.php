@@ -29,12 +29,12 @@
                 echo '      </div>';
                 echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
-                if ($user[0]['type'] == "Etudiant") {
-                    echo '      <a href="/?page=inscriptionChallenge&challenge='.$challenge['nomEvenement'].'&type=dataChallenge"> <button name="sinscrire"> S\'inscrire </button> </a>';
+                if ($user[0]['type'] == "Etudiant" && !checkInscription($user[0]['email'], $challenge['nomEvenement'])) {
+                    echo '      <button name="sinscrire"> <a href="/?page=inscriptionChallenge&evenement='.$challenge['idEvenement'].'">  S\'inscrire </a> </button>';
                 }
-                //if ($user[0]['type'] == "Etudiant") {
-                //    echo '      <a href=""> <button name="monProjet"> Mon projet </button> </a>';
-                //}
+                if ($user[0]['type'] == "Etudiant" && checkInscription($user[0]['email'], $challenge['nomEvenement'])) {
+                    echo '      <a href=""> <button name="monProjet"> Mon projet </button> </a>';
+                }
                 echo '      </div>';
                 echo ' </div>';
             }
@@ -62,12 +62,12 @@
                 echo '      </div>';
                 echo '          <a class ="more-link" href="/?page=dataBattle&battle='.$battle['nomEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
-                if ($user[0]['type'] == "Etudiant") {
-                    echo '      <a href="/?page=inscriptionChallenge&challenge='.$battle['nomEvenement'].'&type=dataBattle"> <button name="sinscrire"> S\'inscrire </button> </a>';
+                if ($user[0]['type'] == "Etudiant" && !checkInscription($user[0]['email'], $battle['nomEvenement'])) {
+                    echo '      <a href="/?page=inscriptionChallenge&evenement='.$battle['idEvenement'].'&type=dataChallenge"> <button name="sinscrire"> S\'inscrire </button> </a>';
                 }
-                //if ($user[0]['type'] == "Etudiant") {
-                //    echo '      <a href=""> <button name="monProjet"> Mon projet </button> </a>';
-                //}
+                if ($user[0]['type'] == "Etudiant" && checkInscription($user[0]['email'], $battle['nomEvenement'])) {
+                    echo '      <a href=""> <button name="monProjet"> Mon projet </button> </a>';
+                }
                 echo '      </div>';
                 echo ' </div>';
             }
