@@ -5,7 +5,7 @@
     <form id="modifierForm" action="../action/verif_signin.php" method="POST">
     <h2>Inscription</h2>
         <div class = "mail">
-            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="email" id="email" name="email" placeholder="Email" title="test" required>
         </div>
 
         <div class = "prenom">
@@ -21,15 +21,12 @@
         </div>
         
         <div class="radioniveauEtude">
-        <label for="niveauEtude" class="titreniveauEtude">niveauEtude</label>
-        <div class="categorie">
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="L1" > L1
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="L2" > L2
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="L3" > L3
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="M1" > M1
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="M2" > M2
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="D" > D
-        </div>
+            <input type="radio" id="L1" name="niveauEtude" value="L1"><label for="L1">L1</label>
+            <input type="radio" id="L2" name="niveauEtude" value="L2"><label for="L2">L2</label>
+            <input type="radio" id="L3" name="niveauEtude" value="L3"><label for="L3">L3</label>
+            <input type="radio" id="M1" name="niveauEtude" value="M1"><label for="M1">M1</label>
+            <input type="radio" id="M2" name="niveauEtude" value="M2"><label for="M2">M2</label>
+            <input type="radio" id="D" name="niveauEtude" value="D"><label for="D">D </label>
         </div>
         
         <div class = "ecole">
