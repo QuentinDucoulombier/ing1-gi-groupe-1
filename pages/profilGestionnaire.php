@@ -11,78 +11,61 @@ if (isset($_SESSION['email'])) {
 
     ?>
 
+<div class="profil_block">
+    <div class="prenomUtilisateur profil">
+        <h2> Nom : </h2>
+        <?php
+        echo "<h2>" . $prenomUtilisateur . "</h2>";
+        ?>
+    </div>
 
-    <html lang="en">
-<!--
-    <head>
-        
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/css/profil.css" />
-        <script defer src="../scripts/profil.js"></script>
+    <div class="nomUtilisateur profil">
+        <h2> Prénom : </h2>
+        <?php
+        echo "<h2>" . $infos[0]['nomUtilisateur'] . "</h2>";
+        ?>
+    </div>
 
+    <div class="email profil">
+        <h2> Email : </h2>
+        <?php
+        echo "<h2>" . $infos[0]['email'] . "</h2>";
+        ?>
+    </div>
 
-        <title>Profil</title>
-    </head>
--->
- 
-    <body>
+    <div class="numeroTel profil">
+        <h2> Numéro de téléphone : </h2>
+        <?php
+        echo "<h2>" . $infos[0]['numeroTel'] . "</h2>";
+        ?>
+    </div>
 
-        <div class="prenomUtilisateur">
-            <h2> Nom : </h2>
-            <?php
-            echo "<h2>" . $prenomUtilisateur . "</h2>";
-            ?>
-        </div>
+    <div class="entreprise profil">
+        <h2> Entreprise : </h2>
+        <?php
+        echo "<h2>" . $infos[0]['nomEntreprise'] . "</h2>";
+        ?>
+    </div>
 
-        <div class="nomUtilisateur">
-            <h2> Prénom : </h2>
-            <?php
-            echo "<h2>" . $infos[0]['nomUtilisateur'] . "</h2>";
-            ?>
-        </div>
+    <div class="dateFinUtilisateur profil">
+        <h2> Date de fin d'utilisateur : </h2>
+        <?php
+        echo "<h2>" . $infos[0]['dateFinUtilisateur'] . "</h2>";
+        ?>
+    </div>
 
-        <div class="email">
-            <h2> Email : </h2>
-            <?php
-            echo "<h2>" . $infos[0]['email'] . "</h2>";
-            ?>
-        </div>
+    <div class="modifier profil">
+        <li class="buttonC" class="boutonmodifier">
+            <div onclick="openModifierModal()">Modifier vos informations</div>
+        </li>
 
-        <div class="numeroTel">
-            <h2> Numéro de téléphone : </h2>
-            <?php
-            echo "<h2>" . $infos[0]['numeroTel'] . "</h2>";
-            ?>
-        </div>
+    </div>
 
-        <div class="entreprise">
-            <h2> Entreprise : </h2>
-            <?php
-            echo "<h2>" . $infos[0]['nomEntreprise'] . "</h2>";
-            ?>
-        </div>
+    <div class="projet_gestionnaire profil">
+        <h2> Vos projets à gérer: </h2>
 
-        <div class="dateFinUtilisateur">
-            <h2> Date de fin d'utilisateur : </h2>
-            <?php
-            $dateFinUtilisateur = date('d F Y', strtotime($infos[0]['dateFinUtilisateur']));
-            echo "<h2>" . $dateFinUtilisateur . "</h2>";
-            ?>, 
-        </div>
-        
-        <div class="modifier">
-            <li class="buttonC" class="boutonmodifier">
-                <div onclick="openModifierModal()">Modifier vos informations</div>
-            </li>
-
-        </div>
-
-        <div class="projet_gestionnaire">
-            <h2> Vos projets à gérer: </h2>
-
-        </div>
+    </div>
+</div>
     
     </body>
 
