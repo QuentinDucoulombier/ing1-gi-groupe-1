@@ -5,7 +5,7 @@
     <form id="modifierForm" action="../action/verif_signin.php" method="POST">
     <h2>Inscription</h2>
         <div class = "mail">
-            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="email" id="email" name="email" placeholder="Email" title="test" required>
         </div>
 
         <div class = "prenom">
