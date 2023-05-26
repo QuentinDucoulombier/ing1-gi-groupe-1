@@ -77,10 +77,68 @@ button {
     border: none;
     transition: color 0.3s ease;    
     font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif !important;
-    
+    cursor: pointer;
   }
   
   button:hover {
     color: #b7b7b7;
   }
   
+
+
+  .liste-projet {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .projet {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .en-tete {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  
+  
+  
+  .title {
+    margin-bottom: 10px;
+  }
+  
+  .image-projet {
+    margin-left: 20px;
+    position: absolute;
+    right:100px
+    
+  }
+  
+  .image-projet img{
+    height: 200px;
+    width: auto;
+  }
+  
+  .contact-projet {
+    margin-top: 20px;
+  }
+  
+  .contact-gestionnaire {
+    margin-bottom: 10px;
+  }
+  
+  .ressources-projet {
+    margin-top: 20px;
+  }
+  
+  h2,
+  h3 {
+    margin: 0;
+  }
+  
+  a {
+    display: block;
+    margin-bottom: 5px;
+  }

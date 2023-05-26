@@ -32,12 +32,13 @@
                 echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
                 if (!isset($_SESSION['email'])){
-                    echo '          <a href="/?page=connexion"> S\'inscrire';
-                    echo '              <button name="sinscrire"> </button>';
+                    echo '          <a href="/?page=connexion">';
+                    echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a>';
                 }
                 if ($user[0]['type'] == "Etudiant" && !checkInscription($user[0]['email'], $challenge['nomEvenement'])) {
                     echo '          <a href="/?page=inscriptionChallenge&evenement='.$challenge['idEvenement'].'">';
+                    echo 'bonjour';
                     echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a> ';
                 }
