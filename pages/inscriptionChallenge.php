@@ -7,7 +7,7 @@
    foreach ($datas as $i=>$data) {
         if($i == 0)
         {
-            echo '<h1>Inscription au '.$data["nomEvenement"].'</h1>
+            echo '<h1>Confirmation d\'inscription au '.$data["nomEvenement"].'</h1>
             <p id=date>Du '.$data["dateDebut"].' au  '.$data["dateFin"].'</p>
             ';
 

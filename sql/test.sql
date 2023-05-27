@@ -35,7 +35,7 @@ FROM Messages
 JOIN Utilisateur ON Utilisateur.idUtilisateur = Messages.id_destinataire
 JOIN Auteur ON Auteur.idUtilisateur = Messages.id_auteur;
 WHERE Auteur.idUtilisateur = 1;
-*/
+
 
 SELECT Messages.message, Messages.date_envoi, Messages.id_auteur, Messages.id_destinataire
 FROM Messages
@@ -55,3 +55,22 @@ WHERE Messages.id_destinataire = 4 AND Messages.id_auteur = 3;
 SELECT Messages.message, Messages.date_envoi, Messages.id_auteur, Messages.id_destinataire, Messages.lu
 FROM Messages
 WHERE Messages.id_destinataire = 4 AND Messages.id_auteur = 3;
+*/
+
+/*
+select * from Equipe 
+INNER JOIN Composer on Composer.idEquipe = Equipe.idEquipe 
+Inner join Utilisateur on Utilisateur.idUtilisateur = Composer.idEtudiant;
+*/
+/*
+UPDATE Equipe
+INNER JOIN Composer on Composer.idEquipe = Equipe.idEquipe 
+SET idCapitaine = 2
+WHERE idProjetData = 
+*/
+
+SELECT * 
+FROM Composer 
+INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
+INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Composer.idEtudiant
+where Composer.idEquipe=4;

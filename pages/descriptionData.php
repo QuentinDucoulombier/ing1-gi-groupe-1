@@ -29,7 +29,7 @@
             Data challenge du '.$data["dateDebut"].'
             <div id="boutton">
                 <button onclick="window.location.href=`./?page=messagerie`">Envoyer un message</button>
-                <button onclick="">Créer/gérer mon équipe</button>
+                <button onclick="window.location.href=`../action/verifEquipe.php`">Créer/gérer mon équipe</button>
             </div>
                 <div id="description">
                 <h2>'.$data["nomProjet"].': </h2>
@@ -71,7 +71,7 @@
             <h3>Coordonnées contact superviseur '.$i.'</h3>
 
             <p>Porteur de projet:</p>
-            Nom: '.$superviseur["nomutilisateur"].'<br/>
+            Nom: '.$superviseur["nomUtilisateur"].'<br/>
             Prenom: '.$superviseur["prenomUtilisateur"].'<br/>
             Mail: '.$superviseur["email"].'<br/>
             Tel: '.$superviseur["numeroTel"].'<br/>

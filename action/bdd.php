@@ -191,7 +191,7 @@
     function getUser($mail){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT email, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville, nomEntreprise, dateFinUtilisateur FROM Utilisateur WHERE email LIKE :email";
+            $sqlQuery = "SELECT * FROM Utilisateur WHERE email LIKE :email";
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':email', $mail);
             $statement->execute();
@@ -813,12 +813,15 @@
         }   
     }
 
+    /**
+     * 
+     */
     function getSuperviseurUtilisateur($idProjet) {
         try{
             $conn = connect();
             $sqlQuery = " SELECT * FROM Superviser 
             INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Superviser.idGestionnaire 
-            where idProjetData = 1;
+            where idProjetData = $idProjet;
             ";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
@@ -830,4 +833,49 @@
         }   
         
     }
+
+    /**
+     * 
+     */
+    function verifEquipe($idUtilisateur) {
+        try{
+            $conn = connect();
+            $sqlQuery = " SELECT * FROM Equipe
+            INNER JOIN Composer ON Composer.idEquipe = Equipe.idEquipe 
+            WHERE Composer.idEtudiant = $idUtilisateur;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetch();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+        
+    }
+
+    
+    function getAllMemberTeam($idTeam) {
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT * 
+            FROM Composer 
+            INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
+            INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Composer.idEtudiant
+            WHERE Composer.idEquipe=$idTeam;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+        
+
+    }
+
+
 ?>
