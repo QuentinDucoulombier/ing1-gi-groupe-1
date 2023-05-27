@@ -23,6 +23,19 @@
     echo '<h1>'. $challenge['nomEvenement'] . '</h3>';
     echo '<p>'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
 
+    if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+        echo '          <a href="/?page=modifierChallenge"> ';
+        echo '              <button name="creation"> Modifier le challenge </button> ';
+        echo '          </a>';
+    }
+
+    // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
+    if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $challenge['nomEvenement']) ) ) ) {
+        echo '          <a href="/?page=synthèseChallenge&projet='.$challenge['idEvenement'].'"> ';
+        echo '              <button name="gestion"> Synthèse du challenge </button> ';
+        echo '          </a>';
+    }
+
 
     echo '<div class=liste-projet>';
 

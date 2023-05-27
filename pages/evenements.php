@@ -1,6 +1,13 @@
 
 <link rel="stylesheet" href="styles/component/evenements.css" />
 
+<div id="evenement-image">
+  <div id="evenement-titre">
+
+    <h1></h1>
+  </div>
+</div>
+
 <div id="liste-evenement">
     <?php
         $challenges = getChallenge();
