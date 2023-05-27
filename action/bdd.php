@@ -794,10 +794,10 @@
     }
 
     /*
-    * Permet de récupérer les projets gérés par un gestionnaire
+    * Permet de checker si un étudiant est inscrit à un des projet du challenge
     * @param mail : 
     */
-    function checkInscription($mail, $evenement){
+    function checkInscriptionProjet($mail, $evenement){
         try{
             $conn = connect();
             $sqlQuery = "SELECT COUNT(*) AS count
@@ -826,5 +826,39 @@
             return false; // En cas d'erreur, renvoyer false
         }
     }
-    
+
+
+    /*
+    * Permet de checker si un gestionnaire supervise un des projet du challenge
+    * @param mail : 
+    */
+    function checkGestionnaireProjet($mail, $evenement){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT COUNT(*) AS count
+                        FROM Utilisateur AS u
+                        INNER JOIN Superviser AS s ON u.idUtilisateur = s.idGestionnaire
+                        INNER JOIN ProjetData AS pd ON s.idProjetData = pd.idProjetData
+                        INNER JOIN Evenement AS ev ON pd.idEvenement = ev.idEvenement
+                        WHERE u.email = :mail AND ev.nomEvenement = :nomEvenement";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':mail', $mail);
+            $statement->bindParam(':nomEvenement', $evenement);
+            $statement->execute();
+
+            $result = $statement->fetch();
+            $count = $result['count'];
+            // Vérification de l'inscription
+            if ($count > 0) {
+                return true; // Le gestionnaire est superviseur d'un projet
+            } else {
+                return false; // Le gestionnaire n'est  pas superviseur d'un projet
+            }
+        }
+        catch(Exception $e){
+            echo 'Erreur : ' . $e->getMessage();
+            return false; // En cas d'erreur, renvoyer false
+        }
+    }
+  
 ?>

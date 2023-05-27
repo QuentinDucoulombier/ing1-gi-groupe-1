@@ -14,7 +14,18 @@
     <div class=title>
         <h1>Liste des Data Challenge</h1>
     </div>
+
+    <?php
+        // Si l'utilisateur est administrateur il peut créer un nouveau challenge
+        if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+            echo '          <a href="/?page=creerChallenge"> ';
+            echo '              <button name="creation"> Créer un évenement </button> ';
+            echo '          </a>';
+        }
+
+    ?>
     <div id=liste-challenge>
+
         <?php
 
             foreach ($challenges as $challenge){
@@ -31,26 +42,36 @@
                 echo '      </div>';
                 echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['idEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
+
+                // Si l'utilisateur n'est pas connecté on le renvoie sur la page de connexion afin qu'il puisse s'inscrire au challenge
                 if (!isset($_SESSION['email'])){
+                    
                     echo '          <a href="/?page=connexion">';
                     echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a>';
                 }
-                if ($user[0]['type'] == "Etudiant" && !checkInscription($user[0]['email'], $challenge['nomEvenement'])) {
+
+                // Si l'utilisateur est un étudiant qui n'est pas inscrit au challenge on lui propose de s'inscrire
+                if (isset($_SESSION['email']) && $user[0]['type'] == "Etudiant" && !checkInscriptionProjet($user[0]['email'], $challenge['nomEvenement'])) {
                     echo '          <a href="/?page=inscriptionChallenge&evenement='.$challenge['idEvenement'].'">';
                     echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a> ';
                 }
-                if ($user[0]['type'] == "Etudiant" && checkInscription($user[0]['email'], $challenge['nomEvenement'])) {
-                    echo '          <a href="/?page=monProjet&projet='.$challenge['idEvenement'].'"> ';
+
+                // Si l'utilisateur est un étudiant inscrit au challenge on lui propose de d'accéder au récap du projet pour lequel il est inscrit
+                if (isset($_SESSION['email']) && $user[0]['type'] == "Etudiant" && checkInscriptionProjet($user[0]['email'], $challenge['nomEvenement'])) {
+                    echo '          <a href="/?page=descriptionChallenge&projet='.$challenge['idEvenement'].'"> ';
                     echo '              <button name="monProjet"> Mon projet </button> ';
                     echo '          </a>';
                 }
-                if ($user[0]['type'] == "Administrateur") {
-                    echo '          <a href="/?page=gererChallenge&projet='.$challenge['idEvenement'].'"> ';
-                    echo '              <button name="gestion"> Gérer le challenge </button> ';
+
+                // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
+                if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $challenge['nomEvenement']) ) ) ) {
+                    echo '          <a href="/?page=synthèseChallenge&projet='.$challenge['idEvenement'].'"> ';
+                    echo '              <button name="gestion"> Synthèse du challenge </button> ';
                     echo '          </a>';
                 }
+
                 echo '      </div>';
                 echo ' </div>';
             }
@@ -78,25 +99,32 @@
                 echo '      </div>';
                 echo '          <a class ="more-link" href="/?page=dataBattle&battle='.$battle['idEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
+
+                // Si l'utilisateur n'est pas connecté on le renvoie sur la page de connexion afin qu'il puisse s'inscrire au challenge
                 if (!isset($_SESSION['email'])){
                     echo '          <a href="/?page=connexion">';
                     echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a>';
                 }
-                if ($user[0]['type'] == "Etudiant" && !checkInscription($user[0]['email'], $battle['nomEvenement'])) {
+
+                // Si l'utilisateur est un étudiant qui n'est pas inscrit à la battle on lui propose de s'inscrire
+                if ($user[0]['type'] == "Etudiant" && !checkInscriptionProjet($user[0]['email'], $battle['nomEvenement'])) {
                     echo '          <a href="/?page=inscriptionChallenge&evenement='.$battle['idEvenement'].'">';
                     echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a> ';
                 }
-                if ($user[0]['type'] == "Etudiant" && checkInscription($user[0]['email'], $battle['nomEvenement'])) {
+
+                // Si l'utilisateur est un étudiant inscrit à la battle on lui propose de d'accéder au récap du projet pour lequel il est inscrit
+                if ($user[0]['type'] == "Etudiant" && checkInscriptionProjet($user[0]['email'], $battle['nomEvenement'])) {
                     echo '          <a href="/?page=monProjet&projet='.$battle['idEvenement'].'"> ';
-                    echo '              <button name="monProjet"> Mon projet </button> ';
-                                        
+                    echo '              <button name="monProjet"> Mon projet </button> ';                                        
                     echo '          </a>';
                 }
-                if ($user[0]['type'] == "Administrateur") {
-                    echo '          <a href="/?page=gererChallenge&projet='.$battle['idEvenement'].'"> ';
-                    echo '              <button name="gestion"> Gérer la battle </button> ';
+
+                // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché à la battle il peut accéder à la synthèse du challenge
+                if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $challenge['nomEvenement']) ) ) ) {
+                    echo '          <a href="/?page=synthèseChallenge&projet='.$challenge['idEvenement'].'"> ';
+                    echo '              <button name="gestion"> Synthèse du challenge </button> ';
                     echo '          </a>';
                 }
                 echo '      </div>';

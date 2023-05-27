@@ -2,7 +2,7 @@
 <?php
 
 
-if(isset($_GET['challenge'])){
+    if(isset($_GET['challenge'])){
         $id = $_GET['challenge'];
     }
 
@@ -12,12 +12,17 @@ if(isset($_GET['challenge'])){
         exit();
     }
 
+    if (isset($_SESSION['email'])){
+        $user = getUser($_SESSION['email']);
+    }
+
     $challenge = getEvenementbyID($id);
+
+    $projets = getProjetData($challenge['nomEvenement']);
 
     echo '<h1>'. $challenge['nomEvenement'] . '</h3>';
     echo '<p>'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
 
-    $projets = getProjetData($challenge['nomEvenement']);
 
     echo '<div class=liste-projet>';
 
@@ -27,7 +32,7 @@ if(isset($_GET['challenge'])){
         echo '      <div class = "en-tete">';
 
         echo '          <div class = "desc">';
-        echo '              <div class = "title">';
+        echo '              <div class = "title-projet">';
         echo '                  <h2>'. $projet['nomProjet'] . '</h2>';
         echo '              </div>';
 
