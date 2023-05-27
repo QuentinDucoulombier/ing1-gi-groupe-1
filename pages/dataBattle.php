@@ -4,7 +4,7 @@
 
 
 if(isset($_GET['battle'])){
-        $nomBattle = $_GET['battle'];
+        $id = $_GET['battle'];
     }
 
     /*Rediriger vers la page 404 à la place de ceci?*/ 
@@ -14,11 +14,12 @@ if(isset($_GET['battle'])){
     }
 
 
+    $battle = getEvenementbyID($id);
 
-    echo '<h1>'. $nomBattle . '</h3>';
-    echo '<p>date</p>';
+    echo '<h1>'. $battle['nomEvenement'] . '</h3>';
+    echo '<p>'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
 
-    $projet = getProjetData($nomBattle);
+    $projet = getProjetData($battle['nomEvenement']);
 
     echo '  <div class=projet>';
 

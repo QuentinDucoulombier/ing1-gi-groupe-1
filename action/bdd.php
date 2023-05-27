@@ -647,6 +647,25 @@
         } 
     }
 
+        /*
+    * Permet de récupérer un data Challenge ou une data battle à l'aide de son id
+    * @return tableau de challenge
+    */
+    function getEvenementbyID($id){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT idEvenement, nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE idEvenement = :id";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':id', $id);
+            $statement->execute();
+            $result = $statement->fetch();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+
     /*
     * Permet de récupérer la liste des data Battle
     * @return tableau de tableau de battle
@@ -793,7 +812,7 @@
             $statement->bindParam(':evenement', $evenement);
             $statement->execute();
 
-            $result = $statement->fetchAll();
+            $result = $statement->fetch();
             $count = $result['count'];
             // Vérification de l'inscription
             if ($count > 0) {

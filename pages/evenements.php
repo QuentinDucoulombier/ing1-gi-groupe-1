@@ -20,7 +20,7 @@
             foreach ($challenges as $challenge){
                 echo ' <div class = "card">';
                 echo '      <div class="event-image">';
-                echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'">';
+                echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['idEvenement'].'">';
                 echo '              <img src="'.$challenge['imageEvent'].'" alt="'.$challenge['nomEvenement'].'">';
                 echo '          </a>';
                 echo '      </div>';
@@ -29,7 +29,7 @@
                 echo '          <div class="event-date"> Du '.$challenge['dateD'] .' Au '. $challenge['dateF'].'</div>';
                 echo '          <div class="event-description">'.$challenge['descriptionEvent'].'</div>';
                 echo '      </div>';
-                echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'"> Lire Plus </a>';
+                echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['idEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
                 if (!isset($_SESSION['email'])){
                     echo '          <a href="/?page=connexion">';
@@ -38,7 +38,6 @@
                 }
                 if ($user[0]['type'] == "Etudiant" && !checkInscription($user[0]['email'], $challenge['nomEvenement'])) {
                     echo '          <a href="/?page=inscriptionChallenge&evenement='.$challenge['idEvenement'].'">';
-                    echo 'bonjour';
                     echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a> ';
                 }
@@ -68,7 +67,7 @@
             foreach ($battles as $battle){
                 echo ' <div class = "card">';
                 echo '      <div class="event-image">';
-                echo '          <a class ="more-link" href="/?page=dataBattle&battle='.$battle['nomEvenement'].'">';
+                echo '          <a class ="more-link" href="/?page=dataBattle&battle='.$battle['idEvenement'].'">';
                 echo '              <img src="'.$battle['imageEvent'].'" alt="'.$battle['nomEvenement'].'">';
                 echo '          </a>';
                 echo '      </div>';
@@ -77,11 +76,11 @@
                 echo '          <div class="event-date"> Du '.$battle['dateD'] .' Au '. $battle['dateF'].'</div>';
                 echo '          <div class="event-description">'.$battle['descriptionEvent'].'</div>';
                 echo '      </div>';
-                echo '          <a class ="more-link" href="/?page=dataBattle&battle='.$battle['nomEvenement'].'"> Lire Plus </a>';
+                echo '          <a class ="more-link" href="/?page=dataBattle&battle='.$battle['idEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
                 if (!isset($_SESSION['email'])){
-                    echo '          <a href="/?page=connexion"> S\'inscrire';
-                    echo '              <button name="sinscrire"> </button>';
+                    echo '          <a href="/?page=connexion">';
+                    echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a>';
                 }
                 if ($user[0]['type'] == "Etudiant" && !checkInscription($user[0]['email'], $battle['nomEvenement'])) {

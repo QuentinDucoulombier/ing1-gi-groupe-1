@@ -3,7 +3,7 @@
 
 
 if(isset($_GET['challenge'])){
-        $nomChallenge = $_GET['challenge'];
+        $id = $_GET['challenge'];
     }
 
     /*Rediriger vers la page 404 à la place de ceci?*/ 
@@ -12,10 +12,12 @@ if(isset($_GET['challenge'])){
         exit();
     }
 
-    echo '<h1>'. $nomChallenge . '</h3>';
-    echo '<p>date</p>';
+    $challenge = getEvenementbyID($id);
 
-    $projets = getProjetData($nomChallenge);
+    echo '<h1>'. $challenge['nomEvenement'] . '</h3>';
+    echo '<p>'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
+
+    $projets = getProjetData($challenge['nomEvenement']);
 
     echo '<div class=liste-projet>';
 
