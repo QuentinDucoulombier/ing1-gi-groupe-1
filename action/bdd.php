@@ -636,7 +636,7 @@
     function getChallenge(){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataChallenge'";
+            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent,idEvenement FROM Evenement WHERE typeEvenement LIKE 'dataChallenge'";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -655,7 +655,7 @@
         try{
             $conn = connect();
 
-            $sqlQuery = "SELECT nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent FROM Evenement WHERE typeEvenement LIKE 'dataBattle'";
+            $sqlQuery = "SELECT * FROM Evenement WHERE typeEvenement LIKE 'dataBattle'";
 
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
@@ -774,4 +774,60 @@
         } 
     }
     
+    /**
+     * 
+     */
+    function getData($idChallenge) {
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT * from ProjetData 
+                        Inner Join Evenement on Evenement.idEvenement = ProjetData.idEvenement 
+                        where ProjetData.idEvenement=$idChallenge";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+    }
+
+    /**
+     * 
+     */
+    function getDataProjet($idProjet) {
+        try{
+            $conn = connect();
+            $sqlQuery = " SELECT * from ProjetData 
+            Inner Join Evenement on Evenement.idEvenement = ProjetData.idEvenement 
+            where ProjetData.idProjetData=$idProjet;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+    }
+
+    function getSuperviseurUtilisateur($idProjet) {
+        try{
+            $conn = connect();
+            $sqlQuery = " SELECT * FROM Superviser 
+            INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Superviser.idGestionnaire 
+            where idProjetData = 1;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+        
+    }
 ?>

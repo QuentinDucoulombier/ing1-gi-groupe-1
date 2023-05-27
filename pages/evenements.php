@@ -28,7 +28,7 @@
                 echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
                 if ($user[0]['type'] == "Etudiant") {
-                    echo '      <a href=""> <button name="sinscrire"> S\'inscrire </button> </a>';
+                    echo '      <a href="./?page=inscriptionChallenge&challenge='.$challenge['idEvenement'].'"> <button name="sinscrire"> S\'inscrire </button> </a>';
                 }
                 //if ($user[0]['type'] == "Etudiant") {
                 //    echo '      <a href=""> <button name="monProjet"> Mon projet </button> </a>';
@@ -59,7 +59,7 @@
                 echo '          <a class ="more-link" href="/?page=dataChallenge&challenge='.$challenge['nomEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
                 if ($user[0]['type'] == "Etudiant") {
-                    echo '      <a href=""> <button name="sinscrire"> S\'inscrire </button> </a>';
+                    echo '      <a href="./?page=inscriptionChallenge&challenge='.$challenge['idEvenement'].'"> <button name="sinscrire"> S\'inscrire </button> </a>';
                 }
                 //if ($user[0]['type'] == "Etudiant") {
                 //    echo '      <a href=""> <button name="monProjet"> Mon projet </button> </a>';
