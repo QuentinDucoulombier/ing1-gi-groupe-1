@@ -1,0 +1,144 @@
+/*
+* Liste challenge
+*/
+#liste-challenge, #liste-battle {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px 200px;
+}
+
+.title {
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: 700;
+    font-size: 28;
+    color: #192231 !important;
+    line-height: 1.2em;
+  }
+/*
+* Card
+*/
+.card {
+    max-width: 25%;
+    min-width: 50px;
+    margin: 30px;
+    border: 1px solid #ccc;
+    display: inline-block;
+    box-sizing: border-box;
+    background-color: white;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 0 5px rgb(51, 51, 51);
+}
+
+@media only screen and (max-width: 768px) {
+    .card {
+      width: 100%;
+    }
+}
+  
+.event-image img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.event-details {
+    padding: 10px;
+    text-align: center;
+}
+
+.event-date{
+    color: #0e8769 !important;
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif;
+}
+.event-name{
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif !important;
+    font-weight: 700 !important;
+    font-size: 20px;
+    color: #192231 !important;
+}
+
+.more-link{
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: 700;
+    text-decoration: underline;
+    color: #0e8769 !important;
+}
+
+.button-projet {
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    background-color: #0e8769;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    transition: color 0.3s ease;    
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif !important;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    color: #b7b7b7;
+  }
+  
+
+
+  .liste-projet {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .projet {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .en-tete {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  
+  
+  
+  .title-projet {
+    margin-bottom: 10px;
+  }
+  
+  .image-projet {
+    margin-left: 20px;
+    position: absolute;
+    right:100px
+    
+  }
+  
+  .image-projet img{
+    height: 200px;
+    width: auto;
+  }
+  
+  .contact-projet {
+    margin-top: 20px;
+  }
+  
+  .contact-gestionnaire {
+    margin-bottom: 10px;
+  }
+  
+  .ressources-projet {
+    margin-top: 20px;
+  }
+  
+  h2,
+  h3 {
+    margin: 0;
+  }
+  
+  a {
+    display: block;
+    margin-bottom: 5px;
+  }

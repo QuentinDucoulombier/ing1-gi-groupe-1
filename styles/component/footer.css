@@ -1,0 +1,14 @@
+footer {
+    background-color: #0e8769 !important;
+
+  }
+
+#footer {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1.5rem;
+    background-color: #0e8769;
+    text-align: center;
+  }

@@ -1,0 +1,121 @@
+
+#modifierForm {
+
+    background-color: #fff;
+    margin-left: 70vh;
+    padding-top: 50px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    max-width: 450px;
+    font-family: 'Poppins',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: 600;
+    line-height: 1.4em;
+}
+
+.formConnexion label {
+  color: #414141;
+  display: flex;
+  justify-content: baseline;
+  text-align: center;
+  cursor: pointer;
+  font-weight:normal;
+  padding: 2px;
+  padding-right: 2.5px;
+  padding-left: 2.5px;
+  letter-spacing: 1px;
+}
+
+
+.formInscription ,.formConnexion {
+    background-image: linear-gradient(100deg,#0e8769 0%,#0c71c3 100%) !important;
+    padding: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.formInscription input ,.formConnexion input{
+
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.12);
+    border: 1 solid #333;
+    padding: 5px;
+    margin: 5px;
+    background-color: #ffffff00;
+}
+
+
+.formInscription input:focus ,.formConnexion input:focus{
+
+    outline: #333;
+
+}
+
+
+.formInscription .submit input ,.formConnexion .submit input{
+
+    padding: 12px;
+    color: #ffffff !important;
+    border-width: 12px !important;
+    border-color: #0e8769;
+    border-radius: 7px;
+    letter-spacing: 1px;
+    font-size: 12px;
+    font-family: 'Poppins',Helvetica,Arial,Lucida,sans-serif !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    background-color: #0e8769 !important;
+    display: inline-block;
+    margin: 0 10 0 6px;
+    cursor: pointer;
+    border: 0 solid #333 !important;
+    border-color: rgba(0, 0, 0, 0) !important;
+    
+
+
+}
+.formInscription .submit ,.formConnexion .submit {
+  display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    margin-bottom: -20px;
+}
+
+input[type=radio] {
+  position: absolute;
+  visibility: hidden;
+  display: none;
+}
+
+.radioniveauEtude label {
+  color: #868686;
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  font-weight:normal;
+  padding: 2px;
+  padding-right: 2.5px;
+  padding-left: 2.5px;
+  letter-spacing: 1px;
+  width: 35.57px;
+  
+}
+
+
+
+
+input[type=radio]:checked + label{
+  background: #e7e7e7;
+}
+
+label + input[type=radio] + label {
+  border-left: solid 2px #e7e7e7;
+  margin-left: -4px;
+}
+.radioniveauEtude {
+  border: solid 1.5px #e7e7e7;
+  display: inline-block;
+  margin: 5px;
+  border-radius: 2px;
+  overflow: hidden;
+}
