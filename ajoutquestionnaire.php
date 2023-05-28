@@ -1,6 +1,5 @@
 <?php 
-$idQuestionnaire=5;
-$idDataBattle=2;
+$idDataBattle=$_GET["idDataBattle"];
 //$dates=getDatesquestionnaire($questionnaire);
 $datedebut="2023-06-01";
 $datefin="2023-06-08";
@@ -12,7 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     var_dump($datedebutQ);
     var_dump($datefinQ);
     var_dump($idDataBattle);
-    addQuestionnaire($idDataBattle,$datedebutQ,$datefinQ);  
+    addQuestionnaire($idDataBattle,$datedebutQ,$datefinQ);
+    $idQuestionnaire=getIdQuestionnaire($idDataBattle,$datedebutQ,$datefinQ); //méthode à ajouter
     for ($i = 1; $i <= 4; $i++) {
         if (isset($_POST['question-'.$i])) {
             $intitule=$_POST['question-'.$i];
