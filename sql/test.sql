@@ -68,9 +68,26 @@ INNER JOIN Composer on Composer.idEquipe = Equipe.idEquipe
 SET idCapitaine = 2
 WHERE idProjetData = 
 */
-
+/*
 SELECT * 
 FROM Composer 
 INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
-INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Composer.idEtudiant
-where Composer.idEquipe=4;
+INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Equipe.idCapitaine
+INNER JOIN ProjetData ON ProjetData.idProjetData = Equipe.idProjetData
+where Utilisateur.idUtilisateur=2 AND Equipe.idProjetData=3;
+*/
+
+select * 
+from Utilisateur 
+Inner Join Composer on Composer.idEtudiant = Utilisateur.idUtilisateur 
+where idEtudiant = 1 and idEquipe =2;
+
+
+DELETE FROM Composer
+WHERE idEtudiant = 1 AND idEquipe = 2;
+
+
+select * 
+from Utilisateur 
+Inner Join Composer on Composer.idEtudiant = Utilisateur.idUtilisateur 
+where idEtudiant = 1 and idEquipe =2;

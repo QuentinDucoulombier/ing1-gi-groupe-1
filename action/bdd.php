@@ -855,7 +855,9 @@
         
     }
 
-    
+    /**
+     * 
+     */
     function getAllMemberTeam($idTeam) {
         try{
             $conn = connect();
@@ -876,6 +878,134 @@
         
 
     }
+
+    /**
+     * 
+     */
+    function getInfoManageTeam($idUtilisateur, $idProjet) {
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT * 
+            FROM Composer 
+            INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
+            INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Equipe.idCapitaine
+            INNER JOIN ProjetData ON ProjetData.idProjetData = Equipe.idProjetData
+            where Utilisateur.idUtilisateur=$idUtilisateur AND Equipe.idProjetData=$idProjet;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetch();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+        
+    }
+
+    /**
+     * 
+     */
+    function suppUserTeam($idUser, $idTeam) {
+        try{
+            $conn = connect();
+            $sqlQuery = "DELETE FROM Composer
+            WHERE idEtudiant = $idUser AND idEquipe = $idTeam;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+    }
+
+    /**
+     * 
+     */
+    function verifSuppUser($idUser, $idTeam) {
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT * 
+            FROM Utilisateur 
+            INNER JOIN Composer ON Composer.idEtudiant = Utilisateur.idUtilisateur 
+            WHERE idEtudiant = $idUser AND idEquipe = $idTeam;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetch();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+    }
+
+    /**
+     * 
+     */
+    function searchStudent($query) {
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT * 
+            FROM Utilisateur 
+            WHERE type = 'Etudiant' 
+            AND (prenomUtilisateur LIKE '%".$query."%' 
+            OR nomUtilisateur LIKE '%".$query."%');
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+        
+    }
+    
+    /**
+     * 
+     */
+    function addUserTeam($idUser, $idTeam) {
+        try{
+            $conn = connect();
+            $sqlQuery = "INSERT Composer(idEtudiant,idEquipe) 
+            VALUES($idUser,$idTeam);
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+    }
+
+    function suppTeam($idTeam){
+        try{
+            $conn = connect();
+            $sqlQuery = "DELETE FROM Composer
+            WHERE idEquipe = $idTeam;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }  
+        try{
+            $conn = connect();
+            $sqlQuery = "DELETE FROM Equipe
+            WHERE idEquipe = $idTeam;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }  
+    }
+
 
 
 ?>
