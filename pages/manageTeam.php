@@ -12,9 +12,10 @@
     <?php
         session_start();
         $idEquipe = $_SESSION["idTeam"];
+        $idProjet = $_SESSION["idProjet"];
         $user = getUser($_SESSION["email"]);
         $idUser = $user[0]['idUtilisateur'];
-        $infoTeam = getInfoManageTeam($idUser,$idEquipe);
+        $infoTeam = getInfoManageTeam($idUser,$idProjet);
         $members = getAllMemberTeam($idEquipe);
         echo '
             <p><strong>Equipe:</strong> '.$infoTeam["nomEquipe"].'</p>
@@ -23,7 +24,6 @@
             <p><strong>Membres:</strong> </p>
         ';
 
-        /*TODO:ici ajax*/
         echo '<div id="table">';
             echo '<table>';
                 foreach($members as $i=>$member) { 

@@ -837,12 +837,13 @@
     /**
      * 
      */
-    function verifEquipe($idUtilisateur) {
+    function verifEquipe($idUtilisateur, $idProjet) {
         try{
             $conn = connect();
             $sqlQuery = " SELECT * FROM Equipe
             INNER JOIN Composer ON Composer.idEquipe = Equipe.idEquipe 
-            WHERE Composer.idEtudiant = $idUtilisateur;
+            WHERE Composer.idEtudiant = $idUtilisateur
+            AND idProjetData = $idProjet;
             ";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
@@ -1004,6 +1005,20 @@
         catch(Exception $e){
             die('Erreur : '.$e->getMessage());
         }  
+    }
+
+    function createTeam($nomEquipe, $idcapitaine, $idProjet) {
+        try{
+            $conn = connect();
+            $sqlQuery = "INSERT into Equipe(nomEquipe, idCapitaine,idProjetData) 
+            VALUES ($nomEquipe,$idcapitaine,$idProjet);
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
     }
 
 

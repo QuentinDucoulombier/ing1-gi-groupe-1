@@ -5,6 +5,7 @@
 <?php
 
     $datas = getDataProjet($_POST["choixChallenge"]);
+    echo $_POST["choixChallenge"];
     $superviseurs = getSuperviseurUtilisateur($_POST["choixChallenge"]);
     foreach ($datas as $data) {
         $youtubeLink = $data["urlVideo"];
@@ -29,7 +30,7 @@
             Data challenge du '.$data["dateDebut"].'
             <div id="boutton">
                 <button onclick="window.location.href=`./?page=messagerie`">Envoyer un message</button>
-                <button onclick="window.location.href=`../action/verifEquipe.php`">Créer/gérer mon équipe</button>
+                <button onclick="window.location.href=`../action/verifEquipe.php?projet='.$_POST["choixChallenge"].'`">Créer/gérer mon équipe</button>
             </div>
                 <div id="description">
                 <h2>'.$data["nomProjet"].': </h2>
