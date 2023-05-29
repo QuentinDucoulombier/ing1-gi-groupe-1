@@ -1,6 +1,6 @@
 <?php 
 $idQuestionnaire=$_GET["idQuestionnaire"]; //passer l'id du prochain questionnaire en get ou créer une requete getprochainquestionnaire($idDataBattle)
-$idDataBattle=$_GET["idDataBattle"];
+$idDataBattle=$_GET["battle"];
 $dates=getDatesDataBattle($idDataBattle);
 $datedebut=$dates["dateDebut"];
 $datefin=$dates["dateFin"];

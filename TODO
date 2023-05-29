@@ -5,50 +5,30 @@
 []Changer nom auteur msg quand recu
 
 
-#Liste des challenges
-[] Mettre les bons boutons en fonction de l'utilisateur
-
 #Requetes SQL à ajouter
 
-
+'
 #Récap Pages
+[] accueil.php
+[] connexion.php
+[] inscription.php
+[] evenements.php
+[] dataBattle.php
+[] dataChallenge.php
 
-##Public
-└── accueil.php
-    ├── connexion.php
-    ├── inscription.php
-    └── evenements.php
-        ├── dataBattle.php
-        └── dataChallenge.php
+[] profilEtudiant.php
+[] inscriptionChallenge.php
+[] descriptionChallenge.php
+[] gestionEquipe.php
+[] messagerie.php
+[] questionnaire.php
 
-##Etudiant
-├── accueil.php
-    ├── profilEtudiant.php
-    └── evenements.php
-        ├── inscriptionChallenge.php
-        ├── dataBattle.php
-        │   ├── inscriptionChallenge.php
-        │   └── descriptionChallenge.php
-        |       ├── gestionEquipe.php
-        |       ├── messagerie.php
-        │       └── questionnaire.php
-        └── dataChallenge.php
-             ├── inscriptionChallenge.php
-             └── descriptionChallenge.php
-                ├── gestionEquipe.php
-                └── messagerie.php
+[] profilGestionnaire.php
+[] synthèseEvenement.php
+[] synthèseProjet.php
+[] creerQuestionnaire.php
+[] noterQuestionnaire.php
 
-##Gestionnaire
-├── accueil.php
-    ├── profilGestionnaire.php
-    └── evenements.php
-        ├── dataBattle.php
-        │   └── descriptionChallenge.php
-        |       ├── gestionEquipe.php
-        |       ├── creerQuestionnaire.php
-        │       └── noterQuestionnaire.php
-        └── dataChallenge.php
-             └── descriptionChallenge.php
-                ├── gestionEquipe.php
-                └── messagerie.php
-        └── synthèseChallenge
+[] profilAdministrateur.php
+[] creerEvenement.php
+[] modifierEvenement.php
