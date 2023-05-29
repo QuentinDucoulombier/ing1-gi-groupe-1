@@ -51,12 +51,12 @@ VALUES
     (3, 'Projet C', 'Description du Projet C', 'projet_c.jpg', 'https://urlfichier3', 'https://www.youtube.com/watch?v=video_c'),
     (4, 'Projet D', 'Description du Projet D', 'projet_d.jpg', 'https://urlfichier4', 'https://www.youtube.com/watch?v=video_d');
 
-INSERT INTO Questionnaire (idDataBattle, dateDebut, dateFin)
+INSERT INTO Questionnaire (idDataBattle, numero, dateDebut, dateFin)
 VALUES 
-    (1, '2023-01-01', '2023-01-07'),
-    (1, '2023-01-08', '2023-01-15'),
-    (1, '2023-01-16', '2023-06-24'),
-    (2, '2023-03-01', '2023-03-07');
+    (1, 1, '2023-01-01', '2023-01-07'),
+    (1, 2, '2023-01-08', '2023-01-15'),
+    (1, 3, '2023-01-16', '2023-06-24'),
+    (2, 1, '2023-03-01', '2023-03-07');
 
 INSERT INTO Question (idQuestionnaire, intituleQuestion)
 VALUES 
@@ -137,6 +137,6 @@ VALUES (2);
 INSERT INTO Superviser (idProjetData, idGestionnaire)
 VALUES 
     (1, 8),
-    (3, 8);
+    (3, 8),
     (3, 7);
 

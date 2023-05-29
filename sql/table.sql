@@ -37,6 +37,7 @@ CREATE TABLE ProjetData(
 CREATE TABLE Questionnaire(
     idQuestionnaire int NOT NULL AUTO_INCREMENT,
     idDataBattle int NOT NULL,
+    numero int,
     dateDebut date,
     dateFin date,
     PRIMARY KEY (idQuestionnaire),
