@@ -1,8 +1,8 @@
 <!--TODO:
-    - []Verifier que le nombre de membre est compris entre 3 et 8
+    - [x]Verifier que le nombre de membre est compris entre 3 et 8
     - [x]Supprimer en ajax
     - [x]Refaire l'affichage des membres en ajax en gros
-    - []Voir bug projet D
+    - [x]Voir bug projet D
 
 -->
 
@@ -37,14 +37,15 @@
                     ';
                 }
             echo '</table>';
+            if($i<3) {
+                echo '<p id="red"><strong>Il est conseillez de constituer une equipe de minimum 3 personnes</strong></p>';
+            }
         echo '</div>';
     
     
     
-    //Voir comment faire pour ajouter
     echo '<button class="addMember" onclick="searchMember('.$i.')">Ajouter membre</button>';
     ?>
-    <!--Faire en ajax-->
     <button class="suppTeam" onclick="suppTeam()">Supprimer équipe</button>
     
     
@@ -52,5 +53,7 @@
     <div id="result">
         
     </div>
-
+    <?php
+        echo '<a href="./?page=descriptionData&idChallenge='.$idProjet.'">Retour description data</a>';
+    ?>
 </div>

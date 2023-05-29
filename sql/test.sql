@@ -76,7 +76,7 @@ INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Equipe.idCapitaine
 INNER JOIN ProjetData ON ProjetData.idProjetData = Equipe.idProjetData
 where Utilisateur.idUtilisateur=2 AND Equipe.idProjetData=3;
 */
-
+/*
 select * 
 from Utilisateur 
 Inner Join Composer on Composer.idEtudiant = Utilisateur.idUtilisateur 
@@ -90,4 +90,9 @@ WHERE idEtudiant = 1 AND idEquipe = 2;
 select * 
 from Utilisateur 
 Inner Join Composer on Composer.idEtudiant = Utilisateur.idUtilisateur 
-where idEtudiant = 1 and idEquipe =2;
+where idEtudiant = 1 and idEquipe =2;*/
+
+SELECT * FROM Utilisateur 
+INNER JOIN Composer on Composer.idEtudiant = Utilisateur.idUtilisateur 
+INNER JOIN Equipe on Equipe.idEquipe = Composer.idEquipe WHERE
+idUtilisateur = 1;

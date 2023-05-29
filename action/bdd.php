@@ -1021,6 +1021,47 @@
         }   
     }
 
+    function getIdTeam($idUser,$idProjet) {
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT idEquipe 
+            FROM Equipe 
+            where idCapitaine = $idUser 
+            AND idProjetData = $idProjet;
+
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetch();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+    }
+
+
+    function getAllProjetUser($idUser) {
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT * FROM Utilisateur 
+            INNER JOIN Composer on Composer.idEtudiant = Utilisateur.idUtilisateur 
+            INNER JOIN Equipe on Equipe.idEquipe = Composer.idEquipe WHERE
+            idUtilisateur = $idUser;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+        
+
+
+    }
+
 
 
 ?>

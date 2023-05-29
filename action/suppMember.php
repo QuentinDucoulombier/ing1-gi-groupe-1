@@ -16,6 +16,9 @@
             ';
         }
     echo '</table>';
+    if($i<3) {
+        echo '<p id="red"><strong>Il est conseillez de constituer une equipe de minimum 3 personnes</strong></p>';
+    }
     if(empty($res)) {
         echo '<p style="color: green;">Membre supprimé avec succès !</p>';
     }

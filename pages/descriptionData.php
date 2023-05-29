@@ -4,9 +4,18 @@
 
 <?php
 
-    $datas = getDataProjet($_POST["choixChallenge"]);
-    echo $_POST["choixChallenge"];
-    $superviseurs = getSuperviseurUtilisateur($_POST["choixChallenge"]);
+    if(isset($_POST["choixChallenge"]))
+    {
+        $choixChallenge = $_POST["choixChallenge"];
+    }
+    elseif(isset($_GET["idChallenge"])) {
+        $choixChallenge = $_GET["idChallenge"];
+    }
+    else {
+        header('Location: /?page=index');
+    }
+    $datas = getDataProjet($choixChallenge);
+    $superviseurs = getSuperviseurUtilisateur($choixChallenge);
     foreach ($datas as $data) {
         $youtubeLink = $data["urlVideo"];
 
@@ -30,7 +39,7 @@
             Data challenge du '.$data["dateDebut"].'
             <div id="boutton">
                 <button onclick="window.location.href=`./?page=messagerie`">Envoyer un message</button>
-                <button onclick="window.location.href=`../action/verifEquipe.php?projet='.$_POST["choixChallenge"].'`">Créer/gérer mon équipe</button>
+                <button onclick="window.location.href=`../action/verifEquipe.php?projet='.$choixChallenge.'`">Créer/gérer mon équipe</button>
             </div>
                 <div id="description">
                 <h2>'.$data["nomProjet"].': </h2>
