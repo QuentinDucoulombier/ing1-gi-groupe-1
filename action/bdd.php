@@ -480,6 +480,47 @@
             die('Erreur : '.$e->getMessage());
         }    
     }
+
+
+    /*
+    * Permet de récupérer un questionnaire associé à une data battle
+    * @param idDataBattle : id data battle lié au questionnaire
+    */
+    function getQuestionnaire($iddatabattle, $numero){
+        try{
+            $conn = connect();
+            $sqlQuery="SELECT idQuestionnaire, idDataBattle, numero, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateDebut,DATE_FORMAT(dateFin, '%d %M %Y') AS dateFin FROM Questionnaire WHERE idDataBattle = :id AND numero = :numero ";
+            $statement=$conn->prepare($sqlQuery);
+            $statement->bindParam(':id',$iddatabattle);
+            $statement->bindParam(':numero',$numero);
+            $statement->execute();
+            $result = $statement->fetch();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }    
+    }
+
+    /*
+    * Permet de récupérer un questionnaire associé à une data battle
+    * @param idDataBattle : id data battle lié au questionnaire
+    */
+    function isQuestionnaire($iddatabattle, $numero){
+        try{
+            $conn = connect();
+            $sqlQuery="SELECT * FROM Questionnaire WHERE idDataBattle = :id AND numero = :numero ";
+            $statement=$conn->prepare($sqlQuery);
+            $statement->bindParam(':id',$iddatabattle);
+            $statement->bindParam(':numero',$numero);
+            $statement->execute();
+            $result = $statement->rowCount();
+            return $result > 0;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }    
+    }
  
     /*
     * Permet d'ajouter une question à un questionnaire 
@@ -526,7 +567,7 @@
     function getDatesQuestionnaire($idQuestionnaire){
         try{
             $conn = connect();
-            $sqlQuery="SELECT dateDebut,dateFin FROM Questionnaire WHERE idQuestionnaire=:idQuestionnaire";
+            $sqlQuery="SELECT DATE_FORMAT(dateDebut, '%d %M %Y') AS dateDebut,DATE_FORMAT(dateFin, '%d %M %Y') AS dateFin FROM Questionnaire WHERE idQuestionnaire=:idQuestionnaire";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':idQuestionnaire',$idQuestionnaire);
             $statement->execute();
@@ -544,7 +585,7 @@
     function getDatesDataBattle($idDataBattle){
         try{
             $conn = connect();
-            $sqlQuery="SELECT dateDebut,dateFin FROM Evenement WHERE idEvenement=:idDataBattle";
+            $sqlQuery="SELECT DATE_FORMAT(dateDebut, '%d %M %Y') AS dateDebut,DATE_FORMAT(dateFin, '%d %M %Y') AS dateFin FROM Evenement WHERE idEvenement=:idDataBattle";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':idDataBattle',$idDataBattle);
             $statement->execute();

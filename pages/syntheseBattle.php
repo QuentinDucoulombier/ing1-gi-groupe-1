@@ -28,8 +28,53 @@
                 echo ' <div id="liste-equipes">';
                 echo    $equipe['nomEquipe'];
                 echo ' </div>';
-            }
+            }?>
 
+            <h3> Liste des questionnaires rattachées : </h3>
+
+            <div id="liste-questionnaires">
+
+            <?php
+            for($i=1; $i<=4; $i++){?>
+
+                <div class="questionnaire">
+                    <p> Questionnaire n°<?php echo $i ?>
+
+                    <?php
+                    if (!isQuestionnaire($idBattle, $i)){?>
+                        </p>
+                        <a href="/?page=ajoutquestionnaire&battle=<?php echo $idBattle?>&numero=<?php echo $i?>">
+                            <button name="creation"> Créer </button>
+                        </a>
+
+                    <?php 
+                    } 
+                    ?>
+                    
+                    <?php
+                    if (isQuestionnaire($idBattle, $i)){
+                        $questionnaire = getQuestionnaire($idBattle, $i);?>
+                        du <?php echo $questionnaire['dateDebut'] . ' au ' . $questionnaire['dateFin']?> </p>
+                        <a href="">
+                            <button name="supprimer"> Supprimer </button>
+                        </a>
+
+                    <?php 
+                    } 
+                    ?>
+                    
+                
+
+                </div>
+            <?php 
+            } 
+            ?>
+
+                
+
+            </div>
+
+<?php
         }
     }
 ?>
