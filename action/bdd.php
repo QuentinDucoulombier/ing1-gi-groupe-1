@@ -789,7 +789,7 @@
     function getEquipeUser($mail){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT Equipe.nomEquipe FROM Equipe 
+            $sqlQuery = "SELECT Equipe.nomEquipe, Equipe.idEquipe FROM Equipe 
                         INNER JOIN Composer ON Equipe.idEquipe = Composer.idEquipe 
                         INNER JOIN Utilisateur ON Composer.idEtudiant = Utilisateur.idUtilisateur 
                         WHERE Utilisateur.email = :mail";
@@ -811,7 +811,7 @@
     function getEquipesEvenement($idEvenement){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT DISTINCT e.nomEquipe
+            $sqlQuery = "SELECT DISTINCT e.nomEquipe, e.idEquipe
                         FROM Equipe AS e
                         INNER JOIN ProjetData AS pd ON e.idProjetData = pd.idProjetData
                         WHERE pd.idEvenement = :idEvenement";
@@ -833,7 +833,7 @@
     function getEquipesProjet($idProjet){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT DISTINCT e.nomEquipe
+            $sqlQuery = "SELECT DISTINCT e.nomEquipe, e.idEquipe
                         FROM Equipe
                         WHERE idProjetData = :idProjet";
             $statement = $conn->prepare($sqlQuery);

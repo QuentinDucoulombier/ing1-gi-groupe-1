@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="styles/component/questionnaire.css" />
+
 <?php 
 $idQuestionnaire=$_GET["idQuestionnaire"]; //passer l'id du prochain questionnaire en get ou créer une requete getprochainquestionnaire($idDataBattle)
 $idDataBattle=$_GET["battle"];
@@ -22,9 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <div id="app">
-    <div id="header">
-        <?php include "component/header.php"; ?>
-    </div>
+
     <div id="middle">
         <div id="content">
             <h1>Création du questionnaire n°<?php echo $idQuestionnaire ?> Data Battle du <?php echo $datedebut?> au  <?php echo $datefin?> </h1>
@@ -58,9 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
     </div>
 
-    <div id="footer">
-        <?php include "component/footer.php"; ?>
-    </div>
 </div>
 
 <script>

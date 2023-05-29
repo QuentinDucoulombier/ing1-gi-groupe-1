@@ -1,0 +1,134 @@
+#app {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  
+#middle {
+    max-width: 800px;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+  
+  #content {
+    margin-top: 20px;
+  }
+  
+  h1 {
+    margin-bottom: 20px;
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  /*
+noter Questionnaire
+*/
+  .question {
+    margin-bottom: 10px;
+  }
+  
+  textarea {
+    width: 100%;
+  }
+  
+  fieldset {
+    margin-top: 10px;
+    border: none;
+  }
+  
+  legend {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input[type="radio"] {
+    margin-right: 5px;
+  }
+  fieldset {
+  margin-top: 10px;
+  border: none;
+}
+
+legend {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+input[type="radio"] + label {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: #e9e9e9;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+input[type="radio"]:checked + label {
+  background-color: #0e8769;
+  color: white;
+}
+
+  
+.envoi,
+.annuler {
+    background-color: #0e8769;
+    color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    transition: color 0.3s ease;    
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif !important;
+    cursor: pointer;
+    }
+  
+.envoi {
+    margin-right: 10px;
+    transition: color 0.3s;
+}
+  
+.annuler {
+    background-color: #f44336;
+    transition: color 0.3s;
+}
+  
+.envoi:hover,
+.annuler:hover {
+    color: #b7b7b7;
+}
+  
+  
+  
+/*
+ajout Questionnaire
+*/
+  
+  form label {
+    display: block;
+    font-weight: bold;
+  }
+  
+  form input[type="date"],
+  form textarea {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  #questions-container .question {
+    font-weight: bold;
+  }
+  
+  #questions-container textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
