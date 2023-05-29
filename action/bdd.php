@@ -725,12 +725,13 @@
     * Permet de récupérer les infos liées à un projet Data 
     * @param nomEvenement : nom de l'evenement correspondant
     */
-    function getProjetData($nomEvenement){
+    function getProjetData($idEvenement){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT * FROM ProjetData INNER JOIN Evenement ON Evenement.idEvenement = ProjetData.idEvenement WHERE Evenement.nomEvenement LIKE :event";
+            $sqlQuery = "SELECT * FROM ProjetData 
+                        WHERE idEvenement LIKE :idEvenement";
             $statement = $conn->prepare($sqlQuery);
-            $statement->bindParam(':event', $nomEvenement);
+            $statement->bindParam(':idEvenement', $idEvenement);
             $statement->execute();
             $result = $statement->fetchAll();
             return $result;
@@ -742,9 +743,9 @@
 
     /*
     * Permet de récupérer les équipes de l'utilisateur 
-    * @param mail : 
+    * @param mail : m
     */
-    function getEquipe($mail){
+    function getEquipeUser($mail){
         try{
             $conn = connect();
             $sqlQuery = "SELECT Equipe.nomEquipe FROM Equipe 
@@ -760,6 +761,72 @@
         catch(Exception $e){
             die('Erreur : '.$e->getMessage());
         } 
+    }
+
+        /*
+    * Permet de récupérer les équipes associés à un challenge/battle 
+    * @param mail : 
+    */
+    function getEquipesEvenement($idEvenement){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT DISTINCT e.nomEquipe
+                        FROM Equipe AS e
+                        INNER JOIN ProjetData AS pd ON e.idProjetData = pd.idProjetData
+                        WHERE pd.idEvenement = :idEvenement";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':idEvenement', $idEvenement);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+
+            /*
+    * Permet de récupérer les équipes associés à un projet 
+    * @param mail : 
+    */
+    function getEquipesProjet($idProjet){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT DISTINCT e.nomEquipe
+                        FROM Equipe
+                        WHERE idProjetData = :idProjet";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':idProjet', $idProjet);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            return false; // En cas d'erreur, renvoyer false
+        }
+    }
+
+                /*
+    * Permet de récupérer les projets associés à un datachallenge/battle 
+    * @param 
+    */
+    function getProjetsEvenement($idEvenement){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT nomProjet, idProjetData
+                        FROM ProjetData
+                        WHERE idEvenement = :idEvenement";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':idEvenement', $idEvenement);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            return false; // En cas d'erreur, renvoyer false
+        }
     }
 
         /*
@@ -779,9 +846,10 @@
             $result = $statement->fetchAll();
             return $result;
         }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        } 
+        catch (PDOException $e) {
+            echo 'Erreur : ' . $e->getMessage();
+            return false; // En cas d'erreur, renvoyer false
+        }
     }
 
     /*
