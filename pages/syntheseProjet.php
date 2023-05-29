@@ -26,4 +26,5 @@
 
         }
     }
+    //header ('Location: /page=404');
 ?>

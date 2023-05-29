@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="styles/component/synthese.css" />
+
 <?php
     if (isset($_SESSION['email'])){
 
@@ -19,62 +21,93 @@
             echo '<h3> Projet rattaché : </h3>';
 
             echo ' <div id="liste-projets">';
-            echo '      <a class ="more-link" href="/?page=syntheseProjet&projet='.$projets[0]['idProjetData'].'"> '.$projets[0]['nomProjet'].' </a>';
+            echo        $projets[0]['nomProjet'];
             echo ' </div>';
 
             echo '<h3> Liste des équipes rattachées : </h3>';
 
-            foreach ($equipes as $equipe){
-                echo ' <div id="liste-equipes">';
-                echo    $equipe['nomEquipe'];
-                echo ' </div>';
-            }?>
+            foreach ($equipes as $equipe){?>
+                <div id="liste-equipes">
+
+                    <div class="nom-equipe">
+                        <?php echo $equipe['nomEquipe'] ?>
+                    </div>
+
+                    <div class="messages">
+                        <a href="">
+                            <button name="messages"> Voir les messages </button>
+                        </a>
+                    </div>
+
+                    <div class="reponses-questionnaire">
+                        <p> Réponses de l'équipe :</p>
+
+                        <?php
+                        for($i=1; $i<=4; $i++){?>
+                                
+                            <?php
+                            if (isQuestionnaire($idBattle, $i)){
+                                $questionnaire = getQuestionnaire($idBattle, $i);?>
+                                <a href="/?page=noteQuestionnaire&dataBattle=<?php echo $idBattle?>&equipe=<?php echo $equipe['idEquipe'] ?>&questionnaire=<?php echo $questionnaire['idQuestionnaire'] ?>">
+                                    <button name="reponses"> Questionnaire n°<?php echo $i ?> </button>
+                                </a>
+                            <?php 
+                            } 
+                            ?>
+                            
+                        <?php 
+                        } 
+                        ?>
+
+                    </div>
+
+                </div>
+                
+            <?php
+            }
+            ?>
 
             <h3> Liste des questionnaires rattachées : </h3>
 
             <div id="liste-questionnaires">
 
-            <?php
-            for($i=1; $i<=4; $i++){?>
+                <?php
+                for($i=1; $i<=4; $i++){?>
 
-                <div class="questionnaire">
-                    <p> Questionnaire n°<?php echo $i ?>
+                    <div class="questionnaire">
+                        <p> Questionnaire n°<?php echo $i ?>
 
-                    <?php
-                    if (!isQuestionnaire($idBattle, $i)){?>
-                        </p>
-                        <a href="/?page=ajoutquestionnaire&battle=<?php echo $idBattle?>&numero=<?php echo $i?>">
-                            <button name="creation"> Créer </button>
-                        </a>
+                        <?php
+                        if (!isQuestionnaire($idBattle, $i)){?>
+                            </p>
+                            <a href="/?page=ajoutquestionnaire&battle=<?php echo $idBattle?>&numero=<?php echo $i?>">
+                                <button name="creation"> Créer </button>
+                            </a>
 
-                    <?php 
-                    } 
-                    ?>
+                        <?php 
+                        } 
+                        ?>
+                        
+                        <?php
+                        if (isQuestionnaire($idBattle, $i)){
+                            $questionnaire = getQuestionnaire($idBattle, $i);?>
+                            du <?php echo $questionnaire['dateDebut'] . ' au ' . $questionnaire['dateFin']?> </p>
+                            <a href="">
+                                <button name="supprimer"> Supprimer </button>
+                            </a>
+
+                        <?php 
+                        } 
+                        ?>
                     
-                    <?php
-                    if (isQuestionnaire($idBattle, $i)){
-                        $questionnaire = getQuestionnaire($idBattle, $i);?>
-                        du <?php echo $questionnaire['dateDebut'] . ' au ' . $questionnaire['dateFin']?> </p>
-                        <a href="">
-                            <button name="supprimer"> Supprimer </button>
-                        </a>
-
-                    <?php 
-                    } 
-                    ?>
-                    
-                
-
-                </div>
-            <?php 
-            } 
-            ?>
-
-                
-
+                    </div>
+                <?php 
+                } 
+                ?>
             </div>
 
-<?php
+        <?php
         }
     }
+
 ?>
