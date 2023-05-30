@@ -45,28 +45,29 @@ if (isset($_SESSION['email'])) {
                 <td><?php echo $infos[0]['ville']; ?></td>
             </tr>
 
-            <tr>
-                <th>Mot de passe</th>
-                <td><?php echo $infos[0]['motDePasse']; ?></td>
-            </tr>
-            <tr>
-                <th>Confirmer mot de passe</th>
-                <td><?php echo $infos[0]['motDePasse']; ?></td>
-            </tr>
-            <tr>
-                <th>Modifier</th>
-                <td><button onclick="toggleEditProfilEtudiant(this)" data-email="<?php echo $infos[0]['email']; ?>">Modifier</button></td>
-            </tr>
-        </table>
-    </div>
-    <div class="projects">
-        <h2>Mes Projets</h2>
+        <tr id="Ancien_MotDePasse_Etudiant">
+            <th>Ancien mot de passe</th>
+            <td></td>
+        </tr>
 
-        <h2>Mon équipe</h2>
-        <?php
-        // Appel de la fonction pour récupérer les équipes de l'utilisateur
-        $resultats = getMembreEquipe($email);
+        <tr>
+            <th>Mot de passe</th>
+            <td><?php echo $infos[0]['motDePasse']; ?></td>
+        </tr>
+        <tr id="Confirmer_MotDePasse_Etudiant">
+            <th>Confirmer mot de passe</th>
+            <td><?php echo $infos[0]['motDePasse']; ?></td>
+        </tr>
+        <tr>
+            <td><button onclick="toggleEditProfilEtudiant(this)" data-email="<?php echo $infos[0]['email']; ?>">Modifier</button></td>
+        </tr>
+    </table>
+    <h2>Mes Projets</h2>
 
+    <h2>Mon équipe</h2>
+    <?php
+    // Appel de la fonction pour récupérer les équipes de l'utilisateur
+    $resultats = getMembreEquipe($email);
 
     // Affichage du tableau
     echo "<table>";

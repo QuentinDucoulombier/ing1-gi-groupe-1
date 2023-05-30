@@ -59,9 +59,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         modifyVille($email, $ville);
     }
 
-    //si le mot de passe a été saisie dans le formulaire
-    $mdp = $_POST['motDePasse'];
-    modifyPasswordForAdmin($email, $mdp);
+    if ($_POST['typePage'] == "profil") {
+        echo $_POST['AncienMotDePasse'];
+        echo $_POST['motDePasse'];
+        modifyPassword($email,$_POST['AncienMotDePasse'],$_POST['motDePasse']);
+
+    } else {
+        modifyPasswordForAdmin($email,$_POST['motDePasse']);
+    }
+    
 
     // si le type a changé
     $nvtype = $_POST['type'];
