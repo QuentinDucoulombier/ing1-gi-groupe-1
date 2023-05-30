@@ -1,31 +1,32 @@
 
-.profil_block {
-    background-color: #fff;
-    padding-top: 50px;
-    padding-right: 30px;
-    padding-bottom: 50px;
-    padding-left: 30px;
-    max-width: 450px;
+.profil {
+    background-image: linear-gradient(100deg,#0e8769 0%,#0c71c3 100%) !important;
+    color:white;
     font-family: 'Poppins',Helvetica,Arial,Lucida,sans-serif;
     font-weight: 600;
     line-height: 1.4em;
+    display: flex;
+    justify-content: first baseline;
+    align-items:flex-start;
+    padding-bottom: 130px;
 }
 
-.profil h2{
-    display: inline-table;
-    /* Ajoutez cette propriété pour aligner les éléments côte à côte */
-    /*align-items: center;
-    /* Ajoutez cette propriété pour centrer les éléments verticalement */
+.profil_block {
+    background-color: white;
+    color: #9c9c9c;
+    margin: 50px;
+    padding: 50px 30px;
+    margin-right: 200px;
+    text-align: left;
+
+    
 }
 
-.nomUtilisateur h2 {
-    margin-right: 10px;
-    /* Ajoutez cette propriété pour ajouter une marge entre les éléments */
+.profil_block table tr th,.profil_block table tr td {
+    padding-bottom: 18px;
+    padding-right: 50px;
 }
 
-#modifierModal {
-    display: none;
-}
 
 #Confirmer_MotDePasse_Etudiant{
     display: none;
@@ -49,4 +50,15 @@
 
 #Ancien_MotDePasse_Admin{
     display: none;
+}
+
+.smaller_profil table tr th,.smaller_profil table tr td {
+    padding-bottom: 0px;
+}
+.smaller_profil table {
+    min-width: 525px;
+
+}
+.projects {
+    margin: 50px;
 }

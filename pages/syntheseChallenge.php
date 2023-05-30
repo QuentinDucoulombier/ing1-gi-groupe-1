@@ -34,12 +34,12 @@
 
         }
         else{
-        //header ('Location: /?page=404');
+        header ('Location: /?page=404');
 
         }
     }
     else{
-    //header ('Location: /?page=404');
+    header ('Location: /?page=404');
 
     }
 ?>

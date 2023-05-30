@@ -4,8 +4,12 @@ function sha1(str) {
 var ConfirmerMotDePassesEtudiant = document.getElementById("Confirmer_MotDePasse_Etudiant");
 var AncienMotDePassesEtudiant = document.getElementById("Ancien_MotDePasse_Etudiant");
 function toggleEditProfilEtudiant(button) {
+
     ConfirmerMotDePassesEtudiant.style.display = 'block';
     AncienMotDePassesEtudiant.style.display = 'block';
+
+    document.getElementById("profil_id").classList.add("smaller_profil");
+
     var email = button.getAttribute('data-email');
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
     var cells = table.getElementsByTagName('td'); // Récupère tous les éléments <td> dans la table
@@ -85,9 +89,13 @@ function sendDataProfilEtudiant(button, email, motDePasse2) {
             // Changer le texte du bouton Envoyer en Modifier
             button.innerHTML = "Modifier";
             button.setAttribute("onclick", "toggleEditProfilEtudiant(this)");
+
             ConfirmerMotDePassesEtudiant.style.display = 'none';
             AncienMotDePassesEtudiant.style.display = 'none';
             location.reload();
+
+            document.getElementById("profil_id").classList.remove("smaller_profil");
+
         }
     };
     // xhttp.open("GET", "pages/modifierUtilisateur.php?email=" + email + "&prenom=" + prenom + "&nom=" + nom + "&type=" + type + "&numeroTel=" + numeroTel + "&niveau

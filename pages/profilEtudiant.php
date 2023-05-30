@@ -9,51 +9,41 @@ if (isset($_SESSION['email'])) {
 
     $infos = getUser($email);
 
-    ?>
+?>
     
-    <html lang="en">
-   
-    <head>
-        
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/css/profil.css" />
 
-
-        <title>Profil</title>
-    </head>
-
-    <h1>Profil</h1>
-    <table>
-        <tr>
-            <th>Prénom</th>
-            <td><?php echo $infos[0]['prenomUtilisateur']; ?></td>
-        </tr>
-        <tr>
-            <th>Nom</th>
-            <td><?php echo $infos[0]['nomUtilisateur']; ?></td>
-        </tr>
-        <tr>
-            <th>Email</th>
-            <td><?php echo $infos[0]['email']; ?></td>
-        </tr>
-        <tr>
-            <th>Numéro de téléphone</th>
-            <td><?php echo $infos[0]['numeroTel']; ?></td>
-        </tr>
-        <tr>
-            <th>Niveau d'étude</th>
-            <td><?php echo $infos[0]['niveauEtude']; ?></td>
-        </tr>
-        <tr>
-            <th>Ecole</th>
-            <td><?php echo $infos[0]['ecole']; ?></td>
-        </tr>
-        <tr>
-            <th>Ville</th>
-            <td><?php echo $infos[0]['ville']; ?></td>
-        </tr>
+<div class="profil">
+    <div id="profil_id" class="profil_block">
+        <h2>Mon Profil</h2>
+        <table>
+            <tr>
+                <th>Prénom</th>
+                <td><?php echo $infos[0]['prenomUtilisateur']; ?></td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td><?php echo $infos[0]['nomUtilisateur']; ?></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><?php echo $infos[0]['email']; ?></td>
+            </tr>
+            <tr>
+                <th>Numéro de téléphone</th>
+                <td><?php echo $infos[0]['numeroTel']; ?></td>
+            </tr>
+            <tr>
+                <th>Niveau d'étude</th>
+                <td><?php echo $infos[0]['niveauEtude']; ?></td>
+            </tr>
+            <tr>
+                <th>Ecole</th>
+                <td><?php echo $infos[0]['ecole']; ?></td>
+            </tr>
+            <tr>
+                <th>Ville</th>
+                <td><?php echo $infos[0]['ville']; ?></td>
+            </tr>
 
         <tr id="Ancien_MotDePasse_Etudiant">
             <th>Ancien mot de passe</th>
@@ -91,8 +81,11 @@ if (isset($_SESSION['email'])) {
     echo "</table>";
     ?>
 
-    </html>
 
+        
+
+    </div>
+</div>
     <?php
 } else {
     echo 'error';
