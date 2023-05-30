@@ -381,9 +381,9 @@ function modifyType($mail, $type)
 }
 
 /*
-* Permet de supprimer les infos propres à un étudiant (niveau d'étude, école, ville) et a un gestionnaire (nom entreprise, date de debut, date de fin)
-* @param mail : mail de l'utilisateur
-*/
+ * Permet de supprimer les infos propres à un étudiant (niveau d'étude, école, ville) et a un gestionnaire (nom entreprise, date de debut, date de fin)
+ * @param mail : mail de l'utilisateur
+ */
 function deleteInfo($mail)
 {
     try {
@@ -427,7 +427,7 @@ function modifyLvl($mail, $lvl)
  * @param ecole : nouvelle école de l'utilisateur
  */
 function modifyEcole($mail, $ecole)
-{   
+{
     echo $ecole;
     echo $mail;
     try {
@@ -603,26 +603,44 @@ function addQuestionnaire($iddatabattle, $dateDebut, $dateFin)
         die('Erreur : ' . $e->getMessage());
     }
 }
-
 /*
- * Permet d'ajouter une question à un questionnaire 
- * @param idQuestionnaire : id questionnaire lié à la question
- * @param intitule : intitulé de la question
+ * Permet de récupérer les dates d'un questionnaire 
+ * @param idQuestionnaire : id questionnaire dont on veut les dates
  */
-function addQuestion($idQuestionnaire, $intitule)
+function getDatesQuestionnaire($idQuestionnaire)
 {
     try {
         $conn = connect();
-        $sqlQuery = "INSERT INTO Question(idQuestionnaire,intituleQuestion) VALUES (:idQuestionnaire,:intitule)";
+        $sqlQuery = "SELECT DATE_FORMAT(dateDebut, '%d %M %Y') AS dateDebut,DATE_FORMAT(dateFin, '%d %M %Y') AS dateFin FROM Questionnaire WHERE idQuestionnaire=:idQuestionnaire";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':idQuestionnaire', $idQuestionnaire);
-        $statement->bindParam(':intitule', $intitule);
         $statement->execute();
+        $result = $statement->fetch();
+        return $result;
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
 }
 
+/*
+ * Permet de récupérer un questionnaire associé à une data battle
+ * @param idDataBattle : id data battle lié au questionnaire
+ */
+function getQuestionnaire($iddatabattle, $numero)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT idQuestionnaire, idDataBattle, numero, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateDebut,DATE_FORMAT(dateFin, '%d %M %Y') AS dateFin FROM Questionnaire WHERE idDataBattle = :id AND numero = :numero ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':id', $iddatabattle);
+        $statement->bindParam(':numero', $numero);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
 /*
  * Permet de récupérer les questions d'un questionnaire 
  * @param idQuestionnaire : id questionnaire lié à la question
@@ -638,6 +656,25 @@ function getQuestion($idQuestionnaire)
         $statement->execute();
         $result = $statement->fetchAll();
         return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+/*
+ * Permet de récupérer un questionnaire associé à une data battle
+ * @param idDataBattle : id data battle lié au questionnaire
+ */
+function isQuestionnaire($iddatabattle, $numero)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT * FROM Questionnaire WHERE idDataBattle = :id AND numero = :numero ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':id', $iddatabattle);
+        $statement->bindParam(':numero', $numero);
+        $statement->execute();
+        $result = $statement->rowCount();
+        return $result > 0;
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
@@ -662,6 +699,43 @@ function setReponse($idEquipe, $idQuestion, $reponse)
         die('Erreur : ' . $e->getMessage());
     }
 }
+/*
+ * Permet de récupérer les dates d'un questionnaire 
+ * @param idQuestionnaire : id questionnaire dont on veut les dates
+ */
+function getDatesDataBattle($idDataBattle)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT DATE_FORMAT(dateDebut, '%d %M %Y') AS dateDebut,DATE_FORMAT(dateFin, '%d %M %Y') AS dateFin FROM Evenement WHERE idEvenement=:idDataBattle";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idDataBattle', $idDataBattle);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+/*
+ * Permet d'ajouter une question à un questionnaire 
+ * @param idQuestionnaire : id questionnaire lié à la question
+ * @param intitule : intitulé de la question
+ */
+function addQuestion($idQuestionnaire, $intitule)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "INSERT INTO Question(idQuestionnaire,intituleQuestion) VALUES (:idQuestionnaire,:intitule)";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idQuestionnaire', $idQuestionnaire);
+        $statement->bindParam(':intitule', $intitule);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
 /*
  * Permet de récupérer les réponses d'une équipe à un questionnaire 
  * @param idQuestion : id question lié à la réponse
@@ -718,6 +792,31 @@ function getNoteEquipe($idEquipe, $idQuestionnaire)
         die('Erreur : ' . $e->getMessage());
     }
 }
+
+function getPodium($idEvenement)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT Equipe.nomEquipe, SUM(Reponse.note) AS totalNotes
+                FROM Equipe
+                INNER JOIN Reponse ON Equipe.idEquipe = Reponse.idEquipe
+                INNER JOIN Question ON Reponse.idQuestion = Question.idQuestion
+                INNER JOIN Questionnaire ON Question.idQuestionnaire = Questionnaire.idQuestionnaire
+                WHERE Questionnaire.idDataBattle = :idEvenement
+                GROUP BY Equipe.nomEquipe
+                ORDER BY totalNotes DESC";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEvenement', $idEvenement);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        print_r($result);
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+
 
 /*
  * Permet d'ajouter un projet Data
@@ -786,6 +885,24 @@ function getBattle()
         die('Erreur : ' . $e->getMessage());
     }
 }
+/*
+ * Permet de récupérer un data Challenge ou une data battle à l'aide de son id
+ * @return tableau de challenge
+ */
+function getEvenementbyID($id)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT idEvenement, nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE idEvenement = :id";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
 
 /*
  * Permet de récupérer les infos liées à un projet Data 
@@ -805,7 +922,27 @@ function getProjetData($nomEvenement)
         die('Erreur : ' . $e->getMessage());
     }
 }
-
+/*
+ * Permet de récupérer les équipes de l'utilisateur 
+ * @param mail : m
+ */
+function getEquipeUser($mail)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT Equipe.nomEquipe, Equipe.idEquipe FROM Equipe 
+                        INNER JOIN Composer ON Equipe.idEquipe = Composer.idEquipe 
+                        INNER JOIN Utilisateur ON Composer.idEtudiant = Utilisateur.idUtilisateur 
+                        WHERE Utilisateur.email = :mail";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':mail', $mail);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
 /*
  * Permet de récupérer les équipes de l'utilisateur 
  * @param mail : 
@@ -828,6 +965,70 @@ function getMembreEquipe($mail)
     }
 }
 
+/*
+ * Permet de récupérer les équipes associés à un challenge/battle 
+ * @param mail : 
+ */
+function getEquipesEvenement($idEvenement)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT DISTINCT e.nomEquipe, e.idEquipe
+                        FROM Equipe AS e
+                        INNER JOIN ProjetData AS pd ON e.idProjetData = pd.idProjetData
+                        WHERE pd.idEvenement = :idEvenement";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEvenement', $idEvenement);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+/*
+ * Permet de récupérer les équipes associés à un projet 
+ * @param mail : 
+ */
+function getEquipesProjet($idProjet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT DISTINCT e.nomEquipe, e.idEquipe
+                        FROM Equipe
+                        WHERE idProjetData = :idProjet";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjet', $idProjet);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (PDOException $e) {
+        echo 'Erreur : ' . $e->getMessage();
+        return false; // En cas d'erreur, renvoyer false
+    }
+}
+
+/*
+ * Permet de récupérer les projets associés à un datachallenge/battle 
+ * @param 
+ */
+function getProjetsEvenement($idEvenement)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT nomProjet, idProjetData
+                        FROM ProjetData
+                        WHERE idEvenement = :idEvenement";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEvenement', $idEvenement);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (PDOException $e) {
+        echo 'Erreur : ' . $e->getMessage();
+        return false; // En cas d'erreur, renvoyer false
+    }
+}
 /*
  * Permet de récupérer les membres d'une équipe
  * @param mail : 
@@ -891,6 +1092,361 @@ function getGestionnaireEquipe($gestio)
         return $result;
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
+    }
+}
+/**
+ * 
+ */
+function getData($idChallenge)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT * from ProjetData 
+                        Inner Join Evenement on Evenement.idEvenement = ProjetData.idEvenement 
+                        where ProjetData.idEvenement=$idChallenge";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/**
+ * 
+ */
+function getDataProjet($idProjet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = " SELECT * from ProjetData 
+            Inner Join Evenement on Evenement.idEvenement = ProjetData.idEvenement 
+            where ProjetData.idProjetData=$idProjet;
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/**
+ * 
+ */
+function getSuperviseurUtilisateur($idProjet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = " SELECT * FROM Superviser 
+            INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Superviser.idGestionnaire 
+            where idProjetData = $idProjet;
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+
+}
+
+/**
+ * 
+ */
+function verifEquipe($idUtilisateur, $idProjet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = " SELECT * FROM Equipe
+            INNER JOIN Composer ON Composer.idEquipe = Equipe.idEquipe 
+            WHERE Composer.idEtudiant = $idUtilisateur
+            AND idProjetData = $idProjet;
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+
+}
+
+/**
+ * 
+ */
+function getAllMemberTeam($idTeam)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT * 
+            FROM Composer 
+            INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
+            INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Composer.idEtudiant
+            WHERE Composer.idEquipe=$idTeam;
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+
+
+}
+
+/**
+ * 
+ */
+function getInfoManageTeam($idUtilisateur, $idProjet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT * 
+            FROM Composer 
+            INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
+            INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Equipe.idCapitaine
+            INNER JOIN ProjetData ON ProjetData.idProjetData = Equipe.idProjetData
+            where Utilisateur.idUtilisateur=$idUtilisateur AND Equipe.idProjetData=$idProjet;
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+
+}
+
+/**
+ * 
+ */
+function suppUserTeam($idUser, $idTeam)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "DELETE FROM Composer
+            WHERE idEtudiant = $idUser AND idEquipe = $idTeam;
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/**
+ * 
+ */
+function verifSuppUser($idUser, $idTeam)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT * 
+            FROM Utilisateur 
+            INNER JOIN Composer ON Composer.idEtudiant = Utilisateur.idUtilisateur 
+            WHERE idEtudiant = $idUser AND idEquipe = $idTeam;
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/**
+ * 
+ */
+function searchStudent($query)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT * 
+            FROM Utilisateur 
+            WHERE type = 'Etudiant' 
+            AND (prenomUtilisateur LIKE '%" . $query . "%' 
+            OR nomUtilisateur LIKE '%" . $query . "%');
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+
+}
+
+/**
+ * 
+ */
+function addUserTeam($idUser, $idTeam)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "INSERT Composer(idEtudiant,idEquipe) 
+            VALUES($idUser,$idTeam);
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+function suppTeam($idTeam)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "DELETE FROM Composer
+            WHERE idEquipe = $idTeam;
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+    try {
+        $conn = connect();
+        $sqlQuery = "DELETE FROM Equipe
+            WHERE idEquipe = $idTeam;
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+function createTeam($nomEquipe, $idcapitaine, $idProjet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "INSERT into Equipe(nomEquipe, idCapitaine,idProjetData) 
+            VALUES ($nomEquipe,$idcapitaine,$idProjet);
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+function getIdTeam($idUser, $idProjet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT idEquipe 
+            FROM Equipe 
+            where idCapitaine = $idUser 
+            AND idProjetData = $idProjet;
+
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+
+function getAllProjetUser($idUser)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT * FROM Utilisateur 
+            INNER JOIN Composer on Composer.idEtudiant = Utilisateur.idUtilisateur 
+            INNER JOIN Equipe on Equipe.idEquipe = Composer.idEquipe WHERE
+            idUtilisateur = $idUser;
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+
+
+
+}
+
+
+/*
+ * Permet de checker si un étudiant est inscrit à un des projet du challenge
+ * @param mail : 
+ */
+function checkInscriptionProjet($mail, $evenement)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT COUNT(*) AS count
+                        FROM Utilisateur AS u
+                        INNER JOIN Composer AS c ON u.idUtilisateur = c.idEtudiant
+                        INNER JOIN Equipe AS e ON c.idEquipe = e.idEquipe
+                        INNER JOIN ProjetData AS pd ON e.idProjetData = pd.idProjetData
+                        INNER JOIN Evenement AS ev ON pd.idEvenement = ev.idEvenement
+                        WHERE u.email = :mail AND ev.nomEvenement = :evenement";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':mail', $mail);
+        $statement->bindParam(':evenement', $evenement);
+        $statement->execute();
+
+        $result = $statement->fetch();
+        $count = $result['count'];
+        // Vérification de l'inscription
+        if ($count > 0) {
+            return true; // L'étudiant est inscrit au projet
+        } else {
+            return false; // L'étudiant n'est pas inscrit au projet
+        }
+    } catch (Exception $e) {
+        echo 'Erreur : ' . $e->getMessage();
+        return false; // En cas d'erreur, renvoyer false
+    }
+}
+
+
+/*
+ * Permet de checker si un gestionnaire supervise un des projet du challenge
+ * @param mail : 
+ */
+function checkGestionnaireProjet($mail, $evenement)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT COUNT(*) AS count
+                        FROM Utilisateur AS u
+                        INNER JOIN Superviser AS s ON u.idUtilisateur = s.idGestionnaire
+                        INNER JOIN ProjetData AS pd ON s.idProjetData = pd.idProjetData
+                        INNER JOIN Evenement AS ev ON pd.idEvenement = ev.idEvenement
+                        WHERE u.email = :mail AND ev.nomEvenement = :nomEvenement";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':mail', $mail);
+        $statement->bindParam(':nomEvenement', $evenement);
+        $statement->execute();
+
+        $result = $statement->fetch();
+        $count = $result['count'];
+        // Vérification de l'inscription
+        if ($count > 0) {
+            return true; // Le gestionnaire est superviseur d'un projet
+        } else {
+            return false; // Le gestionnaire n'est  pas superviseur d'un projet
+        }
+    } catch (Exception $e) {
+        echo 'Erreur : ' . $e->getMessage();
+        return false; // En cas d'erreur, renvoyer false
     }
 }
 
