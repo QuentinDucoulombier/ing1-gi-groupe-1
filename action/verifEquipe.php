@@ -22,6 +22,7 @@
         $_SESSION['idTeam'] = $response["idEquipe"];
         header('Location: /?page=manageTeam');
     } else {
+        $_SESSION['idTeam'] = $response["idEquipe"];
         header('Location: /?page=viewTeam');
     }
     
