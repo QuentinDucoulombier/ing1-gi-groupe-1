@@ -18,7 +18,6 @@
     if($i<3) {
         echo '<p id="red"><strong>Il est conseillez de constituer une equipe de minimum 3 personnes</strong></p>';
     }
-    /*TODO:Rajouter verification ?*/
     echo '<p style="color: green;">Membre ajouté avec succès !</p>';
 
 ?>

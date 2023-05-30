@@ -1,3 +1,9 @@
+/* Réinitialisation des styles par défaut */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
 .small_header {
     box-shadow: 0 0 7px rgba(0,0,0,0.1) !important;
@@ -31,34 +37,43 @@
 
 header {
     display: flex;
-    justify-content: space-around;
-    
-}
-
-header a {
-    float: left;
-    display: block;
-    color: #818181;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+    align-items: center;
+    justify-content: space-between;
   }
-  
+
+  .logo img {
+    width: 80px;
+    height: auto;
+  }
   #nav ul {
     list-style: none;
-
+    display: flex;
 }
 
-header li {
-    display: inline-block;
-    font-size: 14px;
-    padding-right: 22px;
+#nav ul li {
+  margin-left: 20px;
 }
 
-#nav {
-    margin-right: 25%;
+#nav ul li a {
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.3s ease;
 }
 
-.logo {
-    margin-left: 15%;
+#nav ul li a:hover {
+  color: #54b6ba;
 }
+
+.buttonC a {
+  padding: 10px 15px;
+  background-color: #54b6ba;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.buttonC a:hover {
+  background-color: #54b6ba;
+}
+

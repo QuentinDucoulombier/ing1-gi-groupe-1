@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <?php
@@ -6,135 +5,97 @@ if (isset($_SESSION['email'])) {
 
     $email = $_SESSION['email'];
     // recuperer les données de l'utilisateur connecté a partir de son email
-    
-    
+
+
     $infos = getUser($email);
-    $prenomUtilisateur = $infos[0]['prenomUtilisateur'];
 
     ?>
     
+    <html lang="en">
+   
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="/css/profil.css" />
 
 
-<div class="profil_block">
-    <div class="prenomUtilisateur profil">
-        <h2> Nom : </h2>
-        <?php
-        echo "<h2>" . $prenomUtilisateur . "</h2>";
-        ?>
-    </div>
+        <title>Profil</title>
+    </head>
 
-    <div class="nomUtilisateur profil">
-        <h2> Prénom : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['nomUtilisateur'] . "</h2>";
-        ?>
-    </div>
 
-    <div class="email profil">
-        <h2> Email : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['email'] . "</h2>";
-        ?>
-    </div>
+    <table>
+        <tr>
+            <th>Prénom</th>
+            <td><?php echo $infos[0]['prenomUtilisateur']; ?></td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td><?php echo $infos[0]['nomUtilisateur']; ?></td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td><?php echo $infos[0]['email']; ?></td>
+        </tr>
+        <tr>
+            <th>Numéro de téléphone</th>
+            <td><?php echo $infos[0]['numeroTel']; ?></td>
+        </tr>
+        <tr>
+            <th>Niveau d'étude</th>
+            <td><?php echo $infos[0]['niveauEtude']; ?></td>
+        </tr>
+        <tr>
+            <th>Ecole</th>
+            <td><?php echo $infos[0]['ecole']; ?></td>
+        </tr>
+        <tr>
+            <th>Ville</th>
+            <td><?php echo $infos[0]['ville']; ?></td>
+        </tr>
 
-    <div class="numeroTel profil">
-        <h2> Numéro de téléphone : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['numeroTel'] . "</h2>";
-        ?>
-    </div>
+        <tr>
+            <th>Mot de passe</th>
+            <td><?php echo $infos[0]['motDePasse']; ?></td>
+        </tr>
+        <tr>
+            <th>Confirmer mot de passe</th>
+            <td><?php echo $infos[0]['motDePasse']; ?></td>
+        </tr>
+        <tr>
+            <th>Modifier</th>
+            <td><button onclick="toggleEditProfilEtudiant(this)" data-email="<?php echo $infos[0]['email']; ?>">Modifier</button></td>
+        </tr>
+    </table>
+    <h2>Mes Projets</h2>
 
-    <div class="niveauEtude profil">
-        <h2> Niveau d'étude : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['niveauEtude'] . "</h2>";
-        ?>
-    </div>
+    <h2>Mon équipe</h2>
+    <?php
+    // Appel de la fonction pour récupérer les équipes de l'utilisateur
+    $resultats = getMembreEquipe($email);
 
-    <div class="ecole  profil">
-        <h2> Ecole : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['ecole'] . "</h2>";
-        ?>
-    </div>
-
-    <div class="ville profil">
-        <h2> Ville : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['ville'] . "</h2>";
-        ?>
-    </div>
-
-    <div class="modifier">
-        <li class="buttonC" class="boutonmodifier">
-            <div onclick="openModifierModal()">Modifier vos informations</div>
-        </li>
-
-    </div>
-
-    <div class="projet_etudiant">
-        <h2> Vos projets : </h2>
-
-    </div>
-</div>
-    
-    </body>
+    // Affichage du tableau
+    echo "<table>";
+    echo "<thead>";
+    echo "<tr><th>Nom de l'équipe</th></tr>";
+    echo "</thead>";
+    echo "<tbody>";
+    foreach ($resultats as $resultat) {
+        echo "<tr>";
+        echo "<td>" . $resultat['nomEquipe'] . "</td>";
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+    ?>
 
     </html>
 
-    <div id="modifierModal">
-    <div class="modal-content">
-        <span id="closeModifier" onclick="closeModifierModal()">&times;</span>
-        <h2>Modifier vos informations</h2>
-        <form id="modifierForm" action="../action/edit_profil.php" method="POST">
-            <label for="prenomUtilisateur">Prénom:</label><br>
-            <input type="text" id="prenomUtilisateur" name="prenomUtilisateur" value="<?php echo $prenomUtilisateur; ?>" ><br>
-
-            <label for="nomUtilisateur">Nom:</label><br>
-            <input type="text" id="nomUtilisateur" name="nomUtilisateur"><br>
-
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email"><br>
-
-            <label for="numeroTel">Numéro de téléphone:</label><br>
-            <input type="tel" id="numeroTel" name="numeroTel"><br>
-
-            <div class="radioniveauEtude">
-            <label for="niveauEtude" class="titreniveauEtude">niveauEtude</label>
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="L1" > L1 
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="L2" > L2
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="L3" > L3
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="M1" > M1
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="M2" > M2
-            <input type="radio" id="niveauEtude" name="niveauEtude" value="D" > D
-
-            <label for="ecole">Ecole:</label><br>
-            <input type="text" id="ecole" name="ecole"><br>
-
-            <label for="ville">Ville:</label><br>
-            <input type="text" id="ville" name="ville"><br>
-
-            <label for="AncienPassword">Ancien mot de passe:</label><br>
-            <input type="password" id="AncienPassword" name="AncienPassword"><br>
-
-            <label for="password">Nouveau mot de passe:</label><br>
-            <input type="password" id="password" name="password"><br>
-
-            <label for="confirm_password">Confirmer nouveau mot de passe:</label><br>
-            <input type="password" id="confirm_password" name="confirm_password"><br>
-            
-            <input type="submit" value="Valider">
-        </form>
-    </div>
-
-
-
-    
-<?php
-} 
-
-else {
+    <?php
+} else {
     echo 'error';
-//     header('Location: /index.php');
+    //     header('Location: /index.php');
 }
 ?>
+ 
