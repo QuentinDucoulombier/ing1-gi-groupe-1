@@ -24,7 +24,7 @@ if (isset($_SESSION['email'])) {
         <title>Profil</title>
     </head>
 
-
+    <h1>Profil</h1>
     <table>
         <tr>
             <th>Prénom</th>
@@ -64,7 +64,6 @@ if (isset($_SESSION['email'])) {
             <td><?php echo $infos[0]['motDePasse']; ?></td>
         </tr>
         <tr>
-            <th>Modifier</th>
             <td><button onclick="toggleEditProfilEtudiant(this)" data-email="<?php echo $infos[0]['email']; ?>">Modifier</button></td>
         </tr>
     </table>
@@ -77,9 +76,6 @@ if (isset($_SESSION['email'])) {
 
     // Affichage du tableau
     echo "<table>";
-    echo "<thead>";
-    echo "<tr><th>Nom de l'équipe</th></tr>";
-    echo "</thead>";
     echo "<tbody>";
     foreach ($resultats as $resultat) {
         echo "<tr>";
