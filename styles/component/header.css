@@ -5,10 +5,37 @@
     box-sizing: border-box;
   }
 
-  /* Styles pour le header */
-  header {
-    background-color: #f5f5f5;
-    padding: 20px;
+.small_header {
+    box-shadow: 0 0 7px rgba(0,0,0,0.1) !important;
+}
+
+.small_header img {
+    width: 35px !important;
+    height: 35px !important;  
+    
+}
+
+#logo {
+    transition: 0.8s;
+    width: 50px;
+    height: 50px;
+    
+
+}
+#header {
+    box-shadow: none;
+    overflow: hidden;
+    background-color: #ffffff;
+    position: fixed; 
+    top: 0; 
+    left: 0;
+    width: 100%; 
+    transition: 0.4s;
+    z-index: 20;
+}
+
+
+header {
     display: flex;
     align-items: center;
     justify-content: space-between;
