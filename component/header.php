@@ -26,6 +26,7 @@
             } else if ($infos[0]['type'] == "Administrateur") {
             ?>
             <li class="buttonC"><a href="/?page=profilAdmin">Mon Profil </a></li>
+            <li class="buttonC"><a href="/?page=gererUtilisateur">Gérer Utilisateur </a></li>
             <?php } ?>
             <li class="buttonC"><a href="../action/logout.php">Déconnexion </a> </li>
         <?php } else { ?>

@@ -59,7 +59,7 @@ CREATE TABLE Utilisateur(
     nomUtilisateur varchar(30) NOT NULL,
     prenomUtilisateur varchar(30) NOT NULL,
     numeroTel char(10) NOT NULL,
-    niveauEtude varchar(2),
+    niveauEtude varchar(2) ,
     ecole varchar(30),
     ville varchar(30),
     nomEntreprise varchar(30),
@@ -69,7 +69,7 @@ CREATE TABLE Utilisateur(
 --    FOREIGN KEY (nomEntreprise) REFERENCES Entreprise(nomEntreprise),
     UNIQUE (email),
     CONSTRAINT check_numerotel CHECK (numeroTel REGEXP '^[0-9]{10}$'),
-    CONSTRAINT check_niveauEtude CHECK (niveauEtude IN ('L1', 'L2', 'L3', 'M1', 'M2', 'D')),
+    CONSTRAINT check_niveauEtude CHECK (niveauEtude IN ('','L1', 'L2', 'L3', 'M1', 'M2', 'D')),
     CONSTRAINT check_type CHECK (type IN ('Etudiant', 'Gestionnaire', 'Administrateur'))
 );
 
@@ -79,7 +79,7 @@ CREATE TABLE Equipe(
     idCapitaine int NOT NULL,
     idProjetData int NOT NULL,
     PRIMARY KEY (idEquipe),
-    FOREIGN KEY (idCapitaine) REFERENCES Utilisateur(idUtilisateur),
+    FOREIGN KEY (idCapitaine) REFERENCES Utilisateur(idUtilisateur) ON DELETE CASCADE,
     FOREIGN KEY (idProjetData) REFERENCES ProjetData(idProjetData)
 );
 
@@ -87,8 +87,8 @@ CREATE TABLE Composer(
     idEtudiant int NOT NULL,
     idEquipe int NOT NULL,
     PRIMARY KEY (idEquipe, idEtudiant),
-    FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe),
-    FOREIGN KEY (idEtudiant) REFERENCES Utilisateur(idUtilisateur)
+    FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe) ON DELETE CASCADE,
+    FOREIGN KEY (idEtudiant) REFERENCES Utilisateur(idUtilisateur) ON DELETE CASCADE
 );
 
 CREATE TABLE Reponse(
@@ -108,5 +108,5 @@ CREATE TABLE Superviser(
     idGestionnaire int NOT NULL,
     PRIMARY KEY (idProjetData, idGestionnaire),
     FOREIGN KEY (idProjetData) REFERENCES ProjetData(idProjetData),
-    FOREIGN KEY (idGestionnaire) REFERENCES Utilisateur(idUtilisateur)
+    FOREIGN KEY (idGestionnaire) REFERENCES Utilisateur(idUtilisateur) ON DELETE CASCADE
 );
