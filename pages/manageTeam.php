@@ -1,11 +1,3 @@
-<!--TODO:
-    - [x]Verifier que le nombre de membre est compris entre 3 et 8
-    - [x]Supprimer en ajax
-    - [x]Refaire l'affichage des membres en ajax en gros
-    - [x]Voir bug projet D
-
--->
-
 <link rel="stylesheet" href="styles/component/manageTeam.css" />
 <script type="text/javascript" src="../scripts/manageTeam.js"></script>
 <div id=manageTeam>

@@ -1,7 +1,3 @@
-<!--TODO:
-    []:Mettre ca en html si on utilise pas de php
-    []:Ajouter le css
--->
 <link rel="stylesheet" href="styles/component/createTeam.css" />
 
 <div id="createTeam">
