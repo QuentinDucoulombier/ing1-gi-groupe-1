@@ -183,6 +183,9 @@ function supprimerUtilisateur(button) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("email=" + email);
 }
+var button1 = document.getElementById('ajouter-btn1');
+var button2 = document.getElementById('ajouter-btn2');
+
 function ajouterEtudiant() {
     // Créer une référence au tableau HTML
     var tableauEtudiants = document.getElementById('tableauEtudiants');
@@ -220,7 +223,10 @@ function ajouterEtudiant() {
 
     var celluleActions = nouvelleLigne.insertCell();
     celluleActions.innerHTML = '<button onclick="sauvegarderNouvelEtudiant()">Enregistrer</button>';
-}
+
+    button1.style.display = 'none';
+    button2.style.display = 'none';
+}   
 function sauvegarderNouvelEtudiant() {
     // Récupérer les valeurs des champs
     var nouveauPrenom = document.getElementById('nouveauPrenom').value;
@@ -232,8 +238,6 @@ function sauvegarderNouvelEtudiant() {
     var nouvelleEcole = document.getElementById('nouvelleEcole').value;
     var nouvelleVille = document.getElementById('nouvelleVille').value;
     var nouveauMotDePasse = document.getElementById('nouveauMotDePasse').value;
-    alert(nouveauPrenom);
-
     // Créer un objet contenant les données à envoyer
 
 
@@ -288,7 +292,10 @@ function ajouterGestionnaire() {
     celluleMotDePasse.innerHTML = '<input type="password" id="nouveauMotDePasse" value="">';
 
     var celluleActions = nouvelleLigne.insertCell();
-    celluleActions.innerHTML = '<button onclick="sauvegarderNouveauGestionnaire()">Enregistrer</button>';
+    celluleActions.innerHTML = '<button onclick="sauvegarderNouveauGestionnaire(this)">Enregistrer</button>';
+
+    button2.style.display = 'none';
+    button1.style.display = 'none';
 }
 function sauvegarderNouveauGestionnaire() {
     // Récupérer les valeurs des champs
