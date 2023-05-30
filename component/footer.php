@@ -1,15 +1,15 @@
 <footer>
 
     <div>
-        <a href="">Nous contacter</a>
+        <a href="https://iapau.org/contact/">Nous contacter</a>
     </div>
 
     <div>
-        <a href="">IA Pau</a>
+        <a href="https://iapau.org">IA Pau</a>
     </div>
 
     <div>
-        <a href="">Nos challenges</a>
+        <a href="/?page=evenements">Nos challenges</a>
     </div>
     
 
