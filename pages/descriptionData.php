@@ -20,6 +20,7 @@
 
     echo $user[0]['idUtilisateur'];
     $idUser = $user[0]['idUtilisateur'];
+    $_SESSION["idUser"] = $idUser;
     $response = verifEquipe($idUser,$choixChallenge);
     if(!(empty($response))){
         $_SESSION['idTeam'] = $response["idEquipe"];

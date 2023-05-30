@@ -29,6 +29,19 @@
         return $connexion;
     }
 
+    /*Connexion en procedural*/
+    function conn2() {
+        global $username; // récupère le nom d'utilisateur
+        global $password; // récupère le password
+        global $servername;
+        $cnx = mysqli_connect($servername, $username, $password);
+        if (mysqli_connect_errno($cnx)) {
+            echo "Erreur de connexion a MySQL: " . mysqli_connect_error();
+            exit();
+        }
+        return $cnx;
+    }
+
     // Permet de se déconnecter de la base de données
     function disconnect($conn) {
         $conn->close();

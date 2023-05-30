@@ -1,14 +1,8 @@
 <?php
 
-    $serveur = "localhost";
-    $user = "quentin";
-    $pass = "*noeDu64*";
-    $cnx = mysqli_connect($serveur, $user, $pass);
+    require('../bdd.php');
+    $cnx = conn2();
 
-    if (mysqli_connect_errno($cnx)) {
-        echo "Erreur de connexion à MySQL : " . mysqli_connect_error();
-        exit();
-    }
 
     $idUser = $_POST["id"];
    
