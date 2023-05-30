@@ -488,7 +488,9 @@
     function getQuestionnaire($iddatabattle, $numero){
         try{
             $conn = connect();
-            $sqlQuery="SELECT idQuestionnaire, idDataBattle, numero, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateDebut,DATE_FORMAT(dateFin, '%d %M %Y') AS dateFin FROM Questionnaire WHERE idDataBattle = :id AND numero = :numero ";
+            $sqlQuery="SELECT idQuestionnaire, idDataBattle, numero, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateDebut,DATE_FORMAT(dateFin, '%d %M %Y') AS dateFin 
+            FROM Questionnaire 
+            WHERE idDataBattle = :id AND numero = :numero ";
             $statement=$conn->prepare($sqlQuery);
             $statement->bindParam(':id',$iddatabattle);
             $statement->bindParam(':numero',$numero);
@@ -1144,6 +1146,9 @@
         }   
     }
 
+    /**
+     * 
+     */
     function suppTeam($idTeam){
         try{
             $conn = connect();
@@ -1169,6 +1174,9 @@
         }  
     }
 
+    /**
+     * 
+     */
     function createTeam($nomEquipe, $idcapitaine, $idProjet) {
         try{
             $conn = connect();
@@ -1183,6 +1191,9 @@
         }   
     }
 
+    /**
+     * 
+     */
     function getIdTeam($idUser,$idProjet) {
         try{
             $conn = connect();
@@ -1202,7 +1213,9 @@
         }   
     }
 
-
+    /**
+     * 
+     */
     function getAllProjetUser($idUser) {
         try{
             $conn = connect();
@@ -1291,6 +1304,27 @@
             echo 'Erreur : ' . $e->getMessage();
             return false; // En cas d'erreur, renvoyer false
         }
+    }
+
+    function getTeamQuestionnaire($idTeam,$idData,$idQuestionnaire) {
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT * 
+            FROM Questionnaire 
+            INNER JOIN Question ON Question.idQuestionnaire = Questionnaire.idQuestionnaire 
+            INNER JOIN Reponse ON Reponse.idQuestion = Question.idQuestion 
+            WHERE idEquipe = $idTeam AND idDataBattle = $idData AND Questionnaire.idQuestionnaire = $idQuestionnaire;
+            ;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+        
     }
   
 ?>

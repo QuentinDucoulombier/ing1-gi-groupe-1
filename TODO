@@ -1,15 +1,12 @@
 # Messagerie
-[]Changer l'architecture de la bdd du chat pour correspondre a bdd.php
-[]Rajouter le fait d'avoir le nom en couleur quand le msg n'est pas encore vu
+[]Changer l architecture de la bdd du chat pour correspondre a bdd.php
+[]Rajouter le fait d avoir le nom en couleur quand le msg n est pas encore vu
 []Fix bugs
 []Changer nom auteur msg quand recu
 
 
 #EtudiantConnecte(e)
-//[]Quand etudiant confirme son inscription on lui ajoute le projet dans la table Equipe et il devient le idCapitaine
-[]Rajouter le fait d'avoir un systeme d'invitation et du coup de gerer l'equipe en formInscription
-[]voila en gros
-
+[]Ajouter le fait que le questionnaire soit que pour le dataChallenge, implementé la nouvelle fonction
 
 #Requetes SQL à ajouter
 
