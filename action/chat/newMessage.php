@@ -1,14 +1,7 @@
 <?php
-    $serveur = "localhost";
-    $user = "quentin";
-    $pass = "*noeDu64*";
-    $cnx = mysqli_connect($serveur, $user, $pass);
+    require('../bdd.php');
 
-    if (mysqli_connect_errno($cnx)) {
-        echo "Erreur de connexion a MySQL: " . mysqli_connect_error();
-        exit();
-    }
-
+    $cnx = conn2();
     $message = $_POST["message"];
 
     $dbname = "projetIaPau";

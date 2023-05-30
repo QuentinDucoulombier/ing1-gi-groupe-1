@@ -9,17 +9,21 @@
 </head>
 <body>
         <?php
-            $serveur = "localhost";
-            $user = "quentin";
-            $pass = "*noeDu64*";
-            $cnx = mysqli_connect($serveur, $user, $pass);
-            if (mysqli_connect_errno($cnx)) {
-                echo "Erreur de connexion a MySQL: " . mysqli_connect_error();
-                exit();
-            }
-            $dbname = "projetIaPau";
 
-            
+            session_start();
+            $cnx = conn2();
+            $dbname = "projetIaPau";
+            echo $_SESSION["idUser"];
+            $idUser = $_SESSION["idUser"];
+            mysqli_select_db($cnx, $dbname);
+            $queryDestinataire = "UPDATE Auteur SET idUtilisateur = '$idUser'";
+            if(mysqli_query($cnx, $queryDestinataire)) {
+                //echo "Les valeurs de l'auteur ont été modifiées avec succès";
+
+            } else {
+                echo "Erreur lors de la modification des valeurs de l'auteur : " . mysqli_error($cnx);
+            }
+
         ?>
     
         
@@ -33,9 +37,6 @@
                     
                     <?php
                         
-                
-                        
-                        mysqli_select_db($cnx, $dbname);
                         $query = "SELECT idUtilisateur,nomUtilisateur,prenomUtilisateur FROM Utilisateur";
                         $result = mysqli_query($cnx,$query);
                         if ($result) {
@@ -47,7 +48,6 @@
                         }
                         mysqli_close($cnx);
 
-                    
                     ?>
                         
                 </select>
