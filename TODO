@@ -9,3 +9,31 @@
 //[]Quand etudiant confirme son inscription on lui ajoute le projet dans la table Equipe et il devient le idCapitaine
 []Rajouter le fait d'avoir un systeme d'invitation et du coup de gerer l'equipe en formInscription
 []voila en gros
+
+
+#Requetes SQL à ajouter
+
+#Récap Pages
+[] accueil.php
+[] connexion.php
+[] inscription.php
+[] evenements.php
+[] dataBattle.php
+[] dataChallenge.php
+
+[] profilEtudiant.php
+[] inscriptionChallenge.php
+[] descriptionChallenge.php
+[] gestionEquipe.php
+[] messagerie.php
+[] questionnaire.php
+
+[] profilGestionnaire.php
+[] synthèseEvenement.php
+[] synthèseProjet.php
+[] creerQuestionnaire.php
+[] noterQuestionnaire.php
+
+[] profilAdministrateur.php
+[] creerEvenement.php
+[] modifierEvenement.php
