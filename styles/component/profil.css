@@ -26,3 +26,27 @@
 #modifierModal {
     display: none;
 }
+
+#Confirmer_MotDePasse_Etudiant{
+    display: none;
+}
+
+#Confirmer_MotDePasse_Gestionnaire{
+    display: none;
+}
+
+#Confirmer_MotDePasse_Admin{
+    display: none;
+}
+
+#Ancien_MotDePasse_Etudiant{
+    display: none;
+}
+
+#Ancien_MotDePasse_Gestionnaire{
+    display: none;
+}
+
+#Ancien_MotDePasse_Admin{
+    display: none;
+}

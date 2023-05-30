@@ -2,7 +2,11 @@ function sha1(str) {
     return CryptoJS.SHA1(str).toString();
 }
 
+var ConfirmerMotDePassesAdmin = document.getElementById("Confirmer_MotDePasse_Admin");
+var AncienMotDePassesAdmin = document.getElementById("Ancien_MotDePasse_Admin");
 function toggleEditAdmin(button) {
+    ConfirmerMotDePassesAdmin.style.display = 'block';
+    AncienMotDePassesAdmin.style.display = 'block';
     var email = button.getAttribute('data-email');
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
     var cells = table.getElementsByTagName('td'); // Récupère tous les éléments <td> dans la table
@@ -12,18 +16,20 @@ function toggleEditAdmin(button) {
     var nom = cells[1].innerHTML;
     var nvemail = cells[2].innerHTML;
     var tel = cells[3].innerHTML;
-    var motDePasse = cells[4].innerHTML;
-    var ConfirmerMotDePasse = cells[5].innerHTML;
+    // var AncienMotDePasse = cells[4].innerHTML;
+    var motDePasse = cells[5].innerHTML;
+    var ConfirmerMotDePasse = cells[6].innerHTML;
 
     // Modifier les cellules pour afficher les champs de modification
     cells[0].innerHTML = "<input type='text' value='" + prenom + "'>";
     cells[1].innerHTML = "<input type='text' value='" + nom + "'>";
     cells[2].innerHTML = "<input type='text' value='" + nvemail + "'>";
     cells[3].innerHTML = "<input type='text' value='" + tel + "'>";
-    cells[4].innerHTML = "<input type='password' value='" + motDePasse + "'>";
-    cells[5].innerHTML = "<input type='password' value='" + ConfirmerMotDePasse + "'>";
+    cells[4].innerHTML = "<input type='password' value=''>";
+    cells[5].innerHTML = "<input type='password' value='" + motDePasse + "'>";
+    cells[6].innerHTML = "<input type='password' value='" + ConfirmerMotDePasse + "'>";
 
-
+    
     // Changer le texte du bouton Modifier en Envoyer
     button.innerHTML = "Envoyer";
     button.setAttribute("onclick", "sendDataAdmin(this, '" + email + "', '" + motDePasse + "')");
@@ -43,12 +49,13 @@ function sendDataAdmin(button, email, motDePasse2) {
     var nom = cells[1].getElementsByTagName('input')[0].value;
     var nvemail = cells[2].getElementsByTagName('input')[0].value;
     var tel = cells[3].getElementsByTagName('input')[0].value;
-    if (cells[4].getElementsByTagName('input')[0].value == motDePasse2) {
-        var motDePasse = cells[4].getElementsByTagName('input')[0].value;
-        var ConfirmerMotDePasse = cells[5].getElementsByTagName('input')[0].value;
+    var AncienMotDePasse = cells[4].getElementsByTagName('input')[0].value;
+    if (cells[5].getElementsByTagName('input')[0].value == motDePasse2) {
+        var motDePasse = cells[5].getElementsByTagName('input')[0].value;
+        var ConfirmerMotDePasse = cells[6].getElementsByTagName('input')[0].value;
     } else {
-        var motDePasse = sha1(cells[4].getElementsByTagName('input')[0].value);
-        var ConfirmerMotDePasse = sha1(cells[5].getElementsByTagName('input')[0].value);
+        var motDePasse = sha1(cells[5].getElementsByTagName('input')[0].value);
+        var ConfirmerMotDePasse = sha1(cells[6].getElementsByTagName('input')[0].value);
     }
 
 
@@ -64,12 +71,16 @@ function sendDataAdmin(button, email, motDePasse2) {
             cells[1].innerHTML = nom;
             cells[2].innerHTML = nvemail;
             cells[3].innerHTML = tel;
-            cells[4].innerHTML = motDePasse;
-            cells[5].innerHTML = ConfirmerMotDePasse;
+            cells[5].innerHTML = motDePasse;
+            cells[6].innerHTML = ConfirmerMotDePasse;
 
             // Changer le texte du bouton Envoyer en Modifier
             button.innerHTML = "Modifier";
             button.setAttribute("onclick", "toggleEditAdmin(this)");
+            ConfirmerMotDePassesAdmin.style.display = 'none';
+            AncienMotDePassesAdmin.style.display = 'none';
+            location.reload();
+
         }
     };
     // xhttp.open("GET", "pages/modifierUtilisateur.php?email=" + email + "&prenom=" + prenom + "&nom=" + nom + "&type=" + type + "&numeroTel=" + numeroTel + "&niveau
@@ -80,7 +91,7 @@ function sendDataAdmin(button, email, motDePasse2) {
     typePage = "profil";
     xhttp.open("POST", "action/edit_a_profil.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&motDePasse=" + motDePasse + "&typePage=" + typePage);
+    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&motDePasse=" + motDePasse + "&AncienMotDePasse" + AncienMotDePasse + "&typePage=" + typePage);
 
 }
 

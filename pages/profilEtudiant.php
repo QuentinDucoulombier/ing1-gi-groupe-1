@@ -55,11 +55,16 @@ if (isset($_SESSION['email'])) {
             <td><?php echo $infos[0]['ville']; ?></td>
         </tr>
 
+        <tr id="Ancien_MotDePasse_Etudiant">
+            <th>Ancien mot de passe</th>
+            <td></td>
+        </tr>
+
         <tr>
             <th>Mot de passe</th>
             <td><?php echo $infos[0]['motDePasse']; ?></td>
         </tr>
-        <tr>
+        <tr id="Confirmer_MotDePasse_Etudiant">
             <th>Confirmer mot de passe</th>
             <td><?php echo $infos[0]['motDePasse']; ?></td>
         </tr>
