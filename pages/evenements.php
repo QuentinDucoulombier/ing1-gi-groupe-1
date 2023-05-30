@@ -110,6 +110,7 @@
                 echo '          <a class ="more-link" href="/?page=dataBattle&battle='.$battle['idEvenement'].'"> Lire Plus </a>';
                 echo '      <div class="button-projet">';
 
+
                 // Si l'utilisateur n'est pas connecté on le renvoie sur la page de connexion afin qu'il puisse s'inscrire au challenge
                 if (!isset($_SESSION['email'])){
                     echo '          <a href="/?page=connexion">';
