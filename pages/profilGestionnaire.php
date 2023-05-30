@@ -12,6 +12,7 @@ if (isset($_SESSION['email'])) {
 
     ?>
 
+
     <html lang="en">
     <!--
     <head>
@@ -25,7 +26,7 @@ if (isset($_SESSION['email'])) {
 
         <title>Profil</title>
     </head>
--->
+
 
     <table>
         <tr>
@@ -69,6 +70,7 @@ if (isset($_SESSION['email'])) {
             <td><button onclick="toggleEditGestionnaire(this)" data-email="<?php echo $infos[0]['email']; ?>">Modifier</button></td>
         </tr>
     </table>
+
 
 
 

@@ -11,6 +11,24 @@ if (isset($_SESSION['email'])) {
     $prenomUtilisateur = $infos[0]['prenomUtilisateur'];
 
     ?>
+    
+
+
+<div class="profil_block">
+    <div class="prenomUtilisateur profil">
+        <h2> Nom : </h2>
+        <?php
+        echo "<h2>" . $prenomUtilisateur . "</h2>";
+        ?>
+    </div>
+
+    <div class="nomUtilisateur profil">
+        <h2> Prénom : </h2>
+        <?php
+        echo "<h2>" . $infos[0]['nomUtilisateur'] . "</h2>";
+        ?>
+    </div>
+
 
     <html lang="en">
     <!--
@@ -25,7 +43,7 @@ if (isset($_SESSION['email'])) {
 
         <title>Profil</title>
     </head>
--->
+
 
     <table>
         <tr>
@@ -74,6 +92,7 @@ if (isset($_SESSION['email'])) {
 
 
     </html>
+
 
 
     <?php

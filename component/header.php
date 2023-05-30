@@ -8,7 +8,7 @@
                 <a href="/?page=accueil">Accueil</a>
             </li>
             <li>
-                <a href="/?page=contact">Contact</a>
+                <a href="/?page=evenements">Evenements</a>
             </li>
             <li>
             
@@ -17,6 +17,7 @@
             
             if ($infos[0]['type'] == "Etudiant") {
             ?>
+            
             <li class="buttonC"><a href="/?page=profilEtudiant">Mon Profil </a></li>
             <?php
             } else if ($infos[0]['type'] == "Gestionnaire") {
