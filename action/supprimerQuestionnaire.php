@@ -1,18 +1,10 @@
 <?php
+require_once("bdd.php");
 
-session_start();
-require('bdd.php');
+if (isset($_POST["idQuestionnaire"])) {
+  $idQuestionnaire = $_POST["idQuestionnaire"];
 
-//on recupere l'email de l'utilisateur connecté
-$idQuestionnaire = $_POST['idQuestionnaire'];
-echo $idQuestionnaire;
-// Si des données ont été soumises via le formulaire
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-deleteQuestionnaire($idQuestionnaire);
-echo $idQuestionnaire;
+  // Appeler la fonction de suppression du questionnaire
+  deleteQuestionnaire($idQuestionnaire);
 }
-
- 
-// header('Location: /?page=gererUtilisateur');
-
 ?>

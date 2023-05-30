@@ -29,6 +29,8 @@ CREATE TABLE ProjetData(
     image varchar(1024),
     urlFichier varchar(1024),
     urlVideo varchar(1024),
+    conseil varchar(1024),
+    consigne varchar(1024),
     PRIMARY KEY (idProjetData),
     FOREIGN KEY (idEvenement) REFERENCES Evenement(idEvenement)
 --    FOREIGN KEY (idEntreprise) REFERENCES Entreprise(idEntreprise)
@@ -49,7 +51,7 @@ CREATE TABLE Question(
     idQuestionnaire int NOT NULL,
     intituleQuestion varchar(1024) NOT NULL,
     PRIMARY KEY (idQuestion),
-    FOREIGN KEY (idQuestionnaire) REFERENCES Questionnaire(idQuestionnaire)
+    FOREIGN KEY (idQuestionnaire) REFERENCES Questionnaire(idQuestionnaire) ON DELETE CASCADE
 );
 
 CREATE TABLE Utilisateur(
@@ -99,7 +101,7 @@ CREATE TABLE Reponse(
     reponse varchar(4096),
     note tinyint,
     PRIMARY KEY (idReponse),
-    FOREIGN KEY (idQuestion) REFERENCES Question(idQuestion),
+    FOREIGN KEY (idQuestion) REFERENCES Question(idQuestion) ON DELETE CASCADE,
     FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe),
     CONSTRAINT check_note CHECK (note>=0 AND note<5)
 );
