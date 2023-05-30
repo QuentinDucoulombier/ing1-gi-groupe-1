@@ -18,6 +18,8 @@
     
     $battle = getEvenementbyID($id);
     $projet = getProjetData($id);
+    $gestionnaires = getSuperviseur($projet[0]['nomProjet']);
+    $podium = getPodium($id);
 
     echo '<h1>'. $battle['nomEvenement'] . '</h3>';
     echo '<p>'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
@@ -29,7 +31,7 @@
     }
 
     // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
-    if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $challenge['nomEvenement']) ) ) ) {
+    if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $battle['nomEvenement']) ) ) ) {
         echo '          <a href="/?page=syntheseBattle&battle='.$battle['idEvenement'].'"> ';
         echo '              <button name="gestion"> Synthèse de la battle </button> ';
         echo '          </a>';
@@ -69,7 +71,6 @@
     echo '      </div>';
 
 
-    $gestionnaires = getSuperviseur($projet[0]['nomProjet']);
 
     echo '      <div class="contact-projet">';
     echo '          <h3> Coordonnées contact </h3>';
@@ -92,6 +93,34 @@
 
     echo '  </div>';
 
+    echo ' 
+                <h3> Podium </h3> 
+                <div id="podium">
+
+    
+
+
+                <div id="deuxieme">
+
+                    <p>'. $podium[1]['nomEquipe'] .'</p>
+                    <p>'. $podium[1]['totalNotes'] .'</p>
+                </div>
+
+                <div id="premier">
+                    <p>'. $podium[0]['nomEquipe'] .'</p>
+                    <p>'. $podium[0]['totalNotes'] .'</p>
+                </div>
+                
+                <div id="troisieme">
+                    <p>'. $podium[2]['nomEquipe'] .'</p>
+                    <p>'. $podium[2]['totalNotes'] .'</p>
+                </div>
+                    
+
+            </div>
+
+    
+    ';
 
             
 ?>

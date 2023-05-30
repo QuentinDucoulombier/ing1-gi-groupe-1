@@ -11,26 +11,29 @@
 #Requetes SQL à ajouter
 
 #Récap Pages
-[] accueil.php
-[] connexion.php
-[] inscription.php
-[] evenements.php
-[] dataBattle.php
-[] dataChallenge.php
+[] accueil.php      -> légère mise en forme
+[] connexion.php    -> légère mise en forme (facultatif)
+[] inscription.php  -> légère mise en forme (facultatif)
+[] evenements.php   -> fix boutons gestionnaires
+[] dataBattle.php   -> CSS
+[] dataChallenge.php    -> Classement + CSS
 
 [] profilEtudiant.php
 [] inscriptionChallenge.php
 [] descriptionChallenge.php
-[] gestionEquipe.php
+[] createTeam.php
+[] manageTeam.php
 [] messagerie.php
 [] questionnaire.php
 
 [] profilGestionnaire.php
 [] synthèseEvenement.php
 [] synthèseProjet.php
-[] creerQuestionnaire.php
-[] noterQuestionnaire.php
+[] ajoutQuestionnaire.php
+[] noteQuestionnaire.php
 
 [] profilAdministrateur.php
 [] creerEvenement.php
 [] modifierEvenement.php
+[] gererUtilisateur.php
+

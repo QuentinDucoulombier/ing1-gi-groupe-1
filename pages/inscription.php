@@ -1,3 +1,4 @@
+
 <div class="formInscription">
 
     
@@ -44,6 +45,7 @@
         <div class = "confirm_mdp">
             <input type="password" id="confirm_motDePasse" name="confirm_motDePasse" placeholder="Confirmer mot de passe" required>
         </div>
+
 
         <div class="submit">
             <input type="submit" value="S'inscrire">
