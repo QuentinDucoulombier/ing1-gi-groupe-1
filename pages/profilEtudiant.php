@@ -8,28 +8,9 @@ if (isset($_SESSION['email'])) {
 
 
     $infos = getUser($email);
-    $prenomUtilisateur = $infos[0]['prenomUtilisateur'];
 
     ?>
     
-
-
-<div class="profil_block">
-    <div class="prenomUtilisateur profil">
-        <h2> Nom : </h2>
-        <?php
-        echo "<h2>" . $prenomUtilisateur . "</h2>";
-        ?>
-    </div>
-
-    <div class="nomUtilisateur profil">
-        <h2> Prénom : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['nomUtilisateur'] . "</h2>";
-        ?>
-    </div>
-
-
     <html lang="en">
    
     <head>
@@ -38,7 +19,6 @@ if (isset($_SESSION['email'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="/css/profil.css" />
-        <script defer src="../scripts/profil.js"></script>
 
 
         <title>Profil</title>
@@ -88,12 +68,29 @@ if (isset($_SESSION['email'])) {
             <td><button onclick="toggleEditProfilEtudiant(this)" data-email="<?php echo $infos[0]['email']; ?>">Modifier</button></td>
         </tr>
     </table>
+    <h2>Mes Projets</h2>
 
+    <h2>Mon équipe</h2>
+    <?php
+    // Appel de la fonction pour récupérer les équipes de l'utilisateur
+    $resultats = getMembreEquipe($email);
 
+    // Affichage du tableau
+    echo "<table>";
+    echo "<thead>";
+    echo "<tr><th>Nom de l'équipe</th></tr>";
+    echo "</thead>";
+    echo "<tbody>";
+    foreach ($resultats as $resultat) {
+        echo "<tr>";
+        echo "<td>" . $resultat['nomEquipe'] . "</td>";
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+    ?>
 
     </html>
-
-
 
     <?php
 } else {
