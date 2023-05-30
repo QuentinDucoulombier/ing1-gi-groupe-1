@@ -183,6 +183,9 @@ function supprimerUtilisateur(button) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("email=" + email);
 }
+var button1 = document.getElementById('ajouter-btn1');
+var button2 = document.getElementById('ajouter-btn2');
+
 function ajouterEtudiant() {
     // Créer une référence au tableau HTML
     var tableauEtudiants = document.getElementById('tableauEtudiants');
@@ -220,7 +223,10 @@ function ajouterEtudiant() {
 
     var celluleActions = nouvelleLigne.insertCell();
     celluleActions.innerHTML = '<button onclick="sauvegarderNouvelEtudiant()">Enregistrer</button>';
-}
+
+    button1.style.display = 'none';
+    button2.style.display = 'none';
+}   
 function sauvegarderNouvelEtudiant() {
     // Récupérer les valeurs des champs
     var nouveauPrenom = document.getElementById('nouveauPrenom').value;
@@ -232,8 +238,6 @@ function sauvegarderNouvelEtudiant() {
     var nouvelleEcole = document.getElementById('nouvelleEcole').value;
     var nouvelleVille = document.getElementById('nouvelleVille').value;
     var nouveauMotDePasse = document.getElementById('nouveauMotDePasse').value;
-    alert(nouveauPrenom);
-
     // Créer un objet contenant les données à envoyer
 
 
@@ -246,6 +250,7 @@ function sauvegarderNouvelEtudiant() {
             if (xhr.status === 200) {
                 // La requête a été traitée avec succès
                 console.log('Étudiant ajouté avec succès !');
+                location.reload();
             } else {
                 // Une erreur s'est produite lors de la requête
                 console.error('Une erreur s\'est produite lors de l\'ajout de l\'étudiant.');
@@ -278,16 +283,19 @@ function ajouterGestionnaire() {
     celluleNomEntreprise.innerHTML = '<input type="text" id="nouveauNomEntreprise" value="">';
 
     var celluleDateDebutUtilisateur = nouvelleLigne.insertCell();
-    celluleDateDebutUtilisateur.innerHTML = '<input type="text" id="nouvelleDateDebutUtilisateur" value="">';
+    celluleDateDebutUtilisateur.innerHTML = '<input type="date" id="nouvelleDateDebutUtilisateur" value="">';
 
     var celluleDateFinUtilisateur = nouvelleLigne.insertCell();
-    celluleDateFinUtilisateur.innerHTML = '<input type="text" id="nouvelleDateFinUtilisateur" value="">';
+    celluleDateFinUtilisateur.innerHTML = '<input type="date" id="nouvelleDateFinUtilisateur" value="">';
 
     var celluleMotDePasse = nouvelleLigne.insertCell();
     celluleMotDePasse.innerHTML = '<input type="password" id="nouveauMotDePasse" value="">';
 
     var celluleActions = nouvelleLigne.insertCell();
-    celluleActions.innerHTML = '<button onclick="sauvegarderNouveauGestionnaire()">Enregistrer</button>';
+    celluleActions.innerHTML = '<button onclick="sauvegarderNouveauGestionnaire(this)">Enregistrer</button>';
+
+    button2.style.display = 'none';
+    button1.style.display = 'none';
 }
 function sauvegarderNouveauGestionnaire() {
     // Récupérer les valeurs des champs
@@ -300,7 +308,6 @@ function sauvegarderNouveauGestionnaire() {
     var nouvelleDateDebutUtilisateur = document.getElementById('nouvelleDateDebutUtilisateur').value;
     var nouvelleDateFinUtilisateur = document.getElementById('nouvelleDateFinUtilisateur').value;
     var nouveauMotDePasse = document.getElementById('nouveauMotDePasse').value;
-    alert(nouveauPrenom);
 
     // Créer un objet contenant les données à envoyer
     var xhr = new XMLHttpRequest();
@@ -311,6 +318,7 @@ function sauvegarderNouveauGestionnaire() {
             if (xhr.status === 200) {
                 // La requête a été traitée avec succès
                 console.log('Gestionnaire ajouté avec succès !');
+                location.reload();
             } else {
                 // Une erreur s'est produite lors de la requête
                 console.error('Une erreur s\'est produite lors de l\'ajout du gestionnaire.');

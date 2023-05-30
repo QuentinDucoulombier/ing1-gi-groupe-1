@@ -8,11 +8,8 @@ if (isset($_SESSION['email'])) {
 
 
     $infos = getUser($email);
-    $prenomUtilisateur = $infos[0]['prenomUtilisateur'];
 
     ?>
-
-
     <html lang="en">
     
     <head>
@@ -21,13 +18,10 @@ if (isset($_SESSION['email'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="/css/profil.css" />
-        <script defer src="../scripts/profil.js"></script>
-
-
         <title>Profil</title>
     </head>
 
-
+    <h1>Profil</h1>
     <table>
         <tr>
             <th>Prénom</th>
@@ -66,11 +60,26 @@ if (isset($_SESSION['email'])) {
             <td><?php echo $infos[0]['motDePasse']; ?></td>
         </tr>
         <tr>
-            <th>Modifier</th>
             <td><button onclick="toggleEditProfilGestionnaire(this)" data-email="<?php echo $infos[0]['email']; ?>">Modifier</button></td>
         </tr>
     </table>
 
+    <h2>Mes projets à gérer</h2>
+    <?php
+    // Appel de la fonction pour récupérer les équipes de l'utilisateur
+    $resultats = getGestionnaireEquipe($infos[0]['nomUtilisateur']);
+
+    // Affichage du tableau
+    echo "<table>";
+    echo "<body>";
+    foreach ($resultats as $resultat) {
+        echo "<tr>";
+        echo "<td>" . $resultat['nomProjet'] . "</td>";
+        echo "</tr>";
+    }
+    echo "</body>";
+    echo "</table>";
+    ?>
 
 
 
@@ -82,5 +91,3 @@ if (isset($_SESSION['email'])) {
     echo 'error';
     //     header('Location: /index.php');
 }
-?>
- 

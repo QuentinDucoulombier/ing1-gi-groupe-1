@@ -33,7 +33,6 @@ if (!isset($_GET["page"])){
                 
 
         <script src="scripts/main.js" defer></script>
-        <script src="scripts/profil.js" defer></script>
         <script src="scripts/gererUtilisateur.js" defer></script>
         <script src="scripts/profilAdmin.js" defer></script>
         <script src="scripts/profilGestionnaire.js" defer></script>

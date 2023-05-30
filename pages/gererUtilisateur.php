@@ -47,7 +47,7 @@ if (isset($_SESSION['email'])) {
             }
             ?>
             <tr>
-                <td colspan="11"><button class="ajouter-btn" onclick="ajouterEtudiant()">Ajouter un étudiant</button></td>
+                <td colspan="11"><button id="ajouter-btn1" onclick="ajouterEtudiant()">Ajouter un étudiant</button></td>
             </tr>
         </table>
 
@@ -98,7 +98,7 @@ if (isset($_SESSION['email'])) {
             }
             ?>
             <tr>
-                <td colspan="11"><button class="ajouter-btn" onclick="ajouterGestionnaire()">Ajouter un gestionnaire</button></td>
+                <td colspan="11"><button id="ajouter-btn2" onclick="ajouterGestionnaire()">Ajouter un gestionnaire</button></td>
             </tr>
         </table>
     </div>
