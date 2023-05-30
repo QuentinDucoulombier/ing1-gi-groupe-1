@@ -17,6 +17,7 @@
             
             if ($infos[0]['type'] == "Etudiant") {
             ?>
+            
             <li class="buttonC"><a href="/?page=profilEtudiant">Mon Profil </a></li>
             <?php
             } else if ($infos[0]['type'] == "Gestionnaire") {

@@ -1,22 +1,53 @@
+<link rel="stylesheet" href="../styles/component/inscription.css" />
+
 <div id="insChallenge">
+<?php
+    $datas = getData($_GET["challenge"]);
+    echo '<div id=descriptionProjet>';
+   foreach ($datas as $i=>$data) {
+        if($i == 0)
+        {
+            echo '<h1>Confirmation d\'inscription au '.$data["nomEvenement"].'</h1>
+            <p id=date>Du '.$data["dateDebut"].' au  '.$data["dateFin"].'</p>
+            ';
 
-<h1>Inscription au ...... challenge</h1>
+        }
 
-<p id=date>Du ... au ...</p>
+        echo '
 
-<h2>Description du ... challenge</h2>
-
-<p id=description>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-</p>
-
-<!--if datachallenge on rajoute le projet-->
-<form>
-
-    
-
-</form>
+            <h2>Description du '.$data["nomProjet"].'</h2>
 
 
+            <p id=description>
+                '.$data["descriptionEvent"].'
+            </p>
 
+            ';
+            
+        
+    }
+    echo '</div>';
+    echo '<div id=choixProjet>';
+    echo 'Valider votre projet';
+    echo '<form action="./?page=descriptionData" method="POST">';
+
+        
+    foreach($datas as $i=>$data) {
+        if($data["typeEvenement"] == "dataChallenge") {
+            echo '<input type="radio" id="choixChallenge'.$i.'" name="choixChallenge" value="'.$data["idProjetData"].'" required/>
+                  <label for="choixChallenge'.$i.'">'.$data["nomProjet"].'</label>
+            ';
+                
+
+        }
+        else {
+            echo '<input type="hidden" name="choixChallenge" value="'.$data["idProjetData"].'"/>';
+        }
+    }
+    echo '
+            <input type="submit" id="subChallenge" value="Valider mon inscription"/>
+        </form>
+    </div>';
+
+?>
 </div>

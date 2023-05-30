@@ -5,9 +5,14 @@
 []Changer nom auteur msg quand recu
 
 
+#EtudiantConnecte(e)
+//[]Quand etudiant confirme son inscription on lui ajoute le projet dans la table Equipe et il devient le idCapitaine
+[]Rajouter le fait d'avoir un systeme d'invitation et du coup de gerer l'equipe en formInscription
+[]voila en gros
+
+
 #Requetes SQL à ajouter
 
-'
 #Récap Pages
 [] accueil.php
 [] connexion.php
