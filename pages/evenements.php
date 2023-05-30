@@ -20,6 +20,8 @@
     
     <div class=title>
         <h1>Liste des Data Challenge</h1>
+        <div class="separator">
+        </div>
     </div>
 
     <?php
@@ -90,6 +92,8 @@
 
     <div class="title">
         <h1>Liste des Data Battle</h1>
+        <div class="separator">
+        </div>
     </div>
 
     <div id=liste-battle>

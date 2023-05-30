@@ -88,7 +88,7 @@ if (isset($_SESSION['email'])) {
         <h2>Modifier vos informations</h2>
         <form id="modifierForm" action="../action/edit_profil.php" method="POST">
             <label for="prenomUtilisateur">Prénom:</label><br>
-            <input type="text" id="prenomUtilisateur" name="prenomUtilisateur"><br>
+            <input type="text" id="prenomUtilisateur" name="prenomUtilisateur" value="<?php echo $prenomUtilisateur; ?>" ><br>
 
             <label for="nomUtilisateur">Nom:</label><br>
             <input type="text" id="nomUtilisateur" name="nomUtilisateur"><br>
