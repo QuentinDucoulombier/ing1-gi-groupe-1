@@ -10,6 +10,8 @@
     
     $idTeam = $result["idEquipe"];
     addUserTeam($idCapitaine,$idTeam);
+    $response = verifEquipe($idCapitaine,$idProjet);
+    $_SESSION['idTeam'] = $response["idEquipe"];
     header('Location: /?page=manageTeam');
 
 ?>

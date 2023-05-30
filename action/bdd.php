@@ -1053,7 +1053,7 @@
             INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
             INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Equipe.idCapitaine
             INNER JOIN ProjetData ON ProjetData.idProjetData = Equipe.idProjetData
-            where Utilisateur.idUtilisateur=$idUtilisateur AND Equipe.idProjetData=$idProjet;
+            where Composer.idEtudiant=$idUtilisateur AND Equipe.idProjetData=$idProjet;
             ";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();

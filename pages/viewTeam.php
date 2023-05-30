@@ -1,9 +1,9 @@
 <link rel="stylesheet" href="styles/component/manageTeam.css" />
-<script type="text/javascript" src="../scripts/manageTeam.js"></script>
 <div id=manageTeam>
     <?php
         session_start();
         $idEquipe = $_SESSION["idTeam"];
+
         $idProjet = $_SESSION["idProjet"];
         $user = getUser($_SESSION["email"]);
         $idUser = $user[0]['idUtilisateur'];
@@ -24,21 +24,14 @@
                         <tr>
                             <td>Membre '.$i.': '.$member["prenomUtilisateur"].' '.$member["nomUtilisateur"].'</td>
                             <td><button class="sendMsg" onclick="window.location.href=`./?page=messagerie`">Envoyer un message</button></td>
-                            <td><button class="suppMember" onclick="supprimerMember('.$member["idUtilisateur"].','.$member["idEquipe"].')">Supprimer</button></td>
                         </tr>
                     ';
                 }
             echo '</table>';
-            if($i<3) {
-                echo '<p id="red"><strong>Il est conseillez de constituer une equipe de minimum 3 personnes</strong></p>';
-            }
         echo '</div>';
     
     
-    
-    echo '<button class="addMember" onclick="searchMember('.$i.')">Ajouter membre</button>';
     ?>
-    <button class="suppTeam" onclick="suppTeam()">Supprimer équipe</button>
     
     
 
