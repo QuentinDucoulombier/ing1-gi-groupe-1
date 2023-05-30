@@ -11,6 +11,7 @@ if (isset($_SESSION['email'])) {
 
 ?>
     
+
 <div class="profil">
     <div id="profil_id" class="profil_block">
         <h2>Mon Profil</h2>
@@ -66,20 +67,21 @@ if (isset($_SESSION['email'])) {
         // Appel de la fonction pour récupérer les équipes de l'utilisateur
         $resultats = getMembreEquipe($email);
 
-        // Affichage du tableau
-        echo "<table>";
-        echo "<thead>";
-        echo "<tr><th>Nom de l'équipe</th></tr>";
-        echo "</thead>";
-        echo "<tbody>";
-        foreach ($resultats as $resultat) {
-            echo "<tr>";
-            echo "<td>" . $resultat['nomEquipe'] . "</td>";
-            echo "</tr>";
-        }
-        echo "</tbody>";
-        echo "</table>";
-        ?>
+
+    // Affichage du tableau
+    echo "<table>";
+    echo "<tbody>";
+    foreach ($resultats as $resultat) {
+        echo "<tr>";
+        echo "<td>" . $resultat['nomEquipe'] . "</td>";
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+    ?>
+
+
+        
 
     </div>
 </div>

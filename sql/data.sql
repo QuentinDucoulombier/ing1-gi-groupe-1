@@ -44,12 +44,12 @@ VALUES
 ('Data Challenge 3', '2023-05-10', '2023-06-12', 'Encore un autre défi de données intéressant', '/images/imgChallenge1.jpg', 'dataChallenge'),
 ('Data Challenge 4', '2023-10-10', '2023-11-12', 'Encore un de plus défi de données intéressant', '/images/imgChallenge1.jpg', 'dataChallenge');
 
-INSERT INTO ProjetData (idEvenement, nomProjet, description, image, urlFichier, urlVideo)
+INSERT INTO ProjetData (idEvenement, nomProjet, description, image, urlFichier, urlVideo, conseil, consigne)
 VALUES 
-    (1, 'Projet A', 'Description du Projet A', 'projet_a.jpg', 'https://urlfichier', 'https://www.youtube.com/watch?v=video_a'),
-    (3, 'Projet B', 'Description du Projet B', 'projet_b.jpg', 'https://urlfichier2', 'https://www.youtube.com/watch?v=video_b'),
-    (3, 'Projet C', 'Description du Projet C', 'projet_c.jpg', 'https://urlfichier3', 'https://www.youtube.com/watch?v=video_c'),
-    (4, 'Projet D', 'Description du Projet D', 'projet_d.jpg', 'https://urlfichier4', 'https://www.youtube.com/watch?v=video_d');
+    (1, 'Projet A', 'Description du Projet A', 'projet_a.jpg', 'https://urlfichier', 'https://www.youtube.com/watch?v=video_a', 'Voici des conseils pour le projet A', "Voici les consignes pour le projet A"),
+    (3, 'Projet B', 'Description du Projet B', 'projet_b.jpg', 'https://urlfichier2', 'https://www.youtube.com/watch?v=video_b', 'Voici des conseils pour le projet B', "Voici les consignes pour le projet B"),
+    (3, 'Projet C', 'Description du Projet C', 'projet_c.jpg', 'https://urlfichier3', 'https://www.youtube.com/watch?v=video_c', 'Voici des conseils pour le projet C', "Voici les consignes pour le projet C"),
+    (4, 'Projet D', 'Description du Projet D', 'projet_d.jpg', 'https://urlfichier4', 'https://www.youtube.com/watch?v=video_d', 'Voici des conseils pour le projet D', "Voici les consignes pour le projet D");
 
 INSERT INTO Questionnaire (idDataBattle, numero, dateDebut, dateFin)
 VALUES 

@@ -30,7 +30,7 @@
     }
 
     // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
-    if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $challenge['nomEvenement']) ) ) ) {
+    if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")  ) ) {
         echo '          <a href="/?page=syntheseChallenge&challenge='.$challenge['idEvenement'].'"> ';
         echo '              <button name="gestion"> Synthèse du challenge </button> ';
         echo '          </a>';
@@ -53,6 +53,12 @@
         echo                    $projet['description'];
         echo '              </div>';
         echo '          </div>';
+        // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
+        if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjetData($user[0]['email'], $projet['idProjetData']) ) ) ) {
+            echo '          <a href="/?page=syntheseProjet&projet='.$projet['idProjetData'].'"> ';
+            echo '              <button name="gestion"> Synthèse du projet </button> ';
+            echo '          </a>';
+        }
 
         echo '      </div>';
 
