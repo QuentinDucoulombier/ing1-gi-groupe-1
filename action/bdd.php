@@ -603,6 +603,23 @@ function addQuestionnaire($iddatabattle, $dateDebut, $dateFin)
         die('Erreur : ' . $e->getMessage());
     }
 }
+
+/*
+ * Permet de supprimer un questionnaire du site
+ * @param mail : mail de l'utilisateur
+ */
+function deleteQuestionnaire($idQuestionnaire)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "DELETE FROM Questionnaire WHERE idQuestionnaire = :idQuestionnaire";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idQuestionnaire', $idQuestionnaire);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
 /*
  * Permet de récupérer les dates d'un questionnaire 
  * @param idQuestionnaire : id questionnaire dont on veut les dates
@@ -944,27 +961,7 @@ function getEquipeUser($mail)
         die('Erreur : ' . $e->getMessage());
     }
 }
-/*
- * Permet de récupérer les équipes de l'utilisateur 
- * @param mail : 
- */
-function getMembreEquipe($mail)
-{
-    try {
-        $conn = connect();
-        $sqlQuery = "SELECT Equipe.nomEquipe FROM Equipe 
-                        INNER JOIN Composer ON Equipe.idEquipe = Composer.idEquipe 
-                        INNER JOIN Utilisateur ON Composer.idEtudiant = Utilisateur.idUtilisateur 
-                        WHERE Utilisateur.email = :mail";
-        $statement = $conn->prepare($sqlQuery);
-        $statement->bindParam(':mail', $mail);
-        $statement->execute();
-        $result = $statement->fetchAll();
-        return $result;
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-}
+
 
 /*
  * Permet de récupérer les équipes associés à un challenge/battle 

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="styles/component/synthese.css" />
+<link rel="stylesheet" href="scripts/supprimerQuestionnaire.js" />
 
 <?php
     if (isset($_SESSION['email'])){
@@ -92,9 +93,9 @@
                         if (isQuestionnaire($idBattle, $i)){
                             $questionnaire = getQuestionnaire($idBattle, $i);?>
                             du <?php echo $questionnaire['dateDebut'] . ' au ' . $questionnaire['dateFin']?> </p>
-                            <a href="">
-                                <button name="supprimer"> Supprimer </button>
-                            </a>
+                            
+                            <button name="supprimer" id-questionnaire="<?php $questionnaire['idQuestionnaire'] ?>"onclick="supprimerQuestionnaire(this)"> Supprimer </button>
+                            
 
                         <?php 
                         } 
@@ -109,5 +110,4 @@
         <?php
         }
     }
-
 ?>
