@@ -14,7 +14,7 @@
         $projets = getProjetsEvenement($idBattle);
 
         // La page s'affiche uniquement si l'utilisateur est un administrateur ou un gestionnaire du data Challenge
-        if ($user[0]['type'] == "Administrateur") {
+        if ($user[0]['type'] == "Administrateur"|| ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $battle['nomEvenement']) )) {
             echo '<h1>'. $battle['nomEvenement'] . '</h3>';
             echo '<p>'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
 
