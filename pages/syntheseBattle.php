@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="styles/component/synthese.css" />
+<link rel="stylesheet" href="scripts/supprimerQuestionnaire.js" />
 
 <?php
     if (isset($_SESSION['email'])){
@@ -14,7 +15,7 @@
         $projets = getProjetsEvenement($idBattle);
 
         // La page s'affiche uniquement si l'utilisateur est un administrateur ou un gestionnaire du data Challenge
-        if ($user[0]['type'] == "Administrateur") {
+        if ($user[0]['type'] == "Administrateur"|| ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $battle['nomEvenement']) )) {
             echo '<h1>'. $battle['nomEvenement'] . '</h3>';
             echo '<p>'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
 
@@ -92,9 +93,9 @@
                         if (isQuestionnaire($idBattle, $i)){
                             $questionnaire = getQuestionnaire($idBattle, $i);?>
                             du <?php echo $questionnaire['dateDebut'] . ' au ' . $questionnaire['dateFin']?> </p>
-                            <a href="">
-                                <button name="supprimer"> Supprimer </button>
-                            </a>
+                            
+                            <button name="supprimer" id-questionnaire="<?php $questionnaire['idQuestionnaire'] ?>"onclick="supprimerQuestionnaire(this)"> Supprimer </button>
+                            
 
                         <?php 
                         } 
@@ -109,5 +110,4 @@
         <?php
         }
     }
-
 ?>

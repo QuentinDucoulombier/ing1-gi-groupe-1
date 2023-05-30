@@ -137,7 +137,7 @@
                 }
 
                 // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché à la battle il peut accéder à la synthèse du challenge
-                if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $challenge['nomEvenement']) ) ) ) {
+                if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $battle['nomEvenement']) ) ) ) {
                     echo '          <a href="/?page=syntheseBattle&battle='.$battle['idEvenement'].'"> ';
                     echo '              <button name="gestion"> Synthèse de la battle </button> ';
                     echo '          </a>';
