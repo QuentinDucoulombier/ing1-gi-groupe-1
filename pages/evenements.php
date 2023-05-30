@@ -63,14 +63,14 @@
 
                 // Si l'utilisateur est un étudiant qui n'est pas inscrit au challenge on lui propose de s'inscrire
                 if (isset($_SESSION['email']) && $user[0]['type'] == "Etudiant" && !checkInscriptionProjet($user[0]['email'], $challenge['nomEvenement'])) {
-                    echo '          <a href="/?page=inscriptionChallenge&evenement='.$challenge['idEvenement'].'">';
+                    echo '          <a href="/?page=inscriptionChallenge&challenge='.$challenge['idEvenement'].'">';
                     echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a> ';
                 }
 
                 // Si l'utilisateur est un étudiant inscrit au challenge on lui propose de d'accéder au récap du projet pour lequel il est inscrit
                 if (isset($_SESSION['email']) && $user[0]['type'] == "Etudiant" && checkInscriptionProjet($user[0]['email'], $challenge['nomEvenement'])) {
-                    echo '          <a href="/?page=descriptionChallenge&projet='.$challenge['idEvenement'].'"> ';
+                    echo '          <a href="/?page=descriptionData&idChallenge='.$challenge['idEvenement'].'"> ';
                     echo '              <button name="monProjet"> Mon projet </button> ';
                     echo '          </a>';
                 }
@@ -120,14 +120,14 @@
 
                 // Si l'utilisateur est un étudiant qui n'est pas inscrit à la battle on lui propose de s'inscrire
                 if ($user[0]['type'] == "Etudiant" && !checkInscriptionProjet($user[0]['email'], $battle['nomEvenement'])) {
-                    echo '          <a href="/?page=inscriptionChallenge&evenement='.$battle['idEvenement'].'">';
+                    echo '          <a href="/?page=inscriptionChallenge&challenge='.$battle['idEvenement'].'">';
                     echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a> ';
                 }
 
                 // Si l'utilisateur est un étudiant inscrit à la battle on lui propose de d'accéder au récap du projet pour lequel il est inscrit
                 if ($user[0]['type'] == "Etudiant" && checkInscriptionProjet($user[0]['email'], $battle['nomEvenement'])) {
-                    echo '          <a href="/?page=monProjet&projet='.$battle['idEvenement'].'"> ';
+                    echo '          <a href="/?page=descriptionData&idChallenge='.$battle['idEvenement'].'"> ';
                     echo '              <button name="monProjet"> Mon projet </button> ';                                        
                     echo '          </a>';
                 }
