@@ -246,6 +246,7 @@ function sauvegarderNouvelEtudiant() {
             if (xhr.status === 200) {
                 // La requête a été traitée avec succès
                 console.log('Étudiant ajouté avec succès !');
+                location.reload();
             } else {
                 // Une erreur s'est produite lors de la requête
                 console.error('Une erreur s\'est produite lors de l\'ajout de l\'étudiant.');
@@ -278,10 +279,10 @@ function ajouterGestionnaire() {
     celluleNomEntreprise.innerHTML = '<input type="text" id="nouveauNomEntreprise" value="">';
 
     var celluleDateDebutUtilisateur = nouvelleLigne.insertCell();
-    celluleDateDebutUtilisateur.innerHTML = '<input type="text" id="nouvelleDateDebutUtilisateur" value="">';
+    celluleDateDebutUtilisateur.innerHTML = '<input type="date" id="nouvelleDateDebutUtilisateur" value="">';
 
     var celluleDateFinUtilisateur = nouvelleLigne.insertCell();
-    celluleDateFinUtilisateur.innerHTML = '<input type="text" id="nouvelleDateFinUtilisateur" value="">';
+    celluleDateFinUtilisateur.innerHTML = '<input type="date" id="nouvelleDateFinUtilisateur" value="">';
 
     var celluleMotDePasse = nouvelleLigne.insertCell();
     celluleMotDePasse.innerHTML = '<input type="password" id="nouveauMotDePasse" value="">';
@@ -300,7 +301,6 @@ function sauvegarderNouveauGestionnaire() {
     var nouvelleDateDebutUtilisateur = document.getElementById('nouvelleDateDebutUtilisateur').value;
     var nouvelleDateFinUtilisateur = document.getElementById('nouvelleDateFinUtilisateur').value;
     var nouveauMotDePasse = document.getElementById('nouveauMotDePasse').value;
-    alert(nouveauPrenom);
 
     // Créer un objet contenant les données à envoyer
     var xhr = new XMLHttpRequest();
@@ -311,6 +311,7 @@ function sauvegarderNouveauGestionnaire() {
             if (xhr.status === 200) {
                 // La requête a été traitée avec succès
                 console.log('Gestionnaire ajouté avec succès !');
+                location.reload();
             } else {
                 // Une erreur s'est produite lors de la requête
                 console.error('Une erreur s\'est produite lors de l\'ajout du gestionnaire.');
