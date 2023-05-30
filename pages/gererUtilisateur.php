@@ -52,7 +52,7 @@ if (isset($_SESSION['email'])) {
         </table>
 
         <h2>Gestionnaires</h2>
-        <table>
+        <table id="tableauGestionnaire">
             <tr>
                 <th>Prénom</th>
                 <th>Nom</th>
@@ -79,22 +79,27 @@ if (isset($_SESSION['email'])) {
                 echo "<td>" . $info['type'] . "</td>";
                 echo "<td>" . $info['numeroTel'] . "</td>";
                 echo "<td>" . $info['nomEntreprise'] . "</td>";
-                if (isset($info['dateDebutUtilisateur'])) {
-                    echo "<td>" . date('d F Y', strtotime($info['dateDebutUtilisateur'])) . "</td>";
-                } else {
-                    echo "<td></td>";
-                }
-                if (isset($info['dateFinUtilisateur'])) {
-                    echo "<td>" . date('d F Y', strtotime($info['dateFinUtilisateur'])) . "</td>";
-                } else {
-                    echo "<td></td>";
-                }
+                // if (isset($info['dateDebutUtilisateur'])) {
+                //     echo "<td>" . date('d F Y', strtotime($info['dateDebutUtilisateur'])) . "</td>";
+                // } else {
+                //     echo "<td></td>";
+                // }
+                echo "<td>" . $info['dateDebutUtilisateur'] . "</td>";
+                // if (isset($info['dateFinUtilisateur'])) {
+                //     echo "<td>" . date('d F Y', strtotime($info['dateFinUtilisateur'])) . "</td>";
+                // } else {
+                //     echo "<td></td>";
+                // }
+                echo "<td>" . $info['dateFinUtilisateur'] . "</td>";
                 echo "<td>" . $info['motDePasse'] . "</td>";
                 echo "<td><button class='modifier-btn' data-email='" . $info['email'] . "' onclick='toggleEditGestionnaire(this)'>Modifier</button></td>";
                 echo "<td><button class='modifier-btn' data-email='" . $info['email'] . "' onclick='supprimerUtilisateur(this)'>Supprimer</button></td>";
                 echo "</tr>";
             }
             ?>
+            <tr>
+                <td colspan="11"><button class="ajouter-btn" onclick="ajouterGestionnaire()">Ajouter un gestionnaire</button></td>
+            </tr>
         </table>
     </div>
 
@@ -223,8 +228,8 @@ if (isset($_SESSION['email'])) {
         cells[3].innerHTML = "<input type='text' value='" + type + "'>";
         cells[4].innerHTML = "<input type='text' value='" + numeroTel + "'>";
         cells[5].innerHTML = "<input type='text' value='" + nomEntreprise + "'>";
-        cells[6].innerHTML = "<input type='text' value='" + dateDebutUtilisateur + "'>";
-        cells[7].innerHTML = "<input type='text' value='" + dateFinUtilisateur + "'>";
+        cells[6].innerHTML = "<input type='date' value='" + dateDebutUtilisateur + "'>";
+        cells[7].innerHTML = "<input type='date' value='" + dateFinUtilisateur + "'>";
         cells[8].innerHTML = "<input type='text' value='" + motDePasse + "'>";
 
         // Changer le texte du bouton Modifier en Envoyer
@@ -312,7 +317,7 @@ if (isset($_SESSION['email'])) {
         celluleEmail.innerHTML = '<input type="text" id="nouvelEmail" value="">';
 
         var celluleType = nouvelleLigne.insertCell();
-        celluleType.innerHTML = '<input type="text" id="nouveauType" value="">';
+        celluleType.innerHTML = '<input type="text" id="nouveauType" value="Etudiant">';
 
         var celluleNumeroTel = nouvelleLigne.insertCell();
         celluleNumeroTel.innerHTML = '<input type="text" id="nouveauNumeroTel" value="">';
@@ -337,7 +342,7 @@ if (isset($_SESSION['email'])) {
         var nouveauPrenom = document.getElementById('nouveauPrenom').value;
         var nouveauNom = document.getElementById('nouveauNom').value;
         var nouvelEmail = document.getElementById('nouvelEmail').value;
-        var nouveauType = document.getElementById('nouveauType').value;
+        var nouveauType = 'Etudiant';
         var nouveauNumeroTel = document.getElementById('nouveauNumeroTel').value;
         var nouveauNiveauEtude = document.getElementById('nouveauNiveauEtude').value;
         var nouvelleEcole = document.getElementById('nouvelleEcole').value;
@@ -350,7 +355,7 @@ if (isset($_SESSION['email'])) {
 
         // Effectuer la requête AJAX
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'action/ajouterEtudiant.php', true);
+        xhr.open('POST', 'action/ajouterUtilisateur.php', true);
         xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
         xhr.onreadystatechange = function () {
             if (xhr.readyState === XMLHttpRequest.DONE) {
@@ -364,7 +369,73 @@ if (isset($_SESSION['email'])) {
             }
         };
         xhr.send('prenomUtilisateur=' + nouveauPrenom + '&nomUtilisateur=' + nouveauNom + '&email=' + nouvelEmail + '&type=' + nouveauType + '&numeroTel=' + nouveauNumeroTel + '&niveauEtude=' + nouveauNiveauEtude + '&ecole=' + nouvelleEcole + '&ville=' + nouvelleVille + '&motDePasse=' + nouveauMotDePasse);
+        
     }
+    function ajouterGestionnaire(){
+        var tableauGestionnaire = document.getElementById('tableauGestionnaire');
+        var nouvelleLigne = tableauGestionnaire.insertRow();
+
+        var cellulePrenom = nouvelleLigne.insertCell();
+        cellulePrenom.innerHTML = '<input type="text" id="nouveauPrenom" value="">';
+
+        var celluleNom = nouvelleLigne.insertCell();
+        celluleNom.innerHTML = '<input type="text" id="nouveauNom" value="">';
+
+        var celluleEmail = nouvelleLigne.insertCell();
+        celluleEmail.innerHTML = '<input type="text" id="nouvelEmail" value="">';
+
+        var celluleType = nouvelleLigne.insertCell();
+        celluleType.innerHTML = '<input type="text" id="nouveauType" value="Gestionnaire">';
+
+        var celluleNumeroTel = nouvelleLigne.insertCell();
+        celluleNumeroTel.innerHTML = '<input type="text" id="nouveauNumeroTel" value="">';
+
+        var celluleNomEntreprise = nouvelleLigne.insertCell();
+        celluleNomEntreprise.innerHTML = '<input type="text" id="nouveauNomEntreprise" value="">';
+
+        var celluleDateDebutUtilisateur = nouvelleLigne.insertCell();
+        celluleDateDebutUtilisateur.innerHTML = '<input type="text" id="nouvelleDateDebutUtilisateur" value="">';
+
+        var celluleDateFinUtilisateur = nouvelleLigne.insertCell();
+        celluleDateFinUtilisateur.innerHTML = '<input type="text" id="nouvelleDateFinUtilisateur" value="">';
+
+        var celluleMotDePasse = nouvelleLigne.insertCell();
+        celluleMotDePasse.innerHTML = '<input type="password" id="nouveauMotDePasse" value="">';
+
+        var celluleActions = nouvelleLigne.insertCell();
+        celluleActions.innerHTML = '<button onclick="sauvegarderNouveauGestionnaire()">Enregistrer</button>';
+    }
+    function sauvegarderNouveauGestionnaire(){
+        // Récupérer les valeurs des champs
+        var nouveauPrenom = document.getElementById('nouveauPrenom').value;
+        var nouveauNom = document.getElementById('nouveauNom').value;
+        var nouvelEmail = document.getElementById('nouvelEmail').value;
+        var nouveauType = 'Gestionnaire';
+        var nouveauNumeroTel = document.getElementById('nouveauNumeroTel').value;
+        var nouveauNomEntreprise = document.getElementById('nouveauNomEntreprise').value;
+        var nouvelleDateDebutUtilisateur = document.getElementById('nouvelleDateDebutUtilisateur').value;
+        var nouvelleDateFinUtilisateur = document.getElementById('nouvelleDateFinUtilisateur').value;
+        var nouveauMotDePasse = document.getElementById('nouveauMotDePasse').value;
+        alert(nouveauPrenom);
+
+        // Créer un objet contenant les données à envoyer
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'action/ajouterUtilisateur.php', true);
+        xhr.setRequestHeader('Content-Type', "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    // La requête a été traitée avec succès
+                    console.log('Gestionnaire ajouté avec succès !');
+                } else {
+                    // Une erreur s'est produite lors de la requête
+                    console.error('Une erreur s\'est produite lors de l\'ajout du gestionnaire.');
+                }
+            }
+        };
+        xhr.send('prenomUtilisateur=' + nouveauPrenom + '&nomUtilisateur=' + nouveauNom + '&email=' + nouvelEmail + '&type=' + nouveauType + '&numeroTel=' + nouveauNumeroTel + '&nomEntreprise=' + nouveauNomEntreprise + '&dateDebutUtilisateur=' + nouvelleDateDebutUtilisateur + '&dateFinUtilisateur=' + nouvelleDateFinUtilisateur + '&motDePasse=' + nouveauMotDePasse);
+    }
+
 
 
 

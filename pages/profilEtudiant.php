@@ -173,10 +173,11 @@ if (isset($_SESSION['email'])) {
                 alert("Les mots de passe ne correspondent pas");
                 return;
             }
+            type = "Etudiant";
             typePage = "profil";
             xhttp.open("POST", "action/edit_a_profil.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&niveauEtude=" + niveauEtude + "&ecole=" + ecole + "&ville=" + ville + "&motDePasse=" + motDePasse + "&typePage=" + typePage);
+            xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&type=" + type + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&niveauEtude=" + niveauEtude + "&ecole=" + ecole + "&ville=" + ville + "&motDePasse=" + motDePasse + "&typePage=" + typePage);
         }
 
     </script>

@@ -109,8 +109,8 @@ if (isset($_SESSION['email'])) {
             cells[2].innerHTML = "<input type='text' value='" + nvemail + "'>";
             cells[3].innerHTML = "<input type='text' value='" + tel + "'>";
             cells[4].innerHTML = "<input type='text' value='" + nomEntreprise + "'>";
-            cells[5].innerHTML = "<input type='text' value='" + dateDebutUtilisateur + "'>";
-            cells[6].innerHTML = "<input type='text' value='" + dateFinUtilisateur + "'>";
+            cells[5].innerHTML = "<input type='date' value='" + dateDebutUtilisateur + "'>";
+            cells[6].innerHTML = "<input type='date' value='" + dateFinUtilisateur + "'>";
             cells[7].innerHTML = "<input type='text' value='" + motDePasse + "'>";
             cells[8].innerHTML = "<input type='text' value='" + ConfirmerMotDePasse + "'>";
 
@@ -133,6 +133,7 @@ if (isset($_SESSION['email'])) {
             var nom = cells[1].getElementsByTagName('input')[0].value;
             var nvemail = cells[2].getElementsByTagName('input')[0].value;
             var tel = cells[3].getElementsByTagName('input')[0].value;
+            var type = 'Gestionnaire'
             var nomEntreprise = cells[4].getElementsByTagName('input')[0].value;
             var dateDebutUtilisateur = cells[5].getElementsByTagName('input')[0].value;
             var dateFinUtilisateur = cells[6].getElementsByTagName('input')[0].value;
@@ -173,7 +174,7 @@ if (isset($_SESSION['email'])) {
             typePage = "profil";
             xhttp.open("POST", "action/edit_a_profil.php", true);
             xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&nomEntreprise=" + nomEntreprise + "&dateDebutUtilisateur=" + dateDebutUtilisateur + "&dateFinUtilisateur=" + dateFinUtilisateur + "&motDePasse=" + motDePasse + "&typePage=" + typePage);
+            xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + tel + "&nomEntreprise=" + nomEntreprise + "&dateDebutUtilisateur=" + dateDebutUtilisateur + "&dateFinUtilisateur=" + dateFinUtilisateur + "&motDePasse=" + motDePasse + "&typePage=" + typePage);
 
         }
 

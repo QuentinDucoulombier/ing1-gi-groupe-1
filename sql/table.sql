@@ -59,7 +59,7 @@ CREATE TABLE Utilisateur(
     nomUtilisateur varchar(30) NOT NULL,
     prenomUtilisateur varchar(30) NOT NULL,
     numeroTel char(10) NOT NULL,
-    niveauEtude varchar(2) ,
+    niveauEtude varchar(2),
     ecole varchar(30),
     ville varchar(30),
     nomEntreprise varchar(30),

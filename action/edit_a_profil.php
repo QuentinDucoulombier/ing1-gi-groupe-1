@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($type == "Gestionnaire") {
         // Récupération des données POST envoyées par le formulaire
         $dateDebutUtilisateur = htmlspecialchars($_POST['dateDebutUtilisateur']);
-
+        echo $dateDebutUtilisateur;
         modifyDateDebutUtilisateur($email, $dateDebutUtilisateur);
 
     }
@@ -83,9 +83,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     //si le mot de passe a été saisie dans le formulaire
     $mdp = $_POST['motDePasse'];
     modifyPasswordForAdmin($email, $mdp);
-
-    $type = $_POST['type'];
-    modifyType($email, $type);
+    // si le type a changé
+    if ($type != $_POST['type']){
+        $type = $_POST['type'];
+        modifyType($email, $type);
+    }
+    
     $nvmail = htmlspecialchars($_POST['nvemail']);
     modifyEmail($email, $nvmail);
     //si l'ancien mot de passe, le nouveau mot de passe et la confirmation du nouveau mot de passe ont été saisie dans le formulaire

@@ -91,7 +91,7 @@ function addEtudiant($mail, $password, $nom, $prenom, $tel, $niv, $ecole, $ville
     try {
         $conn = connect();
         $sqlQuery = "INSERT INTO Utilisateur (email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville) 
-                    VALUES (:mail, :pass, 'Etudiant', :nom ,  :prenom , :tel, :niveau ,'" . $ecole . "','" . $ville . "')";
+                    VALUES (:mail, :pass, 'Etudiant', :nom ,  :prenom , :tel, :niveau , :ecole , :ville)";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':mail', $mail);
         $statement->bindParam(':pass', $password);
@@ -99,6 +99,8 @@ function addEtudiant($mail, $password, $nom, $prenom, $tel, $niv, $ecole, $ville
         $statement->bindParam(':nom', $nom);
         $statement->bindParam(':tel', $tel);
         $statement->bindParam(':niveau', $niv);
+        $statement->bindParam(':ecole', $ecole);
+        $statement->bindParam(':ville', $ville);
         $statement->execute();
     } catch (Exception $e) {
         // En cas d'erreur, on affiche un message et on arrête tout
@@ -192,7 +194,7 @@ function getUser($mail)
 {
     try {
         $conn = connect();
-        $sqlQuery = "SELECT email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville, nomEntreprise, dateFinUtilisateur FROM Utilisateur WHERE email LIKE :email";
+        $sqlQuery = "SELECT email, motDePasse, type, nomUtilisateur, prenomUtilisateur, numeroTel, niveauEtude, ecole, ville, nomEntreprise, dateDebutUtilisateur, dateFinUtilisateur FROM Utilisateur WHERE email LIKE :email";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':email', $mail);
         $statement->execute();
@@ -486,6 +488,10 @@ function modifyDateDebutUtilisateur($email, $dateDebutUtilisateur)
         $statement->execute();
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
+    }
+    $errorInfo = $statement->errorInfo();
+    if ($errorInfo[0] !== '00000') {
+        echo 'Erreur : ' . $errorInfo[2];
     }
 }
 
