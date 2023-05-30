@@ -8,11 +8,8 @@ if (isset($_SESSION['email'])) {
 
 
     $infos = getUser($email);
-    $prenomUtilisateur = $infos[0]['prenomUtilisateur'];
 
     ?>
-
-
     <html lang="en">
     
     <head>
@@ -21,9 +18,6 @@ if (isset($_SESSION['email'])) {
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="/css/profil.css" />
-        <script defer src="../scripts/profil.js"></script>
-
-
         <title>Profil</title>
     </head>
 
@@ -82,5 +76,3 @@ if (isset($_SESSION['email'])) {
     echo 'error';
     //     header('Location: /index.php');
 }
-?>
- 
