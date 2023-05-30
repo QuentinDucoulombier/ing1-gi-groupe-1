@@ -1,5 +1,5 @@
 <?php 
-
+session_start();
 $questionnaire=$_GET["idQuestionnaire"];//passer en parametre (get) l'id du questionnaire
 
 $dates=getDatesquestionnaire($questionnaire);
@@ -7,7 +7,7 @@ $dates=getDatesquestionnaire($questionnaire);
 $datedebut=$dates["dateDebut"];
 $datefin=$dates["dateFin"];
 $questions=getquestion($questionnaire);
-$idEquipe=1;
+$idEquipe=$_SESSION['idTeam'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     for ($i = 1; $i <= 5; $i++) {

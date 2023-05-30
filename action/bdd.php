@@ -601,6 +601,7 @@
     * Permet de récupérer les réponses d'une équipe à un questionnaire 
     * @param idQuestion : id question lié à la réponse
     * @param idEquipe : id Equipe qui a répondu au questionnaire
+    * TODO:Rajouter le numero dans l'insertion mais il faut faire ca dans la table jsp faire
     */
     function setReponse($idEquipe,$idQuestion,$reponse){
         try{
@@ -969,7 +970,7 @@
             ";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
-            $result = $statement->fetchAll();
+            $result = $statement->fetch();
             return $result;
         }
         catch(Exception $e){
@@ -1306,14 +1307,14 @@
         }
     }
 
-    function getTeamQuestionnaire($idTeam,$idData,$idQuestionnaire) {
+    function getTeamQuestionnaire($idTeam,$idData,$num) {
         try{
             $conn = connect();
             $sqlQuery = "SELECT * 
             FROM Questionnaire 
             INNER JOIN Question ON Question.idQuestionnaire = Questionnaire.idQuestionnaire 
             INNER JOIN Reponse ON Reponse.idQuestion = Question.idQuestion 
-            WHERE idEquipe = $idTeam AND idDataBattle = $idData AND Questionnaire.idQuestionnaire = $idQuestionnaire;
+            WHERE idEquipe = $idTeam AND idDataBattle = $idData AND Questionnaire.numero = $num;
             ;
             ";
             $statement = $conn->prepare($sqlQuery);
