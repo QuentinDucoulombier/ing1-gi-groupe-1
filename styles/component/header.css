@@ -5,6 +5,7 @@
 .small_header img {
     width: 35px !important;
     height: 35px !important;  
+    
 }
 
 #logo {
@@ -15,6 +16,7 @@
 
 }
 #header {
+    box-shadow: none;
     overflow: hidden;
     background-color: #ffffff;
     position: fixed; 

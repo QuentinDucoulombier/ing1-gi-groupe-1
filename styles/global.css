@@ -8,7 +8,7 @@ body {
     color: #2b2b2b;
     line-height: 1.7em;
     font-weight: 500;
-    background-color: rgb(216, 216, 216);  
+    background-color: rgb(255, 255, 255);  
       
 }
 
@@ -33,7 +33,13 @@ html {
   }
   
   #content h1 {
-    margin-top: 0;
+    margin-top: 30px;
+    margin-left: 10px;
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: 700;
+    font-size: 48px;
+    color: #192231 !important;
+    line-height: 1.2em;
   }
 
 
@@ -56,4 +62,15 @@ button {
 
 button:hover {
   color: #b7b7b7;
+}
+
+.separator {
+  background-color: #0e8769;
+  display: flex;
+  height: 3px;
+  width: 250px;
+  margin-left: 10px;
+  border-radius: 7px;
+
+  
 }
