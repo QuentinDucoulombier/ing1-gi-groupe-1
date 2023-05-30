@@ -17,4 +17,27 @@
         7px 7px 0px rgba(0, 0, 0, 0.2);
 }
 
+#accueil-image{
+    height: 500px;
+    background-image: url("/images/pyrenees.jpg");
+    background-size: cover;
+    /* Centre l'image horizontalement et verticalement */
+    background-position: center;
+    clip-path: polygon(100% 0%, 100% 90%, 27% 100%, 0% 90%, 0% 0%);
+    margin-top: -35px;
+}
 
+#accueil-titre h1{
+    display: flex;
+    font-family: 'Montserrat',Helvetica,Arial,Lucida,sans-serif;
+    font-size: 3rem;
+    text-align: center;
+    justify-content: center;
+    color: #fff!important;
+    padding-bottom: 10px;
+    line-height: 1em;
+    font-weight: 500;
+    align-items: center;
+    padding-top: 250px;
+    
+}
