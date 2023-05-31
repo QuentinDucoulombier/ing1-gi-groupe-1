@@ -1488,11 +1488,11 @@ function addUserTeam($idUser, $idTeam)
 
             VALUES ($nomEquipe,$idcapitaine,$idProjet);
             ";
-        $statement = $conn->prepare($sqlQuery);
-        $statement->execute();
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
 }
 
     /**
@@ -1753,4 +1753,71 @@ function checkGestionnaireProjetData($mail, $idprojet)
 
 
 
+    function getLu($idUser, $idEnCours) {
+        
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT *
+            FROM Messages
+            WHERE lu = 0
+            AND id_destinataire = $idUser
+            AND id_auteur = $idEnCours;";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }       
+    }
+
+    
+
+    function getMembreTeam($idTeam) {
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT idEtudiant 
+            FROM Composer 
+            WHERE idEquipe = $idTeam;
+            ";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }       
+    }
+
+    function getNameGroup($idTeam) {
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT nomEquipe 
+            FROM Equipe 
+            WHERE idEquipe=$idTeam;
+            ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+    }
+
+
+    function sendMessage($idAut,$idDest,$message) {
+        try {
+            $conn = connect();
+            $sqlQuery = "INSERT INTO Messages(message,date_envoi,id_auteur, id_destinataire)
+            VALUES ('$message', NOW(),$idAut,$idDest)";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+        } catch (Exception $e) {
+            die('Erreur : ' . $e->getMessage());
+        }
+    }
+    
 ?>

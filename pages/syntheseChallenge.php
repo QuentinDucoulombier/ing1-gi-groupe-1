@@ -63,6 +63,15 @@
                             <input type="submit" value="Voir les messages"/>
                         </form>
                     </div>
+                    <div class="sendGroupMessage">
+                        <form action="/?page=groupeMessage" method="POST">
+                            <?php
+                                echo '<input type="hidden"  name="idTeam" value="'.$equipe['idEquipe'].'"/>'
+                            ?>
+                            <input type="submit" value="Envoyer un message au groupe"/>
+                        </form>
+
+                    </div>
 
                 </div>
                 

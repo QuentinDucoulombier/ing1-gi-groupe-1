@@ -1,20 +1,23 @@
 # Messagerie
 [~]Changer l architecture de la bdd du chat pour correspondre a bdd.php
-[]Rajouter le fait d avoir le nom en couleur quand le msg n est pas encore vu
-[]Fix bugs
+[x]Rajouter le fait d avoir le nom en couleur quand le msg n est pas encore vu
+[x]Fix bugs
 [x]Changer nom auteur msg quand recu
-[]Ajouter voir message sur synthese dataBattle
-[]verifier dans synstheProjet que ca marche bien
+[x]Ajouter voir message sur synthese dataBattle
+[x]verifier dans synstheProjet que ca marche bien
+[]clean code
+[]Actualisation de la notif en ajax
 
-#EtudiantConnecte(e)
-[]fix questionnaire de merde
+# Envoyer group message
+[]On peut faire un retour en ajax
+
 
 #Requetes SQL à ajouter
 
 #Récap Pages
 
-Rajouter les autorisations daccès
-Commenter le code
+[]Rajouter les autorisations daccès
+[]Commenter le code
 
 [] accueil.php      -> CSS (facultatif)
 [x] connexion.php
