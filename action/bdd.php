@@ -561,17 +561,19 @@ function modifyEntreprise($mail, $nomEntreprise)
  * @param tel
  * @param entreprise
  */
-function addEvent($nom, $dateDebut, $dateFin, $type)
+function addEvent($nom, $dateDebut, $dateFin, $type, $descriptionEvent, $imageEvent)
 {
     try {
         $conn = connect();
-        $sqlQuery = "INSERT INTO Evenement (nomEvenement, dateDebut, dateFin, typeEvenement) 
-                    VALUES (:nom, :dateD, :dateF, :type)";
+        $sqlQuery = "INSERT INTO Evenement (nomEvenement, dateDebut, dateFin, typeEvenement, descriptionEvent, imageEvent) 
+                    VALUES (:nom, :dateD, :dateF, :type, :descriptionEvent, :imageEvent)";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':nom', $nom);
         $statement->bindParam(':dateD', $dateDebut);
         $statement->bindParam(':dateF', $dateFin);
         $statement->bindParam(':type', $type);
+        $statement->bindParam(':descriptionEvent', $descriptionEvent);
+        $statement->bindParam(':imageEvent', $imageEvent);
         $statement->execute();
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
