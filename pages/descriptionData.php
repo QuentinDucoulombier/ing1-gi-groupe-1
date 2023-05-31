@@ -18,7 +18,6 @@
     $superviseurs = getSuperviseurUtilisateur($choixChallenge);
     $user = getUser($_SESSION['email']);
 
-    echo $user[0]['idUtilisateur'];
     $idUser = $user[0]['idUtilisateur'];
     $_SESSION["idUser"] = $idUser;
     $response = verifEquipe($idUser,$choixChallenge);
@@ -41,10 +40,10 @@
     echo '
 
 
-        <h1>'.$data["nomEvenement"].'</h1>
+    <h1 class="data-name">'.$data["nomEvenement"].'</h1>
 
         
-        Data challenge du '.$data["dateDebut"].'
+    <p class="date">Data challenge du '.$data["dateDebut"].'</p>
         <div id="boutton">
             <button onclick="window.location.href=`./?page=messagerie`">Envoyer un message</button>
             <button onclick="window.location.href=`../action/verifEquipe.php?projet='.$choixChallenge.'`">Créer/gérer mon équipe</button>

@@ -45,6 +45,7 @@
         }
     }
     echo '
+            <br>
             <input type="submit" id="subChallenge" value="Valider mon inscription"/>
         </form>
     </div>';
