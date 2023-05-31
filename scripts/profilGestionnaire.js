@@ -1,8 +1,14 @@
 function sha1(str) {
     return CryptoJS.SHA1(str).toString();
 }
+var MotDePassesgestionnaire = document.getElementById("MotDePasse_Gestionnaire");
+var ConfirmerMotDePassesgestionnaire = document.getElementById("Confirmer_MotDePasse_Gestionnaire");
+var AncienMotDePassesgestionnaire = document.getElementById("Ancien_MotDePasse_Gestionnaire");
 
 function toggleEditProfilGestionnaire(button) {
+    MotDePassesgestionnaire.style.display = 'block';
+    ConfirmerMotDePassesgestionnaire.style.display = 'block';
+    AncienMotDePassesgestionnaire.style.display = 'block';
     var email = button.getAttribute('data-email');
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
     var cells = table.getElementsByTagName('td'); // Récupère tous les éléments <td> dans la table
@@ -15,8 +21,8 @@ function toggleEditProfilGestionnaire(button) {
     var nomEntreprise = cells[4].innerHTML;
     var dateDebutUtilisateur = cells[5].innerHTML;
     var dateFinUtilisateur = cells[6].innerHTML;
-    var motDePasse = cells[7].innerHTML;
-    var ConfirmerMotDePasse = cells[8].innerHTML;
+    var motDePasse = cells[8].innerHTML;
+    var ConfirmerMotDePasse = cells[9].innerHTML;
 
     // Modifier les cellules pour afficher les champs de modification
     cells[0].innerHTML = "<input type='text' value='" + prenom + "'>";
@@ -26,8 +32,9 @@ function toggleEditProfilGestionnaire(button) {
     cells[4].innerHTML = "<input type='text' value='" + nomEntreprise + "'>";
     cells[5].innerHTML = "<input type='date' value='" + dateDebutUtilisateur + "'>";
     cells[6].innerHTML = "<input type='date' value='" + dateFinUtilisateur + "'>";
-    cells[7].innerHTML = "<input type='text' value='" + motDePasse + "'>";
-    cells[8].innerHTML = "<input type='text' value='" + ConfirmerMotDePasse + "'>";
+    cells[7].innerHTML = "<input type='password' value=''>";
+    cells[8].innerHTML = "<input type='password' value=''>";
+    cells[9].innerHTML = "<input type='password' value=''>";
 
     // Changer le texte du bouton Modifier en Envoyer
     button.innerHTML = "Envoyer";
@@ -52,13 +59,10 @@ function sendDataProfilGestionnaire(button, email, motDePasse2) {
     var nomEntreprise = cells[4].getElementsByTagName('input')[0].value;
     var dateDebutUtilisateur = cells[5].getElementsByTagName('input')[0].value;
     var dateFinUtilisateur = cells[6].getElementsByTagName('input')[0].value;
-    if (cells[7].getElementsByTagName('input')[0].value == motDePasse2) {
-        var motDePasse = cells[7].getElementsByTagName('input')[0].value;
-        var ConfirmerMotDePasse = cells[8].getElementsByTagName('input')[0].value;
-    } else {
-        var motDePasse = sha1(cells[7].getElementsByTagName('input')[0].value);
-        var ConfirmerMotDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
-    }
+    var AncienMotDePasse = cells[7].getElementsByTagName('input')[0].value;
+    var motDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
+    var ConfirmerMotDePasse = sha1(cells[9].getElementsByTagName('input')[0].value);
+
     // Envoyer les données à une page PHP pour effectuer la mise à jour
     // Utilisez AJAX ou un formulaire pour soumettre les données à la page PHP
     // Exemple avec AJAX :
@@ -74,11 +78,15 @@ function sendDataProfilGestionnaire(button, email, motDePasse2) {
             cells[4].innerHTML = nomEntreprise;
             cells[5].innerHTML = dateDebutUtilisateur;
             cells[6].innerHTML = dateFinUtilisateur;
-            cells[7].innerHTML = motDePasse;
-            cells[8].innerHTML = ConfirmerMotDePasse;
+
             // Changer le texte du bouton Envoyer en Modifier
             button.innerHTML = "Modifier";
             button.setAttribute("onclick", "toggleEditProfilGestionnaire(this)");
+            MotDePassesgestionnaire.style.display = 'none';
+            ConfirmerMotDePassesgestionnaire.style.display = 'none';
+            AncienMotDePassesgestionnaire.style.display = 'none';
+            location.reload();
+            
         }
     };
     // xhttp.open("GET", "pages/modifierUtilisateur.php?email=" + email + "&prenom=" + prenom + "&nom=" + nom + "&type=" + type + "&numeroTel=" + numeroTel + "&niveau
@@ -89,6 +97,6 @@ function sendDataProfilGestionnaire(button, email, motDePasse2) {
     typePage = "profil";
     xhttp.open("POST", "action/edit_a_profil.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + tel + "&nomEntreprise=" + nomEntreprise + "&dateDebutUtilisateur=" + dateDebutUtilisateur + "&dateFinUtilisateur=" + dateFinUtilisateur + "&motDePasse=" + motDePasse + "&typePage=" + typePage);
+    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + tel + "&nomEntreprise=" + nomEntreprise + "&dateDebutUtilisateur=" + dateDebutUtilisateur + "&dateFinUtilisateur=" + dateFinUtilisateur + "&motDePasse=" + motDePasse + "&AncienMotDePasse=" + AncienMotDePasse + "&typePage=" + typePage);
 
 }

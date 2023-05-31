@@ -1,13 +1,20 @@
 function sha1(str) {
     return CryptoJS.SHA1(str).toString();
 }
-
+var MotDePassesEtudiant = document.getElementById("MotDePasse_Etudiant");
+var ConfirmerMotDePassesEtudiant = document.getElementById("Confirmer_MotDePasse_Etudiant");
+var AncienMotDePassesEtudiant = document.getElementById("Ancien_MotDePasse_Etudiant");
 function toggleEditProfilEtudiant(button) {
+    MotDePassesEtudiant.style.display = 'block';
+    ConfirmerMotDePassesEtudiant.style.display = 'block';
+    AncienMotDePassesEtudiant.style.display = 'block';
+
     document.getElementById("profil_id").classList.add("smaller_profil");
+
     var email = button.getAttribute('data-email');
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
     var cells = table.getElementsByTagName('td'); // Récupère tous les éléments <td> dans la table
-
+    
     // Récupérer les valeurs actuelles des cellules
     var prenom = cells[0].innerHTML;
     var nom = cells[1].innerHTML;
@@ -16,8 +23,8 @@ function toggleEditProfilEtudiant(button) {
     var niveauEtude = cells[4].innerHTML;
     var ecole = cells[5].innerHTML;
     var ville = cells[6].innerHTML;
-    var motDePasse = cells[7].innerHTML;
-    var ConfirmerMotDePasse = cells[8].innerHTML;
+    var motDePasse = cells[8].innerHTML;
+    var ConfirmerMotDePasse = cells[9].innerHTML;
 
     // Modifier les cellules pour afficher les champs de modification
     cells[0].innerHTML = "<input type='text' value='" + prenom + "'>";
@@ -27,8 +34,9 @@ function toggleEditProfilEtudiant(button) {
     cells[4].innerHTML = "<input type='text' value='" + niveauEtude + "'>";
     cells[5].innerHTML = "<input type='text' value='" + ecole + "'>";
     cells[6].innerHTML = "<input type='text' value='" + ville + "'>";
-    cells[7].innerHTML = "<input type='password' value='" + motDePasse + "'>";
-    cells[8].innerHTML = "<input type='password' value='" + ConfirmerMotDePasse + "'>";
+    cells[7].innerHTML = "<input type='password' value=''>";
+    cells[8].innerHTML = "<input type='password' value=''>";
+    cells[9].innerHTML = "<input type='password' value=''>";
 
     // Changer le texte du bouton Modifier en Envoyer
     button.innerHTML = "Envoyer";
@@ -52,13 +60,10 @@ function sendDataProfilEtudiant(button, email, motDePasse2) {
     var niveauEtude = cells[4].getElementsByTagName('input')[0].value;
     var ecole = cells[5].getElementsByTagName('input')[0].value;
     var ville = cells[6].getElementsByTagName('input')[0].value;
-    if (cells[7].getElementsByTagName('input')[0].value == motDePasse2) {
-        var motDePasse = cells[7].getElementsByTagName('input')[0].value;
-        var ConfirmerMotDePasse = cells[8].getElementsByTagName('input')[0].value;
-    } else {
-        var motDePasse = sha1(cells[7].getElementsByTagName('input')[0].value);
-        var ConfirmerMotDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
-    }
+    var AncienMotDePasse = cells[7].getElementsByTagName('input')[0].value;
+    var motDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
+    var ConfirmerMotDePasse = sha1(cells[9].getElementsByTagName('input')[0].value);
+
 
     // Envoyer les données à une page PHP pour effectuer la mise à jour
     // Utilisez AJAX ou un formulaire pour soumettre les données à la page PHP
@@ -75,12 +80,16 @@ function sendDataProfilEtudiant(button, email, motDePasse2) {
             cells[4].innerHTML = niveauEtude;
             cells[5].innerHTML = ecole;
             cells[6].innerHTML = ville;
-            cells[7].innerHTML = motDePasse;
-            cells[8].innerHTML = ConfirmerMotDePasse;
 
             // Changer le texte du bouton Envoyer en Modifier
             button.innerHTML = "Modifier";
             button.setAttribute("onclick", "toggleEditProfilEtudiant(this)");
+
+            MotDePassesEtudiant.style.display = 'none';
+            ConfirmerMotDePassesEtudiant.style.display = 'none';
+            AncienMotDePassesEtudiant.style.display = 'none';
+            //location.reload();
+
             document.getElementById("profil_id").classList.remove("smaller_profil");
 
         }
@@ -94,6 +103,6 @@ function sendDataProfilEtudiant(button, email, motDePasse2) {
     typePage = "profil";
     xhttp.open("POST", "action/edit_a_profil.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&type=" + type + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&niveauEtude=" + niveauEtude + "&ecole=" + ecole + "&ville=" + ville + "&motDePasse=" + motDePasse + "&typePage=" + typePage);
+    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&type=" + type + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&niveauEtude=" + niveauEtude + "&ecole=" + ecole + "&ville=" + ville + "&motDePasse=" + motDePasse + "&AncienMotDePasse=" + AncienMotDePasse + "&typePage=" + typePage);
 }
 

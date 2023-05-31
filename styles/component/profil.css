@@ -27,6 +27,42 @@
     padding-right: 50px;
 }
 
+#MotDePasse_Etudiant{
+    display: none;
+}
+
+#MotDePasse_Gestionnaire{
+    display: none;
+}
+
+#MotDePasse_Admin{
+    display: none;
+}
+
+#Confirmer_MotDePasse_Etudiant{
+    display: none;
+}
+
+#Confirmer_MotDePasse_Gestionnaire{
+    display: none;
+}
+
+#Confirmer_MotDePasse_Admin{
+    display: none;
+}
+
+#Ancien_MotDePasse_Etudiant{
+    display: none;
+}
+
+#Ancien_MotDePasse_Gestionnaire{
+    display: none;
+}
+
+#Ancien_MotDePasse_Admin{
+    display: none;
+}
+
 .smaller_profil table tr th,.smaller_profil table tr td {
     padding-bottom: 0px;
 }
