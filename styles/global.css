@@ -63,6 +63,22 @@ button:hover {
   color: #b7b7b7;
 }
 
+input[type="submit"] {
+  background-color: #0e8769;
+  color: white;
+  margin: 5px;
+  border-radius: 5px;
+  padding: 10px 20px;
+  border: none;
+  transition: color 0.3s ease;    
+  font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif !important;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  color: #b7b7b7;
+}
+
 .separator {
   background-color: #0e8769;
   display: flex;
