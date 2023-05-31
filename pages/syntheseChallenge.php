@@ -17,10 +17,11 @@
             echo '<p>'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
 
         if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-            echo '          <a href="/?page=modifierChallenge"> ';
+            echo '          <a href="/?page=ModifierEvenement&evenement='.$idChallenge.'"> ';
             echo '              <button name="creation"> Modifier le challenge </button> ';
             echo '          </a>';
         }
+
         // Si l'utilisateur est un administrateur peut supprimer le challenge
         if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
             echo '              <button name="supprimer" id-event="'.$challenge['idEvenement'].'" onclick="supprimerEvent(this)"> Supprimer le challenge </button>';
@@ -32,6 +33,12 @@
                 echo ' <div id="liste-projets">';
                 echo '      <a class ="more-link" href="/?page=syntheseProjet&projet='.$projet['idProjetData'].'"> <button name="gestion"> Syntèse '.$projet['nomProjet'].' </button>  </a>';
                 echo ' </div>';
+
+                if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+                    echo '          <a href="/?page=modifierProjet&projet='.$projet['idProjetData'].'"> ';
+                    echo '              <button name="creation"> Modifier le projet </button> ';
+                    echo '          </a>';
+                }
 
                 // Si l'utilisateur est un administrateur peut supprimer le challenge
                 if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
