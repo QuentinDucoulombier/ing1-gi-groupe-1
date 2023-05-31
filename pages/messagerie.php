@@ -102,4 +102,8 @@
         verification_message();
     </script>
 -->
+
+    <script type="text/javascript" src="../scripts/messagerieInput.js"></script>
+
+
 </html>
