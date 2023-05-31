@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="styles/component/evenements.css" />
+<div class="data-event">
 <?php
 
 
@@ -20,8 +21,8 @@
 
     $projets = getProjetData($id);
 
-    echo '<h1>'. $challenge['nomEvenement'] . '</h3>';
-    echo '<p>'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
+    echo '<h1 class="data-name">'. $challenge['nomEvenement'] . '</h3>';
+    echo '<p class="date">'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
 
     if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
         echo '          <a href="/?page=modifierChallenge"> ';
@@ -95,3 +96,4 @@
 
             
 ?>
+</div>
