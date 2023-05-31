@@ -19,6 +19,7 @@
 
 #accueil-image{
     height: 500px;
+    background-color: rgb(197, 147, 81);
     background-image: url("/images/pyrenees.jpg");
     background-size: cover;
     /* Centre l'image horizontalement et verticalement */
@@ -41,3 +42,44 @@
     padding-top: 250px;
     
 }
+
+
+
+#presentation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .carte {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+  }
+  
+  #description-association {
+    margin: 40px;
+    width: 100%;
+  }
+  
+  #definition {
+    display: flex;
+    justify-content: center;
+  }
+  
+  #definition-dataChallenge,
+  #definition-dataBattle {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  
+  h4 {
+    margin-top: 0;
+  }
+  
+  p {
+    margin-bottom: 0;
+  }
+  

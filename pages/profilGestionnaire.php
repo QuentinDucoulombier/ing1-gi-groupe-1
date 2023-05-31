@@ -1,112 +1,91 @@
 <!DOCTYPE html>
+
 <?php
 if (isset($_SESSION['email'])) {
 
     $email = $_SESSION['email'];
     // recuperer les données de l'utilisateur connecté a partir de son email
-    
-    
+
+
     $infos = getUser($email);
-    $prenomUtilisateur = $infos[0]['prenomUtilisateur'];
 
     ?>
 
-<div class="profil_block">
-    <div class="prenomUtilisateur profil">
-        <h2> Nom : </h2>
-        <?php
-        echo "<h2>" . $prenomUtilisateur . "</h2>";
-        ?>
+<div class="profil">
+    <div id="profil_id" class="profil_block">
+        <h1>Profil</h1>
+        <table>
+            <tr>
+                <th>Prénom</th>
+                <td><?php echo $infos[0]['prenomUtilisateur']; ?></td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td><?php echo $infos[0]['nomUtilisateur']; ?></td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td><?php echo $infos[0]['email']; ?></td>
+            </tr>
+            <tr>
+                <th>Numéro de téléphone</th>
+                <td><?php echo $infos[0]['numeroTel']; ?></td>
+            </tr>
+            <tr>
+                <th>Nom de l'entreprise</th>
+                <td><?php echo $infos[0]['nomEntreprise']; ?></td>
+            </tr>
+            <tr>
+                <th>Date de début</th>
+                <td><?php echo $infos[0]['dateDebutUtilisateur']; ?></td>
+            </tr>
+            <tr>
+                <th>Date de fin</th>
+                <td><?php echo $infos[0]['dateFinUtilisateur']; ?></td>
+            </tr>
+
+            <tr id="Ancien_MotDePasse_Gestionnaire" class="hide">
+                <th>Ancien mot de passe</th>
+                <td></td>
+            </tr>
+
+            <tr id="MotDePasse_Gestionnaire" class="hide">
+                <th>Mot de passe</th>
+                <td><?php echo $infos[0]['motDePasse']; ?></td>
+            </tr>
+            <tr id="Confirmer_MotDePasse_Gestionnaire" class="hide">
+                <th>Confirmer mot de passe</th>
+                <td><?php echo $infos[0]['motDePasse']; ?></td>
+            </tr>
+            <tr>
+                <td><button onclick="toggleEditProfilGestionnaire(this)" data-email="<?php echo $infos[0]['email']; ?>">Modifier</button></td>
+            </tr>
+        </table>
     </div>
+    <div class="projects">
+    <h2>Mes projets à gérer</h2>
+    <?php
+    // Appel de la fonction pour récupérer les équipes de l'utilisateur
+    $resultats = getGestionnaireProjet(['nomUtilisateur']);
 
-    <div class="nomUtilisateur profil">
-        <h2> Prénom : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['nomUtilisateur'] . "</h2>";
-        ?>
-    </div>
+    // Affichage du tableau
+    echo "<table>";
+    echo "<body>";
+    foreach ($resultats as $resultat) {
+        echo "<tr>";
+        echo "<td>" . $resultat['nomProjet'] . "</td>";
+        echo "</tr>";
+    }
+    echo "</body>";
+    echo "</table>";
+    ?>
 
-    <div class="email profil">
-        <h2> Email : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['email'] . "</h2>";
-        ?>
-    </div>
 
-    <div class="numeroTel profil">
-        <h2> Numéro de téléphone : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['numeroTel'] . "</h2>";
-        ?>
-    </div>
 
-    <div class="entreprise profil">
-        <h2> Entreprise : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['nomEntreprise'] . "</h2>";
-        ?>
-    </div>
-
-    <div class="dateFinUtilisateur profil">
-        <h2> Date de fin d'utilisateur : </h2>
-        <?php
-        echo "<h2>" . $infos[0]['dateFinUtilisateur'] . "</h2>";
-        ?>
-    </div>
-
-    <div class="modifier profil">
-        <li class="buttonC" class="boutonmodifier">
-            <div onclick="openModifierModal()">Modifier vos informations</div>
-        </li>
-
-    </div>
-
-    <div class="projet_gestionnaire profil">
-        <h2> Vos projets à gérer: </h2>
-
-    </div>
 </div>
-    
-    </body>
 
-    </html>
-
-    <div id="modifierModal">
-    <div class="modal-content">
-        <span id="closeModifier" onclick="closeModifierModal()">&times;</span>
-        <h2>Modifier vos informations</h2>
-        <form id="modifierForm" action="../action/edit_profil.php" method="POST">
-            <label for="prenomUtilisateur">Prénom:</label><br>
-            <input type="text" id="prenomUtilisateur" name="prenomUtilisateur"><br>
-            <label for="nomUtilisateur">Nom:</label><br>
-            <input type="text" id="nomUtilisateur" name="nomUtilisateur"><br>
-            <label for="email">Email:</label><br>
-            <input type="email" id="email" name="email"><br>
-            <label for="numeroTel">Numéro de téléphone:</label><br>
-            <input type="tel" id="numeroTel" name="numeroTel"><br>
-            <label for="nomEntreprise">Entreprise:</label><br>
-            <input type="text" id="nomEntreprise" name="nomEntreprise"><br>
-            <label for="dateFinUtilisateur">Date de fin d'utilisateur:</label><br>
-            <input type="date" id="dateFinUtilisateur" name="dateFinUtilisateur"><br>
-            <label for="AncienPassword">Ancien mot de passe:</label><br>
-            <input type="password" id="AncienPassword" name="AncienPassword"><br>
-            <label for="password">Nouveau mot de passe:</label><br>
-            <input type="password" id="password" name="password"><br>
-            <label for="confirm_password">Confirmer nouveau mot de passe:</label><br>
-            <input type="password" id="confirm_password" name="confirm_password"><br>
-            <input type="submit" value="Valider">
-        </form>
-    </div>
-
-
-
-
-    
-<?php
-} 
-
-else {
+    <?php
+} else {
     echo 'error';
-//     header('Location: /index.php');
+    //     header('Location: /index.php');
 }
-?>

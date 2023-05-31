@@ -17,7 +17,9 @@
     }
     
     $battle = getEvenementbyID($id);
-    $projet = getProjetData($battle['nomEvenement']);
+    $projet = getProjetData($id);
+    $gestionnaires = getSuperviseur($projet[0]['nomProjet']);
+    $podium = getPodium($id);
 
     echo '<h1>'. $battle['nomEvenement'] . '</h3>';
     echo '<p>'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
@@ -25,6 +27,13 @@
     if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
         echo '          <a href="/?page=modifierBattle"> ';
         echo '              <button name="creation"> Modifier la battle </button> ';
+        echo '          </a>';
+    }
+
+    // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
+    if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $battle['nomEvenement']) ) ) ) {
+        echo '          <a href="/?page=syntheseBattle&battle='.$battle['idEvenement'].'"> ';
+        echo '              <button name="gestion"> Synthèse de la battle </button> ';
         echo '          </a>';
     }
 
@@ -42,9 +51,16 @@
     echo                    $projet[0]['description'];
     echo '              </div>';
     echo '          </div>';
+
     if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
         echo '          <a href="/?page=modifierBattle"> ';
         echo '              <button name="creation"> Modifier le projet </button> ';
+        echo '          </a>';
+    }
+    // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
+    if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $challenge['nomEvenement']) ) ) ) {
+        echo '          <a href="/?page=synthèseProjet&projet='.$projet[0]['idProjetData'].'"> ';
+        echo '              <button name="gestion"> Synthèse du projet </button> ';
         echo '          </a>';
     }
 
@@ -55,7 +71,6 @@
     echo '      </div>';
 
 
-    $gestionnaires = getSuperviseur($projet[0]['nomProjet']);
 
     echo '      <div class="contact-projet">';
     echo '          <h3> Coordonnées contact </h3>';
@@ -78,6 +93,34 @@
 
     echo '  </div>';
 
+    echo ' 
+                <h3> Podium </h3> 
+                <div id="podium">
+
+    
+
+
+                <div id="deuxieme">
+
+                    <p>'. $podium[1]['nomEquipe'] .'</p>
+                    <p>'. $podium[1]['totalNotes'] .'</p>
+                </div>
+
+                <div id="premier">
+                    <p>'. $podium[0]['nomEquipe'] .'</p>
+                    <p>'. $podium[0]['totalNotes'] .'</p>
+                </div>
+                
+                <div id="troisieme">
+                    <p>'. $podium[2]['nomEquipe'] .'</p>
+                    <p>'. $podium[2]['totalNotes'] .'</p>
+                </div>
+                    
+
+            </div>
+
+    
+    ';
 
             
 ?>

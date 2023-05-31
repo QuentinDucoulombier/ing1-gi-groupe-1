@@ -29,12 +29,20 @@
 
 .formInscription ,.formConnexion {
     background-image: linear-gradient(100deg,#0e8769 0%,#0c71c3 100%) !important;
+    margin-top: 100px;
     padding: 50px;
     display: flex;
     justify-content: center;
 }
 
-.formInscription input ,.formConnexion input{
+.formInscription {
+  padding-bottom: 210px;
+}
+
+.formConnexion {
+  padding-bottom: 430px;
+}
+.formInscription input ,.formConnexion input ,.profil_block input{
 
     border-width: 1px;
     border-color: rgba(0,0,0,0.12);
@@ -45,7 +53,7 @@
 }
 
 
-.formInscription input:focus ,.formConnexion input:focus{
+.formInscription input:focus ,.formConnexion input:focus ,.profil_block input:focus{
 
     outline: #333;
 
