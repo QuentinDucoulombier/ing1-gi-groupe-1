@@ -3,7 +3,8 @@
 []Rajouter le fait d avoir le nom en couleur quand le msg n est pas encore vu
 []Fix bugs
 [x]Changer nom auteur msg quand recu
-
+[]Ajouter voir message sur synthese dataBattle
+[]verifier dans synstheProjet que ca marche bien
 
 #EtudiantConnecte(e)
 []fix questionnaire de merde
