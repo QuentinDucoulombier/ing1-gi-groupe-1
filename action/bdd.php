@@ -851,7 +851,6 @@ function getPodium($idEvenement)
         $statement->bindParam(':idEvenement', $idEvenement);
         $statement->execute();
         $result = $statement->fetchAll();
-        print_r($result);
         return $result;
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
