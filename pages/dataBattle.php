@@ -94,10 +94,10 @@
     echo '  </div>';
 
     echo ' 
-                <h3> Podium </h3> 
-                <div id="podium">
+            <h3> Podium </h3> 
+            <div id="podium">
 
-    
+
 
 
                 <div id="deuxieme">
@@ -115,12 +115,8 @@
                     <p>'. $podium[2]['nomEquipe'] .'</p>
                     <p>'. $podium[2]['totalNotes'] .'</p>
                 </div>
-                    
-
             </div>
-
-    
-    ';
+            ';
 
             
 ?>
