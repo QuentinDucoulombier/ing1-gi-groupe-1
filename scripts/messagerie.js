@@ -86,7 +86,7 @@ function displayMsg(message) {
  * @fn const recup_messages()
  * @brief récupère les nouveaux messages depuis le serveur
  */
-const recup_messages = () => {
+function recup_messages() {
 
     console.log(lastMessageId);
     if(lastMessageId == 1){
@@ -98,8 +98,8 @@ const recup_messages = () => {
             let messages = JSON.parse(this.responseText);
 
             messages.forEach(message => {
-                id = message["id"];
-
+                id = parseInt(message["id"]);
+                lastMessageId = parseInt(lastMessageId);
                 console.log("id "+id);
                 console.log("last id "+lastMessageId);
                 console.log(message);
@@ -110,10 +110,7 @@ const recup_messages = () => {
                     lastMessageId = id;
                 }
                 else{
-                    if(lastMessageId == 9)
-                    {
-                        lastMessageId = id;
-                    }
+                    //lastMessageId = id;
                     console.log("ici 2");
                 }
             });

@@ -13,7 +13,7 @@
             session_start();
             $cnx = conn2();
             $dbname = "projetIaPau";
-            echo $_SESSION["idUser"];
+            //echo $_SESSION["idUser"];
             $idUser = $_SESSION["idUser"];
             mysqli_select_db($cnx, $dbname);
             $queryDestinataire = "UPDATE Auteur SET idUtilisateur = '$idUser'";
