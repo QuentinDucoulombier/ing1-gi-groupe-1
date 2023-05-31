@@ -1,10 +1,12 @@
 function sha1(str) {
     return CryptoJS.SHA1(str).toString();
 }
+var MotDePassesgestionnaire = document.getElementById("MotDePasse_Gestionnaire");
 var ConfirmerMotDePassesgestionnaire = document.getElementById("Confirmer_MotDePasse_Gestionnaire");
 var AncienMotDePassesgestionnaire = document.getElementById("Ancien_MotDePasse_Gestionnaire");
 
 function toggleEditProfilGestionnaire(button) {
+    MotDePassesgestionnaire.style.display = 'block';
     ConfirmerMotDePassesgestionnaire.style.display = 'block';
     AncienMotDePassesgestionnaire.style.display = 'block';
     var email = button.getAttribute('data-email');
@@ -31,8 +33,8 @@ function toggleEditProfilGestionnaire(button) {
     cells[5].innerHTML = "<input type='date' value='" + dateDebutUtilisateur + "'>";
     cells[6].innerHTML = "<input type='date' value='" + dateFinUtilisateur + "'>";
     cells[7].innerHTML = "<input type='password' value=''>";
-    cells[8].innerHTML = "<input type='password' value='" + motDePasse + "'>";
-    cells[9].innerHTML = "<input type='password' value='" + ConfirmerMotDePasse + "'>";
+    cells[8].innerHTML = "<input type='password' value=''>";
+    cells[9].innerHTML = "<input type='password' value=''>";
 
     // Changer le texte du bouton Modifier en Envoyer
     button.innerHTML = "Envoyer";
@@ -57,14 +59,10 @@ function sendDataProfilGestionnaire(button, email, motDePasse2) {
     var nomEntreprise = cells[4].getElementsByTagName('input')[0].value;
     var dateDebutUtilisateur = cells[5].getElementsByTagName('input')[0].value;
     var dateFinUtilisateur = cells[6].getElementsByTagName('input')[0].value;
-    var AncienMotDePasse = cells[7].getElementsByTagName('input')[0].value;
-    if (cells[8].getElementsByTagName('input')[0].value == motDePasse2) {
-        var motDePasse = cells[8].getElementsByTagName('input')[0].value;
-        var ConfirmerMotDePasse = cells[9].getElementsByTagName('input')[0].value;
-    } else {
-        var motDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
-        var ConfirmerMotDePasse = sha1(cells[9].getElementsByTagName('input')[0].value);
-    }
+    var AncienMotDePasse = sha1(cells[7].getElementsByTagName('input')[0].value);
+    var motDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
+    var ConfirmerMotDePasse = sha1(cells[9].getElementsByTagName('input')[0].value);
+
     // Envoyer les données à une page PHP pour effectuer la mise à jour
     // Utilisez AJAX ou un formulaire pour soumettre les données à la page PHP
     // Exemple avec AJAX :
@@ -80,14 +78,14 @@ function sendDataProfilGestionnaire(button, email, motDePasse2) {
             cells[4].innerHTML = nomEntreprise;
             cells[5].innerHTML = dateDebutUtilisateur;
             cells[6].innerHTML = dateFinUtilisateur;
-            cells[8].innerHTML = motDePasse;
-            cells[9].innerHTML = ConfirmerMotDePasse;
+
             // Changer le texte du bouton Envoyer en Modifier
             button.innerHTML = "Modifier";
             button.setAttribute("onclick", "toggleEditProfilGestionnaire(this)");
+            MotDePassesgestionnaire.style.display = 'none';
             ConfirmerMotDePassesgestionnaire.style.display = 'none';
             AncienMotDePassesgestionnaire.style.display = 'none';
-            location.reload();
+            //location.reload();
             
         }
     };

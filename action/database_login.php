@@ -3,6 +3,7 @@
     $servername = 'localhost';
 
 
+
     $username = ''; // Mettre votre username MySQL
     $password = ''; // Mettre votre mot de passe MySQL
 

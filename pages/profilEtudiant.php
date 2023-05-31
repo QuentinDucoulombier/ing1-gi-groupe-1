@@ -50,7 +50,7 @@ if (isset($_SESSION['email'])) {
             <td></td>
         </tr>
 
-        <tr>
+        <tr id="MotDePasse_Etudiant">
             <th>Mot de passe</th>
             <td><?php echo $infos[0]['motDePasse']; ?></td>
         </tr>
@@ -67,7 +67,7 @@ if (isset($_SESSION['email'])) {
     <h2>Mon équipe</h2>
     <?php
     // Appel de la fonction pour récupérer les équipes de l'utilisateur
-    $resultats = getMembreEquipe($email);
+    $resultats = getEquipeUser($email);
 
     // Affichage du tableau
     echo "<table>";
