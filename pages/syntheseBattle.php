@@ -20,7 +20,7 @@
             echo '<p>'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
 
             if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-                echo '          <a href="/?page=ModifierEvenement&evenement='.$idBattle.'"> ';
+                echo '          <a href="/?page=modifierEvenement&evenement='.$idBattle.'"> ';
                 echo '              <button name="creation"> Modifier la battle </button> ';
                 echo '          </a>';
             }

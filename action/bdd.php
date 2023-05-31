@@ -1005,24 +1005,6 @@ function getEvenementbyID($id)
     }
 }
 
-/*
- * Permet de récupérer un id d'un data Challenge ou une data battle à l'aide de son nom
- * @return tableau de challenge
- */
-function getEvenementbyName($nom)
-{
-    try {
-        $conn = connect();
-        $sqlQuery = "SELECT idEvenement, nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE idEvenement = :id";
-        $statement = $conn->prepare($sqlQuery);
-        $statement->bindParam(':id', $id);
-        $statement->execute();
-        $result = $statement->fetch();
-        return $result;
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-}
 
  /*
     * Permet de récupérer les infos liées à un projet Data 
@@ -1037,6 +1019,27 @@ function getEvenementbyName($nom)
             $statement->bindParam(':idEvenement', $idEvenement);
             $statement->execute();
             $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+
+
+ /*
+    * Permet de récupérer les infos liées à un projet Data 
+    * @param nomEvenement : nom de l'evenement correspondant
+    */
+    function getProjetDatabyID($idProjetData){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT * FROM ProjetData 
+                        WHERE idProjetData LIKE :idProjetData";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':idProjetData', $idProjetData);
+            $statement->execute();
+            $result = $statement->fetch();
             return $result;
         }
         catch(Exception $e){
@@ -1201,16 +1204,16 @@ function getMembre($equipe)
  * Permet de récupérer le gestionnaire d'une équipe
  * @param mail : 
  */
-function getSuperviseur($equipe)
+function getSuperviseur($projet)
 {
     try {
         $conn = connect();
-        $sqlQuery = "SELECT Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Utilisateur.email FROM Utilisateur
+        $sqlQuery = "SELECT Utilisateur.* FROM Utilisateur
                         INNER JOIN Superviser ON Utilisateur.idUtilisateur = Superviser.idGestionnaire
                         INNER JOIN ProjetData ON Superviser.idProjetData = ProjetData.idProjetData
-                        WHERE ProjetData.nomProjet = :equipe;";
+                        WHERE ProjetData.nomProjet = :projet;";
         $statement = $conn->prepare($sqlQuery);
-        $statement->bindParam(':equipe', $equipe);
+        $statement->bindParam(':projet', $projet);
         $statement->execute();
         $result = $statement->fetchAll();
         return $result;
