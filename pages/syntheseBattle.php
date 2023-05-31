@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="styles/component/synthese.css" />
-<script src="scripts/supprimerQuestionnaire.js" defer></script>
+<script src="scripts/manageEvenements.js" defer></script>
 
 <?php
     if (isset($_SESSION['email'])){
@@ -19,10 +19,25 @@
             echo '<h1>'. $battle['nomEvenement'] . '</h3>';
             echo '<p>'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
 
+            if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+                echo '          <a href="/?page=modifierEvenement&evenement='.$idBattle.'"> ';
+                echo '              <button name="creation"> Modifier la battle </button> ';
+                echo '          </a>';
+            }
+             // Si l'utilisateur est un administrateur peut supprimer le challenge
+             if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
+                echo '              <button name="supprimer" id-event="'.$idBattle.'" onclick="supprimerEvent(this)"> Supprimer la battle </button>';
+            }
+
             echo '<h3> Projet rattaché : </h3>';
 
             echo ' <div id="liste-projets">';
             echo        $projets[0]['nomProjet'];
+            if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+                echo '          <a href="/?page=modifierProjet&projet='.$projet[0]['idProjetData'].'"> ';
+                echo '              <button name="creation"> Modifier le projet </button> ';
+                echo '          </a>';
+            }
             echo ' </div>';
 
             echo '<h3> Liste des équipes rattachées : </h3>';

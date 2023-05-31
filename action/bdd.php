@@ -1534,4 +1534,41 @@ function checkGestionnaireProjetData($mail, $idprojet)
         }   
         
     }
+
+    /*
+ * Permet de mettre l'analyse du code du projetData
+ * @param  : 
+ */
+function setAnalyseCode($idEquipe,$analyse)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE Equipe SET analyseProjet=:analyse WHERE idEquipe=:idEquipe";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEquipe', $idEquipe);
+        $statement->bindParam(':analyse', $analyse);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+/*
+* Permet de checker si un gestionnaire supervise un des projet du challenge
+* @param mail : 
+*/
+function getAnalyseCode($idProjetData)
+{
+   try {
+       $conn = connect();
+       $sqlQuery = "SELECT idEquipe,analyseProjet FROM Equipe WHERE idProjetData=:idProjetData";
+       $statement = $conn->prepare($sqlQuery);
+       $statement->bindParam(':idProjetData', $idProjetData);
+       $statement->execute();
+       $result = $statement->fetchAll();
+            return $result;
+   } catch (Exception $e) {
+       die('Erreur : ' . $e->getMessage());
+   }
+}
+
 ?>
