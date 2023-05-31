@@ -69,6 +69,31 @@ function request($req)
     }
 
 }
+/*
+* Permet de verifier si un mail existe dans la base de données
+* @param mail : mail de l'utilisateur
+* @return true si le mail existe
+*/
+function isMail($mail)
+{
+
+    try {
+        
+        $conn = connect();
+
+        $sqlQuery = "SELECT `email` FROM Utilisateur WHERE email LIKE :mail;";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':mail', $mail);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result > 0;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+
+
+}
+
 
 /*
  * Permet de vérifier si l'utilisateur est présent dans la base de données (au moment de la connexion)
@@ -554,12 +579,6 @@ function modifyEntreprise($mail, $nomEntreprise)
 
 /*
  * Permet d'ajouter un evenement (date battle/challenge)
- * @param mail : mail de l'utilisateur
- * @param pass : Mot de passe
- * @param nom
- * @param prenom
- * @param tel
- * @param entreprise
  */
 function addEvent($nom, $dateDebut, $dateFin, $type, $descriptionEvent, $imageEvent)
 {
@@ -575,10 +594,49 @@ function addEvent($nom, $dateDebut, $dateFin, $type, $descriptionEvent, $imageEv
         $statement->bindParam(':descriptionEvent', $descriptionEvent);
         $statement->bindParam(':imageEvent', $imageEvent);
         $statement->execute();
+
+        // Récupération de l'id de l'événement ajouté
+        $eventId = $conn->lastInsertId();
+
+        return $eventId;
+
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
 }
+
+/*
+ * Permet de supprimer un evenement du site
+ */
+function deleteEvent($idEvent)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "DELETE FROM Evenement WHERE idEvenement = :idEvent";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEvent', $idEvent);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de supprimer un evenement du site
+ */
+function deleteProjet($idProjet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "DELETE FROM ProjetData WHERE idProjetData = :idProjet";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjet', $idProjet);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
 /*
  * Permet d'ajouter un questionnaire 
  * @param idDataBattle : id data battle lié au questionnaire
@@ -658,6 +716,8 @@ function deleteQuestionnaire($idQuestionnaire)
         die('Erreur : ' . $e->getMessage());
     }
 }
+
+
 /*
  * Permet de récupérer les dates d'un questionnaire 
  * @param idQuestionnaire : id questionnaire dont on veut les dates
@@ -870,12 +930,12 @@ function getPodium($idEvenement)
  * @param tel
  * @param entreprise
  */
-function addProjetData($idEvenement, $nomProjet, $description, $image, $urlFichier, $urlVideo)
+function addProjetData($idEvenement, $nomProjet, $description, $image, $urlFichier, $urlVideo, $conseil, $consigne)
 {
     try {
         $conn = connect();
-        $sqlQuery = "INSERT INTO ProjetData (idEvenement, nomProjet, description, image, urlFichier, urlVideo) 
-                    VALUES (:id, :nom, :desc, :img, :fichier, :video)";
+        $sqlQuery = "INSERT INTO ProjetData (idEvenement, nomProjet, description, image, urlFichier, urlVideo, conseil, consigne) 
+                    VALUES (:id, :nom, :desc, :img, :fichier, :video, :conseil, :consigne)";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':id', $idEvenement);
         $statement->bindParam(':nom', $nomProjet);
@@ -883,9 +943,9 @@ function addProjetData($idEvenement, $nomProjet, $description, $image, $urlFichi
         $statement->bindParam(':img', $image);
         $statement->bindParam(':fichier', $urlFichier);
         $statement->bindParam(':video', $urlVideo);
+        $statement->bindParam(':conseil', $conseil);
+        $statement->bindParam(':consigne', $consigne);
         $statement->execute();
-        $result = $statement->fetchAll();
-        return $result;
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
@@ -898,7 +958,7 @@ function addProjetData($idEvenement, $nomProjet, $description, $image, $urlFichi
     function getChallenge(){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent,idEvenement FROM Evenement WHERE typeEvenement LIKE 'dataChallenge'";
+            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent,idEvenement FROM Evenement WHERE typeEvenement LIKE 'dataChallenge' ORDER BY dateD DESC";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -916,7 +976,7 @@ function addProjetData($idEvenement, $nomProjet, $description, $image, $urlFichi
     function getBattle(){
         try{
             $conn = connect();
-            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent,idEvenement  FROM Evenement WHERE typeEvenement LIKE 'dataBattle'";
+            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent,idEvenement  FROM Evenement WHERE typeEvenement LIKE 'dataBattle' ORDER BY dateD DESC";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -931,6 +991,25 @@ function addProjetData($idEvenement, $nomProjet, $description, $image, $urlFichi
  * @return tableau de challenge
  */
 function getEvenementbyID($id)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT idEvenement, nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent FROM Evenement WHERE idEvenement = :id";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':id', $id);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de récupérer un id d'un data Challenge ou une data battle à l'aide de son nom
+ * @return tableau de challenge
+ */
+function getEvenementbyName($nom)
 {
     try {
         $conn = connect();

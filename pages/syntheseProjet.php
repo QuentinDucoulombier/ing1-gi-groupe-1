@@ -17,6 +17,17 @@
             echo '<p>'. $challenge['dateDebut'].' - '.$challenge['dateFin'].'</p>';
             echo '<h2>'. $projet['nomProjet'] . '</h2>';
 
+            if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+                echo '          <a href="/?page=modifierProjet&projet='.$projet['idProjetData'].'"> ';
+                echo '              <button name="creation"> Modifier le projet </button> ';
+                echo '          </a>';
+            }
+
+            // Si l'utilisateur est un administrateur peut supprimer le challenge
+            if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
+                echo '              <button name="supprimer" id-projet="'.$projet['idProjetData'].'" onclick="supprimerProjet(this)"> Supprimer le projet </button>';
+            }
+
 
             echo '<h3> Liste des équipes rattachées : </h3>';
 
@@ -50,3 +61,5 @@
 
     }
     ?>
+
+<script src="scripts/manageEvenements.js" defer></script>

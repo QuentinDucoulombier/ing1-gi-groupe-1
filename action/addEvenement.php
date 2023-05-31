@@ -1,5 +1,3 @@
-
-
 <?php
 
 require('bdd.php');
@@ -12,10 +10,10 @@ $dateFin = $_POST['dateFin'];
 $description = $_POST['description'];
 $image = $_POST['image'];
 
-addEvent($nomEvenement, $dateDebut, $dateFin, $type, $description, $image);
+$eventid = addEvent($nomEvenement, $dateDebut, $dateFin, $type, $description, $image);
 
 
 
-//header('Location: /?page=ajoutProjet');
+header('Location: /?page=ajoutProjet&type='.$type.'&evenement='.$eventid);
 
 ?>

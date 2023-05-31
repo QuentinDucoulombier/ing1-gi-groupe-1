@@ -24,11 +24,6 @@
     echo '<h1 class="data-name">'. $challenge['nomEvenement'] . '</h3>';
     echo '<p class="date">'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
 
-    if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-        echo '          <a href="/?page=modifierChallenge"> ';
-        echo '              <button name="creation"> Modifier le challenge </button> ';
-        echo '          </a>';
-    }
 
     // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
     if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")  ) ) {
@@ -102,3 +97,6 @@
             
 ?>
 </div>
+
+
+<script src="scripts/manageEvenements.js" defer></script>

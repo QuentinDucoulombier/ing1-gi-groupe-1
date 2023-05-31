@@ -32,7 +32,7 @@ CREATE TABLE ProjetData(
     conseil varchar(1024),
     consigne varchar(1024),
     PRIMARY KEY (idProjetData),
-    FOREIGN KEY (idEvenement) REFERENCES Evenement(idEvenement)
+    FOREIGN KEY (idEvenement) REFERENCES Evenement(idEvenement) ON DELETE CASCADE
 --    FOREIGN KEY (idEntreprise) REFERENCES Entreprise(idEntreprise)
 );
 
@@ -43,7 +43,7 @@ CREATE TABLE Questionnaire(
     dateDebut date,
     dateFin date,
     PRIMARY KEY (idQuestionnaire),
-    FOREIGN KEY (idDataBattle) REFERENCES Evenement(idEvenement)
+    FOREIGN KEY (idDataBattle) REFERENCES Evenement(idEvenement) ON DELETE CASCADE
 );
 
 CREATE TABLE Question(
@@ -83,7 +83,7 @@ CREATE TABLE Equipe(
     idProjetData int NOT NULL,
     PRIMARY KEY (idEquipe),
     FOREIGN KEY (idCapitaine) REFERENCES Utilisateur(idUtilisateur) ON DELETE CASCADE,
-    FOREIGN KEY (idProjetData) REFERENCES ProjetData(idProjetData)
+    FOREIGN KEY (idProjetData) REFERENCES ProjetData(idProjetData) ON DELETE CASCADE
 );
 
 CREATE TABLE Composer(
@@ -102,7 +102,7 @@ CREATE TABLE Reponse(
     note tinyint,
     PRIMARY KEY (idReponse),
     FOREIGN KEY (idQuestion) REFERENCES Question(idQuestion) ON DELETE CASCADE,
-    FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe),
+    FOREIGN KEY (idEquipe) REFERENCES Equipe(idEquipe) ON DELETE CASCADE,
     CONSTRAINT check_note CHECK (note>=0 AND note<5)
 );
 
@@ -110,7 +110,7 @@ CREATE TABLE Superviser(
     idProjetData int NOT NULL,
     idGestionnaire int NOT NULL,
     PRIMARY KEY (idProjetData, idGestionnaire),
-    FOREIGN KEY (idProjetData) REFERENCES ProjetData(idProjetData),
+    FOREIGN KEY (idProjetData) REFERENCES ProjetData(idProjetData) ON DELETE CASCADE,
 
     FOREIGN KEY (idGestionnaire) REFERENCES Utilisateur(idUtilisateur) ON DELETE CASCADE
 
