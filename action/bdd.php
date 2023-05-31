@@ -1642,4 +1642,36 @@ function checkGestionnaireProjetData($mail, $idprojet)
         
     }
 
+    function getMessageTeam($idTeam) {
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT Messages.message, Messages.date_envoi, UtilisateurDes.nomUtilisateur as nomDestinataire, UtilisateurDes.prenomUtilisateur as prenomDestinataire, UtilisateurAut.nomUtilisateur as nomAuteur, UtilisateurAut.prenomUtilisateur as prenomAuteur
+            FROM Composer
+            INNER JOIN Messages ON Messages.id_destinataire = Composer.idEtudiant
+            INNER JOIN Utilisateur as UtilisateurDes ON UtilisateurDes.idUtilisateur = Messages.id_destinataire
+            INNER JOIN Utilisateur as UtilisateurAut ON UtilisateurAut.idUtilisateur = Messages.id_auteur
+            WHERE Composer.idEquipe = $idTeam
+            
+            UNION
+            
+            SELECT Messages.message, Messages.date_envoi, UtilisateurDes.nomUtilisateur as nomDestinataire, UtilisateurDes.prenomUtilisateur as prenomDestinataire, UtilisateurAut.nomUtilisateur as nomAuteur, UtilisateurAut.prenomUtilisateur as prenomUtilisateur
+            FROM Composer
+            INNER JOIN Messages ON Messages.id_auteur = Composer.idEtudiant
+            INNER JOIN Utilisateur as UtilisateurDes ON UtilisateurDes.idUtilisateur = Messages.id_destinataire
+            INNER JOIN Utilisateur as UtilisateurAut ON UtilisateurAut.idUtilisateur = Messages.id_auteur
+            WHERE Composer.idEquipe = $idTeam;";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->execute();
+            $result = $statement->fetchAll();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        }   
+
+
+    } 
+
+
+
 ?>

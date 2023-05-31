@@ -34,9 +34,12 @@
                     </div>
 
                     <div class="messages">
-                        <a href="">
-                            <button name="messages"> Voir les messages </button>
-                        </a>
+                        <form action="/?page=viewMessageTeam" method="POST">
+                            <?php
+                                echo '<input type="hidden"  name="idTeam" value="'.$equipe['idEquipe'].'"/>'
+                            ?>
+                            <input type="submit" value="Voir les messages"/>
+                        </form>
                     </div>
 
                 </div>
