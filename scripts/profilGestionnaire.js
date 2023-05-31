@@ -59,7 +59,7 @@ function sendDataProfilGestionnaire(button, email, motDePasse2) {
     var nomEntreprise = cells[4].getElementsByTagName('input')[0].value;
     var dateDebutUtilisateur = cells[5].getElementsByTagName('input')[0].value;
     var dateFinUtilisateur = cells[6].getElementsByTagName('input')[0].value;
-    var AncienMotDePasse = cells[7].getElementsByTagName('input')[0].value;
+    var AncienMotDePasse = sha1(cells[7].getElementsByTagName('input')[0].value);
     var motDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
     var ConfirmerMotDePasse = sha1(cells[9].getElementsByTagName('input')[0].value);
 
@@ -85,7 +85,7 @@ function sendDataProfilGestionnaire(button, email, motDePasse2) {
             MotDePassesgestionnaire.style.display = 'none';
             ConfirmerMotDePassesgestionnaire.style.display = 'none';
             AncienMotDePassesgestionnaire.style.display = 'none';
-            location.reload();
+            //location.reload();
             
         }
     };
