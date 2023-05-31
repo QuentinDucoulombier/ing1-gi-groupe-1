@@ -20,7 +20,7 @@
             echo '<p>'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
 
             if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-                echo '          <a href="/?page=modifierBattle"> ';
+                echo '          <a href="/?page=ModifierEvenement&evenement='.$idBattle.'"> ';
                 echo '              <button name="creation"> Modifier la battle </button> ';
                 echo '          </a>';
             }
@@ -33,6 +33,11 @@
 
             echo ' <div id="liste-projets">';
             echo        $projets[0]['nomProjet'];
+            if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+                echo '          <a href="/?page=modifierProjet&projet='.$projet[0]['idProjetData'].'"> ';
+                echo '              <button name="creation"> Modifier le projet </button> ';
+                echo '          </a>';
+            }
             echo ' </div>';
 
             echo '<h3> Liste des équipes rattachées : </h3>';

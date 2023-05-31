@@ -49,12 +49,6 @@
     echo '              </div>';
     echo '          </div>';
 
-    if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-        echo '          <a href="/?page=modifierBattle"> ';
-        echo '              <button name="creation"> Modifier le projet </button> ';
-        echo '          </a>';
-    }
-
     echo '      </div>';
 
     echo '      <div class=image-projet>';

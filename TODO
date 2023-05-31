@@ -20,7 +20,7 @@ Commenter le code
 [x] inscription.php
 [x] evenements.php
 [x] dataBattle.php
-[] dataChallenge.php    -> Classement ?
+[x] dataChallenge.php    -> Classement ?
 
 [] profilEtudiant.php       -> Lien vers les projets auquels il appartient
 [] inscriptionChallenge.php -> afficher un message dalerte pour dire quil faut creer lequipe
