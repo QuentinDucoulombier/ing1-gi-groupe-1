@@ -10,41 +10,43 @@ function toggleEditProfilGestionnaire(button) {
     ConfirmerMotDePassesgestionnaire.classList.remove("hide");
     AncienMotDePassesgestionnaire.classList.remove("hide");
     document.getElementById("profil_id").classList.add("smaller_profil");
+
     var email = button.getAttribute('data-email');
+    var mdp = button.getAttribute('data-mdp');
+
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
     var cells = table.getElementsByTagName('td'); // Récupère tous les éléments <td> dans la table
 
     // Récupérer les valeurs actuelles des cellules
     var prenom = cells[0].innerHTML;
-    var nom = cells[1].innerHTML;
-    var nvemail = cells[2].innerHTML;
-    var tel = cells[3].innerHTML;
-    var nomEntreprise = cells[4].innerHTML;
-    var dateDebutUtilisateur = cells[5].innerHTML;
-    var dateFinUtilisateur = cells[6].innerHTML;
-    var motDePasse = cells[8].innerHTML;
-    var ConfirmerMotDePasse = cells[9].innerHTML;
+    var nom = cells[2].innerHTML;
+    var nvemail = cells[4].innerHTML;
+    var tel = cells[6].innerHTML;
+    var nomEntreprise = cells[8].innerHTML;
+    var dateDebutUtilisateur = cells[10].innerHTML;
+    var dateFinUtilisateur = cells[12].innerHTML;
+
 
     // Modifier les cellules pour afficher les champs de modification
     cells[0].innerHTML = "<input type='text' value='" + prenom + "'>";
-    cells[1].innerHTML = "<input type='text' value='" + nom + "'>";
-    cells[2].innerHTML = "<input type='text' value='" + nvemail + "'>";
-    cells[3].innerHTML = "<input type='text' value='" + tel + "'>";
-    cells[4].innerHTML = "<input type='text' value='" + nomEntreprise + "'>";
-    cells[5].innerHTML = "<input type='date' value='" + dateDebutUtilisateur + "'>";
-    cells[6].innerHTML = "<input type='date' value='" + dateFinUtilisateur + "'>";
-    cells[7].innerHTML = "<input type='password' value=''>";
-    cells[8].innerHTML = "<input type='password' value=''>";
-    cells[9].innerHTML = "<input type='password' value=''>";
+    cells[2].innerHTML = "<input type='text' value='" + nom + "'>";
+    cells[4].innerHTML = "<input type='text' value='" + nvemail + "'>";
+    cells[6].innerHTML = "<input type='text' value='" + tel + "'>";
+    cells[8].innerHTML = "<input type='text' value='" + nomEntreprise + "'>";
+    cells[10].innerHTML = "<input type='date' value='" + dateDebutUtilisateur + "'>";
+    cells[12].innerHTML = "<input type='date' value='" + dateFinUtilisateur + "'>";
+    cells[14].innerHTML = "<input type='password' value=''>";
+    cells[16].innerHTML = "<input type='password' value=''>";
+    cells[18].innerHTML = "<input type='password' value=''>";
 
     // Changer le texte du bouton Modifier en Envoyer
     button.innerHTML = "Envoyer";
-    button.setAttribute("onclick", "sendDataProfilGestionnaire(this, '" + email + "', '" + motDePasse + "')");
+    button.setAttribute("onclick", "validateProfilGestionnaire(this, '" + email + "', '" + mdp + "')");
 }
 
 
 
-function sendDataProfilGestionnaire(button, email, motDePasse2) {
+function sendDataProfilGestionnaire(button, email) {
 
 
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
@@ -53,16 +55,15 @@ function sendDataProfilGestionnaire(button, email, motDePasse2) {
 
     // Récupérer les nouvelles valeurs des champs de modification
     var prenom = cells[0].getElementsByTagName('input')[0].value;
-    var nom = cells[1].getElementsByTagName('input')[0].value;
-    var nvemail = cells[2].getElementsByTagName('input')[0].value;
-    var tel = cells[3].getElementsByTagName('input')[0].value;
-    var type = 'Gestionnaire'
-    var nomEntreprise = cells[4].getElementsByTagName('input')[0].value;
-    var dateDebutUtilisateur = cells[5].getElementsByTagName('input')[0].value;
-    var dateFinUtilisateur = cells[6].getElementsByTagName('input')[0].value;
-    var AncienMotDePasse = sha1(cells[7].getElementsByTagName('input')[0].value);
-    var motDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
-    var ConfirmerMotDePasse = sha1(cells[9].getElementsByTagName('input')[0].value);
+    var nom = cells[2].getElementsByTagName('input')[0].value;
+    var nvemail = cells[4].getElementsByTagName('input')[0].value;
+    var tel = cells[6].getElementsByTagName('input')[0].value;
+    var nomEntreprise = cells[8].getElementsByTagName('input')[0].value;
+    var dateDebutUtilisateur = cells[10].getElementsByTagName('input')[0].value;
+    var dateFinUtilisateur = cells[12].getElementsByTagName('input')[0].value;
+    var AncienMotDePasse = sha1(cells[14].getElementsByTagName('input')[0].value);
+    var motDePasse = sha1(cells[16].getElementsByTagName('input')[0].value);
+    var ConfirmerMotDePasse = sha1(cells[18].getElementsByTagName('input')[0].value);
 
     // Envoyer les données à une page PHP pour effectuer la mise à jour
     // Utilisez AJAX ou un formulaire pour soumettre les données à la page PHP
@@ -73,12 +74,12 @@ function sendDataProfilGestionnaire(button, email, motDePasse2) {
 
             // Mettre à jour les cellules avec les nouvelles valeurs
             cells[0].innerHTML = prenom;
-            cells[1].innerHTML = nom;
-            cells[2].innerHTML = nvemail;
-            cells[3].innerHTML = tel;
-            cells[4].innerHTML = nomEntreprise;
-            cells[5].innerHTML = dateDebutUtilisateur;
-            cells[6].innerHTML = dateFinUtilisateur;
+            cells[2].innerHTML = nom;
+            cells[4].innerHTML = nvemail;
+            cells[6].innerHTML = tel;
+            cells[8].innerHTML = nomEntreprise;
+            cells[10].innerHTML = dateDebutUtilisateur;
+            cells[12].innerHTML = dateFinUtilisateur;
 
             // Changer le texte du bouton Envoyer en Modifier
             button.innerHTML = "Modifier";
@@ -96,9 +97,110 @@ function sendDataProfilGestionnaire(button, email, motDePasse2) {
         alert("Les mots de passe ne correspondent pas");
         return;
     }
+    type = "Gestionnaire";
     typePage = "profil";
     xhttp.open("POST", "action/edit_a_profil.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + tel + "&nomEntreprise=" + nomEntreprise + "&dateDebutUtilisateur=" + dateDebutUtilisateur + "&dateFinUtilisateur=" + dateFinUtilisateur + "&motDePasse=" + motDePasse + "&AncienMotDePasse=" + AncienMotDePasse + "&typePage=" + typePage);
 
 }
+
+function validateProfilGestionnaire(button, email2, mdp) {
+
+    var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
+    var cells = table.getElementsByTagName('td'); // Récupère tous les éléments <td> dans la table
+
+    // Récupérer les nouvelles valeurs des champs de modification
+    var prenom = cells[0].getElementsByTagName('input')[0].value;
+    var nom = cells[2].getElementsByTagName('input')[0].value;
+    var email = cells[4].getElementsByTagName('input')[0].value;
+    var numeroTel = cells[6].getElementsByTagName('input')[0].value;
+    var nomEntreprise = cells[8].getElementsByTagName('input')[0].value;
+    var dateDebutUtilisateur = cells[10].getElementsByTagName('input')[0].value;
+    var dateFinUtilisateur = cells[12].getElementsByTagName('input')[0].value;
+    var AncienMotDePasse = sha1(cells[14].getElementsByTagName('input')[0].value);
+    var motDePasse = sha1(cells[16].getElementsByTagName('input')[0].value);
+    var ConfirmerMotDePasse = sha1(cells[18].getElementsByTagName('input')[0].value);
+
+    var valid = true;
+
+    if (!prenom) { 
+        document.getElementById("prenomError").style.display = "block";
+        valid = false;
+    }
+    else {
+        document.getElementById("prenomError").style.display = "none";
+    }
+
+    if (!nom) {
+        document.getElementById("nomError").style.display = "block";
+        valid = false;
+    }
+    else {
+        document.getElementById("nomError").style.display = "none";
+    }
+
+    if (!email) {
+        document.getElementById("emailError").style.display = "block";
+        valid = false;
+    } else if (email2 != email){
+        document.getElementById("emailError").style.display = "none";
+        // Vérification du mail via une requête AJAX
+        checkEmailExists(email);
+    }
+    else {
+        document.getElementById("emailError").style.display = "none";
+    }
+
+  
+    if (!numeroTel || numeroTel.length !== 10 || isNaN(numeroTel)) {
+        document.getElementById("numeroTelError").style.display = "block";
+        valid = false;
+    } else {
+        document.getElementById("numeroTelError").style.display = "none";
+    }
+
+    if (!nomEntreprise) {
+        document.getElementById("nomEntrepriseError").style.display = "block";
+        valid = false;
+    }
+    else {
+        document.getElementById("nomEntrepriseError").style.display = "none";
+    }
+
+    if (!dateDebutUtilisateur) {
+        document.getElementById("dateDebutError").style.display = "block";
+        valid = false;
+    }
+    else {
+        document.getElementById("dateDebutError").style.display = "none";
+    }
+
+    if (!dateFinUtilisateur) {
+        document.getElementById("dateFinError").style.display = "block";
+        valid = false;
+    }
+    else {
+        document.getElementById("dateFinError").style.display = "none";
+    }
+
+    if (AncienMotDePasse != mdp && motDePasse != "da39a3ee5e6b4b0d3255bfef95601890afd80709") {
+        document.getElementById("ancienMotDePasseError").style.display = "block";
+        valid = false;
+    } else {
+        document.getElementById("ancienMotDePasseError").style.display = "none";
+    }
+    
+    
+    if (motDePasse != ConfirmerMotDePasse) {
+        document.getElementById("confirmMotDePasseError").style.display = "block";
+        valid = false;
+    } else {
+        document.getElementById("confirmMotDePasseError").style.display = "none";
+    }
+    if (valid == true) {
+        sendDataProfilGestionnaire(button, email2);
+      }
+    return valid;
+    
+    }
