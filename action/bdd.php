@@ -1204,16 +1204,16 @@ function getMembre($equipe)
  * Permet de récupérer le gestionnaire d'une équipe
  * @param mail : 
  */
-function getSuperviseur($equipe)
+function getSuperviseur($projet)
 {
     try {
         $conn = connect();
-        $sqlQuery = "SELECT Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Utilisateur.email FROM Utilisateur
+        $sqlQuery = "SELECT Utilisateur.* FROM Utilisateur
                         INNER JOIN Superviser ON Utilisateur.idUtilisateur = Superviser.idGestionnaire
                         INNER JOIN ProjetData ON Superviser.idProjetData = ProjetData.idProjetData
-                        WHERE ProjetData.nomProjet = :equipe;";
+                        WHERE ProjetData.nomProjet = :projet;";
         $statement = $conn->prepare($sqlQuery);
-        $statement->bindParam(':equipe', $equipe);
+        $statement->bindParam(':projet', $projet);
         $statement->execute();
         $result = $statement->fetchAll();
         return $result;
