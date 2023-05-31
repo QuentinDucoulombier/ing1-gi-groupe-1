@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="styles/component/evenements.css" />
+<div class="data-event">
 <?php
 
 
@@ -20,8 +21,8 @@
 
     $projets = getProjetData($id);
 
-    echo '<h1>'. $challenge['nomEvenement'] . '</h3>';
-    echo '<p>'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
+    echo '<h1 class="data-name">'. $challenge['nomEvenement'] . '</h3>';
+    echo '<p class="date">'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
 
     if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
         echo '          <a href="/?page=modifierChallenge"> ';
@@ -57,6 +58,11 @@
         if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjetData($user[0]['email'], $projet['idProjetData']) ) ) ) {
             echo '          <a href="/?page=syntheseProjet&projet='.$projet['idProjetData'].'"> ';
             echo '              <button name="gestion"> Synthèse du projet </button> ';
+            echo '          </a>';
+        }// Si l'utilisateur est un étudiant inscrit au challenge on lui propose de d'accéder au récap du projet pour lequel il est inscrit
+        if (isset($_SESSION['email']) && $user[0]['type'] == "Etudiant" && checkInscriptionProjet($user[0]['email'], $projet['idProjetData'])) {
+            echo '          <a href="/?page=descriptionData&idChallenge='.$projet['idProjetData'].'"> ';
+            echo '              <button name="monProjet"> Mon projet </button> ';
             echo '          </a>';
         }
 
@@ -95,3 +101,4 @@
 
             
 ?>
+</div>

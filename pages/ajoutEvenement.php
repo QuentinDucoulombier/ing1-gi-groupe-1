@@ -4,19 +4,20 @@
     <h3>Créer un évenement</h3>
 
     <div id="request-type">
+
         <div class="field">                            
-            <label for="gender">Type d'évènement :</label>                            
+            <label for="type">Type d'évènement :</label>                            
             <p class="needed" id="needed-type">
                 Champs requis
-            </p>                            
+            </p>
         </div>
         <div id="evenement-buttons">
             <p>
-                <input type="radio" id="dataChallenge" name="evenement" value="Data Challenge">
+                <input type="radio" id="dataChallenge" name="type" value="DataChallenge">
                 <label for="dataChallenge">Data Challenge</label>
             </p>
             <p>
-                <input type="radio" id="dataBattle" name="evenement" value="Data Battle">
+                <input type="radio" id="dataBattle" name="type" value="DataBattle">
                 <label for="dataBattle">Data Battle</label>
             </p>
 

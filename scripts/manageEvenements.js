@@ -2,7 +2,7 @@ function validateEvenement() {
     var isValid = true;
   
     // Vérification du champ "Type d'évènement"
-    var eventTypeRadios = document.querySelectorAll('input[name="evenement"]');
+    var eventTypeRadios = document.querySelectorAll('input[name="type"]');
     var eventTypeNeeded = document.getElementById('needed-type');
     var eventTypeValid = false;
   
@@ -51,17 +51,6 @@ function validateEvenement() {
       isValid = false;
     } else {
       endDateNeeded.style.visibility = 'hidden';
-    }
-  
-    // Vérification du champ "Description"
-    var descriptionInput = document.getElementById('description');
-    var descriptionNeeded = document.getElementById('needed-description');
-  
-    if (descriptionInput.value.trim() === '') {
-      descriptionNeeded.style.visibility = 'visible';
-      isValid = false;
-    } else {
-      descriptionNeeded.style.visibility = 'hidden';
     }
   
     return isValid;
