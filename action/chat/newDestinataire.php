@@ -52,9 +52,6 @@
     }
 
 
-    /*Modifie le fait que l'utilisateur a vu le message*/
-    /*TODO rajouter sql pour avoir l'auteur et remplacer le destinataire par $idUser*/
-
     $queryLu = "UPDATE Messages
     SET Messages.lu = 1
     WHERE Messages.id_destinataire = $idAut AND Messages.id_auteur = $idUser;
