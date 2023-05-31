@@ -1,5 +1,6 @@
 #evenement-image{
   height: 400px;
+  background-color: rgb(197, 147, 81);
   background-image: url("/images/pyrenees.jpg");
   background-size: cover;
   /* Centre l'image horizontalement et verticalement */

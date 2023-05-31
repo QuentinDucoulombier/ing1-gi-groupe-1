@@ -1,7 +1,8 @@
 <?php
     require('../bdd.php');
 
-
+    session_start();
+    $idUser = $_SESSION["idUser"];
     $dbname = "projetIaPau";
     $conn = conn2();
 
@@ -89,11 +90,11 @@
 
     SELECT Messages.id_message, Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Messages.message, Messages.date_envoi, Messages.lu, Messages.id_auteur, Messages.id_destinataire
     FROM Messages
-    INNER JOIN Destinataire ON Destinataire.idUtilisateur = Messages.id_auteur
-    JOIN Utilisateur ON Utilisateur.idUtilisateur = Destinataire.idUtilisateur
-    where Messages.id_destinataire = 4
-    
-    ORDER BY id_message ASC
+    LEFT JOIN Destinataire ON Destinataire.idUtilisateur = Messages.id_auteur
+    LEFT JOIN Utilisateur ON Utilisateur.idUtilisateur = Messages.id_auteur
+    where Messages.id_destinataire = ".$idUser."
+
+    ORDER BY id_message ASC;
 
     ";
 
