@@ -604,6 +604,39 @@ function addEvent($nom, $dateDebut, $dateFin, $type, $descriptionEvent, $imageEv
         die('Erreur : ' . $e->getMessage());
     }
 }
+
+/*
+ * Permet de supprimer un evenement du site
+ */
+function deleteEvent($idEvent)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "DELETE FROM Evenement WHERE idEvenement = :idEvent";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEvent', $idEvent);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de supprimer un evenement du site
+ */
+function deleteProjet($idProjet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "DELETE FROM ProjetData WHERE idProjetData = :idProjet";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjet', $idProjet);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
 /*
  * Permet d'ajouter un questionnaire 
  * @param idDataBattle : id data battle lié au questionnaire
@@ -683,6 +716,8 @@ function deleteQuestionnaire($idQuestionnaire)
         die('Erreur : ' . $e->getMessage());
     }
 }
+
+
 /*
  * Permet de récupérer les dates d'un questionnaire 
  * @param idQuestionnaire : id questionnaire dont on veut les dates

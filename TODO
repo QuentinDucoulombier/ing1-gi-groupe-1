@@ -41,7 +41,7 @@ Commenter le code
 
 [x] profilAdministrateur.php
 [] ajoutEvenement.php       -> ajouter un /images + améliorations eventuelles (facultatif)
-[] ajoutProjet.php          -> à faire
-[] modifierEvenement.php    -> à faire
+[] ajoutProjet.php          -> CSS preque fini (ajoutEvenement.css)
+[] modifierEvenement.php    -> CSS presque fini(ajoutEvenement.css)
 [] modifierProjet.php       -> à faire
 [] gererUtilisateur.php     -> CSS + liste déroulante pour le niveau detude (facultatif)
