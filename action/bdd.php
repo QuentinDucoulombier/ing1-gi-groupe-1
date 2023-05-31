@@ -35,7 +35,7 @@ function connect()
         global $password; // récupère le password
         global $servername;
         $cnx = mysqli_connect($servername, $username, $password);
-        if (mysqli_connect_errno($cnx)) {
+        if (mysqli_connect_errno()) {
             echo "Erreur de connexion a MySQL: " . mysqli_connect_error();
             exit();
         }
@@ -45,12 +45,9 @@ function connect()
     // Permet de se déconnecter de la base de données
     function disconnect($conn) {
         $conn->close();
+    }
 
-// Permet de se déconnecter de la base de données
-function disconnect($conn)
-{
-    $conn->close();
-}
+
 
 /*
  * Permet de faire une requête SQL générique
@@ -642,7 +639,7 @@ function addQuestionnaire($iddatabattle, $dateDebut, $dateFin)
         catch(Exception $e){
             die('Erreur : '.$e->getMessage());
         }    
-
+    }
 /*
  * Permet de supprimer un questionnaire du site
  * @param mail : mail de l'utilisateur
@@ -678,25 +675,7 @@ function getDatesQuestionnaire($idQuestionnaire)
     }
 }
 
-/*
- * Permet de récupérer un questionnaire associé à une data battle
- * @param idDataBattle : id data battle lié au questionnaire
- */
-function getQuestionnaire($iddatabattle, $numero)
-{
-    try {
-        $conn = connect();
-        $sqlQuery = "SELECT idQuestionnaire, idDataBattle, numero, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateDebut,DATE_FORMAT(dateFin, '%d %M %Y') AS dateFin FROM Questionnaire WHERE idDataBattle = :id AND numero = :numero ";
-        $statement = $conn->prepare($sqlQuery);
-        $statement->bindParam(':id', $iddatabattle);
-        $statement->bindParam(':numero', $numero);
-        $statement->execute();
-        $result = $statement->fetch();
-        return $result;
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-}
+
 /*
  * Permet de récupérer les questions d'un questionnaire 
  * @param idQuestionnaire : id questionnaire lié à la question
@@ -735,26 +714,7 @@ function isQuestionnaire($iddatabattle, $numero)
         die('Erreur : ' . $e->getMessage());
     }
 }
-/*
- * Permet de récupérer les réponses d'une équipe à un questionnaire 
- * @param idQuestion : id question lié à la réponse
- * @param idEquipe : id Equipe qui a répondu au questionnaire
- */
-function setReponse($idEquipe, $idQuestion, $reponse)
-{
-    try {
-        $conn = connect();
-        $sqlQuery = "UPDATE TABLE reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe SET reponse = :reponse";
-        $statement = $conn->prepare($sqlQuery);
-        $statement->bindParam(':idQuestion', $idQuestion);
-        $statement->bindParam(':idEquipe', $idEquipe);
-        $statement->bindParam(':idEquipe', $idEquipe);
-        $statement->bindParam(':reponse', $reponse);
-        $statement->execute();
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-}
+
 /*
  * Permet de récupérer les dates d'un questionnaire 
  * @param idQuestionnaire : id questionnaire dont on veut les dates
@@ -772,6 +732,7 @@ function getDatesDataBattle($idDataBattle)
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
+}
     /*
     * Permet de récupérer les réponses d'une équipe à un questionnaire 
     * @param idQuestion : id question lié à la réponse
@@ -792,10 +753,10 @@ function getDatesDataBattle($idDataBattle)
         catch(Exception $e){
             die('Erreur : '.$e->getMessage());
         }    
-    }    
-    /*
+    }
+    
 
-}
+
 /*
  * Permet d'ajouter une question à un questionnaire 
  * @param idQuestionnaire : id questionnaire lié à la question
@@ -1194,7 +1155,7 @@ function getDataProjet($idProjet)
         }   
 
     }
-}
+
 
 /**
  * 
@@ -1553,6 +1514,7 @@ function checkGestionnaireProjetData($mail, $idprojet)
         echo 'Erreur : ' . $e->getMessage();
         return false; // En cas d'erreur, renvoyer false
     }
+}
 
     function getTeamQuestionnaire($idTeam,$idData,$num) {
         try{
@@ -1561,9 +1523,7 @@ function checkGestionnaireProjetData($mail, $idprojet)
             FROM Questionnaire 
             INNER JOIN Question ON Question.idQuestionnaire = Questionnaire.idQuestionnaire 
             INNER JOIN Reponse ON Reponse.idQuestion = Question.idQuestion 
-            WHERE idEquipe = $idTeam AND idDataBattle = $idData AND Questionnaire.numero = $num;
-            ;
-            ";
+            WHERE idEquipe = $idTeam AND idDataBattle = $idData AND Questionnaire.numero = $num";
             $statement = $conn->prepare($sqlQuery);
             $statement->execute();
             $result = $statement->fetchAll();
@@ -1574,6 +1534,4 @@ function checkGestionnaireProjetData($mail, $idprojet)
         }   
         
     }
-  
 ?>
-
