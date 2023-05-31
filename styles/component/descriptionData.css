@@ -1,104 +1,14 @@
-/* styles/component/descriptionData.css */
+.data-name {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  color: #222222 !important;
+}
 
-/* Styles généraux */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-  }
-  
-  .container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: 20px;
-  }
-  
-  /* Styles pour l'élément #description */
-  #description {
-    background-color: #fff;
-    padding: 20px;
-    margin: 10px;
-  }
-  
-  #description h1 {
-    font-size: 24px;
-    margin-bottom: 10px;
-    color: #00af7e;
-  }
-  
-  #description h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: #00af7e;
-  }
-  
-  #description img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 20px;
-    width: 30%; 
-  }
-  
-  #description #ressource,
-  #description #consignes,
-  #description #conseils {
-    margin-top: 20px;
-  }
-  
-  /* Styles pour les boutons */
-  #description #boutton button {
-    background-color: #00af7e;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    margin-right: 10px;
-    cursor: pointer;
-  }
-  
-  #description #boutton button:hover {
-    background-color: #008c68;
-  }
-  
-  /* Styles pour le formulaire GitHub */
-  #description #formGithub {
-    margin-top: 20px;
-  }
-  
-  #description #formGithub input[type="text"] {
-    width: 200px;
-    padding: 5px;
-    margin-right: 10px;
-  }
-  
-  #description #formGithub input[type="submit"] {
-    background-color: #00af7e;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  #description #formGithub input[type="submit"]:hover {
-    background-color: #008c68;
-  }
-  
-  /* Styles pour les coordonnées des superviseurs */
-  #description h3 {
-    font-size: 18px;
-    color: #00af7e;
-    margin-top: 20px;
-  }
-  
-  #description p {
-    color: #00af7e;
-  }
-  
-  #description .superviseur-info {
-    margin-bottom: 10px;
-  }
-  
-  #description .superviseur-info span {
-    font-weight: bold;
-  }
-  
+.date {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: -20px;
+}
+

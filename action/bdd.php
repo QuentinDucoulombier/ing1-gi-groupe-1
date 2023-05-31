@@ -69,6 +69,31 @@ function request($req)
     }
 
 }
+/*
+* Permet de verifier si un mail existe dans la base de données
+* @param mail : mail de l'utilisateur
+* @return true si le mail existe
+*/
+function isMail($mail)
+{
+
+    try {
+        
+        $conn = connect();
+
+        $sqlQuery = "SELECT `email` FROM Utilisateur WHERE email LIKE :mail;";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':mail', $mail);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result > 0;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+
+
+}
+
 
 /*
  * Permet de vérifier si l'utilisateur est présent dans la base de données (au moment de la connexion)

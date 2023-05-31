@@ -37,7 +37,7 @@ html {
     font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif;
     font-weight: 700;
     font-size: 48px;
-    color: #192231 !important;
+    color: #192231;
     line-height: 1.2em;
   }
 
@@ -86,6 +86,7 @@ input[type="submit"]:hover {
   width: 250px;
   margin-left: 10px;
   border-radius: 7px;
+  margin-bottom: 10px;
 
   
 }
