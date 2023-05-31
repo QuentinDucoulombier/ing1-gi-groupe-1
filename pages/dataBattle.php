@@ -63,7 +63,7 @@
     foreach ($gestionnaires as $gestionnaire){
         echo '      <div class = "contact-gestionnaire">';
         echo '          <p>'.$gestionnaire['prenomUtilisateur'].' ' . $gestionnaire['nomUtilisateur'].'</p>';
-        echo '          <p> Mail : ' .$gestionnaire['email'] .' Tel :'. $gestionnaire['numeroTel'] .'</p>';
+        echo '          <p> Mail : ' .$gestionnaire['email'] .' Tel : '. $gestionnaire['numeroTel'] .'</p>';
         echo '      </div>';
     }
     echo '      </div>';
@@ -88,17 +88,17 @@
                 <div id="deuxieme">
 
                     <p>'. $podium[1]['nomEquipe'] .'</p>
-                    <p>'. $podium[1]['totalNotes'] .'</p>
+                    <p>'. $podium[1]['totalNotes'] .' points</p>
                 </div>
 
                 <div id="premier">
                     <p>'. $podium[0]['nomEquipe'] .'</p>
-                    <p>'. $podium[0]['totalNotes'] .'</p>
+                    <p>'. $podium[0]['totalNotes'] .' points</p>
                 </div>
                 
                 <div id="troisieme">
                     <p>'. $podium[2]['nomEquipe'] .'</p>
-                    <p>'. $podium[2]['totalNotes'] .'</p>
+                    <p>'. $podium[2]['totalNotes'] .' points</p>
                 </div>
             </div>
             ';
