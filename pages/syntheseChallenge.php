@@ -26,13 +26,17 @@
             echo '              <button name="supprimer" id-event="'.$challenge['idEvenement'].'" onclick="supprimerEvent(this)"> Supprimer le challenge </button>';
         }
 
-
             echo '<h3> Liste des projets rattachés : </h3>';
 
             foreach ($projets as $projet){
                 echo ' <div id="liste-projets">';
                 echo '      <a class ="more-link" href="/?page=syntheseProjet&projet='.$projet['idProjetData'].'"> <button name="gestion"> Syntèse '.$projet['nomProjet'].' </button>  </a>';
                 echo ' </div>';
+
+                // Si l'utilisateur est un administrateur peut supprimer le challenge
+                if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
+                    echo '              <button name="supprimer" id-projet="'.$projet['idProjetData'].'" onclick="supprimerProjet(this)"> Supprimer le projet </button>';
+                }
             }
 
             echo '<h3> Liste des équipes rattachées : </h3>';
