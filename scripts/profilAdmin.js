@@ -5,9 +5,9 @@ var MotDePassesAdmin = document.getElementById("MotDePasse_Admin");
 var ConfirmerMotDePassesAdmin = document.getElementById("Confirmer_MotDePasse_Admin");
 var AncienMotDePassesAdmin = document.getElementById("Ancien_MotDePasse_Admin");
 function toggleEditAdmin(button) {
-    MotDePassesAdmin.style.display = 'block';
-    ConfirmerMotDePassesAdmin.style.display = 'block';
-    AncienMotDePassesAdmin.style.display = 'block';
+    MotDePassesAdmin.classList.remove("hide");
+    ConfirmerMotDePassesAdmin.classList.remove("hide");
+    AncienMotDePassesAdmin.classList.remove("hide");
     var email = button.getAttribute('data-email');
     var mdp = button.getAttribute('data-mdp');
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
@@ -70,9 +70,9 @@ function sendDataAdmin(button, email) {
             // Changer le texte du bouton Envoyer en Modifier
             button.innerHTML = "Modifier";
             button.setAttribute("onclick", "toggleEditAdmin(this)");
-            MotDePassesAdmin.style.display = 'none';
-            ConfirmerMotDePassesAdmin.style.display = 'none';
-            AncienMotDePassesAdmin.style.display = 'none';
+            MotDePassesAdmin.classList.add("hide");
+            ConfirmerMotDePassesAdmin.classList.add("hide");
+            AncienMotDePassesAdmin.classList.add("hide");
             //location.reload();
 
         }

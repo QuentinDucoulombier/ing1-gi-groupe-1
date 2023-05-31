@@ -27,7 +27,7 @@
     <?php
         // Si l'utilisateur est administrateur il peut créer un nouveau challenge
         if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-            echo '          <a href="/?page=ajoutEvenement.php"> ';
+            echo '          <a href="/?page=ajoutEvenement"> ';
             echo '              <button name="creation"> Créer un évenement </button> ';
             echo '          </a>';
         }
@@ -64,21 +64,21 @@
                 }
 
                 // Si l'utilisateur est un étudiant qui n'est pas inscrit au challenge on lui propose de s'inscrire
-                if (isset($_SESSION['email']) && $user[0]['type'] == "Etudiant" && !checkInscriptionProjet($user[0]['email'], $challenge['nomEvenement'])) {
+                if (isset($_SESSION['email']) && $user[0]['type'] == "Etudiant" && !checkInscriptionEvenement($user[0]['email'], $challenge['nomEvenement'])) {
                     echo '          <a href="/?page=inscriptionChallenge&challenge='.$challenge['idEvenement'].'">';
                     echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a> ';
                 }
 
                 // Si l'utilisateur est un étudiant inscrit au challenge on lui propose de d'accéder au récap du projet pour lequel il est inscrit
-                if (isset($_SESSION['email']) && $user[0]['type'] == "Etudiant" && checkInscriptionProjet($user[0]['email'], $challenge['nomEvenement'])) {
+                if (isset($_SESSION['email']) && $user[0]['type'] == "Etudiant" && checkInscriptionEvenement($user[0]['email'], $challenge['nomEvenement'])) {
                     echo '          <a href="/?page=descriptionData&idChallenge='.$challenge['idEvenement'].'"> ';
                     echo '              <button name="monProjet"> Mon projet </button> ';
                     echo '          </a>';
                 }
 
                 // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
-                if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $challenge['nomEvenement']) ) ) ) {
+                if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireInterne($user[0]['email']) ) ) ) {
                     echo '          <a href="/?page=syntheseChallenge&challenge='.$challenge['idEvenement'].'"> ';
                     echo '              <button name="gestion"> Synthèse du challenge </button> ';
                     echo '          </a>';
@@ -123,14 +123,14 @@
                 }
 
                 // Si l'utilisateur est un étudiant qui n'est pas inscrit à la battle on lui propose de s'inscrire
-                if ($user[0]['type'] == "Etudiant" && !checkInscriptionProjet($user[0]['email'], $battle['nomEvenement'])) {
+                if ($user[0]['type'] == "Etudiant" && !checkInscriptionEvenement($user[0]['email'], $battle['nomEvenement'])) {
                     echo '          <a href="/?page=inscriptionChallenge&challenge='.$battle['idEvenement'].'">';
                     echo '              <button name="sinscrire"> S\'inscrire </button>';
                     echo '          </a> ';
                 }
 
                 // Si l'utilisateur est un étudiant inscrit à la battle on lui propose de d'accéder au récap du projet pour lequel il est inscrit
-                if ($user[0]['type'] == "Etudiant" && checkInscriptionProjet($user[0]['email'], $battle['nomEvenement'])) {
+                if ($user[0]['type'] == "Etudiant" && checkInscriptionEvenement($user[0]['email'], $battle['nomEvenement'])) {
                     echo '          <a href="/?page=descriptionData&idChallenge='.$battle['idEvenement'].'"> ';
                     echo '              <button name="monProjet"> Mon projet </button> ';                                        
                     echo '          </a>';

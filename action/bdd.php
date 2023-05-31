@@ -586,17 +586,19 @@ function modifyEntreprise($mail, $nomEntreprise)
  * @param tel
  * @param entreprise
  */
-function addEvent($nom, $dateDebut, $dateFin, $type)
+function addEvent($nom, $dateDebut, $dateFin, $type, $descriptionEvent, $imageEvent)
 {
     try {
         $conn = connect();
-        $sqlQuery = "INSERT INTO Evenement (nomEvenement, dateDebut, dateFin, typeEvenement) 
-                    VALUES (:nom, :dateD, :dateF, :type)";
+        $sqlQuery = "INSERT INTO Evenement (nomEvenement, dateDebut, dateFin, typeEvenement, descriptionEvent, imageEvent) 
+                    VALUES (:nom, :dateD, :dateF, :type, :descriptionEvent, :imageEvent)";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':nom', $nom);
         $statement->bindParam(':dateD', $dateDebut);
         $statement->bindParam(':dateF', $dateFin);
         $statement->bindParam(':type', $type);
+        $statement->bindParam(':descriptionEvent', $descriptionEvent);
+        $statement->bindParam(':imageEvent', $imageEvent);
         $statement->execute();
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
@@ -876,7 +878,6 @@ function getPodium($idEvenement)
         $statement->bindParam(':idEvenement', $idEvenement);
         $statement->execute();
         $result = $statement->fetchAll();
-        print_r($result);
         return $result;
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
@@ -988,6 +989,29 @@ function getEvenementbyID($id)
             die('Erreur : '.$e->getMessage());
         } 
     }
+
+    /*
+    * Permet de récupérer les infos d'un challenge qui est lié à un projet Data
+    */
+    function getEvenementbyProjet($idProjet){
+        try{
+            $conn = connect();
+            $sqlQuery = "SELECT Evenement.*
+                        FROM Evenement
+                        INNER JOIN ProjetData ON Evenement.idEvenement = ProjetData.idEvenement
+                        WHERE ProjetData.idProjetData = :idProjet";
+            $statement = $conn->prepare($sqlQuery);
+            $statement->bindParam(':idProjet', $idProjet);
+            $statement->execute();
+            $result = $statement->fetch();
+            return $result;
+        }
+        catch(Exception $e){
+            die('Erreur : '.$e->getMessage());
+        } 
+    }
+
+
 /*
  * Permet de récupérer les équipes de l'utilisateur 
  * @param mail : m
@@ -1041,7 +1065,7 @@ function getEquipesProjet($idProjet)
     try {
         $conn = connect();
         $sqlQuery = "SELECT DISTINCT e.nomEquipe, e.idEquipe
-                        FROM Equipe
+                        FROM Equipe e
                         WHERE idProjetData = :idProjet";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':idProjet', $idProjet);
@@ -1069,6 +1093,28 @@ function getProjetsEvenement($idEvenement)
         $statement->bindParam(':idEvenement', $idEvenement);
         $statement->execute();
         $result = $statement->fetchAll();
+        return $result;
+    } catch (PDOException $e) {
+        echo 'Erreur : ' . $e->getMessage();
+        return false; // En cas d'erreur, renvoyer false
+    }
+}
+
+/*
+ * Permet de récupérer les projets associés à un datachallenge/battle 
+ * @param 
+ */
+function getProjetbyID($idProjet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT *
+                        FROM ProjetData
+                        WHERE idProjetData = :idProjet";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjet', $idProjet);
+        $statement->execute();
+        $result = $statement->fetch();
         return $result;
     } catch (PDOException $e) {
         echo 'Erreur : ' . $e->getMessage();
@@ -1446,7 +1492,7 @@ function addUserTeam($idUser, $idTeam)
  * Permet de checker si un étudiant est inscrit à un des projet du challenge
  * @param mail : 
  */
-function checkInscriptionProjet($mail, $evenement)
+function checkInscriptionEvenement($mail, $evenement)
 {
     try {
         $conn = connect();
@@ -1460,6 +1506,38 @@ function checkInscriptionProjet($mail, $evenement)
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':mail', $mail);
         $statement->bindParam(':evenement', $evenement);
+        $statement->execute();
+
+        $result = $statement->fetch();
+        $count = $result['count'];
+        // Vérification de l'inscription
+        if ($count > 0) {
+            return true; // L'étudiant est inscrit au projet
+        } else {
+            return false; // L'étudiant n'est pas inscrit au projet
+        }
+    } catch (Exception $e) {
+        echo 'Erreur : ' . $e->getMessage();
+        return false; // En cas d'erreur, renvoyer false
+    }
+}
+
+/*
+ * Permet de checker si un étudiant est inscrit à un des projet du challenge
+ * @param mail : 
+ */
+function checkInscriptionProjet($mail, $projet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT COUNT(*) AS count
+                        FROM Utilisateur AS u
+                        INNER JOIN Composer AS c ON u.idUtilisateur = c.idEtudiant
+                        INNER JOIN Equipe AS e ON c.idEquipe = e.idEquipe
+                        WHERE u.email = :mail AND e.idProjetData = :projet";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':mail', $mail);
+        $statement->bindParam(':projet', $projet);
         $statement->execute();
 
         $result = $statement->fetch();
@@ -1494,6 +1572,35 @@ function checkGestionnaireProjet($mail, $evenement)
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':mail', $mail);
         $statement->bindParam(':nomEvenement', $evenement);
+        $statement->execute();
+
+        $result = $statement->fetch();
+        $count = $result['count'];
+        // Vérification de l'inscription
+        if ($count > 0) {
+            return true; // Le gestionnaire est superviseur d'un projet
+        } else {
+            return false; // Le gestionnaire n'est  pas superviseur d'un projet
+        }
+    } catch (Exception $e) {
+        echo 'Erreur : ' . $e->getMessage();
+        return false; // En cas d'erreur, renvoyer false
+    }
+}
+
+/*
+ * Permet de checker si un gestionnaire supervise un des projet du challenge
+ * @param mail : 
+ */
+function checkGestionnaireInterne($mail)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT COUNT(*) AS count
+                        FROM Utilisateur AS
+                        WHERE email = :mail AND LOWER(nomEntreprise) LIKE LOWER('IA Pau')";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':mail', $mail);
         $statement->execute();
 
         $result = $statement->fetch();
@@ -1559,4 +1666,5 @@ function checkGestionnaireProjetData($mail, $idprojet)
         }   
         
     }
+
 ?>
