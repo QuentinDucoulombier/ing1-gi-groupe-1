@@ -6,9 +6,10 @@ var ConfirmerMotDePassesgestionnaire = document.getElementById("Confirmer_MotDeP
 var AncienMotDePassesgestionnaire = document.getElementById("Ancien_MotDePasse_Gestionnaire");
 
 function toggleEditProfilGestionnaire(button) {
-    MotDePassesgestionnaire.style.display = 'block';
-    ConfirmerMotDePassesgestionnaire.style.display = 'block';
-    AncienMotDePassesgestionnaire.style.display = 'block';
+    MotDePassesgestionnaire.classList.remove("hide");
+    ConfirmerMotDePassesgestionnaire.classList.remove("hide");
+    AncienMotDePassesgestionnaire.classList.remove("hide");
+    document.getElementById("profil_id").classList.add("smaller_profil");
     var email = button.getAttribute('data-email');
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
     var cells = table.getElementsByTagName('td'); // Récupère tous les éléments <td> dans la table
@@ -82,9 +83,10 @@ function sendDataProfilGestionnaire(button, email, motDePasse2) {
             // Changer le texte du bouton Envoyer en Modifier
             button.innerHTML = "Modifier";
             button.setAttribute("onclick", "toggleEditProfilGestionnaire(this)");
-            MotDePassesgestionnaire.style.display = 'none';
-            ConfirmerMotDePassesgestionnaire.style.display = 'none';
-            AncienMotDePassesgestionnaire.style.display = 'none';
+            MotDePassesgestionnaire.classList.add("hide");
+            ConfirmerMotDePassesgestionnaire.classList.add("hide");
+            AncienMotDePassesgestionnaire.classList.add("hide");
+            document.getElementById("profil_id").classList.remove("smaller_profil");
             //location.reload();
             
         }

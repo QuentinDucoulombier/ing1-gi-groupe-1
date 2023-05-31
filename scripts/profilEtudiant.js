@@ -5,9 +5,9 @@ var MotDePassesEtudiant = document.getElementById("MotDePasse_Etudiant");
 var ConfirmerMotDePassesEtudiant = document.getElementById("Confirmer_MotDePasse_Etudiant");
 var AncienMotDePassesEtudiant = document.getElementById("Ancien_MotDePasse_Etudiant");
 function toggleEditProfilEtudiant(button) {
-    MotDePassesEtudiant.style.display = 'block';
-    ConfirmerMotDePassesEtudiant.style.display = 'block';
-    AncienMotDePassesEtudiant.style.display = 'block';
+    MotDePassesEtudiant.classList.remove("hide");
+    ConfirmerMotDePassesEtudiant.classList.remove("hide");
+    AncienMotDePassesEtudiant.classList.remove("hide");
 
     document.getElementById("profil_id").classList.add("smaller_profil");
 
@@ -85,9 +85,9 @@ function sendDataProfilEtudiant(button, email, motDePasse2) {
             button.innerHTML = "Modifier";
             button.setAttribute("onclick", "toggleEditProfilEtudiant(this)");
 
-            MotDePassesEtudiant.style.display = 'none';
-            ConfirmerMotDePassesEtudiant.style.display = 'none';
-            AncienMotDePassesEtudiant.style.display = 'none';
+            MotDePassesEtudiant.classList.add("hide");
+            ConfirmerMotDePassesEtudiant.classList.add("hide");
+            AncienMotDePassesEtudiant.classList.add("hide");
             //location.reload();
 
             document.getElementById("profil_id").classList.remove("smaller_profil");

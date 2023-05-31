@@ -27,6 +27,10 @@
     padding-right: 50px;
 }
 
+.hide {
+    display: none;
+}
+/*
 #MotDePasse_Etudiant{
     display: none;
 }
@@ -62,7 +66,7 @@
 #Ancien_MotDePasse_Admin{
     display: none;
 }
-
+*/
 .smaller_profil table tr th,.smaller_profil table tr td {
     padding-bottom: 0px;
 }
