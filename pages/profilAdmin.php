@@ -48,7 +48,7 @@ if (isset($_SESSION['email'])) {
             <th>Ancien mot de passe</th>
             <td></td>
         </tr>
-        <tr>
+        <tr id="MotDePasse_Admin">
             <th>Mot de passe</th>
             <td><?php echo $infos[0]['motDePasse']; ?></td>
         </tr>
