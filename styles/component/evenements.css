@@ -1,10 +1,22 @@
+#evenement-image{
+  height: 400px;
+  background-color: rgb(197, 147, 81);
+  background-image: url("/images/pyrenees.jpg");
+  background-size: cover;
+  /* Centre l'image horizontalement et verticalement */
+  background-position: center;
+  clip-path: polygon(100% 0%, 100% 90%, 27% 100%, 0% 90%, 0% 0%);
+  margin-top: -48px;
+}
+
+
 /*
 * Liste challenge
 */
 #liste-challenge, #liste-battle {
     display: flex;
     flex-wrap: wrap;
-    margin: 20px 200px;
+    margin: 30px 7%;
 }
 
 .title {
@@ -18,15 +30,16 @@
 * Card
 */
 .card {
-    max-width: 25%;
-    min-width: 50px;
-    margin: 30px;
+    width: calc(26% - 10px);
+    min-width: 150px;
+    margin: 40px;
     border: 1px solid #ccc;
     display: inline-block;
     box-sizing: border-box;
     background-color: white;
     transition: all 0.3s ease-in-out;
-    box-shadow: 0 0 5px rgb(51, 51, 51);
+    box-shadow: 0 0 5px rgba(51, 51, 51, 0.4);
+
 }
 
 @media only screen and (max-width: 768px) {
@@ -64,22 +77,133 @@
     color: #0e8769 !important;
 }
 
-.button-projet button {
+.button-projet {
     display: flex;
     justify-content: center;
-    border-width: 0px !important;
-    font-size: 16px;
-    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif !important;
+}
+
+button {
     background-color: #0e8769;
     color: white;
+    border-radius: 5px;
+    padding: 10px 20px;
+    border: none;
+    transition: color 0.3s ease;    
+    font-family: 'Ubuntu',Helvetica,Arial,Lucida,sans-serif !important;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    color: #b7b7b7;
+  }
+  
 
+
+  .liste-projet {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .projet {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .en-tete {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  
+  
+  
+  .title-projet {
+    margin-bottom: 10px;
+  }
+  
+  .image-projet {
+    margin-left: 20px;
+    position: absolute;
+    right:100px
+    
+  }
+  
+  .image-projet img{
+    height: 200px;
+    width: auto;
+  }
+  
+  .contact-projet {
+    margin-top: 20px;
+  }
+  
+  .contact-gestionnaire {
+    margin-bottom: 10px;
+  }
+  
+  .ressources-projet {
+    margin-top: 20px;
+  }
+  
+  h2,
+  h3 {
+    margin: 0;
+  }
+  
+  a {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+
+/*PODIUM*/
+#podium {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
   
 }
 
-.button-projet:hover button{
-    background-color: #004b38;
+h3 {
+  font-size: 24px;
 }
-/*CSS DES BOUTONS A UNIFORMISER
-*/
 
+#premier,
+#deuxieme,
+#troisieme {
+  width: 200px;
+  height: 300px;
+  background-color: #f5f5f5;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 20px 20px 0 0;
+}
+
+#premier {
+  height: 300px;
+  background-color: gold;
+}
+
+#deuxieme {
+  height: 250px;
+  background-color: silver;
+}
+
+#troisieme {
+  height: 200px;
+  background-color: #cd7f32;
+}
+
+#premier p,
+#deuxieme p,
+#troisieme p {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+}
 

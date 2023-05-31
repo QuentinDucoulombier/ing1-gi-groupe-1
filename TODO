@@ -1,5 +1,39 @@
 # Messagerie
-[]Changer l'architecture de la bdd du chat pour correspondre a bdd.php
-[]Rajouter le fait d'avoir le nom en couleur quand le msg n'est pas encore vu
+[~]Changer l architecture de la bdd du chat pour correspondre a bdd.php
+[]Rajouter le fait d avoir le nom en couleur quand le msg n est pas encore vu
 []Fix bugs
-[]Changer nom auteur msg quand recu
+[x]Changer nom auteur msg quand recu
+
+
+#EtudiantConnecte(e)
+[]fix questionnaire de merde
+
+#Requetes SQL à ajouter
+
+#Récap Pages
+[] accueil.php      -> légère mise en forme
+[] connexion.php    -> légère mise en forme (facultatif)
+[] inscription.php  -> légère mise en forme (facultatif)
+[] evenements.php   -> fix boutons gestionnaires
+[] dataBattle.php   -> CSS
+[] dataChallenge.php    -> Classement + CSS
+
+[] profilEtudiant.php
+[] inscriptionChallenge.php
+[] descriptionChallenge.php
+[] createTeam.php
+[] manageTeam.php
+[] messagerie.php
+[] questionnaire.php
+
+[] profilGestionnaire.php
+[] synthèseEvenement.php
+[] synthèseProjet.php
+[] ajoutQuestionnaire.php
+[] noteQuestionnaire.php
+
+[] profilAdministrateur.php
+[] creerEvenement.php
+[] modifierEvenement.php
+[] gererUtilisateur.php
+

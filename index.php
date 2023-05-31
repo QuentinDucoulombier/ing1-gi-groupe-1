@@ -33,8 +33,11 @@ if (!isset($_GET["page"])){
                 
 
         <script src="scripts/main.js" defer></script>
-        <script src="scripts/profil.js" defer></script>
-
+        <script src="scripts/gererUtilisateur.js" defer></script>
+        <script src="scripts/profilAdmin.js" defer></script>
+        <script src="scripts/profilGestionnaire.js" defer></script>
+        <script src="scripts/profilEtudiant.js" defer></script>
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     </head>
     <body>
     

@@ -1,6 +1,5 @@
 <div class="formConnexion">
 
-
     <form id="modifierForm" action="../action/verif_login.php" method="POST">
         <h2>Connexion</h2>
 
