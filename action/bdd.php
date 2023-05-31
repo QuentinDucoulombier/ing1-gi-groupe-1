@@ -35,7 +35,7 @@ function connect()
         global $password; // récupère le password
         global $servername;
         $cnx = mysqli_connect($servername, $username, $password);
-        if (mysqli_connect_errno($cnx)) {
+        if (mysqli_connect_errno()) {
             echo "Erreur de connexion a MySQL: " . mysqli_connect_error();
             exit();
         }
@@ -732,6 +732,7 @@ function getDatesDataBattle($idDataBattle)
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
+}
     /*
     * Permet de récupérer les réponses d'une équipe à un questionnaire 
     * @param idQuestion : id question lié à la réponse
@@ -755,7 +756,7 @@ function getDatesDataBattle($idDataBattle)
     }
     
 
-}
+
 /*
  * Permet d'ajouter une question à un questionnaire 
  * @param idQuestionnaire : id questionnaire lié à la question
