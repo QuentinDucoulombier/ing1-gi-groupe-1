@@ -45,16 +45,16 @@ if (isset($_SESSION['email'])) {
                 <td><?php echo $infos[0]['ville']; ?></td>
             </tr>
 
-        <tr id="Ancien_MotDePasse_Etudiant">
+        <tr id="Ancien_MotDePasse_Etudiant" class="hide">
             <th>Ancien mot de passe</th>
             <td></td>
         </tr>
 
-        <tr>
+        <tr id="MotDePasse_Etudiant" class="hide">
             <th>Mot de passe</th>
             <td><?php echo $infos[0]['motDePasse']; ?></td>
         </tr>
-        <tr id="Confirmer_MotDePasse_Etudiant">
+        <tr id="Confirmer_MotDePasse_Etudiant" class="hide">
             <th>Confirmer mot de passe</th>
             <td><?php echo $infos[0]['motDePasse']; ?></td>
         </tr>
@@ -62,12 +62,14 @@ if (isset($_SESSION['email'])) {
             <td><button onclick="toggleEditProfilEtudiant(this)" data-email="<?php echo $infos[0]['email']; ?>">Modifier</button></td>
         </tr>
     </table>
+    </div>
+    <div class="projects">
     <h2>Mes Projets</h2>
 
     <h2>Mon équipe</h2>
     <?php
     // Appel de la fonction pour récupérer les équipes de l'utilisateur
-    $resultats = getMembreEquipe($email);
+    $resultats = getEquipeUser($email);
 
     // Affichage du tableau
     echo "<table>";
