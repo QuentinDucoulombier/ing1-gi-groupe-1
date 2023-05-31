@@ -57,7 +57,7 @@ if (isset($_SESSION['email'])) {
             <td></td>
         </tr>
 
-        <tr>
+        <tr id="MotDePasse_Gestionnaire">
             <th>Mot de passe</th>
             <td><?php echo $infos[0]['motDePasse']; ?></td>
         </tr>
@@ -73,7 +73,7 @@ if (isset($_SESSION['email'])) {
     <h2>Mes projets à gérer</h2>
     <?php
     // Appel de la fonction pour récupérer les équipes de l'utilisateur
-    $resultats = getGestionnaireEquipe($infos[0]['nomUtilisateur']);
+    $resultats = getGestionnaireProjet(['nomUtilisateur']);
 
     // Affichage du tableau
     echo "<table>";
