@@ -27,7 +27,7 @@
     <?php
         // Si l'utilisateur est administrateur il peut créer un nouveau challenge
         if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-            echo '          <a href="/?page=creerChallenge"> ';
+            echo '          <a href="/?page=ajoutEvenement.php"> ';
             echo '              <button name="creation"> Créer un évenement </button> ';
             echo '          </a>';
         }
