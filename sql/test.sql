@@ -99,7 +99,16 @@ idUtilisateur = 1;
 */
 SELECT Messages.id_message, Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Messages.message, Messages.date_envoi, Messages.lu, Messages.id_auteur, Messages.id_destinataire
 FROM Messages
-INNER JOIN Destinataire ON Destinataire.idUtilisateur = Messages.id_auteur
-JOIN Utilisateur ON Utilisateur.idUtilisateur = Destinataire.idUtilisateur
-where Messages.id_destinataire = 4
+JOIN Auteur ON Auteur.idUtilisateur = Messages.id_destinataire
+JOIN Utilisateur ON Utilisateur.idUtilisateur = Auteur.idUtilisateur
+
+ORDER BY id_message ASC;
+
+
+
+SELECT Messages.id_message, Utilisateur.prenomUtilisateur, Utilisateur.nomUtilisateur, Messages.message, Messages.date_envoi, Messages.lu, Messages.id_auteur, Messages.id_destinataire
+FROM Messages
+LEFT JOIN Destinataire ON Destinataire.idUtilisateur = Messages.id_auteur
+LEFT JOIN Utilisateur ON Utilisateur.idUtilisateur = Messages.id_auteur
+where Messages.id_destinataire = 1
 ORDER BY id_message ASC;
