@@ -10,17 +10,16 @@ if (isset($_SESSION['email']) && (isset($_GET['evenement']))){
             
         <link rel="stylesheet" href="styles/component/ajoutEvenement.css" />
 
-        <form action="action/updateEvenement.php" method="post" onsubmit="return validateEvenement()">
+        <form action="action/updateEvenement.php" method="post">
             <h3>Modifier l'évenement</h3>
 
             <div id="request-name">
 
                 <div class="field">
                     <label for="nomEvenement">Nom de l'évènement : </label>
-                    <p></p>   
                 </div>
                 
-                <input type="text" name="nomEvenement" id="nomEvenement" placeholder="<?php echo $evenement['nomEvenement'] ?>">
+                <input type="text" name="nomEvenement" id="nomEvenement" value="<?php echo $evenement['nomEvenement'] ?>">
             </div>
 
             <div id="request-dateDebut">
@@ -47,9 +46,10 @@ if (isset($_SESSION['email']) && (isset($_GET['evenement']))){
             <div id="request-description">
                 <div class="field">
                     <label for="description">Description : </label>
+                    <?php echo ($evenement['descriptionEvent']) ?>
                                 
                 </div>
-                <textarea type="text" name="description" id="description" rows="10" cols="66"></textarea>
+                <textarea type="text" name="description" id="description" rows="10" cols="66"><?php echo $evenement['descriptionEvent'] ?></textarea>
             </div>
 
             <div id="request-image">
@@ -60,7 +60,7 @@ if (isset($_SESSION['email']) && (isset($_GET['evenement']))){
             </div>
 
             <div>
-                <input type="submit" value="Valider">
+                <input type="submit" value="Modifier l'évènement">
             </div>
 
 
