@@ -130,7 +130,7 @@ const recup_messages = () => {
  */
 function newMsg() {
     let message = document.getElementById("message-text").value;
-    //if(!is_blocked){
+    
     var xhttp = new XMLHttpRequest();
 
 
@@ -144,6 +144,6 @@ function newMsg() {
     xhttp.open("POST", "../action/chat/newMessage.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhttp.send("message="+message);
-    //}
+   
 
 }
