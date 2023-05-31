@@ -32,7 +32,15 @@ function toggleEditProfilEtudiant(button) {
     cells[2].innerHTML = "<input type='text' value='" + nom + "'>";
     cells[4].innerHTML = "<input type='text' value='" + nvemail + "'>";
     cells[6].innerHTML = "<input type='text' value='" + tel + "'>";
-    cells[8].innerHTML = "<input type='text' value='" + niveauEtude + "'>";
+    cells[8].innerHTML = `
+        <div class="radioniveauEtude">
+            <input type="radio" id="L1" name="niveauEtude" value="L1" ${niveauEtude === 'L1' ? 'checked' : ''}><label for="L1">L1</label>
+            <input type="radio" id="L2" name="niveauEtude" value="L2" ${niveauEtude === 'L2' ? 'checked' : ''}><label for="L2">L2</label>
+            <input type="radio" id="L3" name="niveauEtude" value="L3" ${niveauEtude === 'L3' ? 'checked' : ''}><label for="L3">L3</label>
+            <input type="radio" id="M1" name="niveauEtude" value="M1" ${niveauEtude === 'M1' ? 'checked' : ''}><label for="M1">M1</label>
+            <input type="radio" id="M2" name="niveauEtude" value="M2" ${niveauEtude === 'M2' ? 'checked' : ''}><label for="M2">M2</label>
+            <input type="radio" id="D" name="niveauEtude" value="D" ${niveauEtude === 'D' ? 'checked' : ''}><label for="D">D</label>
+        </div>`;
     cells[10].innerHTML = "<input type='text' value='" + ecole + "'>";
     cells[12].innerHTML = "<input type='text' value='" + ville + "'>";
     cells[14].innerHTML = "<input type='password' value=''>";
@@ -57,7 +65,14 @@ function sendDataProfilEtudiant(button, email) {
     var nom = cells[2].getElementsByTagName('input')[0].value;
     var nvemail = cells[4].getElementsByTagName('input')[0].value;
     var tel = cells[6].getElementsByTagName('input')[0].value;
-    var niveauEtude = cells[8].getElementsByTagName('input')[0].value;
+    var niveauEtudeInputs = cells[8].querySelectorAll('input[name="niveauEtude"]');
+    var niveauEtudeValue = '';
+    for (var i = 0; i < niveauEtudeInputs.length; i++) {
+        if (niveauEtudeInputs[i].checked) {
+            niveauEtudeValue = niveauEtudeInputs[i].value;
+            break;
+        }
+    }
     var ecole = cells[10].getElementsByTagName('input')[0].value;
     var ville = cells[12].getElementsByTagName('input')[0].value;
     var AncienMotDePasse = sha1(cells[14].getElementsByTagName('input')[0].value);
@@ -76,7 +91,7 @@ function sendDataProfilEtudiant(button, email) {
             cells[2].innerHTML = nom;
             cells[4].innerHTML = nvemail;
             cells[6].innerHTML = tel;
-            cells[8].innerHTML = niveauEtude;
+            cells[8].innerHTML = niveauEtudeValue;
             cells[10].innerHTML = ecole;
             cells[12].innerHTML = ville;
 
@@ -103,7 +118,7 @@ function sendDataProfilEtudiant(button, email) {
     typePage = "profil";
     xhttp.open("POST", "action/edit_a_profil.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&type=" + type + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&niveauEtude=" + niveauEtude + "&ecole=" + ecole + "&ville=" + ville + "&motDePasse=" + motDePasse + "&AncienMotDePasse=" + AncienMotDePasse + "&typePage=" + typePage);
+    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&type=" + type + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&niveauEtude=" + niveauEtudeValue + "&ecole=" + ecole + "&ville=" + ville + "&motDePasse=" + motDePasse + "&AncienMotDePasse=" + AncienMotDePasse + "&typePage=" + typePage);
 }
 
 function validateProfilEtudiant(button, email2, mdp){
@@ -117,7 +132,14 @@ function validateProfilEtudiant(button, email2, mdp){
     var nom = cells[2].getElementsByTagName('input')[0].value;
     var email = cells[4].getElementsByTagName('input')[0].value;
     var numeroTel = cells[6].getElementsByTagName('input')[0].value;
-    var niveauEtude = cells[8].getElementsByTagName('input')[0].value;
+    var niveauEtudeInputs = cells[8].querySelectorAll('input[name="niveauEtude"]');
+    var niveauEtudeValue = '';
+    for (var i = 0; i < niveauEtudeInputs.length; i++) {
+        if (niveauEtudeInputs[i].checked) {
+            niveauEtudeValue = niveauEtudeInputs[i].value;
+            break;
+        }
+    }
     var ecole = cells[10].getElementsByTagName('input')[0].value;
     var ville = cells[12].getElementsByTagName('input')[0].value;
     var AncienmotDePasse = sha1(cells[14].getElementsByTagName('input')[0].value);
@@ -154,7 +176,7 @@ if (!numeroTel || numeroTel.length !== 10 || isNaN(numeroTel)) {
     document.getElementById("numeroTelError").style.display = "none";
 }
 
-if (!niveauEtude) {
+if (!niveauEtudeValue) {
     document.getElementById("niveauEtudeError").style.display = "block";
     valid = false;
 } else {
