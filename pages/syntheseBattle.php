@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="styles/component/synthese.css" />
-<script src="scripts/supprimer.js" defer></script>
+<script src="scripts/manageEvenements.js" defer></script>
 
 <?php
     if (isset($_SESSION['email'])){

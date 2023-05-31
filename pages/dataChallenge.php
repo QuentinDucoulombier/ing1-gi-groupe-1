@@ -99,4 +99,4 @@
 </div>
 
 
-<script src="scripts/supprimer.js" defer></script>
+<script src="scripts/manageEvenements.js" defer></script>
