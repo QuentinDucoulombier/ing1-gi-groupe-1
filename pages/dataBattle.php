@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="styles/component/evenements.css" />
-
+<div class="data-event">
 <?php
 
 
@@ -21,8 +21,12 @@
     $gestionnaires = getSuperviseur($projet[0]['nomProjet']);
     $podium = getPodium($id);
 
-    echo '<h1>'. $battle['nomEvenement'] . '</h3>';
-    echo '<p>'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
+
+    echo '<h1 class="data-name">'. $battle['nomEvenement'] . '</h1>';
+
+    echo '<p class="date">'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
+
+
 
     if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
         echo '          <a href="/?page=modifierBattle"> ';
@@ -94,7 +98,7 @@
     echo '  </div>';
 
     echo ' 
-            <h3> Podium </h3> 
+            <h3 id=podium-title> Podium </h3> 
             <div id="podium">
 
 
@@ -120,3 +124,4 @@
 
             
 ?>
+</div>
