@@ -5,6 +5,7 @@ var MotDePassesAdmin = document.getElementById("MotDePasse_Admin");
 var ConfirmerMotDePassesAdmin = document.getElementById("Confirmer_MotDePasse_Admin");
 var AncienMotDePassesAdmin = document.getElementById("Ancien_MotDePasse_Admin");
 function toggleEditAdmin(button) {
+    MotDePassesAdmin.style.display = 'block';
     ConfirmerMotDePassesAdmin.style.display = 'block';
     AncienMotDePassesAdmin.style.display = 'block';
     var email = button.getAttribute('data-email');
@@ -86,7 +87,7 @@ function sendDataAdmin(button, email, motDePasse2) {
     typePage = "profil";
     xhttp.open("POST", "action/edit_a_profil.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&motDePasse=" + motDePasse + "&AncienMotDePasse" + AncienMotDePasse + "&typePage=" + typePage);
+    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&motDePasse=" + motDePasse + "&AncienMotDePasse=" + AncienMotDePasse + "&typePage=" + typePage);
 
 }
 
