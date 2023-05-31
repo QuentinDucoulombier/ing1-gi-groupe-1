@@ -9,36 +9,34 @@ function toggleEditAdmin(button) {
     ConfirmerMotDePassesAdmin.classList.remove("hide");
     AncienMotDePassesAdmin.classList.remove("hide");
     var email = button.getAttribute('data-email');
+    var mdp = button.getAttribute('data-mdp');
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
     var cells = table.getElementsByTagName('td'); // Récupère tous les éléments <td> dans la table
 
     // Récupérer les valeurs actuelles des cellules
     var prenom = cells[0].innerHTML;
-    var nom = cells[1].innerHTML;
-    var nvemail = cells[2].innerHTML;
-    var tel = cells[3].innerHTML;
-    // var AncienMotDePasse = cells[4].innerHTML;
-    var motDePasse = cells[5].innerHTML;
-    var ConfirmerMotDePasse = cells[6].innerHTML;
+    var nom = cells[2].innerHTML;
+    var nvemail = cells[4].innerHTML;
+    var tel = cells[6].innerHTML;
 
     // Modifier les cellules pour afficher les champs de modification
     cells[0].innerHTML = "<input type='text' value='" + prenom + "'>";
-    cells[1].innerHTML = "<input type='text' value='" + nom + "'>";
-    cells[2].innerHTML = "<input type='text' value='" + nvemail + "'>";
-    cells[3].innerHTML = "<input type='text' value='" + tel + "'>";
-    cells[4].innerHTML = "<input type='password' value=''>";
-    cells[5].innerHTML = "<input type='password' value=''>";
-    cells[6].innerHTML = "<input type='password' value=''>";
+    cells[2].innerHTML = "<input type='text' value='" + nom + "'>";
+    cells[4].innerHTML = "<input type='text' value='" + nvemail + "'>";
+    cells[6].innerHTML = "<input type='text' value='" + tel + "'>";
+    cells[8].innerHTML = "<input type='password' value=''>";
+    cells[10].innerHTML = "<input type='password' value=''>";
+    cells[12].innerHTML = "<input type='password' value=''>";
 
     
     // Changer le texte du bouton Modifier en Envoyer
     button.innerHTML = "Envoyer";
-    button.setAttribute("onclick", "sendDataAdmin(this, '" + email + "', '" + motDePasse + "')");
+    button.setAttribute("onclick", "validateProfilAdmin(this,'" + email + "', '" + mdp + "')");
 }
 
 
 
-function sendDataAdmin(button, email, motDePasse2) {
+function sendDataAdmin(button, email) {
 
 
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
@@ -47,12 +45,12 @@ function sendDataAdmin(button, email, motDePasse2) {
 
     // Récupérer les nouvelles valeurs des champs de modification
     var prenom = cells[0].getElementsByTagName('input')[0].value;
-    var nom = cells[1].getElementsByTagName('input')[0].value;
-    var nvemail = cells[2].getElementsByTagName('input')[0].value;
-    var tel = cells[3].getElementsByTagName('input')[0].value;
-    var AncienMotDePasse = sha1(cells[4].getElementsByTagName('input')[0].value);
-    var motDePasse = sha1(cells[5].getElementsByTagName('input')[0].value);
-    var ConfirmerMotDePasse = sha1(cells[6].getElementsByTagName('input')[0].value);
+    var nom = cells[2].getElementsByTagName('input')[0].value;
+    var nvemail = cells[4].getElementsByTagName('input')[0].value;
+    var tel = cells[6].getElementsByTagName('input')[0].value;
+    var AncienMotDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
+    var motDePasse = sha1(cells[10].getElementsByTagName('input')[0].value);
+    var ConfirmerMotDePasse = sha1(cells[12].getElementsByTagName('input')[0].value);
 
 
     // Envoyer les données à une page PHP pour effectuer la mise à jour
@@ -64,9 +62,9 @@ function sendDataAdmin(button, email, motDePasse2) {
 
             // Mettre à jour les cellules avec les nouvelles valeurs
             cells[0].innerHTML = prenom;
-            cells[1].innerHTML = nom;
-            cells[2].innerHTML = nvemail;
-            cells[3].innerHTML = tel;
+            cells[2].innerHTML = nom;
+            cells[4].innerHTML = nvemail;
+            cells[6].innerHTML = tel;
 
 
             // Changer le texte du bouton Envoyer en Modifier
@@ -84,6 +82,7 @@ function sendDataAdmin(button, email, motDePasse2) {
         alert("Les mots de passe ne correspondent pas");
         return;
     }
+    type = "Administrateur";
     typePage = "profil";
     xhttp.open("POST", "action/edit_a_profil.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -91,3 +90,70 @@ function sendDataAdmin(button, email, motDePasse2) {
 
 }
 
+function validateProfilAdmin(button, email2, mdp) {
+
+    var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
+    var cells = table.getElementsByTagName('td'); // Récupère tous les éléments <td> dans la table
+
+    var prenom = cells[0].getElementsByTagName('input')[0].value;
+    var nom = cells[2].getElementsByTagName('input')[0].value;
+    var email = cells[4].getElementsByTagName('input')[0].value;
+    var numeroTel = cells[6].getElementsByTagName('input')[0].value;
+    var AncienmotDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
+    var motDePasse = sha1(cells[10].getElementsByTagName('input')[0].value);
+    var confirmMotDePasse = sha1(cells[12].getElementsByTagName('input')[0].value);
+    
+    var valid = true;
+
+    if (!email) {
+        document.getElementById("emailError").style.display = "block";
+        valid = false;
+    } else if (email2 != email){
+        document.getElementById("emailError").style.display = "none";
+        // Vérification du mail via une requête AJAX
+        checkEmailExists(email);
+    }
+
+
+    if (!prenom) {
+        document.getElementById("prenomError").style.display = "block";
+        valid = false;
+    } else {
+        document.getElementById("prenomError").style.display = "none";
+    }
+
+    if (!nom) {
+        document.getElementById("nomError").style.display = "block";
+        valid = false;
+    } else {
+        document.getElementById("nomError").style.display = "none";
+    }
+
+    if (!numeroTel || numeroTel.length !== 10 || isNaN(numeroTel)) {
+        document.getElementById("numeroTelError").style.display = "block";
+        valid = false;
+    } else {
+        document.getElementById("numeroTelError").style.display = "none";
+    }
+
+
+    if (AncienmotDePasse != mdp && motDePasse != "da39a3ee5e6b4b0d3255bfef95601890afd80709") {
+        document.getElementById("ancienMotDePasseError").style.display = "block";
+        valid = false;
+    } else {
+        document.getElementById("ancienMotDePasseError").style.display = "none";
+    }
+
+
+    if (motDePasse != confirmMotDePasse) {
+        document.getElementById("confirmMotDePasseError").style.display = "block";
+        valid = false;
+    } else {
+        document.getElementById("confirmMotDePasseError").style.display = "none";
+    }
+    if (valid == true) {
+        sendDataAdmin(button, email2);
+    }
+    return valid;
+
+}

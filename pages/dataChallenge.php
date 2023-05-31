@@ -24,11 +24,6 @@
     echo '<h1 class="data-name">'. $challenge['nomEvenement'] . '</h3>';
     echo '<p class="date">'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
 
-    if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-        echo '          <a href="/?page=modifierChallenge"> ';
-        echo '              <button name="creation"> Modifier le challenge </button> ';
-        echo '          </a>';
-    }
 
     // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
     if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")  ) ) {
@@ -62,7 +57,7 @@
         }// Si l'utilisateur est un étudiant inscrit au challenge on lui propose de d'accéder au récap du projet pour lequel il est inscrit
         if (isset($_SESSION['email']) && $user[0]['type'] == "Etudiant" && checkInscriptionProjet($user[0]['email'], $projet['idProjetData'])) {
             echo '          <a href="/?page=descriptionData&idChallenge='.$projet['idProjetData'].'"> ';
-            echo '              <button name="monProjet"> Mon projet </button> ';
+            echo '              <button id="myproject" name="monProjet"> Mon projet </button> ';
             echo '          </a>';
         }
 
@@ -102,3 +97,6 @@
             
 ?>
 </div>
+
+
+<script src="scripts/manageEvenements.js" defer></script>
