@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="styles/component/synthese.css" />
-<script src="scripts/supprimerQuestionnaire.js" defer></script>
+<script src="scripts/supprimer.js" defer></script>
 
 <?php
     if (isset($_SESSION['email'])){
@@ -18,6 +18,16 @@
         if ($user[0]['type'] == "Administrateur"|| ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $battle['nomEvenement']) )) {
             echo '<h1>'. $battle['nomEvenement'] . '</h3>';
             echo '<p>'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
+
+            if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+                echo '          <a href="/?page=modifierBattle"> ';
+                echo '              <button name="creation"> Modifier la battle </button> ';
+                echo '          </a>';
+            }
+             // Si l'utilisateur est un administrateur peut supprimer le challenge
+             if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
+                echo '              <button name="supprimer" id-event="'.$idBattle.'" onclick="supprimerEvent(this)"> Supprimer la battle </button>';
+            }
 
             echo '<h3> Projet rattaché : </h3>';
 
