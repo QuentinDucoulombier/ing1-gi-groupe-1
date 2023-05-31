@@ -11,29 +11,37 @@
 #Requetes SQL à ajouter
 
 #Récap Pages
-[] accueil.php      -> légère mise en forme
-[] connexion.php    -> légère mise en forme (facultatif)
-[] inscription.php  -> légère mise en forme (facultatif)
-[] evenements.php   -> fix boutons gestionnaires
-[] dataBattle.php   -> CSS
-[] dataChallenge.php    -> Classement + CSS
 
-[] profilEtudiant.php
-[] inscriptionChallenge.php
-[] descriptionChallenge.php
-[] createTeam.php
-[] manageTeam.php
-[] messagerie.php
-[] questionnaire.php
+Rajouter les autorisations daccès
+Commenter le code
 
-[] profilGestionnaire.php
-[] synthèseEvenement.php
-[] synthèseProjet.php
-[] ajoutQuestionnaire.php
-[] noteQuestionnaire.php
+[] accueil.php      -> CSS (facultatif)
+[x] connexion.php
+[x] inscription.php
+[x] evenements.php
+[x] dataBattle.php
+[] dataChallenge.php    -> Classement ?
 
-[] profilAdministrateur.php
-[] creerEvenement.php
-[] modifierEvenement.php
-[] gererUtilisateur.php
+[] profilEtudiant.php       -> Lien vers les projets auquels il appartient
+[] inscriptionChallenge.php -> afficher un message dalerte pour dire quil faut creer lequipe
+[] descriptionChallenge.php -> CSS
+[] createTeam.php           -> CSS
+[] manageTeam.php           -> CSS
+[] viewTeam.php             -> CSS
+[] messagerie.php           -> Rajouter notif + Messages groupés + fix bug
+[] questionnaire.php        -> confusion numéro et id à fix
 
+[] profilGestionnaire.php   -> Lien vers les projets quil gère
+[] synthèseEvenement.php    -> CSS
+[] synthèseProjet.php       -> CSS
+[] synthèseBattle.php       -> CSS
+[] ajoutQuestionnaire.php   -> confusion numéro et id à fix + validation
+[] noteQuestionnaire.php    -> confusion numéro et id à fix + validation
+[] viewMessageTeam.php      -> à faire
+
+[x] profilAdministrateur.php
+[] ajoutEvenement.php       -> ajouter un /images + améliorations eventuelles (facultatif)
+[] ajoutProjet.php          -> à faire
+[] modifierEvenement.php    -> à faire
+[] modifierProjet.php       -> à faire
+[] gererUtilisateur.php     -> CSS + liste déroulante pour le niveau detude (facultatif)

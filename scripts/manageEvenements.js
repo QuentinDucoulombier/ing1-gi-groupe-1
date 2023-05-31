@@ -55,4 +55,20 @@ function validateEvenement() {
   
     return isValid;
   }
+
+  function validateProjet() {
+    var isValid = true;
   
+    // Vérification du champ "Nom de l'évènement"
+    var eventNameInput = document.getElementById('nomProjet');
+    var eventNameNeeded = document.getElementById('needed-name');
+  
+    if (eventNameInput.value.trim() === '') {
+      eventNameNeeded.style.visibility = 'visible';
+      isValid = false;
+    } else {
+      eventNameNeeded.style.visibility = 'hidden';
+    }
+  
+    return isValid;
+  }
