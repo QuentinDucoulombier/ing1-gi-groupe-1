@@ -1,5 +1,5 @@
 git add .
-git checkout EtudiantConnecte
+git checkout Messagerie
 echo "Entrez le commit"
 read x
 git commit -m "$x"
