@@ -49,7 +49,7 @@ function sendDataAdmin(button, email, motDePasse2) {
     var nom = cells[1].getElementsByTagName('input')[0].value;
     var nvemail = cells[2].getElementsByTagName('input')[0].value;
     var tel = cells[3].getElementsByTagName('input')[0].value;
-    var AncienMotDePasse = cells[4].getElementsByTagName('input')[0].value;
+    var AncienMotDePasse = sha1(cells[4].getElementsByTagName('input')[0].value);
     var motDePasse = sha1(cells[5].getElementsByTagName('input')[0].value);
     var ConfirmerMotDePasse = sha1(cells[6].getElementsByTagName('input')[0].value);
 
@@ -74,7 +74,7 @@ function sendDataAdmin(button, email, motDePasse2) {
             MotDePassesAdmin.style.display = 'none';
             ConfirmerMotDePassesAdmin.style.display = 'none';
             AncienMotDePassesAdmin.style.display = 'none';
-            location.reload();
+            //location.reload();
 
         }
     };
