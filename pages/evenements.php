@@ -87,7 +87,9 @@
                 
                 // Si l'utilisateur est un administrateur peut supprimer le challenge
                 if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
+                    echo '          <a>';
                     echo '              <button name="supprimer" id-event="'.$challenge['idEvenement'].'" onclick="supprimerEvent(this)"> Supprimer le challenge </button>';
+                    echo '          </a>';
                 }
 
                 echo '      </div>';
@@ -151,7 +153,9 @@
 
                 // Si l'utilisateur est un administrateur peut supprimer le challenge
                 if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
+                    echo '          <a>';
                     echo '              <button name="supprimer" id-event="'.$battle['idEvenement'].'" onclick="supprimerEvent(this)"> Supprimer la battle </button>';
+                    echo '          </a>';
                 }
                 echo '      </div>';
                 echo ' </div>';
