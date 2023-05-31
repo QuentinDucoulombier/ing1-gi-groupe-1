@@ -1,5 +1,5 @@
 <header>
-    <a class="logo" href="https://iapau.org/">
+    <a class="logo" href="/?page=accueil">
         <img src="http://iapau.org/wp-content/uploads/2021/05/iapau_round.png" alt="Association IA Pau" id="logo">
     </a>
 	<div id="nav">

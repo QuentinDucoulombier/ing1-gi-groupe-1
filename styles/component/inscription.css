@@ -8,7 +8,7 @@ body {
     color: #2b2b2b;
     line-height: 1.7em;
     font-weight: 500;
-    background-color: rgb(216, 216, 216);
+    background-color: rgb(231, 231, 231);
     text-align: center;
 }
 
@@ -83,7 +83,7 @@ html {
     margin-bottom: 10px;
     padding: 5px 10px;
     font-size: 16px;
-    border: 1px solid #00af7e;
+    border: 1px solid #0e8769;
     border-radius: 3px;
     cursor: pointer;
 }
@@ -92,7 +92,7 @@ html {
     margin-top: 10px;
     padding: 5px 10px;
     font-size: 16px;
-    background-color: #00af7e;
+    background-color: #0e8769;
     color: #fff;
     border: none;
     border-radius: 3px;
@@ -109,12 +109,12 @@ html {
     margin-bottom: 10px;
     padding: 5px 10px;
     font-size: 16px;
-    border: 1px solid #00af7e;
+    border: 1px solid #0e8769;
     border-radius: 3px;
     cursor: pointer;
 }
 
 #choixProjet input[type="radio"]:checked + label {
-    background-color: #00af7e;
+    background-color: #0e8769;
     color: #fff;
 }
