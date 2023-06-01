@@ -23,8 +23,6 @@ function toggleEditEtudiant(button) {
     var niveauEtude = cells[5].innerHTML;
     var ecole = cells[6].innerHTML;
     var ville = cells[7].innerHTML;
-    var motDePasse = cells[8].innerHTML;
-
     // Modifier les cellules pour afficher les champs de modification
     cells[0].innerHTML = "<input type='text' value='" + prenom + "'>";
     cells[1].innerHTML = "<input type='text' value='" + nom + "'>";
@@ -42,20 +40,19 @@ function toggleEditEtudiant(button) {
         </div>`;
     cells[6].innerHTML = "<input type='text' value='" + ecole + "'>";
     cells[7].innerHTML = "<input type='text' value='" + ville + "'>";
-    cells[8].innerHTML = "<input type='text' value='" + motDePasse + "'>";
+
 
     // Changer le texte du bouton Modifier en Envoyer
     button.innerHTML = "Envoyer";
-    button.setAttribute("onclick", "sendDataEtudiant(this, '" + email + "', '" + motDePasse + "')");
+    button.setAttribute("onclick", "sendDataEtudiant(this, '" + email + "')");
 }
 
 /**
  * récupère les données du formulaire et les envoie à la page action/edit_a_profil.php
  * @param {*} button 
  * @param {*} email 
- * @param {*} motDePasse2 
- */
-function sendDataEtudiant(button, email, motDePasse2) {
+ *  */
+function sendDataEtudiant(button, email) {
 
 
     var row = button.parentNode.parentNode;
@@ -77,12 +74,6 @@ function sendDataEtudiant(button, email, motDePasse2) {
     }
     var ecole = cells[6].getElementsByTagName('input')[0].value;
     var ville = cells[7].getElementsByTagName('input')[0].value;
-    if (cells[8].getElementsByTagName('input')[0].value == motDePasse2) {
-        var motDePasse = cells[8].getElementsByTagName('input')[0].value;
-    } else {
-        var motDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
-    }
-
 
 
     // Envoyer les données à une page PHP pour effectuer la mise à jour
@@ -101,7 +92,6 @@ function sendDataEtudiant(button, email, motDePasse2) {
             cells[5].innerHTML = niveauEtudeValue;
             cells[6].innerHTML = ecole;
             cells[7].innerHTML = ville;
-            cells[8].innerHTML = motDePasse;
 
             // Changer le texte du bouton Envoyer en Modifier
             button.innerHTML = "Modifier";
@@ -112,13 +102,14 @@ function sendDataEtudiant(button, email, motDePasse2) {
 
     xhttp.open("POST", "action/edit_a_profil.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + numeroTel + "&niveauEtude=" + niveauEtudeValue + "&ecole=" + ecole + "&ville=" + ville + "&motDePasse=" + motDePasse);
+    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + numeroTel + "&niveauEtude=" + niveauEtudeValue + "&ecole=" + ecole + "&ville=" + ville );
 
 }
 /*
 * Affiche les champs de modification du profil
 * @param {HTMLElement} button - le bouton Modifier
 */
+
 function toggleEditGestionnaire(button) {
     var email = button.getAttribute('data-email');
     var row = button.parentNode.parentNode;
@@ -133,7 +124,6 @@ function toggleEditGestionnaire(button) {
     var nomEntreprise = cells[5].innerHTML;
     var dateDebutUtilisateur = cells[6].innerHTML;
     var dateFinUtilisateur = cells[7].innerHTML;
-    var motDePasse = cells[8].innerHTML;
 
     // Modifier les cellules pour afficher les champs de modification
     cells[0].innerHTML = "<input type='text' value='" + prenom + "'>";
@@ -144,11 +134,10 @@ function toggleEditGestionnaire(button) {
     cells[5].innerHTML = "<input type='text' value='" + nomEntreprise + "'>";
     cells[6].innerHTML = "<input type='date' value='" + dateDebutUtilisateur + "'>";
     cells[7].innerHTML = "<input type='date' value='" + dateFinUtilisateur + "'>";
-    cells[8].innerHTML = "<input type='text' value='" + motDePasse + "'>";
 
     // Changer le texte du bouton Modifier en Envoyer
     button.innerHTML = "Envoyer";
-    button.setAttribute("onclick", "sendDataGestionnaire(this, '" + email + "', '" + motDePasse + "')");
+    button.setAttribute("onclick", "sendDataGestionnaire(this, '" + email + "')");
 }
 
 /*
@@ -157,7 +146,7 @@ function toggleEditGestionnaire(button) {
 * @param {string} email - l'email de l'utilisateur
 * @param {string} mdp - le mot de passe de l'utilisateur
 */
-function sendDataGestionnaire(button, email, motDePasse2) {
+function sendDataGestionnaire(button, email) {
     var row = button.parentNode.parentNode;
     var cells = row.getElementsByTagName('td');
 
@@ -170,11 +159,6 @@ function sendDataGestionnaire(button, email, motDePasse2) {
     var nomEntreprise = cells[5].getElementsByTagName('input')[0].value;
     var dateDebutUtilisateur = cells[6].getElementsByTagName('input')[0].value;
     var dateFinUtilisateur = cells[7].getElementsByTagName('input')[0].value;
-    if (cells[8].getElementsByTagName('input')[0].value == motDePasse2) {
-        var motDePasse = cells[8].getElementsByTagName('input')[0].value;
-    } else {
-        var motDePasse = sha1(cells[8].getElementsByTagName('input')[0].value);
-    }
 
     // Envoyer les données à une page PHP pour effectuer la mise à jour
     // Utilisez AJAX ou un formulaire pour soumettre les données à la page PHP
@@ -191,7 +175,7 @@ function sendDataGestionnaire(button, email, motDePasse2) {
             cells[5].innerHTML = nomEntreprise;
             cells[6].innerHTML = dateDebutUtilisateur;
             cells[7].innerHTML = dateFinUtilisateur;
-            cells[8].innerHTML = motDePasse;
+
 
             // Changer le texte du bouton Envoyer en Modifier
             button.innerHTML = "Modifier";
@@ -202,7 +186,7 @@ function sendDataGestionnaire(button, email, motDePasse2) {
 
     xhttp.open("POST", "action/edit_a_profil.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + numeroTel + "&nomEntreprise=" + nomEntreprise + "&dateDebutUtilisateur=" + dateDebutUtilisateur + "&dateFinUtilisateur=" + dateFinUtilisateur + "&motDePasse=" + motDePasse);
+    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + numeroTel + "&nomEntreprise=" + nomEntreprise + "&dateDebutUtilisateur=" + dateDebutUtilisateur + "&dateFinUtilisateur=" + dateFinUtilisateur );
 }
 /*
 * supprime un utilisateur
@@ -260,9 +244,6 @@ function ajouterEtudiant() {
     var celluleVille = nouvelleLigne.insertCell();
     celluleVille.innerHTML = '<input type="text" id="nouvelleVille" value="">';
 
-    var celluleMotDePasse = nouvelleLigne.insertCell();
-    celluleMotDePasse.innerHTML = '<input type="password" id="nouveauMotDePasse" value="">';
-
     var celluleActions = nouvelleLigne.insertCell();
     celluleActions.innerHTML = '<button onclick="sauvegarderNouvelEtudiant()">Enregistrer</button>';
 
@@ -282,7 +263,7 @@ function sauvegarderNouvelEtudiant() {
     var nouveauNiveauEtude = document.getElementById('nouveauNiveauEtude').value;
     var nouvelleEcole = document.getElementById('nouvelleEcole').value;
     var nouvelleVille = document.getElementById('nouvelleVille').value;
-    var nouveauMotDePasse = document.getElementById('nouveauMotDePasse').value;
+    var nouveauMotDePasse = 'root';
     // Créer un objet contenant les données à envoyer
 
 
@@ -337,8 +318,6 @@ function ajouterGestionnaire() {
     var celluleDateFinUtilisateur = nouvelleLigne.insertCell();
     celluleDateFinUtilisateur.innerHTML = '<input type="date" id="nouvelleDateFinUtilisateur" value="">';
 
-    var celluleMotDePasse = nouvelleLigne.insertCell();
-    celluleMotDePasse.innerHTML = '<input type="password" id="nouveauMotDePasse" value="">';
 
     var celluleActions = nouvelleLigne.insertCell();
     celluleActions.innerHTML = '<button onclick="sauvegarderNouveauGestionnaire(this)">Enregistrer</button>';
@@ -359,7 +338,7 @@ function sauvegarderNouveauGestionnaire() {
     var nouveauNomEntreprise = document.getElementById('nouveauNomEntreprise').value;
     var nouvelleDateDebutUtilisateur = document.getElementById('nouvelleDateDebutUtilisateur').value;
     var nouvelleDateFinUtilisateur = document.getElementById('nouvelleDateFinUtilisateur').value;
-    var nouveauMotDePasse = document.getElementById('nouveauMotDePasse').value;
+    var nouveauMotDePasse = 'root';
 
     // Créer un objet contenant les données à envoyer
     var xhr = new XMLHttpRequest();
