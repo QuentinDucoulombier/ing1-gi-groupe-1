@@ -1,10 +1,18 @@
+/*
+*fonction qui cripte le mot de passe
+*/
 function sha1(str) {
     return CryptoJS.SHA1(str).toString();
 }
+// variables qui contiennent les champs de mot de passe
 var MotDePassesgestionnaire = document.getElementById("MotDePasse_Gestionnaire");
 var ConfirmerMotDePassesgestionnaire = document.getElementById("Confirmer_MotDePasse_Gestionnaire");
 var AncienMotDePassesgestionnaire = document.getElementById("Ancien_MotDePasse_Gestionnaire");
 
+/*
+* Affiche les champs de modification du profil
+* @param {HTMLElement} button - le bouton Modifier
+ */
 function toggleEditProfilGestionnaire(button) {
     MotDePassesgestionnaire.classList.remove("hide");
     ConfirmerMotDePassesgestionnaire.classList.remove("hide");
@@ -45,7 +53,11 @@ function toggleEditProfilGestionnaire(button) {
 }
 
 
-
+/*
+* récupère les données du formulaire et les envoie à la page action/edit_a_profil.php
+* @param {HTMLElement} button - le bouton Envoyer
+* @param {string} email - l'email de l'utilisateur
+*/
 function sendDataProfilGestionnaire(button, email) {
 
 
@@ -88,7 +100,7 @@ function sendDataProfilGestionnaire(button, email) {
             ConfirmerMotDePassesgestionnaire.classList.add("hide");
             AncienMotDePassesgestionnaire.classList.add("hide");
             document.getElementById("profil_id").classList.remove("smaller_profil");
-            //location.reload();
+            location.reload();
             
         }
     };
@@ -105,6 +117,12 @@ function sendDataProfilGestionnaire(button, email) {
 
 }
 
+/*
+* verifie les champs du formulaire
+* @param {HTMLElement} button - le bouton Envoyer
+* @param {string} email - l'email de l'utilisateur
+* @param {string} mdp - le mot de passe de l'utilisateur
+*/
 function validateProfilGestionnaire(button, email2, mdp) {
 
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document

@@ -638,6 +638,236 @@ function deleteProjet($idProjet)
 }
 
 /*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updateNomEvent($idEvenement, $nom)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE Evenement SET nomEvenement = :nom WHERE idEvenement = :idEvenement";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEvenement', $idEvenement);
+        $statement->bindParam(':nom', $nom);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updateDateD($idEvenement, $dateDebut)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE Evenement SET dateDebut = :dateDebut WHERE idEvenement = :idEvenement";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEvenement', $idEvenement);
+        $statement->bindParam(':dateDebut', $dateDebut);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updateDateF($idEvenement, $dateFin)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE Evenement SET dateDebut = :dateFin WHERE idEvenement = :idEvenement";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEvenement', $idEvenement);
+        $statement->bindParam(':dateFin', $dateFin);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updateDescriptionEvent($idEvenement, $descriptionEvent)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE Evenement SET descriptionEvent = :descriptionEvent WHERE idEvenement = :idEvenement";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEvenement', $idEvenement);
+        $statement->bindParam(':descriptionEvent', $descriptionEvent);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updateImageEvent($idEvenement, $imageEvent)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE Evenement SET imageEvent = :imageEvent WHERE idEvenement = :idEvenement";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEvenement', $idEvenement);
+        $statement->bindParam(':descriptionEvent', $imageEvent);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+
+/*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updateNomProjet($idProjetData, $nomProjet)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE ProjetData SET nomProjet = :nomProjet WHERE idProjetData = :idProjetData";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjetData', $idProjetData);
+        $statement->bindParam(':nomProjet', $nomProjet);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updateDescProjet($idProjetData, $description)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE ProjetData SET description = :description WHERE idProjetData = :idProjetData";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjetData', $idProjetData);
+        $statement->bindParam(':description', $description);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updateimageProjet($idProjetData, $image)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE ProjetData SET image = :image WHERE idProjetData = :idProjetData";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjetData', $idProjetData);
+        $statement->bindParam(':image', $image);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updatefichierProjet($idProjetData, $urlFichier)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE ProjetData SET urlFichier = :urlFichier WHERE idProjetData = :idProjetData";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjetData', $idProjetData);
+        $statement->bindParam(':urlFichier', $urlFichier);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updateVideoProjet($idProjetData, $urlVideo)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE ProjetData SET urlVideo = :urlVideo WHERE idProjetData = :idProjetData";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjetData', $idProjetData);
+        $statement->bindParam(':urlVideo', $urlVideo);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updateConseilProjet($idProjetData, $conseil)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE ProjetData SET conseil = :conseil WHERE idProjetData = :idProjetData";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjetData', $idProjetData);
+        $statement->bindParam(':conseil', $conseil);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/*
+ * Permet de modifier le nom d'un event
+ * @param mail : mail de l'utilisateur
+ * @param name : nouveau nom
+ */
+function updateConsigneProjet($idProjetData, $consigne)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE ProjetData SET consigne = :consigne WHERE idProjetData = :idProjetData";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjetData', $idProjetData);
+        $statement->bindParam(':consigne', $consigne);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+
+/*
  * Permet d'ajouter un questionnaire 
  * @param idDataBattle : id data battle lié au questionnaire
  * @param dateDebut : date de début du questionnaire
@@ -1242,6 +1472,30 @@ function getGestionnaireProjet($gestio)
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
+}
+
+/**
+ * permet de récupérer les projets d'un utilisateur
+ * @param mail : mail de l'utilisateur
+ */
+function getProjetUser($mail)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT ProjetData.nomProjet, ProjetData.idProjetData FROM ProjetData 
+                        INNER JOIN Equipe ON ProjetData.idProjetData = Equipe.idProjetData 
+                        INNER JOIN Composer ON Equipe.idEquipe = Composer.idEquipe 
+                        INNER JOIN Utilisateur ON Composer.idEtudiant = Utilisateur.idUtilisateur 
+                        WHERE Utilisateur.email = :mail";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':mail', $mail);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+
 }
 
 /**

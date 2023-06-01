@@ -1,63 +1,97 @@
+.data-name {
+  padding-top: 30px;
+  display: flex;
+  justify-content: center;
+  color: #222222 !important;
+}
+
+.date {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  margin-top: -10px;
+}
+
+.synthese {
+  border-radius: 20px;
+  margin: 15px;
+  padding: 15px;
+  padding-top: 25px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 0 5px rgba(134, 134, 134, 0.4);
+
+}
+
+.project-list {
+  
+ 
+}
+
+.project-name {
+  display:inline;
+
+}
 h1 {
     margin-bottom: 10px;
-  }
-  
-  h3 {
-    margin-top: 20px;
-  }
-  
-  #liste-projets {
-    margin-bottom: 20px;
-  }
-  
-  #liste-equipes {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    padding: 10px;
-  }
-  
-  .nom-equipe {
-    font-weight: bold;
-  }
-  
-  .messages,
-  .reponses-questionnaire {
-    margin-top: 10px;
-  }
-  
-  .reponses-questionnaire p {
-    margin-bottom: 5px;
-  }
-  
-  .button-container {
-    display: flex;
-    justify-content: center;
-  }
-  
-  button {
-    margin-right: 10px;
-  }
-  
-  #liste-questionnaires {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 20px;
-  }
-  
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+#liste-projets {
+  margin-bottom: 20px;
+}
+
+#liste-equipes {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.nom-equipe {
+  font-weight: bold;
+}
+
+.messages,
+.reponses-questionnaire {
+  margin-top: 10px;
+}
+
+.reponses-questionnaire p {
+  margin-bottom: 5px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+button {
+  margin-right: 10px;
+}
+
+#liste-questionnaires {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.questionnaire {
+  width: 50%;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.questionnaire p {
+  margin: 0;
+}
+
+@media screen and (max-width: 768px) {
   .questionnaire {
-    width: 50%;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    padding: 10px;
+    width: 100%;
   }
+}
   
-  .questionnaire p {
-    margin: 0;
-  }
-  
-  @media screen and (max-width: 768px) {
-    .questionnaire {
-      width: 100%;
-    }
-  }
-  
+ 
