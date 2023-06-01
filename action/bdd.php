@@ -2207,5 +2207,5 @@ function getAnalyseCode($idProjetData)
        die('Erreur : ' . $e->getMessage());
    }
 }
-    
+
 ?>
