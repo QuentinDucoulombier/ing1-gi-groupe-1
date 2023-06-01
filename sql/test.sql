@@ -119,14 +119,41 @@ FROM Messages
 WHERE id_auteur = 1
 OR id_destinataire = 1;
 */
-
+/*
 SELECT *
 FROM Composer
 INNER JOIN Messages ON Messages.id_destinataire = Composer.idEtudiant
-WHERE idEquipe = 4;
+INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Composer.idEtudiant
+WHERE idEquipe = 2
 
+UNION
 
 SELECT *
 FROM Composer
 INNER JOIN Messages ON Messages.id_auteur = Composer.idEtudiant
-WHERE idEquipe = 4;
+INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Composer.idEtudiant
+WHERE idEquipe = 2;
+*/
+/*
+SELECT Messages.message, Messages.date_envoi, UtilisateurDes.nomUtilisateur as nomDestinataire, UtilisateurDes.prenomUtilisateur as prenomDestinataire, UtilisateurAut.nomUtilisateur as nomAuteur, UtilisateurAut.prenomUtilisateur as prenomAuteur
+FROM Composer
+INNER JOIN Messages ON Messages.id_destinataire = Composer.idEtudiant
+INNER JOIN Utilisateur as UtilisateurDes ON UtilisateurDes.idUtilisateur = Messages.id_destinataire
+INNER JOIN Utilisateur as UtilisateurAut ON UtilisateurAut.idUtilisateur = Messages.id_auteur
+WHERE Composer.idEquipe = 1
+
+UNION
+
+SELECT Messages.message, Messages.date_envoi, UtilisateurDes.nomUtilisateur as nomDestinataire, UtilisateurDes.prenomUtilisateur as prenomDestinataire, UtilisateurAut.nomUtilisateur as nomAuteur, UtilisateurAut.prenomUtilisateur as prenomUtilisateur
+FROM Composer
+INNER JOIN Messages ON Messages.id_auteur = Composer.idEtudiant
+INNER JOIN Utilisateur as UtilisateurDes ON UtilisateurDes.idUtilisateur = Messages.id_destinataire
+INNER JOIN Utilisateur as UtilisateurAut ON UtilisateurAut.idUtilisateur = Messages.id_auteur
+WHERE Composer.idEquipe = 1;
+*/
+
+SELECT *
+FROM Messages
+WHERE lu = 0
+AND id_destinataire = 3 /*User*/
+AND id_auteur = 4;  /*A affiché*/

@@ -21,7 +21,7 @@
 
             if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
                 echo '          <div class="synthese"';
-                echo '          <a href="/?page=ModifierEvenement&evenement='.$idBattle.'"> ';
+                echo '          <a href="/?page=modifierEvenement&evenement='.$idBattle.'"> ';
                 echo '              <button name="creation"> Modifier la battle </button> ';
                 echo '          </a>';
             }
@@ -54,9 +54,22 @@
                     </div>
 
                     <div class="messages">
-                        <a href="">
-                            <button name="messages"> Voir les messages </button>
-                        </a>
+                        <form action="/?page=viewMessageTeam" method="POST">
+                            <?php
+                                echo '<input type="hidden"  name="idTeam" value="'.$equipe['idEquipe'].'"/>'
+                            ?>
+                            <input type="submit" value="Voir les messages"/>
+                        </form>
+                    </div>
+
+                    <div class="sendGroupMessage">
+                        <form action="/?page=groupeMessage" method="POST">
+                            <?php
+                                echo '<input type="hidden"  name="idTeam" value="'.$equipe['idEquipe'].'"/>'
+                            ?>
+                            <input type="submit" value="Envoyer un message au groupe"/>
+                        </form>
+
                     </div>
 
                     <div class="reponses-questionnaire">

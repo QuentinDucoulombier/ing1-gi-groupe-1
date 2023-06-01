@@ -78,7 +78,7 @@
     </div>
 
     <div>
-        <input type="submit" value="Ajouter un projet">
+        <input type="submit" value="Valider et ajouter un projet">
     </div>
 
 
