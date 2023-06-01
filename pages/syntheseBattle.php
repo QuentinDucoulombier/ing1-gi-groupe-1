@@ -32,9 +32,11 @@
             }
 
             echo '<h3> Projet rattaché : </h3>';
-
+            
             echo ' <div id="liste-projets">';
             echo        $projets[0]['nomProjet'];
+            echo '<div><button class="button" onclick="window.location.href=`./?page=statglobale&ProjetData='.$projets[0]["idProjetData"].'`">Statistiques projets</button></div>';
+
             if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
                 echo ' <div class="project-name"';
 
@@ -46,6 +48,7 @@
             echo ' </div>';
 
             echo '<h3> Liste des équipes rattachées : </h3>';
+        
 
             foreach ($equipes as $equipe){?>
                 <div id="liste-equipes">
