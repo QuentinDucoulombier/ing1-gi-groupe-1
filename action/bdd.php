@@ -872,6 +872,7 @@ function addEquipe($nom, $idcapitaine, $idprojet)
         die('Erreur : ' . $e->getMessage());
     }
 }
+
 /*
  * Permet d'ajouter un questionnaire 
  * @param idDataBattle : id data battle lié au questionnaire
@@ -894,27 +895,27 @@ function addQuestionnaire($iddatabattle, $dateDebut, $dateFin)
 }
 
 
-    /*
-    * Permet de récupérer un questionnaire associé à une data battle
-    * @param idDataBattle : id data battle lié au questionnaire
-    */
-    function getQuestionnaire($iddatabattle, $numero){
-        try{
-            $conn = connect();
-            $sqlQuery="SELECT idQuestionnaire, idDataBattle, numero, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateDebut,DATE_FORMAT(dateFin, '%d %M %Y') AS dateFin 
-            FROM Questionnaire 
-            WHERE idDataBattle = :id AND numero = :numero ";
-            $statement=$conn->prepare($sqlQuery);
-            $statement->bindParam(':id',$iddatabattle);
-            $statement->bindParam(':numero',$numero);
-            $statement->execute();
-            $result = $statement->fetch();
-            return $result;
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        }    
+/*
+* Permet de récupérer un questionnaire associé à une data battle
+* @param idDataBattle : id data battle lié au questionnaire
+*/
+function getQuestionnaire($iddatabattle, $numero){
+    try{
+        $conn = connect();
+        $sqlQuery="SELECT idQuestionnaire, idDataBattle, numero, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateDebut,DATE_FORMAT(dateFin, '%d %M %Y') AS dateFin 
+        FROM Questionnaire 
+        WHERE idDataBattle = :id AND numero = :numero ";
+        $statement=$conn->prepare($sqlQuery);
+        $statement->bindParam(':id',$iddatabattle);
+        $statement->bindParam(':numero',$numero);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
     }
+    catch(Exception $e){
+        die('Erreur : '.$e->getMessage());
+    }    
+}
 /*
  * Permet de supprimer un questionnaire du site
  * @param mail : mail de l'utilisateur
@@ -1015,7 +1016,6 @@ function getDatesDataBattle($idDataBattle)
 * Permet de récupérer les réponses d'une équipe à un questionnaire 
 * @param idQuestion : id question lié à la réponse
 * @param idEquipe : id Equipe qui a répondu au questionnaire
-* TODO:Rajouter le numero dans l'insertion mais il faut faire ca dans la table jsp faire
 */
 function setReponse($idEquipe,$idQuestion,$reponse){
     try{
@@ -1168,40 +1168,40 @@ function addProjetData($idEvenement, $nomProjet, $description, $image, $urlFichi
 }
 
 /*
-    * Permet de récupérer la liste des data Challenge
-    * @return tableau de tableau de challenge
-    */
-    function getChallenge(){
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent,idEvenement FROM Evenement WHERE typeEvenement LIKE 'dataChallenge' ORDER BY dateD DESC";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->execute();
-            $result = $statement->fetchAll();
-            return $result;
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        } 
+* Permet de récupérer la liste des data Challenge
+* @return tableau de tableau de challenge
+*/
+function getChallenge(){
+    try{
+        $conn = connect();
+        $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent,idEvenement FROM Evenement WHERE typeEvenement LIKE 'dataChallenge' ORDER BY dateD DESC";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
     }
+    catch(Exception $e){
+        die('Erreur : '.$e->getMessage());
+    } 
+}
 
 /*
-    * Permet de récupérer la liste des data Battle
-    * @return tableau de tableau de battle
-    */
-    function getBattle(){
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent,idEvenement  FROM Evenement WHERE typeEvenement LIKE 'dataBattle' ORDER BY dateD DESC";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->execute();
-            $result = $statement->fetchAll();
-            return $result;
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        } 
+* Permet de récupérer la liste des data Battle
+* @return tableau de tableau de battle
+*/
+function getBattle(){
+    try{
+        $conn = connect();
+        $sqlQuery = "SELECT nomEvenement, DATE_FORMAT(dateDebut, '%d %M %Y') AS dateD, DATE_FORMAT(dateFin, '%d %M %Y') AS dateF, descriptionEvent, imageEvent,idEvenement  FROM Evenement WHERE typeEvenement LIKE 'dataBattle' ORDER BY dateD DESC";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
     }
+    catch(Exception $e){
+        die('Erreur : '.$e->getMessage());
+    } 
+}
 /*
  * Permet de récupérer un data Challenge ou une data battle à l'aide de son id
  * @return tableau de challenge
@@ -1222,66 +1222,66 @@ function getEvenementbyID($id)
 }
 
 
- /*
-    * Permet de récupérer les infos liées à un projet Data 
-    * @param nomEvenement : nom de l'evenement correspondant
-    */
-    function getProjetData($idEvenement){
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT * FROM ProjetData 
-                        WHERE idEvenement LIKE :idEvenement";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->bindParam(':idEvenement', $idEvenement);
-            $statement->execute();
-            $result = $statement->fetch();
-            return $result;
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        } 
+/*
+* Permet de récupérer les infos liées à un projet Data 
+* @param nomEvenement : nom de l'evenement correspondant
+*/
+function getProjetData($idEvenement){
+    try{
+        $conn = connect();
+        $sqlQuery = "SELECT * FROM ProjetData 
+                    WHERE idEvenement LIKE :idEvenement";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEvenement', $idEvenement);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
     }
+    catch(Exception $e){
+        die('Erreur : '.$e->getMessage());
+    } 
+}
 
- /*
-    * Permet de récupérer les infos liées à un projet Data 
-    * @param nomEvenement : nom de l'evenement correspondant
-    */
-    function getProjetDatabyID($idProjetData){
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT * FROM ProjetData 
-                        WHERE idProjetData LIKE :idProjetData";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->bindParam(':idProjetData', $idProjetData);
-            $statement->execute();
-            $result = $statement->fetch();
-            return $result;
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        } 
+/*
+* Permet de récupérer les infos liées à un projet Data 
+* @param nomEvenement : nom de l'evenement correspondant
+*/
+function getProjetDatabyID($idProjetData){
+    try{
+        $conn = connect();
+        $sqlQuery = "SELECT * FROM ProjetData 
+                    WHERE idProjetData LIKE :idProjetData";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjetData', $idProjetData);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
     }
+    catch(Exception $e){
+        die('Erreur : '.$e->getMessage());
+    } 
+}
 
-    /*
-    * Permet de récupérer les infos d'un challenge qui est lié à un projet Data
-    */
-    function getEvenementbyProjet($idProjet){
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT Evenement.*
-                        FROM Evenement
-                        INNER JOIN ProjetData ON Evenement.idEvenement = ProjetData.idEvenement
-                        WHERE ProjetData.idProjetData = :idProjet";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->bindParam(':idProjet', $idProjet);
-            $statement->execute();
-            $result = $statement->fetch();
-            return $result;
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        } 
+/*
+* Permet de récupérer les infos d'un challenge qui est lié à un projet Data
+*/
+function getEvenementbyProjet($idProjet){
+    try{
+        $conn = connect();
+        $sqlQuery = "SELECT Evenement.*
+                    FROM Evenement
+                    INNER JOIN ProjetData ON Evenement.idEvenement = ProjetData.idEvenement
+                    WHERE ProjetData.idProjetData = :idProjet";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idProjet', $idProjet);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
     }
+    catch(Exception $e){
+        die('Erreur : '.$e->getMessage());
+    } 
+}
 
 /*
  * Permet de récupérer les équipes de l'utilisateur 
