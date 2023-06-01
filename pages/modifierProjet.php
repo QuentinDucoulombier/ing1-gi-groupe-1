@@ -72,6 +72,9 @@ $projet = getProjetDatabyID($id)
         <input type="file" id="image" name="image" accept="image/png, image/jpeg">
     </div>
     
+    <input type="hidden" name="id" value="<?php echo isset($id) ? $id : ''; ?>">
+    
+    
     <div id="submit">
         <input type="submit" name="action" value="Modifier le projet">
     </div>
