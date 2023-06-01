@@ -1,6 +1,5 @@
 <?php 
 
-//$idProjetData=$_GET["ProjetData"];
 $idEquipe=$_GET["Equipe"];
 
 ?>

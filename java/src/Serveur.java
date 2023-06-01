@@ -66,12 +66,14 @@ public class Serveur {
 
             reader.close();
             String pythonCode = requestBodyBuilder.toString();
+            String result1 = AnalyseCodePython.getFonctionsLignes(pythonCode);
             String[] lines = pythonCode.split("\n");
             String keywords = lines[lines.length-2];
-            String result1 = AnalyseCodePython.getFonctionsLignes(pythonCode);
-            String result2 = AnalyseCodePython.getOccurenceMots(pythonCode, Arrays.asList(keywords.split(",")));
-            return result1.substring(0, result1.length() - 1)+","+result2.substring(1);
-            
+            if (!keywords.isEmpty()) {
+            	String result2 = AnalyseCodePython.getOccurenceMots(pythonCode, Arrays.asList(keywords.split(",")));
+            	return result1.substring(0, result1.length() - 1)+","+result2.substring(1);
+            }
+          	return result1;
         }
 
         /**

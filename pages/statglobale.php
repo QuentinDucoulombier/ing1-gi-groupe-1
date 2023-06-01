@@ -1,5 +1,5 @@
 <?php 
-$idProjetData=3;
+$idProjetData=$_GET["ProjetData"];
 
 $data=getanalyseCode($idProjetData);
 
