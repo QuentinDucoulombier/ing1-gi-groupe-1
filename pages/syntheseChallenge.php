@@ -97,7 +97,7 @@
     }
     else{
     header ('Location: /?page=connexion');
-
+    
     }
 ?>
 </div>

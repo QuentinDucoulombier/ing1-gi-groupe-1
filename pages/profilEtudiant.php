@@ -101,6 +101,5 @@ if (isset($_SESSION['email'])) {
     <?php
 } else {
     echo 'error';
-    //     header('Location: /index.php');
 }
 ?>
