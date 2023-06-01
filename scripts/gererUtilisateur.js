@@ -1,7 +1,14 @@
+/*
+* cript le mot de passe en SHA1
+* @param {string} str - le mot de passe
+*/
 function sha1(str) {
     return CryptoJS.SHA1(str).toString();
 }
-
+/*
+* Affiche les champs de modification du profil
+* @param {HTMLElement} button - le bouton Modifier
+*/
 function toggleEditEtudiant(button) {
     var email = button.getAttribute('data-email');
     var row = button.parentNode.parentNode;
@@ -24,7 +31,15 @@ function toggleEditEtudiant(button) {
     cells[2].innerHTML = "<input type='text' value='" + nvemail + "'>";
     cells[3].innerHTML = "<input type='text' value='" + type + "'>";
     cells[4].innerHTML = "<input type='text' value='" + numeroTel + "'>";
-    cells[5].innerHTML = "<input type='text' value='" + niveauEtude + "'>";
+    cells[5].innerHTML = `
+        <div class="radioniveauEtude" style="display: flex;">
+            <input type="radio" id="L1" name="niveauEtude" value="L1" ${niveauEtude === 'L1' ? 'checked' : ''}><label for="L1">L1</label>
+            <input type="radio" id="L2" name="niveauEtude" value="L2" ${niveauEtude === 'L2' ? 'checked' : ''}><label for="L2">L2</label>
+            <input type="radio" id="L3" name="niveauEtude" value="L3" ${niveauEtude === 'L3' ? 'checked' : ''}><label for="L3">L3</label>
+            <input type="radio" id="M1" name="niveauEtude" value="M1" ${niveauEtude === 'M1' ? 'checked' : ''}><label for="M1">M1</label>
+            <input type="radio" id="M2" name="niveauEtude" value="M2" ${niveauEtude === 'M2' ? 'checked' : ''}><label for="M2">M2</label>
+            <input type="radio" id="D" name="niveauEtude" value="D" ${niveauEtude === 'D' ? 'checked' : ''}><label for="D">D</label>
+        </div>`;
     cells[6].innerHTML = "<input type='text' value='" + ecole + "'>";
     cells[7].innerHTML = "<input type='text' value='" + ville + "'>";
     cells[8].innerHTML = "<input type='text' value='" + motDePasse + "'>";
@@ -34,7 +49,12 @@ function toggleEditEtudiant(button) {
     button.setAttribute("onclick", "sendDataEtudiant(this, '" + email + "', '" + motDePasse + "')");
 }
 
-
+/**
+ * récupère les données du formulaire et les envoie à la page action/edit_a_profil.php
+ * @param {*} button 
+ * @param {*} email 
+ * @param {*} motDePasse2 
+ */
 function sendDataEtudiant(button, email, motDePasse2) {
 
 
@@ -47,7 +67,14 @@ function sendDataEtudiant(button, email, motDePasse2) {
     var nvemail = cells[2].getElementsByTagName('input')[0].value;
     var type = cells[3].getElementsByTagName('input')[0].value;
     var numeroTel = cells[4].getElementsByTagName('input')[0].value;
-    var niveauEtude = cells[5].getElementsByTagName('input')[0].value;
+    var niveauEtudeInputs = cells[5].querySelectorAll('input[name="niveauEtude"]');
+    var niveauEtudeValue = '';
+    for (var i = 0; i < niveauEtudeInputs.length; i++) {
+        if (niveauEtudeInputs[i].checked) {
+            niveauEtudeValue = niveauEtudeInputs[i].value;
+            break;
+        }
+    }
     var ecole = cells[6].getElementsByTagName('input')[0].value;
     var ville = cells[7].getElementsByTagName('input')[0].value;
     if (cells[8].getElementsByTagName('input')[0].value == motDePasse2) {
@@ -71,7 +98,7 @@ function sendDataEtudiant(button, email, motDePasse2) {
             cells[2].innerHTML = nvemail;
             cells[3].innerHTML = type;
             cells[4].innerHTML = numeroTel;
-            cells[5].innerHTML = niveauEtude;
+            cells[5].innerHTML = niveauEtudeValue;
             cells[6].innerHTML = ecole;
             cells[7].innerHTML = ville;
             cells[8].innerHTML = motDePasse;
@@ -85,10 +112,13 @@ function sendDataEtudiant(button, email, motDePasse2) {
 
     xhttp.open("POST", "action/edit_a_profil.php", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + numeroTel + "&niveauEtude=" + niveauEtude + "&ecole=" + ecole + "&ville=" + ville + "&motDePasse=" + motDePasse);
+    xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + numeroTel + "&niveauEtude=" + niveauEtudeValue + "&ecole=" + ecole + "&ville=" + ville + "&motDePasse=" + motDePasse);
 
 }
-
+/*
+* Affiche les champs de modification du profil
+* @param {HTMLElement} button - le bouton Modifier
+*/
 function toggleEditGestionnaire(button) {
     var email = button.getAttribute('data-email');
     var row = button.parentNode.parentNode;
@@ -121,7 +151,12 @@ function toggleEditGestionnaire(button) {
     button.setAttribute("onclick", "sendDataGestionnaire(this, '" + email + "', '" + motDePasse + "')");
 }
 
-
+/*
+* récupère les données du formulaire et les envoie à la page action/edit_a_profil.php
+* @param {HTMLElement} button - le bouton Envoyer
+* @param {string} email - l'email de l'utilisateur
+* @param {string} mdp - le mot de passe de l'utilisateur
+*/
 function sendDataGestionnaire(button, email, motDePasse2) {
     var row = button.parentNode.parentNode;
     var cells = row.getElementsByTagName('td');
@@ -169,6 +204,10 @@ function sendDataGestionnaire(button, email, motDePasse2) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + numeroTel + "&nomEntreprise=" + nomEntreprise + "&dateDebutUtilisateur=" + dateDebutUtilisateur + "&dateFinUtilisateur=" + dateFinUtilisateur + "&motDePasse=" + motDePasse);
 }
+/*
+* supprime un utilisateur
+* @param {HTMLElement} button - le bouton Supprimer
+*/
 function supprimerUtilisateur(button) {
     var email = button.getAttribute('data-email');
     var xhttp = new XMLHttpRequest();
@@ -183,9 +222,12 @@ function supprimerUtilisateur(button) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("email=" + email);
 }
+
 var button1 = document.getElementById('ajouter-btn1');
 var button2 = document.getElementById('ajouter-btn2');
-
+/*
+* Ajoute un étudiant
+*/
 function ajouterEtudiant() {
     // Créer une référence au tableau HTML
     var tableauEtudiants = document.getElementById('tableauEtudiants');
@@ -227,6 +269,9 @@ function ajouterEtudiant() {
     button1.style.display = 'none';
     button2.style.display = 'none';
 }   
+/*
+* Sauvegarde un nouvel étudiant
+*/
 function sauvegarderNouvelEtudiant() {
     // Récupérer les valeurs des champs
     var nouveauPrenom = document.getElementById('nouveauPrenom').value;
@@ -260,6 +305,10 @@ function sauvegarderNouvelEtudiant() {
     xhr.send('prenomUtilisateur=' + nouveauPrenom + '&nomUtilisateur=' + nouveauNom + '&email=' + nouvelEmail + '&type=' + nouveauType + '&numeroTel=' + nouveauNumeroTel + '&niveauEtude=' + nouveauNiveauEtude + '&ecole=' + nouvelleEcole + '&ville=' + nouvelleVille + '&motDePasse=' + nouveauMotDePasse);
 
 }
+/*
+* Ajoute un gestionnaire
+*/
+
 function ajouterGestionnaire() {
     var tableauGestionnaire = document.getElementById('tableauGestionnaire');
     var nouvelleLigne = tableauGestionnaire.insertRow();
@@ -297,6 +346,9 @@ function ajouterGestionnaire() {
     button2.style.display = 'none';
     button1.style.display = 'none';
 }
+/*
+* Sauvegarde un nouveau gestionnaire
+*/
 function sauvegarderNouveauGestionnaire() {
     // Récupérer les valeurs des champs
     var nouveauPrenom = document.getElementById('nouveauPrenom').value;

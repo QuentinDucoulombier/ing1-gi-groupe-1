@@ -79,17 +79,7 @@ if (isset($_SESSION['email'])) {
                 echo "<td>" . $info['type'] . "</td>";
                 echo "<td>" . $info['numeroTel'] . "</td>";
                 echo "<td>" . $info['nomEntreprise'] . "</td>";
-                // if (isset($info['dateDebutUtilisateur'])) {
-                //     echo "<td>" . date('d F Y', strtotime($info['dateDebutUtilisateur'])) . "</td>";
-                // } else {
-                //     echo "<td></td>";
-                // }
                 echo "<td>" . $info['dateDebutUtilisateur'] . "</td>";
-                // if (isset($info['dateFinUtilisateur'])) {
-                //     echo "<td>" . date('d F Y', strtotime($info['dateFinUtilisateur'])) . "</td>";
-                // } else {
-                //     echo "<td></td>";
-                // }
                 echo "<td>" . $info['dateFinUtilisateur'] . "</td>";
                 echo "<td>" . $info['motDePasse'] . "</td>";
                 echo "<td><button class='modifier-btn' data-email='" . $info['email'] . "' onclick='toggleEditGestionnaire(this)'>Modifier</button></td>";
@@ -108,6 +98,5 @@ if (isset($_SESSION['email'])) {
     <?php
 } else {
     echo 'error';
-    //     header('Location: /index.php');
 }
 ?>

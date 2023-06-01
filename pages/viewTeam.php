@@ -24,6 +24,7 @@
             <p><strong>Equipe:</strong> '.$infoTeam["nomEquipe"].'</p>
             <p><strong>Projet: </strong>'.$infoTeam["nomProjet"].'</p>
             <p><strong>Capitaine: </strong> '.$infoTeam["prenomUtilisateur"].' '.$infoTeam["nomUtilisateur"].'</p>
+            <br>
             <p><strong>Membres:</strong> </p>
         ';
 
@@ -50,6 +51,6 @@
         
     </div>
     <?php
-        echo '<a href="./?page=descriptionData&idChallenge='.$idProjet.'">Retour description data</a>';
+        echo '<br><a href="./?page=descriptionData&idChallenge='.$idProjet.'">Retour description data</a>';
     ?>
 </div>

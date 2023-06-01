@@ -1,9 +1,19 @@
+/*
+* cript le mot de passe en SHA1
+* @param {string} str - le mot de passe
+*/
 function sha1(str) {
     return CryptoJS.SHA1(str).toString();
 }
+// variables qui contiennent les champs de mot de passe
 var MotDePassesAdmin = document.getElementById("MotDePasse_Admin");
 var ConfirmerMotDePassesAdmin = document.getElementById("Confirmer_MotDePasse_Admin");
 var AncienMotDePassesAdmin = document.getElementById("Ancien_MotDePasse_Admin");
+
+/*
+* Affiche les champs de modification du profil
+* @param {HTMLElement} button - le bouton Modifier
+    */
 function toggleEditAdmin(button) {
     MotDePassesAdmin.classList.remove("hide");
     ConfirmerMotDePassesAdmin.classList.remove("hide");
@@ -35,7 +45,11 @@ function toggleEditAdmin(button) {
 }
 
 
-
+/*
+* récupère les données du formulaire et les envoie à la page action/edit_a_profil.php
+* @param {HTMLElement} button - le bouton Envoyer
+* @param {string} email - l'email de l'utilisateur
+*/
 function sendDataAdmin(button, email) {
 
 
@@ -73,7 +87,7 @@ function sendDataAdmin(button, email) {
             MotDePassesAdmin.classList.add("hide");
             ConfirmerMotDePassesAdmin.classList.add("hide");
             AncienMotDePassesAdmin.classList.add("hide");
-            //location.reload();
+            location.reload();
 
         }
     };
@@ -89,7 +103,13 @@ function sendDataAdmin(button, email) {
     xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&motDePasse=" + motDePasse + "&AncienMotDePasse=" + AncienMotDePasse + "&typePage=" + typePage);
 
 }
-
+/**
+ * Vérifie les champs du formulaire de modification du profil
+ * @param {HTMLElement} button - le bouton Envoyer
+ * @param {string} email - l'email de l'utilisateur
+ * @param {string} mdp - le mot de passe de l'utilisateur
+ * @returns {boolean} - true si les champs sont valides, false sinon    
+    */
 function validateProfilAdmin(button, email2, mdp) {
 
     var table = document.querySelector('table'); // Sélectionne la première table trouvée dans le document
