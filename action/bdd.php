@@ -1243,16 +1243,22 @@ function getGestionnaireProjet($gestio)
         die('Erreur : ' . $e->getMessage());
     }
 }
+
 /**
- * 
+ * @fn function getData()
+ * @param idChallenge l'id du challenge
+ * @return Toutes les data liées à l'événement
+ * @brief Permet de récupérer toutes les informations d'un événement Data en fonction de l'id du challenge
  */
 function getData($idChallenge)
 {
     try {
+        // Se connecter à la base de données
         $conn = connect();
+        // Requête SQL pour récupérer les données de l'événement spécifié
         $sqlQuery = "SELECT * from ProjetData 
-                        Inner Join Evenement on Evenement.idEvenement = ProjetData.idEvenement 
-                        where ProjetData.idEvenement=$idChallenge";
+                        INNER JOIN Evenement ON Evenement.idEvenement = ProjetData.idEvenement 
+                        WHERE ProjetData.idEvenement = $idChallenge";
         $statement = $conn->prepare($sqlQuery);
         $statement->execute();
         $result = $statement->fetchAll();
@@ -1263,61 +1269,20 @@ function getData($idChallenge)
 }
 
 /**
- * 
+ * @fn function getDataProjet($idProjet)
+ * @param idProjet l'id du projet
+ * @return Toutes les data liées au projet
+ * @brief Permet de récupérer toutes les données du projet en fonction de son id
  */
 function getDataProjet($idProjet)
 {
     try {
+        // Se connecter à la base de données
         $conn = connect();
-        $sqlQuery = " SELECT * from ProjetData 
-            Inner Join Evenement on Evenement.idEvenement = ProjetData.idEvenement 
-            where ProjetData.idProjetData=$idProjet;
-            ";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->execute();
-            $result = $statement->fetch();
-            return $result;
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        }   
-
-    }
-
-
-/**
- * 
- */
-function getSuperviseurUtilisateur($idProjet)
-{
-    try {
-        $conn = connect();
-        $sqlQuery = " SELECT * FROM Superviser 
-            INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Superviser.idGestionnaire 
-            where idProjetData = $idProjet;
-            ";
-        $statement = $conn->prepare($sqlQuery);
-        $statement->execute();
-        $result = $statement->fetchAll();
-        return $result;
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-
-}
-
-/**
- * 
- */
-function verifEquipe($idUtilisateur, $idProjet)
-{
-    try {
-        $conn = connect();
-        $sqlQuery = " SELECT * FROM Equipe
-            INNER JOIN Composer ON Composer.idEquipe = Equipe.idEquipe 
-            WHERE Composer.idEtudiant = $idUtilisateur
-            AND idProjetData = $idProjet;
-            ";
+        // Requête SQL pour récupérer les données du projet spécifié
+        $sqlQuery = "SELECT * from ProjetData 
+            INNER JOIN Evenement ON Evenement.idEvenement = ProjetData.idEvenement 
+            WHERE ProjetData.idProjetData = $idProjet;";
         $statement = $conn->prepare($sqlQuery);
         $statement->execute();
         $result = $statement->fetch();
@@ -1325,22 +1290,23 @@ function verifEquipe($idUtilisateur, $idProjet)
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
-
 }
 
 /**
- * 
+ * @fn function getSuperviseurUtilisateur($idProjet)
+ * @param idProjet id du projet
+ * @return les infos du superviseur du projet
+ * @brief Permet de récupérer les informations sur le superviseur du projet
  */
-function getAllMemberTeam($idTeam)
+function getSuperviseurUtilisateur($idProjet)
 {
     try {
+        // Se connecter à la base de données
         $conn = connect();
-        $sqlQuery = "SELECT * 
-            FROM Composer 
-            INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
-            INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Composer.idEtudiant
-            WHERE Composer.idEquipe=$idTeam;
-            ";
+        // Requête SQL pour récupérer les informations sur le superviseur du projet spécifié
+        $sqlQuery = "SELECT * FROM Superviser 
+            INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Superviser.idGestionnaire 
+            WHERE idProjetData = $idProjet;";
         $statement = $conn->prepare($sqlQuery);
         $statement->execute();
         $result = $statement->fetchAll();
@@ -1348,24 +1314,80 @@ function getAllMemberTeam($idTeam)
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
+}
 
 
+/**
+ * @fn function verifEquipe($idUtilisateur, $idProjet)
+ * @param idUtilisateur l'id de l'utilisateur
+ * @param idProjet l'id du projet
+ * @return les informations sur l'équipe
+ * @brief Permet de vérifier si l'utilisateur fait partie de l'équipe du projet spécifié
+ */
+function verifEquipe($idUtilisateur, $idProjet)
+{
+    try {
+        // Se connecter à la base de données
+        $conn = connect();
+        // Requête SQL pour vérifier si l'utilisateur fait partie de l'équipe du projet spécifié
+        $sqlQuery = "SELECT * FROM Equipe
+            INNER JOIN Composer ON Composer.idEquipe = Equipe.idEquipe 
+            WHERE Composer.idEtudiant = $idUtilisateur
+            AND idProjetData = $idProjet;";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
 }
 
 /**
- * 
+ * @fn function getAllMemberTeam($idTeam)
+ * @param idTeam l'id de l'équipe
+ * @return Tous les membres de l'équipe
+ * @brief Permet de récupérer tous les membres d'une équipe spécifiée
+ */
+function getAllMemberTeam($idTeam)
+{
+    try {
+        // Se connecter à la base de données
+        $conn = connect();
+        // Requête SQL pour récupérer tous les membres de l'équipe spécifiée
+        $sqlQuery = "SELECT * 
+            FROM Composer 
+            INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
+            INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Composer.idEtudiant
+            WHERE Composer.idEquipe = $idTeam;";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/**
+ * @fn function getInfoManageTeam($idUtilisateur, $idProjet)
+ * @param idUtilisateur l'id de l'utilisateur
+ * @param idProjet l'id du projet
+ * @return les informations sur le gestionnaire de l'équipe
+ * @brief Permet de récupérer les informations sur le gestionnaire de l'équipe du projet spécifié
  */
 function getInfoManageTeam($idUtilisateur, $idProjet)
 {
     try {
+        // Se connecter à la base de données
         $conn = connect();
+        // Requête SQL pour récupérer les informations sur le gestionnaire de l'équipe du projet spécifié
         $sqlQuery = "SELECT * 
             FROM Composer 
             INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
             INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Equipe.idCapitaine
             INNER JOIN ProjetData ON ProjetData.idProjetData = Equipe.idProjetData
-            where Utilisateur.idUtilisateur=$idUtilisateur AND Equipe.idProjetData=$idProjet;
-            ";
+            WHERE Utilisateur.idUtilisateur = $idUtilisateur AND Equipe.idProjetData = $idProjet;";
         $statement = $conn->prepare($sqlQuery);
         $statement->execute();
         $result = $statement->fetch();
@@ -1373,16 +1395,20 @@ function getInfoManageTeam($idUtilisateur, $idProjet)
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
-
 }
 
 /**
- * 
+ * @fn function suppUserTeam($idUser, $idTeam)
+ * @param idUser l'id de l'utilisateur
+ * @param idTeam l'id de l'équipe
+ * @brief Supprime un utilisateur de l'équipe spécifiée
  */
 function suppUserTeam($idUser, $idTeam)
 {
     try {
+        // Se connecter à la base de données
         $conn = connect();
+        // Requête SQL pour supprimer un utilisateur de l'équipe spécifiée
         $sqlQuery = "DELETE FROM Composer
             WHERE idEtudiant = $idUser AND idEquipe = $idTeam;
             ";
@@ -1394,12 +1420,18 @@ function suppUserTeam($idUser, $idTeam)
 }
 
 /**
- * 
+ * @fn function verifSuppUser($idUser, $idTeam)
+ * @param idUser l'id de l'utilisateur
+ * @param idTeam l'id de l'équipe
+ * @return les informations sur l'utilisateur
+ * @brief Vérifie si l'utilisateur spécifié est membre de l'équipe spécifiée
  */
 function verifSuppUser($idUser, $idTeam)
 {
     try {
+        // Se connecter à la base de données
         $conn = connect();
+        // Requête SQL pour vérifier si l'utilisateur spécifié est membre de l'équipe spécifiée
         $sqlQuery = "SELECT * 
             FROM Utilisateur 
             INNER JOIN Composer ON Composer.idEtudiant = Utilisateur.idUtilisateur 
@@ -1415,12 +1447,17 @@ function verifSuppUser($idUser, $idTeam)
 }
 
 /**
- * 
+ * @fn function searchStudent($query)
+ * @param query la requête de recherche
+ * @return les résultats de la recherche
+ * @brief Recherche des étudiants correspondant à la requête spécifiée
  */
 function searchStudent($query)
 {
     try {
+        // Se connecter à la base de données
         $conn = connect();
+        // Requête SQL pour rechercher des étudiants correspondant à la requête spécifiée
         $sqlQuery = "SELECT * 
             FROM Utilisateur 
             WHERE type = 'Etudiant' 
@@ -1434,16 +1471,21 @@ function searchStudent($query)
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
-
 }
 
+
 /**
- * 
+ * @fn function addUserTeam($idUser, $idTeam)
+ * @param idUser l'id de l'utilisateur
+ * @param idTeam l'id de l'équipe
+ * @brief Ajoute un utilisateur à l'équipe spécifiée
  */
 function addUserTeam($idUser, $idTeam)
 {
     try {
+        // Se connecter à la base de données
         $conn = connect();
+        // Requête SQL pour ajouter un utilisateur à l'équipe spécifiée
         $sqlQuery = "INSERT Composer(idEtudiant,idEquipe) 
             VALUES($idUser,$idTeam);
             ";
@@ -1454,14 +1496,18 @@ function addUserTeam($idUser, $idTeam)
     }
 }
 
-    /**
-     * 
-     */
-    function suppTeam($idTeam){
-        try{
-            $conn = connect();
-            $sqlQuery = "DELETE FROM Composer
-
+/**
+ * @fn function suppTeam($idTeam)
+ * @param idTeam l'id de l'équipe
+ * @brief Supprime l'équipe spécifiée, ainsi que tous ses membres
+ */
+function suppTeam($idTeam)
+{
+    try {
+        // Se connecter à la base de données
+        $conn = connect();
+        // Requête SQL pour supprimer tous les membres de l'équipe spécifiée
+        $sqlQuery = "DELETE FROM Composer
             WHERE idEquipe = $idTeam;
             ";
         $statement = $conn->prepare($sqlQuery);
@@ -1469,8 +1515,11 @@ function addUserTeam($idUser, $idTeam)
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
+
     try {
+        // Se connecter à la base de données
         $conn = connect();
+        // Requête SQL pour supprimer l'équipe spécifiée
         $sqlQuery = "DELETE FROM Equipe
             WHERE idEquipe = $idTeam;
             ";
@@ -1481,35 +1530,46 @@ function addUserTeam($idUser, $idTeam)
     }
 }
 
-    /**
-     * 
-     */
-    function createTeam($nomEquipe, $idcapitaine, $idProjet) {
-        try{
-            $conn = connect();
-            $sqlQuery = "INSERT into Equipe(nomEquipe, idCapitaine,idProjetData) 
-
+/**
+ * @fn function createTeam($nomEquipe, $idcapitaine, $idProjet)
+ * @param nomEquipe le nom de l'équipe
+ * @param idcapitaine l'id du capitaine de l'équipe
+ * @param idProjet l'id du projet lié à l'équipe
+ * @brief Crée une nouvelle équipe avec les informations spécifiées
+ */
+function createTeam($nomEquipe, $idcapitaine, $idProjet)
+{
+    try {
+        // Se connecter à la base de données
+        $conn = connect();
+        // Requête SQL pour créer une nouvelle équipe
+        $sqlQuery = "INSERT into Equipe(nomEquipe, idCapitaine,idProjetData) 
             VALUES ($nomEquipe,$idcapitaine,$idProjet);
             ";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->execute();
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
 }
 
-    /**
-     * 
-     */
-    function getIdTeam($idUser,$idProjet) {
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT idEquipe 
-
+/**
+ * @fn function getIdTeam($idUser, $idProjet)
+ * @param idUser l'id de l'utilisateur
+ * @param idProjet l'id du projet
+ * @return l'id de l'équipe
+ * @brief Récupère l'id de l'équipe à laquelle l'utilisateur est capitaine pour le projet spécifié
+ */
+function getIdTeam($idUser, $idProjet)
+{
+    try {
+        // Se connecter à la base de données
+        $conn = connect();
+        // Requête SQL pour récupérer l'id de l'équipe à laquelle l'utilisateur est capitaine
+        $sqlQuery = "SELECT idEquipe 
             FROM Equipe 
-            where idCapitaine = $idUser 
+            WHERE idCapitaine = $idUser 
             AND idProjetData = $idProjet;
-
             ";
         $statement = $conn->prepare($sqlQuery);
         $statement->execute();
@@ -1520,17 +1580,22 @@ function addUserTeam($idUser, $idTeam)
     }
 }
 
-    /**
-     * 
-     */
-    function getAllProjetUser($idUser) {
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT * FROM Utilisateur 
-
-            INNER JOIN Composer on Composer.idEtudiant = Utilisateur.idUtilisateur 
-            INNER JOIN Equipe on Equipe.idEquipe = Composer.idEquipe WHERE
-            idUtilisateur = $idUser;
+/**
+ * @fn function getAllProjetUser($idUser)
+ * @param idUser l'id de l'utilisateur
+ * @return tous les projets de l'utilisateur
+ * @brief Récupère tous les projets auxquels l'utilisateur participe
+ */
+function getAllProjetUser($idUser)
+{
+    try {
+        // Se connecter à la base de données
+        $conn = connect();
+        // Requête SQL pour récupérer tous les projets auxquels l'utilisateur participe
+        $sqlQuery = "SELECT * FROM Utilisateur 
+            INNER JOIN Composer ON Composer.idEtudiant = Utilisateur.idUtilisateur 
+            INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
+            WHERE idUtilisateur = $idUser;
             ";
         $statement = $conn->prepare($sqlQuery);
         $statement->execute();
@@ -1539,9 +1604,6 @@ function addUserTeam($idUser, $idTeam)
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
     }
-
-
-
 }
 
 
@@ -1705,122 +1767,156 @@ function checkGestionnaireProjetData($mail, $idprojet)
     }
 }
 
-    function getTeamQuestionnaire($idTeam,$idData,$num) {
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT * 
-            FROM Questionnaire 
-            INNER JOIN Question ON Question.idQuestionnaire = Questionnaire.idQuestionnaire 
-            INNER JOIN Reponse ON Reponse.idQuestion = Question.idQuestion 
-            WHERE idEquipe = $idTeam AND idDataBattle = $idData AND Questionnaire.numero = $num";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->execute();
-            $result = $statement->fetchAll();
-            return $result;
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        }   
+/**
+ * @fn function getTeamQuestionnaire($idTeam, $idData, $num)
+ * @param idTeam l'id de l'équipe
+ * @param idData l'id des données de la bataille
+ * @param num le numéro du questionnaire
+ * @return les détails du questionnaire pour l'équipe spécifiée
+ * @brief Récupère les détails du questionnaire pour une équipe spécifique, des données spécifiques et un numéro de questionnaire spécifique
+ */
+function getTeamQuestionnaire($idTeam, $idData, $num)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT * 
+        FROM Questionnaire 
+        INNER JOIN Question ON Question.idQuestionnaire = Questionnaire.idQuestionnaire 
+        INNER JOIN Reponse ON Reponse.idQuestion = Question.idQuestion 
+        WHERE idEquipe = $idTeam AND idDataBattle = $idData AND Questionnaire.numero = $num";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/**
+ * @fn function getMessageTeam($idTeam)
+ * @param idTeam l'id de l'équipe
+ * @return les messages pour l'équipe spécifiée
+ * @brief Récupère les messages pour une équipe spécifique
+ */
+function getMessageTeam($idTeam)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT Messages.message, Messages.date_envoi, UtilisateurDes.nomUtilisateur as nomDestinataire, UtilisateurDes.prenomUtilisateur as prenomDestinataire, UtilisateurAut.nomUtilisateur as nomAuteur, UtilisateurAut.prenomUtilisateur as prenomAuteur
+        FROM Composer
+        INNER JOIN Messages ON Messages.id_destinataire = Composer.idEtudiant
+        INNER JOIN Utilisateur as UtilisateurDes ON UtilisateurDes.idUtilisateur = Messages.id_destinataire
+        INNER JOIN Utilisateur as UtilisateurAut ON UtilisateurAut.idUtilisateur = Messages.id_auteur
+        WHERE Composer.idEquipe = $idTeam
         
-    }
-
-    function getMessageTeam($idTeam) {
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT Messages.message, Messages.date_envoi, UtilisateurDes.nomUtilisateur as nomDestinataire, UtilisateurDes.prenomUtilisateur as prenomDestinataire, UtilisateurAut.nomUtilisateur as nomAuteur, UtilisateurAut.prenomUtilisateur as prenomAuteur
-            FROM Composer
-            INNER JOIN Messages ON Messages.id_destinataire = Composer.idEtudiant
-            INNER JOIN Utilisateur as UtilisateurDes ON UtilisateurDes.idUtilisateur = Messages.id_destinataire
-            INNER JOIN Utilisateur as UtilisateurAut ON UtilisateurAut.idUtilisateur = Messages.id_auteur
-            WHERE Composer.idEquipe = $idTeam
-            
-            UNION
-            
-            SELECT Messages.message, Messages.date_envoi, UtilisateurDes.nomUtilisateur as nomDestinataire, UtilisateurDes.prenomUtilisateur as prenomDestinataire, UtilisateurAut.nomUtilisateur as nomAuteur, UtilisateurAut.prenomUtilisateur as prenomUtilisateur
-            FROM Composer
-            INNER JOIN Messages ON Messages.id_auteur = Composer.idEtudiant
-            INNER JOIN Utilisateur as UtilisateurDes ON UtilisateurDes.idUtilisateur = Messages.id_destinataire
-            INNER JOIN Utilisateur as UtilisateurAut ON UtilisateurAut.idUtilisateur = Messages.id_auteur
-            WHERE Composer.idEquipe = $idTeam;";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->execute();
-            $result = $statement->fetchAll();
-            return $result;
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        }   
-
-
-    } 
-
-
-
-    function getLu($idUser, $idEnCours) {
+        UNION
         
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT *
-            FROM Messages
-            WHERE lu = 0
-            AND id_destinataire = $idUser
-            AND id_auteur = $idEnCours;";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->execute();
-            $result = $statement->fetchAll();
-            return $result;
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        }       
+        SELECT Messages.message, Messages.date_envoi, UtilisateurDes.nomUtilisateur as nomDestinataire, UtilisateurDes.prenomUtilisateur as prenomDestinataire, UtilisateurAut.nomUtilisateur as nomAuteur, UtilisateurAut.prenomUtilisateur as prenomUtilisateur
+        FROM Composer
+        INNER JOIN Messages ON Messages.id_auteur = Composer.idEtudiant
+        INNER JOIN Utilisateur as UtilisateurDes ON UtilisateurDes.idUtilisateur = Messages.id_destinataire
+        INNER JOIN Utilisateur as UtilisateurAut ON UtilisateurAut.idUtilisateur = Messages.id_auteur
+        WHERE Composer.idEquipe = $idTeam;";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
     }
+}
 
-    
-
-    function getMembreTeam($idTeam) {
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT idEtudiant 
-            FROM Composer 
-            WHERE idEquipe = $idTeam;
-            ";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->execute();
-            $result = $statement->fetchAll();
-            return $result;
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        }       
+/**
+ * @fn function getLu($idUser, $idEnCours)
+ * @param idUser l'id de l'utilisateur
+ * @param idEnCours l'id en cours
+ * @return les messages non lus entre l'utilisateur et l'id en cours
+ * @brief Récupère les messages non lus entre l'utilisateur et l'id en cours
+ */
+function getLu($idUser, $idEnCours)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT *
+        FROM Messages
+        WHERE lu = 0
+        AND id_destinataire = $idUser
+        AND id_auteur = $idEnCours;";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
     }
+}
 
-    function getNameGroup($idTeam) {
-        try{
-            $conn = connect();
-            $sqlQuery = "SELECT nomEquipe 
-            FROM Equipe 
-            WHERE idEquipe=$idTeam;
-            ";
+/**
+ * @fn function getMembreTeam($idTeam)
+ * @param idTeam l'id de l'équipe
+ * @return les membres de l'équipe spécifiée
+ * @brief Récupère les membres de l'équipe spécifiée
+ */
+function getMembreTeam($idTeam)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT idEtudiant 
+        FROM Composer 
+        WHERE idEquipe = $idTeam;
+        ";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
+/**
+ * @fn function getNameGroup($idTeam)
+ * @param idTeam l'id de l'équipe
+ * @return le nom de l'équipe spécifiée
+ * @brief Récupère le nom de l'équipe spécifiée
+ */
+function getNameGroup($idTeam)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT nomEquipe 
+        FROM Equipe 
+        WHERE idEquipe=$idTeam;
+        ";
         $statement = $conn->prepare($sqlQuery);
         $statement->execute();
         $result = $statement->fetch();
         return $result;
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
     }
+}
 
-
-    function sendMessage($idAut,$idDest,$message) {
-        try {
-            $conn = connect();
-            $sqlQuery = "INSERT INTO Messages(message,date_envoi,id_auteur, id_destinataire)
-            VALUES ('$message', NOW(),$idAut,$idDest)";
-            $statement = $conn->prepare($sqlQuery);
-            $statement->execute();
-        } catch (Exception $e) {
-            die('Erreur : ' . $e->getMessage());
-        }
+/**
+ * @fn function sendMessage($idAut, $idDest, $message)
+ * @param idAut l'id de l'auteur du message
+ * @param idDest l'id du destinataire du message
+ * @param message le contenu du message
+ * @brief Envoie un message entre un auteur et un destinataire spécifiés
+ */
+function sendMessage($idAut, $idDest, $message)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "INSERT INTO Messages(message, date_envoi, id_auteur, id_destinataire)
+        VALUES ('$message', NOW(), $idAut, $idDest)";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
     }
+}
+
     
 ?>
