@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 
 body {
+  margin-top: 20px;
   display: flex;
   position: relative;
   flex-direction: row;
@@ -103,34 +104,6 @@ body {
   justify-content: space-between;
 }
 
-.plus {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 2px;
-  cursor: pointer;
-  margin-right: 2%;
-  margin-top: 2%;
-  height: 1.4em;
-  width: 1.4em;
-  background: #f7f7f7;
-  border-radius: 100%;
-  border: 1px solid #ccc;
-  transition: 300ms ease-in-out;
-}
-
-.plus:hover {
-  transform: scale(110%);
-}
-
-.plus div {
-  width: 4px;
-  height: 4px;
-  background: #000000;
-  border-radius: 100%;
-}
-
 .auteur {
   font-weight: 700;
   font-size: 1em;
@@ -160,78 +133,12 @@ body {
   height: auto;
 }
 
-.button-bloque-debloque {
-  cursor: pointer;
-  vertical-align: baseline;
-  text-align: center;
-  margin: 5px;
-  background: rgb(163, 163, 254);
-  border: 2px solid #000000;
-  border-radius: 3px;
-}
+
 
 .hidden {
   display: none !important;
 }
 
-#option-plus {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  background: burlywood;
-  border: 2px solid #000000;
-  border-radius: 3px;
-}
-
-#supprimer {
-  cursor: pointer;
-  padding: 2px;
-  background: burlywood;
-}
-
-#signaler {
-  cursor: pointer;
-  padding: 2px;
-  background: burlywood;
-}
-
-.b:hover {
-  text-decoration: underline black;
-}
-
-#signalement {
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 0.85em;
-  background: burlywood;
-  border: 2px solid #000000;
-  border-radius: 3px;
-}
-
-#signalement p {
-  margin-top: 5px;
-  margin-bottom: 0;
-  margin-left: 4px;
-  margin-right: 4px;
-}
-
-#signalement #les-boutons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-
-#les-boutons div {
-  cursor: pointer;
-  border: 1px solid black;
-  border-radius: 5px;
-  margin: 1px;
-  padding: 2px;
-}
 
 #description {
   height: 150px;
@@ -240,5 +147,5 @@ body {
 }
 
 .notification {
-  background-color: rgb(255, 122, 122);
+  background-color: rgba(255, 122, 122, 0.8);
 }

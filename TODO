@@ -16,8 +16,8 @@
 
 #Récap Pages
 
-[]Rajouter les autorisations daccès
-[]Commenter le code
+[x]Rajouter les autorisations daccès
+[x]Commenter le code
 
 [] accueil.php      -> CSS (facultatif)
 [x] connexion.php
