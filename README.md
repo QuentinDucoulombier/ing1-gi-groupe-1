@@ -23,6 +23,8 @@ mysql -u user -p
 ```bash
     source sql/table.sql
     source sql/data.sql
+    ou
+    source sql/data2.sql
 ```
 
 ## Accéder au site web
