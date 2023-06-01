@@ -39,13 +39,15 @@
                     if ($result) {
                         while($row = mysqli_fetch_assoc($result)){
                             $isLu = getLu($idUser,$row['idUtilisateur']);
-
+                            
                             if(empty($isLu)) {
                                 // Option pour un utilisateur non lu
                                 echo '<option onclick=newDestinataire("'.$row['idUtilisateur'].'") value="'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'">'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'</option>' ;
                             } else {
+                                //On peut meme rajouter le nombre de message avec $isLu 
+                                //TODO:Voir si on garde
                                 // Option pour un utilisateur lu avec une classe "notification"
-                                echo '<option class="notification" onclick=newDestinataire("'.$row['idUtilisateur'].'") value="'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'">'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'</option>' ;
+                                echo '<option id="option_'.$row['idUtilisateur'].'" class="notification" onclick=newDestinataire("'.$row['idUtilisateur'].'") value="'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'">'.sizeof($isLu).'=> '.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'</option>' ;
                             }
                         }
                     } else {

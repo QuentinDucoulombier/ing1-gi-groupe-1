@@ -3,8 +3,8 @@
     $servername = 'localhost';
 
 
-    $username = 'loossimon'; // Mettre votre username MySQL
-    $password = 'S1m0n?021308'; // Mettre votre mot de passe MySQL
+    $username = 'quentin'; // Mettre votre username MySQL
+    $password = '*noeDu64*'; // Mettre votre mot de passe MySQL
 
 
     $bddname = 'projetIaPau';
