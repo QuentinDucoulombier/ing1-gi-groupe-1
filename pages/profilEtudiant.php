@@ -88,7 +88,7 @@ if (isset($_SESSION['email'])) {
     echo "</tbody>";
     echo "</table>";
     ?>
-    <h2>Mon équipe</h2>
+    <h2>Mes équipes</h2>
     <?php
     // Appel de la fonction pour récupérer les équipes de l'utilisateur
     $resultats = getEquipeUser($email);

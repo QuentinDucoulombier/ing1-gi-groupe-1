@@ -962,7 +962,7 @@ function getQuestion($idQuestionnaire)
 {
     try {
         $conn = connect();
-        $sqlQuery = "SELECT intituleQuestion FROM Question WHERE idQuestionnaire=:idQuestionnaire";
+        $sqlQuery = "SELECT intituleQuestion,idQuestion FROM Question WHERE idQuestionnaire=:idQuestionnaire";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':idQuestionnaire', $idQuestionnaire);
         $statement->execute();
