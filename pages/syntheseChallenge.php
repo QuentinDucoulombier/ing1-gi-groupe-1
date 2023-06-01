@@ -47,6 +47,8 @@
                             echo '              <button name="supprimer" id-projet="'.$projet['idProjetData'].'" onclick="supprimerProjet(this)"> Supprimer le projet </button>';
                         }
                     }
+                    echo '<div><button class="statistique" onclick="window.location.href=`./?page=statglobale&ProjetData='.$projets[0]["idProjetData"].'`">Statistiques projets</button></div>';
+
                     echo '          </div>';
                     echo ' </div>';
                 }

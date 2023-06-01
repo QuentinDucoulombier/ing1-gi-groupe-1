@@ -78,9 +78,11 @@
             </div>
             <div id="consignes">
                 <h3>Consignes</h3>
+                <p>'.$data["consigne"].'</p>
             </div>
             <div id="conseils">
                 <h3>Conseils</h3>
+                <p>'.$data["conseil"].'</p>
             </div>
         
         
@@ -167,9 +169,12 @@
                 
 
             </form>
-
-
         </div>
+        <?php echo '
+        <div>
+            <button onclick="window.location.href=`./?page=analyseCode&Equipe='.$_SESSION["idTeam"].'`">Analyser code</button>
+        </div>'; 
+        ?>
 
 
     </div>

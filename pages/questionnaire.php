@@ -8,15 +8,17 @@ $datedebut=$dates["dateDebut"];
 $datefin=$dates["dateFin"];
 $questions=getquestion($questionnaire);
 $idEquipe=$_SESSION['idTeam'];
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    for ($i = 1; $i <= 5; $i++) {
+    $i=1;
+    foreach($questions as $question) {
         if (isset($_POST['question-'.$i])) {
             $reponse = $_POST['question-'.$i];
-            setReponse($idEquipe, $i, $reponse);
+            setReponse($idEquipe, $question["idQuestion"], $reponse);
         }
+        $i++;
     }
-}
+}   
+
 ?>
 
 <div id="app">

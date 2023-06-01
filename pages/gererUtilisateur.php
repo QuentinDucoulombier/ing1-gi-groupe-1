@@ -11,7 +11,7 @@ if (isset($_SESSION['email'])) {
 
     <div class="tableau">
         <h2>Étudiants</h2>
-        <table id="tableauEtudiants">
+        <table id="tableauEtudiants" class="tableauGestion">
             <tr>
                 <th>Prénom</th>
                 <th>Nom</th>
@@ -50,7 +50,7 @@ if (isset($_SESSION['email'])) {
         </table>
 
         <h2>Gestionnaires</h2>
-        <table id="tableauGestionnaire">
+        <table id="tableauGestionnaire" class="tableauGestion">
             <tr>
                 <th>Prénom</th>
                 <th>Nom</th>
