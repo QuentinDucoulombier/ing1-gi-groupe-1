@@ -11,7 +11,7 @@ if (isset($_SESSION['email'])) {
 
     <div class="tableau">
         <h2>Étudiants</h2>
-        <table id="tableauEtudiants">
+        <table id="tableauEtudiants" class="tableauGestion">
             <tr>
                 <th>Prénom</th>
                 <th>Nom</th>
@@ -21,7 +21,6 @@ if (isset($_SESSION['email'])) {
                 <th>Niveau d'étude</th>
                 <th>Ecole</th>
                 <th>Ville</th>
-                <th>Mot de passe</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
             </tr>
@@ -40,7 +39,6 @@ if (isset($_SESSION['email'])) {
                 echo "<td>" . $info['niveauEtude'] . "</td>";
                 echo "<td>" . $info['ecole'] . "</td>";
                 echo "<td>" . $info['ville'] . "</td>";
-                echo "<td>" . $info['motDePasse'] . "</td>";
                 echo "<td><button class='modifier-btn' data-email='" . $info['email'] . "' onclick='toggleEditEtudiant(this)'>Modifier</button></td>";
                 echo "<td><button class='modifier-btn' data-email='" . $info['email'] . "' onclick='supprimerUtilisateur(this)'>Supprimer</button></td>";
                 echo "</tr>";
@@ -52,7 +50,7 @@ if (isset($_SESSION['email'])) {
         </table>
 
         <h2>Gestionnaires</h2>
-        <table id="tableauGestionnaire">
+        <table id="tableauGestionnaire" class="tableauGestion">
             <tr>
                 <th>Prénom</th>
                 <th>Nom</th>
@@ -62,7 +60,6 @@ if (isset($_SESSION['email'])) {
                 <th>Nom de l'entreprise</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
-                <th>Mot de passe</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
             </tr>
@@ -81,7 +78,6 @@ if (isset($_SESSION['email'])) {
                 echo "<td>" . $info['nomEntreprise'] . "</td>";
                 echo "<td>" . $info['dateDebutUtilisateur'] . "</td>";
                 echo "<td>" . $info['dateFinUtilisateur'] . "</td>";
-                echo "<td>" . $info['motDePasse'] . "</td>";
                 echo "<td><button class='modifier-btn' data-email='" . $info['email'] . "' onclick='toggleEditGestionnaire(this)'>Modifier</button></td>";
                 echo "<td><button class='modifier-btn' data-email='" . $info['email'] . "' onclick='supprimerUtilisateur(this)'>Supprimer</button></td>";
                 echo "</tr>";

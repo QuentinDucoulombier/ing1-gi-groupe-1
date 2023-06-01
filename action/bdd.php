@@ -304,24 +304,6 @@ function modifyPassword($mail, $oldPass, $newPass)
     }
 }
 
-/*
- * Permet de modifier le mdp d'un utilisateur
- * @param mail : mail de l'utilisateur
- * @param Pass : password de l'utilisateur
- */
-function modifyPasswordForAdmin($mail, $Pass)
-{
-    try {
-        $conn = connect();
-        $sqlQuery = "UPDATE Utilisateur SET motDePasse = :Pass WHERE email LIKE :mail";
-        $statement = $conn->prepare($sqlQuery);
-        $statement->bindParam(':mail', $mail);
-        $statement->bindParam(':Pass', $Pass);
-        $statement->execute();
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-}
 
 
 /*
@@ -980,7 +962,7 @@ function getQuestion($idQuestionnaire)
 {
     try {
         $conn = connect();
-        $sqlQuery = "SELECT intituleQuestion FROM Question WHERE idQuestionnaire=:idQuestionnaire";
+        $sqlQuery = "SELECT intituleQuestion,idQuestion FROM Question WHERE idQuestionnaire=:idQuestionnaire";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':idQuestionnaire', $idQuestionnaire);
         $statement->execute();
@@ -1103,7 +1085,7 @@ function noterReponse($idEquipe, $idQuestion, $note)
 {
     try {
         $conn = connect();
-        $sqlQuery = "UPDATE TABLE Reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe SET note=:note";
+        $sqlQuery = "UPDATE Reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe SET note=:note";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':idQuestion', $idQuestion);
         $statement->bindParam(':idEquipe', $idEquipe);
@@ -1477,7 +1459,7 @@ function getGestionnaireProjet($gestio)
 
 /**
  * permet de récupérer les projets d'un utilisateur
- * @param mail : mail de l'utilisateur
+ * @param $mail : mail de l'utilisateur
  */
 function getProjetUser($mail)
 {
