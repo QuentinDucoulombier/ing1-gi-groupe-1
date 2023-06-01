@@ -1,12 +1,3 @@
-/**TODO:
- * [~]Clean code
- * [x]fix bugs
- * [x]add group message
- * []Transformer les requetes get en post
- * [x]Rajouter le fait d'ajouter un systeme de notif
- * []Mettre le systeme une actualisation de la notif
- **/
-
 var lastMessageId = 0;
 var id = 1;
 
@@ -30,14 +21,14 @@ function newDestinataire(id) {
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             
-            console.log(this.responseText);
+            //console.log(this.responseText);
             document.getElementById("name").innerHTML = this.responseText;
             
             lastMessageId = 1;
             recup_messages();
         }
     }
-    console.log(id);
+    //console.log(id);
 
     xhttp.open("POST", "../action/chat/newDestinataire.php", true);
     xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -98,7 +89,7 @@ function displayMsg(message) {
  */
 function recup_messages() {
 
-    console.log(lastMessageId);
+    //console.log(lastMessageId);
     if(lastMessageId == 1){
         document.getElementById("message-zone").innerHTML = "";
     }
@@ -110,18 +101,18 @@ function recup_messages() {
             messages.forEach(message => {
                 id = parseInt(message["id"]);
                 lastMessageId = parseInt(lastMessageId);
-                console.log("id "+id);
-                console.log("last id "+lastMessageId);
-                console.log(message);
+                //console.log("id "+id);
+                //console.log("last id "+lastMessageId);
+                //console.log(message);
 
                 if (id > lastMessageId) {
-                    console.log("ici");
+                    //console.log("ici");
                     displayMsg(message);
                     lastMessageId = id;
                 }
                 else{
                     //lastMessageId = id;
-                    console.log("ici 2");
+                    //console.log("ici 2");
                 }
             });
         }
@@ -143,7 +134,7 @@ function newMsg() {
 
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+            //console.log(this.responseText);
             recup_messages();
             document.getElementById("message-text").value = "";
 

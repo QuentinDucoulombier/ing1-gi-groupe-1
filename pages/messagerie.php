@@ -55,9 +55,7 @@
                                 // Option pour un utilisateur non lu
                                 echo '<option onclick=newDestinataire("'.$row['idUtilisateur'].'") value="'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'">'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'</option>' ;
                             } else {
-                                //TODO:Voir si on garde
                                 // Option pour un utilisateur lu avec une classe "notification"
-                                //sizeof($isLu)
                                 echo '<option id="option_'.$row['idUtilisateur'].'" class="notification" onclick=newDestinataire("'.$row['idUtilisateur'].'") value="'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'">'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'</option>' ;
                             }
                         }
@@ -86,7 +84,7 @@
 
 <!-- Inclusion des fichiers JavaScript -->
 <script type="text/javascript" src="../scripts/messagerieInput.js"></script>
-
+<!--Si on veut rendre la messagerie instatannée-->
 <!--
     <script>
 
