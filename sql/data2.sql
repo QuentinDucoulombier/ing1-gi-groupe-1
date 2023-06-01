@@ -1,7 +1,7 @@
 INSERT INTO Evenement (nomEvenement, dateDebut, dateFin, descriptionEvent, imageEvent, typeEvenement)
 VALUES
 ('Data battle Nouvelle Aquitaine 2022', '2023-01-01', '2023-01-31', 'Une compétition de données passionnante', '/images/imgChallenge5.jpg', 'dataBattle'),
-('Data Battle 2', '2023-03-01', '2023-03-31', 'Une autre compétition de données captivante', '/images/imgChallenge6 .jpg', 'dataBattle'),
+('Data Battle 2', '2023-03-01', '2023-03-31', 'Une autre compétition de données captivante', '/images/imgChallenge6.jpg', 'dataBattle'),
 ('Data challenge janvier 2022', '2023-01-15', '2023-01-17', 'Les sujets abordés concernent la détection d`objets, le traitement de la langue et la classification de documents. Des...', '/images/imgChallenge1.jpg', 'dataChallenge'),
 ('data challenge festival', '2023-12-05', '2023-12-06', 'Un autre défi de données intéressant', '/images/imgChallenge2.jpg', 'dataChallenge'),
 ('Data Challenge 3', '2023-05-10', '2023-06-12', "Les sujets abordés concernent le sport, l'énergie et le traitement de la langue. Des prix ont été décernés aux trois...", '/images/imgChallenge3.jpg', 'dataChallenge'),
