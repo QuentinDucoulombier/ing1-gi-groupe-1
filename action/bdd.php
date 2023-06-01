@@ -1299,7 +1299,6 @@ function getEvenementbyID($id)
             die('Erreur : '.$e->getMessage());
         } 
     }
-}
 
 /*
  * Permet de récupérer les équipes de l'utilisateur 
