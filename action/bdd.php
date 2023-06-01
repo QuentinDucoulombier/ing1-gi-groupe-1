@@ -772,7 +772,7 @@ function updateDescProjet($idProjetData, $description)
 }
 
 /*
- * Permet de modifier le nom d'un event
+* Permet de modifier le nom d'un event
  * @param mail : mail de l'utilisateur
  * @param name : nouveau nom
  */
@@ -795,6 +795,7 @@ function updateimageProjet($idProjetData, $image)
  * @param mail : mail de l'utilisateur
  * @param name : nouveau nom
  */
+
 function updatefichierProjet($idProjetData, $urlFichier)
 {
     try {
@@ -814,6 +815,7 @@ function updatefichierProjet($idProjetData, $urlFichier)
  * @param mail : mail de l'utilisateur
  * @param name : nouveau nom
  */
+
 function updateVideoProjet($idProjetData, $urlVideo)
 {
     try {
@@ -833,6 +835,7 @@ function updateVideoProjet($idProjetData, $urlVideo)
  * @param mail : mail de l'utilisateur
  * @param name : nouveau nom
  */
+
 function updateConseilProjet($idProjetData, $conseil)
 {
     try {
@@ -1248,14 +1251,13 @@ function getEvenementbyID($id)
             $statement = $conn->prepare($sqlQuery);
             $statement->bindParam(':idEvenement', $idEvenement);
             $statement->execute();
-            $result = $statement->fetchAll();
+            $result = $statement->fetch();
             return $result;
         }
         catch(Exception $e){
             die('Erreur : '.$e->getMessage());
         } 
     }
-
 
  /*
     * Permet de récupérer les infos liées à un projet Data 
@@ -1297,7 +1299,7 @@ function getEvenementbyID($id)
             die('Erreur : '.$e->getMessage());
         } 
     }
-
+}
 
 /*
  * Permet de récupérer les équipes de l'utilisateur 
@@ -2172,5 +2174,40 @@ function sendMessage($idAut, $idDest, $message)
     }
 }
 
-    
+    /*
+ * Permet de mettre l'analyse du code du projetData
+ * @param  : 
+ */
+function setAnalyseCode($idEquipe,$analyse)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "UPDATE Equipe SET analyseProjet=:analyse WHERE idEquipe=:idEquipe";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':idEquipe', $idEquipe);
+        $statement->bindParam(':analyse', $analyse);
+        $statement->execute();
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+/*
+* Permet de checker si un gestionnaire supervise un des projet du challenge
+* @param mail : 
+*/
+function getAnalyseCode($idProjetData)
+{
+   try {
+       $conn = connect();
+       $sqlQuery = "SELECT idEquipe,analyseProjet FROM Equipe WHERE idProjetData=:idProjetData";
+       $statement = $conn->prepare($sqlQuery);
+       $statement->bindParam(':idProjetData', $idProjetData);
+       $statement->execute();
+       $result = $statement->fetchAll();
+            return $result;
+   } catch (Exception $e) {
+       die('Erreur : ' . $e->getMessage());
+   }
+}
+
 ?>

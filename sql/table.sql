@@ -81,6 +81,7 @@ CREATE TABLE Equipe(
     nomEquipe varchar(255) NOT NULL,
     idCapitaine int NOT NULL,
     idProjetData int NOT NULL,
+    analyseProjet varchar(1024),
     PRIMARY KEY (idEquipe),
     FOREIGN KEY (idCapitaine) REFERENCES Utilisateur(idUtilisateur) ON DELETE CASCADE,
     FOREIGN KEY (idProjetData) REFERENCES ProjetData(idProjetData) ON DELETE CASCADE
