@@ -139,5 +139,4 @@ CREATE TABLE Messages (
   message TEXT,
   date_envoi DATETIME,
   lu TINYINT(1) DEFAULT 0
-
 );

@@ -23,6 +23,10 @@ if (isset($_POST['email']) && isset($_POST['motDePasse'])) {
     // Démarrage de la session
     // Stockage de l'email dans la session
     $_SESSION['email'] = $email;
+    $user = getUser($_SESSION['email']);
+
+    $idUser = $user[0]['idUtilisateur'];
+    $_SESSION["idUser"] = $idUser;
     echo "success";
 
   } else {
