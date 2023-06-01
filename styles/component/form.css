@@ -2,6 +2,7 @@
 #modifierForm {
 
     background-color: #fff;
+    margin-top: 130px;
     padding-top: 50px;
     padding-right: 30px;
     padding-bottom: 50px;
@@ -31,18 +32,20 @@
 
 .formInscription ,.formConnexion {
     background-image: linear-gradient(100deg,#0e8769 0%,#0c71c3 100%) !important;
-    margin-top: 100px;
+    margin-top: -50px;
     padding: 50px;
     display: flex;
     justify-content: center;
+    margin-bottom: -50px;
+
 }
 
 .formInscription {
-  padding-bottom: 210px;
+  padding-bottom: 230px;
 }
 
 .formConnexion {
-  padding-bottom: 430px;
+  padding-bottom: 450px;
 }
 .formInscription input ,.formConnexion input ,.profil_block input{
 
