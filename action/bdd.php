@@ -1025,27 +1025,28 @@ function getDatesDataBattle($idDataBattle)
         die('Erreur : ' . $e->getMessage());
     }
 }
-    /*
-    * Permet de récupérer les réponses d'une équipe à un questionnaire 
-    * @param idQuestion : id question lié à la réponse
-    * @param idEquipe : id Equipe qui a répondu au questionnaire
-    * TODO:Rajouter le numero dans l'insertion mais il faut faire ca dans la table jsp faire
-    */
-    function setReponse($idEquipe,$idQuestion,$reponse){
-        try{
-            $conn = connect();
-            $sqlQuery="INSERT INTO Reponse(idQuestion,idEquipe,reponse,note) VALUES (:idQuestion,:idEquipe,:reponse,NULL)";
-            $statement=$conn->prepare($sqlQuery);
-            $statement->bindParam(':idQuestion',$idQuestion);
-            $statement->bindParam(':idEquipe',$idEquipe);
-            $statement->bindParam(':idEquipe',$idEquipe);
-            $statement->bindParam(':reponse',$reponse);
-            $statement->execute();
-        }
-        catch(Exception $e){
-            die('Erreur : '.$e->getMessage());
-        }    
+
+/*
+* Permet de récupérer les réponses d'une équipe à un questionnaire 
+* @param idQuestion : id question lié à la réponse
+* @param idEquipe : id Equipe qui a répondu au questionnaire
+* TODO:Rajouter le numero dans l'insertion mais il faut faire ca dans la table jsp faire
+*/
+function setReponse($idEquipe,$idQuestion,$reponse){
+    try{
+        $conn = connect();
+        $sqlQuery="INSERT INTO Reponse(idQuestion,idEquipe,reponse,note) VALUES (:idQuestion,:idEquipe,:reponse,NULL)";
+        $statement=$conn->prepare($sqlQuery);
+        $statement->bindParam(':idQuestion',$idQuestion);
+        $statement->bindParam(':idEquipe',$idEquipe);
+        $statement->bindParam(':idEquipe',$idEquipe);
+        $statement->bindParam(':reponse',$reponse);
+        $statement->execute();
     }
+    catch(Exception $e){
+        die('Erreur : '.$e->getMessage());
+    }    
+}
     
 
 
@@ -1100,7 +1101,7 @@ function noterReponse($idEquipe, $idQuestion, $note)
 {
     try {
         $conn = connect();
-        $sqlQuery = "UPDATE TABLE Reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe SET note=:note";
+        $sqlQuery = "UPDATE Reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe SET note=:note";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':idQuestion', $idQuestion);
         $statement->bindParam(':idEquipe', $idEquipe);
