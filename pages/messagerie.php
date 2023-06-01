@@ -6,8 +6,19 @@
 <div id="messagerie">
 
     <?php
+
         // Début du code PHP
         session_start();
+        /*verif connexion et statut*/
+        if (!isset($_SESSION['email'])) {
+            header ('Location: /?page=404');
+        } else {
+            $user = getUser($_SESSION['email']);
+            if ($user[0]['type'] != "Etudiant") 
+            {
+                header ('Location: /?page=404');
+            }
+        }
 
         $cnx = conn2();
         $dbname = "projetIaPau";
@@ -39,13 +50,15 @@
                     if ($result) {
                         while($row = mysqli_fetch_assoc($result)){
                             $isLu = getLu($idUser,$row['idUtilisateur']);
-
+                            
                             if(empty($isLu)) {
                                 // Option pour un utilisateur non lu
                                 echo '<option onclick=newDestinataire("'.$row['idUtilisateur'].'") value="'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'">'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'</option>' ;
                             } else {
+                                //TODO:Voir si on garde
                                 // Option pour un utilisateur lu avec une classe "notification"
-                                echo '<option class="notification" onclick=newDestinataire("'.$row['idUtilisateur'].'") value="'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'">'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'</option>' ;
+                                //sizeof($isLu)
+                                echo '<option id="option_'.$row['idUtilisateur'].'" class="notification" onclick=newDestinataire("'.$row['idUtilisateur'].'") value="'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'">'.$row['prenomUtilisateur'].' '. $row['nomUtilisateur'].'</option>' ;
                             }
                         }
                     } else {

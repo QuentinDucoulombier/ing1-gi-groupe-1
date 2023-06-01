@@ -12,8 +12,11 @@
   margin-top: -20px;
 }
 
-#description {
-  background-color: rgb(255, 255, 255);
-  padding-top: 10px;
-  margin-left: 50px;
+#description,
+#boutton {
+  background-color: white;
+  padding-top: 2%;
+  margin-left: 10%;
+  padding-left: 30px;
+  margin-right: 10%;
 }

@@ -17,6 +17,14 @@ var id = 1;
  */
 function newDestinataire(id) {
 
+    
+
+    // Changer la couleur de l'option sélectionnée
+    var selectedOption = document.getElementById("option_" + id);
+    if (selectedOption) {
+        selectedOption.style.backgroundColor = "white"; // Modifier la couleur de fond selon vos besoins
+    }
+
     var xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function () {
