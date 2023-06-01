@@ -28,6 +28,14 @@ php -S localhost:8080
 Ouvrez un navigateur et accédez à l'url :
 http://localhost:8080
 
+## Ouverture du serveur
+
+Déplacer vous dans le dossier java/bin et tapez la commande:
+
+```bash
+java Serveur
+```
+Le serveur est maintenant ouvert, vous avez accès aux analyses de code.
 ## Connexion sur le site web
 
 *Accès Utilisateur*   
@@ -50,3 +58,4 @@ Mot de passe : 1234
 email : admin@ia.pau
 Mot de passe : 1234
 - L'administrateur a accès à tout
+

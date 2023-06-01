@@ -52,7 +52,7 @@
     echo '      </div>';
 
     echo '      <div class=image-projet>';
-    echo '          <img src="'.$projet[0]['imageEvent'].'" alt="'.$projet[0]['nomEvenement'].'">';
+    echo '          <img src="'.$projet[0]['image'].'" alt="'.$projet[0]['nomEvenement'].'">';
     echo '      </div>';
 
 
