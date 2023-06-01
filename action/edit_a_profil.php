@@ -63,16 +63,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         modifyPassword($email,$_POST['AncienMotDePasse'],$_POST['motDePasse']);
 
-    } else {
-        modifyPasswordForAdmin($email,$_POST['motDePasse']);
     }
-    
 
     // si le type a changé
     $nvtype = $_POST['type'];
     if ($type != $nvtype) {
         $nvtype = $_POST['type'];
-        modifyType($email, $type);
+        modifyType($email, $nvtype);
     }
 
     $nvmail = htmlspecialchars($_POST['nvemail']);
