@@ -21,7 +21,6 @@ if (isset($_SESSION['email'])) {
                 <th>Niveau d'étude</th>
                 <th>Ecole</th>
                 <th>Ville</th>
-                <th>Mot de passe</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
             </tr>
@@ -40,7 +39,6 @@ if (isset($_SESSION['email'])) {
                 echo "<td>" . $info['niveauEtude'] . "</td>";
                 echo "<td>" . $info['ecole'] . "</td>";
                 echo "<td>" . $info['ville'] . "</td>";
-                echo "<td>" . $info['motDePasse'] . "</td>";
                 echo "<td><button class='modifier-btn' data-email='" . $info['email'] . "' onclick='toggleEditEtudiant(this)'>Modifier</button></td>";
                 echo "<td><button class='modifier-btn' data-email='" . $info['email'] . "' onclick='supprimerUtilisateur(this)'>Supprimer</button></td>";
                 echo "</tr>";
@@ -62,7 +60,6 @@ if (isset($_SESSION['email'])) {
                 <th>Nom de l'entreprise</th>
                 <th>Date de début</th>
                 <th>Date de fin</th>
-                <th>Mot de passe</th>
                 <th>Modifier</th>
                 <th>Supprimer</th>
             </tr>
@@ -79,19 +76,8 @@ if (isset($_SESSION['email'])) {
                 echo "<td>" . $info['type'] . "</td>";
                 echo "<td>" . $info['numeroTel'] . "</td>";
                 echo "<td>" . $info['nomEntreprise'] . "</td>";
-                // if (isset($info['dateDebutUtilisateur'])) {
-                //     echo "<td>" . date('d F Y', strtotime($info['dateDebutUtilisateur'])) . "</td>";
-                // } else {
-                //     echo "<td></td>";
-                // }
                 echo "<td>" . $info['dateDebutUtilisateur'] . "</td>";
-                // if (isset($info['dateFinUtilisateur'])) {
-                //     echo "<td>" . date('d F Y', strtotime($info['dateFinUtilisateur'])) . "</td>";
-                // } else {
-                //     echo "<td></td>";
-                // }
                 echo "<td>" . $info['dateFinUtilisateur'] . "</td>";
-                echo "<td>" . $info['motDePasse'] . "</td>";
                 echo "<td><button class='modifier-btn' data-email='" . $info['email'] . "' onclick='toggleEditGestionnaire(this)'>Modifier</button></td>";
                 echo "<td><button class='modifier-btn' data-email='" . $info['email'] . "' onclick='supprimerUtilisateur(this)'>Supprimer</button></td>";
                 echo "</tr>";
@@ -108,6 +94,5 @@ if (isset($_SESSION['email'])) {
     <?php
 } else {
     echo 'error';
-    //     header('Location: /index.php');
 }
 ?>

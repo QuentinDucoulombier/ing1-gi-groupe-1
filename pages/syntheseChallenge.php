@@ -27,77 +27,75 @@
             // Si l'utilisateur est un administrateur peut supprimer le challenge
             if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
                 echo '              <button name="supprimer" id-event="'.$challenge['idEvenement'].'" onclick="supprimerEvent(this)"> Supprimer le challenge </button>';
-            }
+            
 
-            echo '<h3> Liste des projets rattachés : </h3>';
-            foreach ($projets as $projet){
-                echo ' <div id="liste-projets">';
-                echo '      <a class ="more-link" href="/?page=syntheseProjet&projet='.$projet['idProjetData'].'"> <button name="gestion"> Syntèse '.$projet['nomProjet'].' </button>  </a>';
-                echo ' <div class="project-name"';
+                echo '<h3> Liste des projets rattachés : </h3>';
+                foreach ($projets as $projet){
+                    echo ' <div id="liste-projets">';
+                    echo '      <a class ="more-link" href="/?page=syntheseProjet&projet='.$projet['idProjetData'].'"> <button name="gestion"> Syntèse '.$projet['nomProjet'].' </button>  </a>';
+                    echo ' <div class="project-name"';
 
 
-                    if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-                        echo '          <a href="/?page=modifierProjet&projet='.$projet['idProjetData'].'"> ';
-                        echo '              <button name="creation"> Modifier le projet </button> ';
-                        echo '          </a>';
+                        if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+                            echo '          <a href="/?page=modifierProjet&projet='.$projet['idProjetData'].'"> ';
+                            echo '              <button name="creation"> Modifier le projet </button> ';
+                            echo '          </a>';
+                        }
+
+                        // Si l'utilisateur est un administrateur peut supprimer le challenge
+                        if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
+                            echo '              <button name="supprimer" id-projet="'.$projet['idProjetData'].'" onclick="supprimerProjet(this)"> Supprimer le projet </button>';
+                        }
                     }
-
-                    // Si l'utilisateur est un administrateur peut supprimer le challenge
-                    if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
-                        echo '              <button name="supprimer" id-projet="'.$projet['idProjetData'].'" onclick="supprimerProjet(this)"> Supprimer le projet </button>';
-                    }
+                    echo '          </div>';
+                    echo ' </div>';
                 }
-                echo '          </div>';
-                echo ' </div>';
-            }
-            echo '<h3> Liste des équipes rattachées : </h3>';
+                echo '<h3> Liste des équipes rattachées : </h3>';
 
 
-                foreach ($equipes as $equipe){?>
-                    <div id="liste-equipes">
+                    foreach ($equipes as $equipe){?>
+                        <div id="liste-equipes">
 
-                        <div class="nom-equipe">
-                            <?php echo $equipe['nomEquipe'] ?>
-                        </div>
+                            <div class="nom-equipe">
+                                <?php echo $equipe['nomEquipe'] ?>
+                            </div>
+
+                            <div class="messages">
+                                <a href="">
+                                    <button name="messages"> Voir les messages </button>
+                                </a>
+                            </div>
 
                         <div class="messages">
-                            <a href="">
-                                <button name="messages"> Voir les messages </button>
-                            </a>
+                            <form action="/?page=viewMessageTeam" method="POST">
+                                <?php
+                                    echo '<input type="hidden"  name="idTeam" value="'.$equipe['idEquipe'].'"/>'
+                                ?>
+                                <input type="submit" value="Voir les messages"/>
+                            </form>
                         </div>
+                        <div class="sendGroupMessage">
+                            <form action="/?page=groupeMessage" method="POST">
+                                <?php
+                                    echo '<input type="hidden"  name="idTeam" value="'.$equipe['idEquipe'].'"/>'
+                                ?>
+                                <input type="submit" value="Envoyer un message au groupe"/>
+                            </form>
 
-                    <div class="messages">
-                        <form action="/?page=viewMessageTeam" method="POST">
-                            <?php
-                                echo '<input type="hidden"  name="idTeam" value="'.$equipe['idEquipe'].'"/>'
-                            ?>
-                            <input type="submit" value="Voir les messages"/>
-                        </form>
-                    </div>
-                    <div class="sendGroupMessage">
-                        <form action="/?page=groupeMessage" method="POST">
-                            <?php
-                                echo '<input type="hidden"  name="idTeam" value="'.$equipe['idEquipe'].'"/>'
-                            ?>
-                            <input type="submit" value="Envoyer un message au groupe"/>
-                        </form>
+                        </div>
+                        
+                    <?php
+                    }
+                    ?>
 
-                    </div>
-                    
                 <?php
-                }
-                ?>
+            } else{
+            header ('Location: /?page=connexion');
 
-            <?php
             }
-        else{
+    } else {
         header ('Location: /?page=connexion');
-
-        }
-    }
-    else{
-    header ('Location: /?page=connexion');
-
+    
     }
 ?>
 </div>

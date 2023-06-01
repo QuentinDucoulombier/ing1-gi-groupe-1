@@ -1,5 +1,8 @@
 
-
+/*
+    * Fonction qui vérifie que tous les champs du formulaire d'inscription sont remplis.
+    * @returns {boolean} - true si tous les champs sont remplis, false sinon
+    */
 function validateForm() {
     var email = document.getElementById("email").value;
     var prenom = document.getElementById("prenomUtilisateur").value;
@@ -80,6 +83,11 @@ function validateForm() {
 
     return valid;
 }
+/*
+    * Fonction qui vérifie si l'e-mail existe déjà dans la base de données.
+    * @param {string} email - L'e-mail à vérifier
+    * @returns {void}
+    */
 function checkEmailExists(email) {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {

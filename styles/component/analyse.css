@@ -1,0 +1,31 @@
+
+
+
+h1 {
+    text-align: center;
+}
+
+form {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+input[type="file"] {
+    margin-right: 10px;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.canvas-background{
+    background-color: white;
+}
+.chart-container {
+    max-width: 1000px;
+    position: relative;
+    margin: auto;
+  }

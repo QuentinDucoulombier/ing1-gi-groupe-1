@@ -15,9 +15,8 @@ if (!isset($_GET["page"])){
         <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <meta charset="utf-8">
 
-<!--        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
-    
+        <link rel="icon" type="images/x-icon" href="/images/iapau_round.png">
+
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
     
         <title>Projet - <?php echo router::get_page(); ?></title>
@@ -39,6 +38,7 @@ if (!isset($_GET["page"])){
         <script src="scripts/profilGestionnaire.js" defer></script>
         <script src="scripts/profilEtudiant.js" defer></script>
         <script src="scripts/inscription.js" defer></script>
+        <script src="scripts/connexion.js" defer></script>
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
     </head>
     <body>

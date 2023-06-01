@@ -6,7 +6,6 @@ require('bdd.php');
 $email = $_POST['email'];
 $infos = getUser($email);
 $type = $infos[0]['type'];
-echo "ddd";
 // Si des données ont été soumises via le formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -59,22 +58,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $ville = htmlspecialchars($_POST['ville']);
         modifyVille($email, $ville);
     }
-    echo $_POST['typePage'];
+
     if ($_POST['typePage'] == "profil") {
-        echo $_POST['AncienMotDePasse'];
-        echo $_POST['motDePasse'];
+
         modifyPassword($email,$_POST['AncienMotDePasse'],$_POST['motDePasse']);
 
-    } else {
-        modifyPasswordForAdmin($email,$_POST['motDePasse']);
     }
-    
 
     // si le type a changé
     $nvtype = $_POST['type'];
     if ($type != $nvtype) {
         $nvtype = $_POST['type'];
-        modifyType($email, $type);
+        modifyType($email, $nvtype);
     }
 
     $nvmail = htmlspecialchars($_POST['nvemail']);
