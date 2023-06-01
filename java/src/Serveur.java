@@ -55,26 +55,33 @@ public class Serveur {
          * @return
          */
         private String handlePostRequest(HttpExchange httpExchange) throws IOException {
+            // Récupération du corps de la requête HTTP
             InputStream requestBody = httpExchange.getRequestBody();
             BufferedReader reader = new BufferedReader(new InputStreamReader(requestBody));
-
+            // Construction de la chaîne de requête à partir du corps de la requête
             StringBuilder requestBodyBuilder = new StringBuilder();
             String line;
             while ((line = reader.readLine()) != null) {
                 requestBodyBuilder.append(line).append("\n");
             }
-
             reader.close();
+            // Conversion de la chaîne de requete en code Python
             String pythonCode = requestBodyBuilder.toString();
+            // Appel de la méthode "getFonctionsLignes" pour obtenir les statistiques sur les fonctions et les lignes de code
             String result1 = AnalyseCodePython.getFonctionsLignes(pythonCode);
+            // Extraction des mots clés de la dernière ligne du code Python
             String[] lines = pythonCode.split("\n");
-            String keywords = lines[lines.length-2];
+            String keywords = lines[lines.length - 2];
+            // Vérification si des mots clés sont présents
             if (!keywords.isEmpty()) {
-            	String result2 = AnalyseCodePython.getOccurenceMots(pythonCode, Arrays.asList(keywords.split(",")));
-            	return result1.substring(0, result1.length() - 1)+","+result2.substring(1);
+                // Appel de la méthode "getOccurenceMots" pour obtenir les occurrences des mots clés dans le code Python
+                String result2 = AnalyseCodePython.getOccurenceMots(pythonCode, Arrays.asList(keywords.split(",")));
+                // Concaténation des résultats obtenus
+                return result1.substring(0, result1.length() - 1) + "," + result2.substring(1);
             }
-          	return result1;
+            return result1;
         }
+
 
         /**
          * Génère une page HTML de réponse simple

@@ -18,46 +18,57 @@ public class AnalyseCodePython {
 			e.printStackTrace();
 		}
     }
+    //fonctions pour récuperer les informations sur le nb de lignes et de fonctions
     public static String getFonctionsLignes(String pythonCode) throws IOException {
+    	//initialisation des variables
         int nbLignes = 0;
         int nbFonctions = 0;
         int minLignes = Integer.MAX_VALUE;
         int maxLignes = 0;
-        int sumLines = 0;
-
+        int sumLignes = 0;
+        
         List<Integer> functionLines = new ArrayList<>();
         Map<String, Integer> functionCalls = new HashMap<>();
-
+        
+        //récuperer les lignes de code dans un tableau de chaines
         String[] linesCode = pythonCode.split("\n");
-
+        //parcour des lignes
         for (String line : linesCode) {
+        	//si fonction
             if (line.trim().startsWith("def ")) {
+            	//calculer la somme des lignes et le min/max
                 if (!functionLines.isEmpty()) {
                     int numLines = nbLignes - functionLines.get(functionLines.size() - 1);
                     minLignes = Math.min(minLignes, numLines);
                     maxLignes = Math.max(maxLignes, numLines);
-                    sumLines += numLines;
+                    sumLignes += numLines;
                 }
+                //calculer nb de fonctions et nb de lignes des fonctions
                 nbFonctions++;
                 functionLines.add(nbLignes);
             }
             nbLignes++;
-
+            //calcul nombre d'appel
             if (line.contains("(")) {
                 String functionName = getFunctionName(line);
                 functionCalls.put(functionName, functionCalls.getOrDefault(functionName, 0) + 1);
             }
         }
-
+        
         if (!functionLines.isEmpty()) {
             int numLines = nbLignes - functionLines.get(functionLines.size() - 1);
             minLignes = Math.min(minLignes, numLines);
             maxLignes = Math.max(maxLignes, numLines);
-            sumLines += numLines;
+            sumLignes += numLines;
         }
 
-        int moyLignes = (nbFonctions > 0) ? sumLines / nbFonctions : 0;
-
+        int moyLignes;
+        if (nbFonctions > 0) {
+            moyLignes = sumLignes / nbFonctions;
+        } else {
+            moyLignes = 0;
+        }
+        //on transforme les données en format JSON
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{");
         jsonBuilder.append("\"nbLignes\":").append(nbLignes).append(",");
@@ -87,7 +98,7 @@ public class AnalyseCodePython {
         jsonBuilder.append("}");
         return jsonBuilder.toString();
     }
-
+    //fonction pour récuperer le nom de la fonction
     private static String getFunctionName(String line) {
         int startIndex = line.indexOf("def ") + 4;
         int endIndex = line.indexOf("(");
@@ -95,25 +106,30 @@ public class AnalyseCodePython {
     }
 
 
-
+    //fonctions pour calculer le nombre d'occurence d'une liste de mots clés
     public static String getOccurenceMots(String pythonCode, List<String> MotsCles) throws IOException {
+    	//initialisation des variables
         int[] occurrences = new int[MotsCles.size()];
         StringBuilder jsonBuilder = new StringBuilder();
         jsonBuilder.append("{");
-
+        //parcours du fichier
         BufferedReader reader = new BufferedReader(new StringReader(pythonCode));
         String line;
         while ((line = reader.readLine()) != null) {
             for (int i = 0; i < MotsCles.size(); i++) {
-                String motcle = MotsCles.get(i);
-                int index = line.indexOf(motcle);
+            	String motcle = MotsCles.get(i);
+                //premiere occurence
+            	int index = line.indexOf(motcle);
+            	//calcul nombre d'occurence
                 while (index != -1) {
                     occurrences[i]++;
+                    //occurence suivante
                     index = line.indexOf(motcle, index + motcle.length());
                 }
             }
         }
         reader.close();
+        //création JSON
         for (int i=0;i<MotsCles.size()-1;i++) {
             jsonBuilder.append("\""+MotsCles.get(i)+"\":").append(occurrences[i]).append(",");
         }
