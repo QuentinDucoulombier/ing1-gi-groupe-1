@@ -304,24 +304,6 @@ function modifyPassword($mail, $oldPass, $newPass)
     }
 }
 
-/*
- * Permet de modifier le mdp d'un utilisateur
- * @param mail : mail de l'utilisateur
- * @param Pass : password de l'utilisateur
- */
-function modifyPasswordForAdmin($mail, $Pass)
-{
-    try {
-        $conn = connect();
-        $sqlQuery = "UPDATE Utilisateur SET motDePasse = :Pass WHERE email LIKE :mail";
-        $statement = $conn->prepare($sqlQuery);
-        $statement->bindParam(':mail', $mail);
-        $statement->bindParam(':Pass', $Pass);
-        $statement->execute();
-    } catch (Exception $e) {
-        die('Erreur : ' . $e->getMessage());
-    }
-}
 
 
 /*
@@ -1475,7 +1457,7 @@ function getGestionnaireProjet($gestio)
 }
 /**
  * permet de récupérer les projets d'un utilisateur
- * @param mail : mail de l'utilisateur
+ * @param $mail : mail de l'utilisateur
  */
 function getProjetUser($mail)
 {
