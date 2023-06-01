@@ -53,6 +53,7 @@
   
   #manageTeam button.suppMember,
   #manageTeam button.suppTeam,
+  #manageTeam button.leaveTeam,
   .buttons button.cancel {
     background-color: #ff4d4d; /* Couleur rouge */
   }

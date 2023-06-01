@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="styles/component/descriptionData.css" />
+<script type="text/javascript" src="../scripts/sendGithub.js"></script>  
 
 <div>
 
@@ -162,13 +163,15 @@
     }
 ?>
         <div id="lienGithub">
+            <!--TODO: Rajouter une fonction js qui dit que le lien a bien etait pris en compte-->
             <h3>Deposer votre lien github: </h3>
-            <form id="formGithub">
+            <form id="formGithub" onsubmit="sendGithub()" action="">
                 <input type="text" id="github" name="github" placeholder="lien github" />
                 <input type="submit" id="subgithub" name="subgithub" value="Deposer mon code"/>
-                
-
             </form>
+            <div id="statut">
+
+            </div>
         </div>
         <?php echo '
         <div>
