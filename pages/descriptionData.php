@@ -169,9 +169,12 @@
                 
 
             </form>
-
-
         </div>
+        <?php echo '
+        <div>
+            <button onclick="window.location.href=`./?page=analyseCode&Equipe='.$_SESSION["idTeam"].'`">Analyser code</button>
+        </div>'; 
+        ?>
 
 
     </div>

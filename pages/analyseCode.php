@@ -6,6 +6,7 @@ $idEquipe=$_GET["Equipe"];
 
 
 <h1 id="test">Analyse code Equipe <?php echo $idEquipe?></h1>
+<link rel="stylesheet" href="styles/component/analyse.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../scripts/analyse.js"></script>

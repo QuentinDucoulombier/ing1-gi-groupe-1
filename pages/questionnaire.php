@@ -8,7 +8,6 @@ $datedebut=$dates["dateDebut"];
 $datefin=$dates["dateFin"];
 $questions=getquestion($questionnaire);
 $idEquipe=$_SESSION['idTeam'];
-print_r($questions);
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $i=1;
     foreach($questions as $question) {
