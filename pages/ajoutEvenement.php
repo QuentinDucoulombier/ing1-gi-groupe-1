@@ -13,11 +13,11 @@
         </div>
         <div id="evenement-buttons">
             <p>
-                <input type="radio" id="dataChallenge" name="type" value="DataChallenge">
+                <input type="radio" id="dataChallenge" name="type" value="dataChallenge">
                 <label for="dataChallenge">Data Challenge</label>
             </p>
             <p>
-                <input type="radio" id="dataBattle" name="type" value="DataBattle">
+                <input type="radio" id="dataBattle" name="type" value="dataBattle">
                 <label for="dataBattle">Data Battle</label>
             </p>
 
@@ -78,7 +78,7 @@
     </div>
 
     <div>
-        <input type="submit" value="Ajouter un projet">
+        <input type="submit" value="Valider et ajouter un projet">
     </div>
 
 

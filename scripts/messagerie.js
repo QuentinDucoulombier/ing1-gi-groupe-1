@@ -1,9 +1,10 @@
 /**TODO:
  * [~]Clean code
- * []fix bugs
- * []add group message
+ * [x]fix bugs
+ * [x]add group message
  * []Transformer les requetes get en post
- * []Rajouter le fait d'ajouter un systeme de notif
+ * [x]Rajouter le fait d'ajouter un systeme de notif
+ * []Mettre le systeme une actualisation de la notif
  **/
 
 var lastMessageId = 0;
@@ -23,6 +24,7 @@ function newDestinataire(id) {
             
             console.log(this.responseText);
             document.getElementById("name").innerHTML = this.responseText;
+            
             lastMessageId = 1;
             recup_messages();
         }

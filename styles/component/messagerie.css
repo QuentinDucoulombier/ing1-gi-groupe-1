@@ -238,3 +238,7 @@ body {
   max-width: 500px;
   max-height: 300px;
 }
+
+.notification {
+  background-color: red;
+}

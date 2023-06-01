@@ -83,6 +83,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($_POST['typePage'] == "profil") {
         // on change le mail dans la session
         $_SESSION['email'] = $nvmail;
+        $user = getUser($_SESSION['email']);
+
+        $idUser = $user[0]['idUtilisateur'];
+        $_SESSION["idUser"] = $idUser;
     }
 }
 ?>

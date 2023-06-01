@@ -27,13 +27,6 @@
     echo '<p class="date">'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
 
 
-
-    if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-        echo '          <a href="/?page=modifierBattle"> ';
-        echo '              <button name="creation"> Modifier la battle </button> ';
-        echo '          </a>';
-    }
-
     // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
     if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $battle['nomEvenement']) ) ) ) {
         echo '          <a href="/?page=syntheseBattle&battle='.$battle['idEvenement'].'"> ';
@@ -56,18 +49,6 @@
     echo '              </div>';
     echo '          </div>';
 
-    if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-        echo '          <a href="/?page=modifierBattle"> ';
-        echo '              <button name="creation"> Modifier le projet </button> ';
-        echo '          </a>';
-    }
-    // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
-    if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $challenge['nomEvenement']) ) ) ) {
-        echo '          <a href="/?page=synthèseProjet&projet='.$projet[0]['idProjetData'].'"> ';
-        echo '              <button name="gestion"> Synthèse du projet </button> ';
-        echo '          </a>';
-    }
-
     echo '      </div>';
 
     echo '      <div class=image-projet>';
@@ -82,7 +63,7 @@
     foreach ($gestionnaires as $gestionnaire){
         echo '      <div class = "contact-gestionnaire">';
         echo '          <p>'.$gestionnaire['prenomUtilisateur'].' ' . $gestionnaire['nomUtilisateur'].'</p>';
-        echo '          <p> Mail : ' .$gestionnaire['email'] .' Tel :'. $gestionnaire['numeroTel'] .'</p>';
+        echo '          <p> Mail : ' .$gestionnaire['email'] .' Tel : '. $gestionnaire['numeroTel'] .'</p>';
         echo '      </div>';
     }
     echo '      </div>';
@@ -107,17 +88,17 @@
                 <div id="deuxieme">
 
                     <p>'. $podium[1]['nomEquipe'] .'</p>
-                    <p>'. $podium[1]['totalNotes'] .'</p>
+                    <p>'. $podium[1]['totalNotes'] .' points</p>
                 </div>
 
                 <div id="premier">
                     <p>'. $podium[0]['nomEquipe'] .'</p>
-                    <p>'. $podium[0]['totalNotes'] .'</p>
+                    <p>'. $podium[0]['totalNotes'] .' points</p>
                 </div>
                 
                 <div id="troisieme">
                     <p>'. $podium[2]['nomEquipe'] .'</p>
-                    <p>'. $podium[2]['totalNotes'] .'</p>
+                    <p>'. $podium[2]['totalNotes'] .' points</p>
                 </div>
             </div>
             ';
@@ -125,3 +106,7 @@
             
 ?>
 </div>
+
+
+
+<script src="scripts/manageEvenements.js" defer></script>

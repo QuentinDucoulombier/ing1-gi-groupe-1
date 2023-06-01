@@ -1,6 +1,7 @@
 
 <link rel="stylesheet" href="styles/component/evenements.css" />
 
+
 <div id="evenement-image">
   <div id="evenement-titre">
 
@@ -77,10 +78,17 @@
                     echo '          </a>';
                 }
 
-                // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
+                // Si l'utilisateur est un administrateur ou s'il est gestionnaire interne il peut accéder à la synthèse du challenge
                 if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireInterne($user[0]['email']) ) ) ) {
                     echo '          <a href="/?page=syntheseChallenge&challenge='.$challenge['idEvenement'].'"> ';
                     echo '              <button name="gestion"> Synthèse du challenge </button> ';
+                    echo '          </a>';
+                }
+                
+                // Si l'utilisateur est un administrateur peut supprimer le challenge
+                if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
+                    echo '          <a>';
+                    echo '              <button name="supprimer" id-event="'.$challenge['idEvenement'].'" onclick="supprimerEvent(this)"> Supprimer le challenge </button>';
                     echo '          </a>';
                 }
 
@@ -142,6 +150,13 @@
                     echo '              <button name="gestion"> Synthèse de la battle </button> ';
                     echo '          </a>';
                 }
+
+                // Si l'utilisateur est un administrateur peut supprimer le challenge
+                if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
+                    echo '          <a>';
+                    echo '              <button name="supprimer" id-event="'.$battle['idEvenement'].'" onclick="supprimerEvent(this)"> Supprimer la battle </button>';
+                    echo '          </a>';
+                }
                 echo '      </div>';
                 echo ' </div>';
             }
@@ -151,3 +166,6 @@
 
 
 </div>
+
+
+<script src="scripts/manageEvenements.js" defer></script>

@@ -80,9 +80,15 @@
   color: #0e8769 !important;
 }
 
+/* .card:nth-child(-1){
+  flex-direction: ;
+} */
+
 .button-projet {
   display: flex;
   justify-content: center;
+  align-self: flex-end;
+  margin-bottom: 10px;
 }
 
 button {
@@ -110,8 +116,6 @@ button:hover {
 .data-event {
   padding-bottom: 50px;
   margin-bottom: -40px;
-  background-image: linear-gradient(180deg,#76d6be 0%,#75c7b1 50%,#17be95 100%);
-  background-color: #17be95;
   min-height: 900px;
 }
 
@@ -189,11 +193,24 @@ h3 {
 a {
   color: #0e8769;
   text-decoration: none;
-  display: block;
+  display: flex;
   margin-bottom: 5px;
 }
 
 a:hover {
+  color: #17be95;
+}
+
+.card a {
+  color: #0e8769;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+  margin: 5px;
+}
+
+.card a:hover {
   color: #17be95;
 }
 
