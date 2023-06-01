@@ -802,7 +802,7 @@ function updatefichierProjet($idProjetData, $urlFichier)
         $sqlQuery = "UPDATE ProjetData SET urlFichier = :urlFichier WHERE idProjetData = :idProjetData";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':idProjetData', $idProjetData);
-        $statement->bindParam(':urlFichier', $imurlFichierage);
+        $statement->bindParam(':urlFichier', $urlFichier);
         $statement->execute();
     } catch (Exception $e) {
         die('Erreur : ' . $e->getMessage());
