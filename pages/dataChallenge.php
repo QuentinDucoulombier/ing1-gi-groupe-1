@@ -42,11 +42,11 @@
 
         echo '          <div class = "desc">';
         echo '              <div class = "title-projet">';
-        echo '                  <h2>'. $projet['nomProjet'] . '</h2>';
+        echo '                  <h2>'. $projet["nomProjet"].'</h2>';
         echo '              </div>';
 
         echo '              <div class = "description">';
-        echo                    $projet['description'];
+        echo                    $projet["description"];
         echo '              </div>';
         echo '          </div>';
         // Si l'utilisateur est un administrateur ou s'il est un gestionnaire rattaché au challenge il peut accéder à la synthèse du challenge
