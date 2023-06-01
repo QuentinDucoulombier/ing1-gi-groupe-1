@@ -1,3 +1,4 @@
+<script type="text/javascript" src="../scripts/viewTeam.js"></script>
 <link rel="stylesheet" href="styles/component/manageTeam.css" />
 <div id=manageTeam>
     <?php
@@ -41,7 +42,7 @@
                 }
             echo '</table>';
         echo '</div>';
-    
+        echo '<button class="leaveTeam" onclick="supprimerMember('.$idUser.','.$idEquipe.')">Quitter l\'équipe</button>';
     
     ?>
     
