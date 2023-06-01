@@ -59,6 +59,8 @@ if (isset($_SESSION['email']) && (isset($_GET['evenement']))){
                 <input type="file" id="image" name="image" accept="image/png, image/jpeg">
             </div>
 
+            <input type="hidden" name="id" value="<?php echo isset($idevenement) ? $idevenement : ''; ?>">
+    
             <div>
                 <input type="submit" value="Modifier l'évènement">
             </div>

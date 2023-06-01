@@ -7,7 +7,6 @@
     $password = 'S1m0n?021308'; // Mettre votre mot de passe MySQL
 
 
-
     $bddname = 'projetIaPau';
     $port = 8080
 ?>
