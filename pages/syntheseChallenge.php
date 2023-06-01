@@ -16,42 +16,40 @@
             echo '<h1 class="data-name">'. $challenge['nomEvenement'] . '</h3>';
             echo '<p class="date">'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
 
-        if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-            echo '          <div class="synthese"';
-            echo '          <a href="/?page=modifierEvenement&evenement='.$idChallenge.'"> ';
-            echo '              <button name="creation"> Modifier le challenge </button> ';
-            echo '          </a>';
-        }
-
-
             // Si l'utilisateur est un administrateur peut supprimer le challenge
-            if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
-                echo '              <button name="supprimer" id-event="'.$challenge['idEvenement'].'" onclick="supprimerEvent(this)"> Supprimer le challenge </button>';
-            
+            if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+                echo '          <div class="synthese">';
+                echo '          <a href="/?page=modifierEvenement&evenement='.$idChallenge.'"> ';
+                echo '              <button name="creation"> Modifier le challenge </button> ';
+                echo '          </a>';
+                echo '          <button name="supprimer" id-event="'.$challenge['idEvenement'].'" onclick="supprimerEvent(this)"> Supprimer le challenge </button>';
+            }
+        
 
-                echo '<h3> Liste des projets rattachés : </h3>';
-                foreach ($projets as $projet){
-                    echo ' <div id="liste-projets">';
-                    echo '      <a class ="more-link" href="/?page=syntheseProjet&projet='.$projet['idProjetData'].'"> <button name="gestion"> Syntèse '.$projet['nomProjet'].' </button>  </a>';
-                    echo ' <div class="project-name"';
+            echo '<h3> Liste des projets rattachés : </h3>';
+            foreach ($projets as $projet){
+                echo ' <div id="liste-projets">';
+                echo '<p>'.$projet['nomProjet'].'</p>';
+                echo '      <a class ="more-link" href="/?page=syntheseProjet&projet='.$projet['idProjetData'].'"> <button name="gestion"> Synthèse '.$projet['nomProjet'].' </button>  </a>';
+                echo ' <div class="project-name">';
 
 
-                        if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
-                            echo '          <a href="/?page=modifierProjet&projet='.$projet['idProjetData'].'"> ';
-                            echo '              <button name="creation"> Modifier le projet </button> ';
-                            echo '          </a>';
-                        }
-
-                        // Si l'utilisateur est un administrateur peut supprimer le challenge
-                        if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
-                            echo '              <button name="supprimer" id-projet="'.$projet['idProjetData'].'" onclick="supprimerProjet(this)"> Supprimer le projet </button>';
-                        }
-                    }
-                    echo '<div><button class="statistique" onclick="window.location.href=`./?page=statglobale&ProjetData='.$projets[0]["idProjetData"].'`">Statistiques projets</button></div>';
-
-                    echo '          </div>';
-                    echo ' </div>';
+                if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+                    echo '          <a href="/?page=modifierProjet&projet='.$projet['idProjetData'].'"> ';
+                    echo '              <button name="creation"> Modifier le projet </button> ';
+                    echo '          </a>';
                 }
+
+                // Si l'utilisateur est un administrateur peut supprimer le challenge
+                if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
+                    echo '              <button name="supprimer" id-projet="'.$projet['idProjetData'].'" onclick="supprimerProjet(this)"> Supprimer le projet </button>';
+                }
+            }
+                echo '<div><button class="statistique" onclick="window.location.href=`./?page=statglobale&ProjetData='.$projets[0]["idProjetData"].'`">Statistiques projets</button></div>';
+
+                echo '          </div>';
+                echo ' </div>';
+            
                 echo '<h3> Liste des équipes rattachées : </h3>';
 
 
@@ -62,11 +60,7 @@
                                 <?php echo $equipe['nomEquipe'] ?>
                             </div>
 
-                            <div class="messages">
-                                <a href="">
-                                    <button name="messages"> Voir les messages </button>
-                                </a>
-                            </div>
+
 
                         <div class="messages">
                             <form action="/?page=viewMessageTeam" method="POST">
@@ -85,17 +79,18 @@
                             </form>
 
                         </div>
+                    </div>
                         
                     <?php
                     }
                     ?>
 
                 <?php
-            } else{
+            }else{
             header ('Location: /?page=connexion');
 
             }
-    } else {
+         } else {
         header ('Location: /?page=connexion');
     
     }
