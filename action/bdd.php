@@ -962,7 +962,7 @@ function getQuestion($idQuestionnaire)
 {
     try {
         $conn = connect();
-        $sqlQuery = "SELECT intituleQuestion FROM Question WHERE idQuestionnaire=:idQuestionnaire";
+        $sqlQuery = "SELECT intituleQuestion,idQuestion FROM Question WHERE idQuestionnaire=:idQuestionnaire";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':idQuestionnaire', $idQuestionnaire);
         $statement->execute();
@@ -1085,7 +1085,7 @@ function noterReponse($idEquipe, $idQuestion, $note)
 {
     try {
         $conn = connect();
-        $sqlQuery = "UPDATE TABLE Reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe SET note=:note";
+        $sqlQuery = "UPDATE Reponse WHERE idQuestion=:idQuestion AND idEquipe=:idEquipe SET note=:note";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':idQuestion', $idQuestion);
         $statement->bindParam(':idEquipe', $idEquipe);
