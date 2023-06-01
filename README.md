@@ -1,4 +1,12 @@
-# projet
+# Projet Ing1-GI-Groupe-1
+
+---
+
+Auteurs : Quentin Ducoulombier, Aventin Farret, Hélène Delran--Garric, Mathis Firmino, Simon Loos  
+Date: 1 Juin 2023  
+Email: ducoulombi@cy-tech.fr, farretaven@cy-tech.fr, delrangarr@cy-tech.fr, firminomat@cy-tech.fr, loossimon@cy-tech.fr  
+
+--- 
 
 ## Connexion à la base de données
 
@@ -44,7 +52,7 @@ Mot de passe : 1234
 - idUtilisateur = 1  
 - Chef et membre des équipes d'id 1 (Equipe A) et 2 (Equipe B)
 - L'équipe A est inscrite au projetData 1 (Projet A) qui appartient à la data battle 1 (id1)
-- L'equipe B est inscrite au ProjetData 3 (Projet C) qui appartient au data challenge 1 (id3)
+- L'équipe B est inscrite au projetData 3 (Projet C) qui appartient au data challenge 1 (id3)
 
 
 *Accès Gestionnaire*   
@@ -57,5 +65,5 @@ Mot de passe : 1234
 *Accès Admin*   
 email : admin@ia.pau
 Mot de passe : 1234
-- L'administrateur a accès à tout
+- L'administrateur à accès à tout
 
