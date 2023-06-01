@@ -47,5 +47,5 @@
 [] ajoutEvenement.php       -> ajouter un /images + améliorations eventuelles (facultatif)
 [] ajoutProjet.php          -> CSS preque fini (ajoutEvenement.css)
 [] modifierEvenement.php    -> CSS presque fini(ajoutEvenement.css)
-[] modifierProjet.php       -> à faire
+[] modifierProjet.php       -> back à faire
 [] gererUtilisateur.php     -> CSS + liste déroulante pour le niveau detude (facultatif)
