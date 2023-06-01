@@ -1635,6 +1635,27 @@ function getInfoManageTeam($idUtilisateur, $idProjet)
     }
 }
 
+function getInfoViewTeam($idUtilisateur, $idProjet)
+{
+    try {
+        // Se connecter à la base de données
+        $conn = connect();
+        // Requête SQL pour récupérer les informations sur le gestionnaire de l'équipe du projet spécifié
+        $sqlQuery = "SELECT * 
+        FROM Composer 
+        INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
+        INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Composer.idEtudiant
+        INNER JOIN ProjetData ON ProjetData.idProjetData = Equipe.idProjetData
+        WHERE Utilisateur.idUtilisateur = $idUtilisateur AND Equipe.idProjetData = $idProjet;";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetch();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
 /**
  * @fn function suppUserTeam($idUser, $idTeam)
  * @param idUser l'id de l'utilisateur
@@ -2191,5 +2212,20 @@ function getAnalyseCode($idProjetData)
        die('Erreur : ' . $e->getMessage());
    }
 }
+
+function getUserById($idUser) {
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT * FROM Utilisateur 
+        WHERE idUtilisateur = $idUser";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->execute();
+        $result = $statement->fetch();
+             return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+}
+
 
 ?>

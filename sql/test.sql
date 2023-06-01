@@ -151,9 +151,17 @@ INNER JOIN Utilisateur as UtilisateurDes ON UtilisateurDes.idUtilisateur = Messa
 INNER JOIN Utilisateur as UtilisateurAut ON UtilisateurAut.idUtilisateur = Messages.id_auteur
 WHERE Composer.idEquipe = 1;
 */
-
+/*
 SELECT *
 FROM Messages
 WHERE lu = 0
-AND id_destinataire = 3 /*User*/
-AND id_auteur = 4;  /*A affiché*/
+AND id_destinataire = 3 
+AND id_auteur = 4;  
+*/
+
+SELECT * 
+FROM Composer 
+INNER JOIN Equipe ON Equipe.idEquipe = Composer.idEquipe 
+INNER JOIN Utilisateur ON Utilisateur.idUtilisateur = Composer.idEtudiant
+INNER JOIN ProjetData ON ProjetData.idProjetData = Equipe.idProjetData
+WHERE Utilisateur.idUtilisateur = 4 AND Equipe.idProjetData = 1;

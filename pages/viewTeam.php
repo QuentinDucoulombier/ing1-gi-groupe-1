@@ -16,14 +16,14 @@
         $idEquipe = $_SESSION["idTeam"];
 
         $idProjet = $_SESSION["idProjet"];
-        $user = getUser($_SESSION["email"]);
-        $idUser = $user[0]['idUtilisateur'];
-        $infoTeam = getInfoManageTeam($idUser,$idProjet);
+        $idUser = $_SESSION["idUser"];
+        $infoTeam = getInfoViewTeam($idUser,$idProjet);
         $members = getAllMemberTeam($idEquipe);
+        $capitaine = getUserById($infoTeam["idCapitaine"]);
         echo '
             <p><strong>Equipe:</strong> '.$infoTeam["nomEquipe"].'</p>
             <p><strong>Projet: </strong>'.$infoTeam["nomProjet"].'</p>
-            <p><strong>Capitaine: </strong> '.$infoTeam["prenomUtilisateur"].' '.$infoTeam["nomUtilisateur"].'</p>
+            <p><strong>Capitaine: </strong> '.$capitaine["prenomUtilisateur"].' '.$capitaine["nomUtilisateur"].'</p>
             <br>
             <p><strong>Membres:</strong> </p>
         ';
