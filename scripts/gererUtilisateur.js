@@ -1,7 +1,14 @@
+/*
+* cript le mot de passe en SHA1
+* @param {string} str - le mot de passe
+*/
 function sha1(str) {
     return CryptoJS.SHA1(str).toString();
 }
-
+/*
+* Affiche les champs de modification du profil
+* @param {HTMLElement} button - le bouton Modifier
+*/
 function toggleEditEtudiant(button) {
     var email = button.getAttribute('data-email');
     var row = button.parentNode.parentNode;
@@ -42,7 +49,12 @@ function toggleEditEtudiant(button) {
     button.setAttribute("onclick", "sendDataEtudiant(this, '" + email + "', '" + motDePasse + "')");
 }
 
-
+/**
+ * récupère les données du formulaire et les envoie à la page action/edit_a_profil.php
+ * @param {*} button 
+ * @param {*} email 
+ * @param {*} motDePasse2 
+ */
 function sendDataEtudiant(button, email, motDePasse2) {
 
 
@@ -103,7 +115,10 @@ function sendDataEtudiant(button, email, motDePasse2) {
     xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + numeroTel + "&niveauEtude=" + niveauEtudeValue + "&ecole=" + ecole + "&ville=" + ville + "&motDePasse=" + motDePasse);
 
 }
-
+/*
+* Affiche les champs de modification du profil
+* @param {HTMLElement} button - le bouton Modifier
+*/
 function toggleEditGestionnaire(button) {
     var email = button.getAttribute('data-email');
     var row = button.parentNode.parentNode;
@@ -136,7 +151,12 @@ function toggleEditGestionnaire(button) {
     button.setAttribute("onclick", "sendDataGestionnaire(this, '" + email + "', '" + motDePasse + "')");
 }
 
-
+/*
+* récupère les données du formulaire et les envoie à la page action/edit_a_profil.php
+* @param {HTMLElement} button - le bouton Envoyer
+* @param {string} email - l'email de l'utilisateur
+* @param {string} mdp - le mot de passe de l'utilisateur
+*/
 function sendDataGestionnaire(button, email, motDePasse2) {
     var row = button.parentNode.parentNode;
     var cells = row.getElementsByTagName('td');
@@ -184,6 +204,10 @@ function sendDataGestionnaire(button, email, motDePasse2) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&nvemail=" + nvemail + "&type=" + type + "&numeroTel=" + numeroTel + "&nomEntreprise=" + nomEntreprise + "&dateDebutUtilisateur=" + dateDebutUtilisateur + "&dateFinUtilisateur=" + dateFinUtilisateur + "&motDePasse=" + motDePasse);
 }
+/*
+* supprime un utilisateur
+* @param {HTMLElement} button - le bouton Supprimer
+*/
 function supprimerUtilisateur(button) {
     var email = button.getAttribute('data-email');
     var xhttp = new XMLHttpRequest();
@@ -198,9 +222,12 @@ function supprimerUtilisateur(button) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("email=" + email);
 }
+
 var button1 = document.getElementById('ajouter-btn1');
 var button2 = document.getElementById('ajouter-btn2');
-
+/*
+* Ajoute un étudiant
+*/
 function ajouterEtudiant() {
     // Créer une référence au tableau HTML
     var tableauEtudiants = document.getElementById('tableauEtudiants');
@@ -242,6 +269,9 @@ function ajouterEtudiant() {
     button1.style.display = 'none';
     button2.style.display = 'none';
 }   
+/*
+* Sauvegarde un nouvel étudiant
+*/
 function sauvegarderNouvelEtudiant() {
     // Récupérer les valeurs des champs
     var nouveauPrenom = document.getElementById('nouveauPrenom').value;
@@ -275,6 +305,10 @@ function sauvegarderNouvelEtudiant() {
     xhr.send('prenomUtilisateur=' + nouveauPrenom + '&nomUtilisateur=' + nouveauNom + '&email=' + nouvelEmail + '&type=' + nouveauType + '&numeroTel=' + nouveauNumeroTel + '&niveauEtude=' + nouveauNiveauEtude + '&ecole=' + nouvelleEcole + '&ville=' + nouvelleVille + '&motDePasse=' + nouveauMotDePasse);
 
 }
+/*
+* Ajoute un gestionnaire
+*/
+
 function ajouterGestionnaire() {
     var tableauGestionnaire = document.getElementById('tableauGestionnaire');
     var nouvelleLigne = tableauGestionnaire.insertRow();
@@ -312,6 +346,9 @@ function ajouterGestionnaire() {
     button2.style.display = 'none';
     button1.style.display = 'none';
 }
+/*
+* Sauvegarde un nouveau gestionnaire
+*/
 function sauvegarderNouveauGestionnaire() {
     // Récupérer les valeurs des champs
     var nouveauPrenom = document.getElementById('nouveauPrenom').value;

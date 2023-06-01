@@ -1,5 +1,7 @@
 
-
+/*
+* Script de connexion
+*/
 document.getElementById("modifierForm").addEventListener("submit", function (event) {
     event.preventDefault(); // Empêche l'envoi du formulaire
 

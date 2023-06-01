@@ -1,10 +1,19 @@
+/**
+ * cript les mots de passe en SHA1
+ * @param {string} str - le mot de passe
+ */
 function sha1(str) {
     return CryptoJS.SHA1(str).toString();
 }
+// variables qui contiennent les champs de mot de passe
 var MotDePassesEtudiant = document.getElementById("MotDePasse_Etudiant");
 var ConfirmerMotDePassesEtudiant = document.getElementById("Confirmer_MotDePasse_Etudiant");
 var AncienMotDePassesEtudiant = document.getElementById("Ancien_MotDePasse_Etudiant");
 
+/*
+* Affiche les champs de modification du profil
+* @param {HTMLElement} button - le bouton Modifier
+    */
 function toggleEditProfilEtudiant(button) {
     MotDePassesEtudiant.classList.remove("hide");
     ConfirmerMotDePassesEtudiant.classList.remove("hide");
@@ -52,7 +61,11 @@ function toggleEditProfilEtudiant(button) {
    button.setAttribute("onclick", "validateProfilEtudiant(this,'" + email + "', '" + mdp + "')");
 
 }
-
+/*
+* récupère les données du formulaire et les envoie à la page action/edit_a_profil.php
+* @param {HTMLElement} button - le bouton Envoyer
+* @param {string} email - l'email de l'utilisateur
+*/
 function sendDataProfilEtudiant(button, email) {
 
 
@@ -103,7 +116,7 @@ function sendDataProfilEtudiant(button, email) {
             MotDePassesEtudiant.classList.add("hide");
             ConfirmerMotDePassesEtudiant.classList.add("hide");
             AncienMotDePassesEtudiant.classList.add("hide");
-            //location.reload();
+            location.reload();
 
             document.getElementById("profil_id").classList.remove("smaller_profil");
 
@@ -120,7 +133,12 @@ function sendDataProfilEtudiant(button, email) {
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("email=" + email + "&prenomUtilisateur=" + prenom + "&nomUtilisateur=" + nom + "&type=" + type + "&nvemail=" + nvemail + "&numeroTel=" + tel + "&niveauEtude=" + niveauEtudeValue + "&ecole=" + ecole + "&ville=" + ville + "&motDePasse=" + motDePasse + "&AncienMotDePasse=" + AncienMotDePasse + "&typePage=" + typePage);
 }
-
+/*
+* Vérifie que les champs du formulaire sont valides
+* @param {HTMLElement} button - le bouton Envoyer
+* @param {string} email - l'email de l'utilisateur
+* @param {string} mdp - le mot de passe de l'utilisateur
+*/
 function validateProfilEtudiant(button, email2, mdp){
 
 
