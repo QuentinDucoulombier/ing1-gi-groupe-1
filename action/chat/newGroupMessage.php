@@ -1,5 +1,4 @@
 <?php
-    /*TODO:Faire ca en ajax si le temps/envie*/
     session_start();
     require('../bdd.php');
 
@@ -14,7 +13,6 @@
             $idDest = $membre["idEtudiant"];
             sendMessage($idUser,$idDest,$message);
         }
-        //echo "<p>Message envoyé avec succès</p>"
     }
     header('Location: /?page=groupeMessage');
     

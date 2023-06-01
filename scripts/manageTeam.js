@@ -5,7 +5,7 @@ function supprimerMember(idUser,idTeam){
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+            //console.log(this.responseText);
             document.getElementById("table").innerHTML = this.responseText;
         }
             
@@ -47,12 +47,12 @@ function suggestMembers() {
 
 
 function addMember(idUser,idTeam){
-    console.log("user "+idUser);
-    console.log("team "+idTeam);
+    //console.log("user "+idUser);
+    //console.log("team "+idTeam);
     xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(this.responseText);
+            //console.log(this.responseText);
             document.getElementById("table").innerHTML = this.responseText;
             document.getElementById("searchMember").innerHTML = "";
         }

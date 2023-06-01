@@ -163,7 +163,6 @@
     }
 ?>
         <div id="lienGithub">
-            <!--TODO: Rajouter une fonction js qui dit que le lien a bien etait pris en compte-->
             <h3>Deposer votre lien github: </h3>
             <form id="formGithub" onsubmit="sendGithub()" action="">
                 <input type="text" id="github" name="github" placeholder="lien github" />
