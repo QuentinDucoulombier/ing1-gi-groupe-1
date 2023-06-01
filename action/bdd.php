@@ -1474,6 +1474,30 @@ function getGestionnaireProjet($gestio)
     }
 }
 /**
+ * permet de récupérer les projets d'un utilisateur
+ * @param mail : mail de l'utilisateur
+ */
+function getProjetUser($mail)
+{
+    try {
+        $conn = connect();
+        $sqlQuery = "SELECT ProjetData.nomProjet, ProjetData.idProjetData FROM ProjetData 
+                        INNER JOIN Equipe ON ProjetData.idProjetData = Equipe.idProjetData 
+                        INNER JOIN Composer ON Equipe.idEquipe = Composer.idEquipe 
+                        INNER JOIN Utilisateur ON Composer.idEtudiant = Utilisateur.idUtilisateur 
+                        WHERE Utilisateur.email = :mail";
+        $statement = $conn->prepare($sqlQuery);
+        $statement->bindParam(':mail', $mail);
+        $statement->execute();
+        $result = $statement->fetchAll();
+        return $result;
+    } catch (Exception $e) {
+        die('Erreur : ' . $e->getMessage());
+    }
+
+}
+
+/**
  * 
  */
 function getData($idChallenge)

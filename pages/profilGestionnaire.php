@@ -76,7 +76,7 @@ if (isset($_SESSION['email'])) {
     <h2>Mes projets à gérer</h2>
     <?php
     // Appel de la fonction pour récupérer les équipes de l'utilisateur
-    $resultats = getGestionnaireProjet(['nomUtilisateur']);
+    $resultats = getGestionnaireProjet($infos[0]['nomUtilisateur']);
 
     // Affichage du tableau
     echo "<table>";
