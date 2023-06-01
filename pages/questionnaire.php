@@ -17,6 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $i++;
     }
+    header("Location: /?page=evenements");
 }   
 
 ?>
@@ -47,3 +48,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php include "component/footer.php"; ?>
     </div>
 </div>
+
+<style>
+    h1{
+        text-align:center;
+    }
+    #questionnaire{
+        width:800px;
+        border-radius: 20px;
+        margin: auto;
+        padding: 15px;
+        padding-top: 25px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0 0 5px rgba(134, 134, 134, 0.4);
+    }
+</style>

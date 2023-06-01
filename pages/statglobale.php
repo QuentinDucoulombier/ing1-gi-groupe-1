@@ -17,22 +17,24 @@ foreach ($data as $equipe) {
 
         // Convertir le JSON en tableau associatif
         $analyseProjet = json_decode($json, true);
-
         // Récupérer le nombre de lignes de l'analyseProjet
         $nbLignes = $analyseProjet["nbLignes"];
         $nbFonctions= $analyseProjet["nbFonctions"];
+        $moyfonctions = $analyseProjet["moyLignes"];
         // Ajouter l'équipe au tableau des labels
         $labels[] = "Équipe " . $equipe["idEquipe"];
 
         // Ajouter le nombre de lignes au tableau des données
         $dataValues1[] = $nbLignes;
         $dataValues2[] = $nbFonctions;
+        $dataValues3[]= $moyfonctions;
         
     }
 }
 
 ?>
 <h1 id="test">Analyse code ProjetData <?php echo $idProjetData?></h1>
+<div class= "canva-container">
 <div class="chart1">
     <p>Comparaison nombre de lignes par équipe</p>
     <canvas id="myChart1"></canvas>
@@ -41,6 +43,11 @@ foreach ($data as $equipe) {
     <p>Comparaison nombre de fonctions par équipe</p>
     <canvas id="myChart2"></canvas>
 </div>
+<div class="chart3">
+    <p>Comparaison nombre de lignes moyens des fonctions</p>
+    <canvas id="myChart3"></canvas>
+</div>
+</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -48,6 +55,8 @@ foreach ($data as $equipe) {
     var labels = <?php echo json_encode($labels); ?>;
     var nbLignes = <?php echo json_encode($dataValues1); ?>;
     var nbFonctions = <?php echo json_encode($dataValues2); ?>;
+    var moyFonctions = <?php echo json_encode($dataValues3); ?>;
+
     // Création du pie chart avec Chart.js
     var ctx1 = document.getElementById("myChart1").getContext("2d");
     new Chart(ctx1, {
@@ -73,6 +82,21 @@ foreach ($data as $equipe) {
                 label: "nombre de fonctions",
                 data: nbFonctions,
                 backgroundColor: ["#4BC0C0", "#FF9F40", "#9966FF", "#F0DB4F", "#B3FF66"]         
+            }]
+        },
+        options: {
+            responsive: true,
+        }
+    });
+    var ctx3 = document.getElementById("myChart3").getContext("2d");
+    new Chart(ctx3, {
+        type: "pie",
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "nombre de lignes moyens des fonctions",
+                data: moyFonctions,
+                backgroundColor: ["#9966FF", "#F0DB4F", "#B3FF66","#4BC0C0", "#FF9F40", "#9966FF", "#F0DB4F", "#B3FF66"]         
             }]
         },
         options: {
@@ -117,5 +141,28 @@ foreach ($data as $equipe) {
         font-size: 18px;
         color: #666;
         margin-bottom: 10px;
+    }
+    /* Style pour le conteneur du deuxième graphique */
+    .chart3 {
+        width:400px;
+        height:400px;
+        margin: 40px auto;
+        text-align: center;
+    }
+
+    /* Style pour le paragraphe du deuxième graphique */
+    .chart3 p {
+        font-size: 18px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+    .canva-container{
+        width:600px;
+        border-radius: 20px;
+        margin: auto;
+        padding: 15px;
+        padding-top: 25px;
+        background-color: rgb(255, 255, 255);
+        box-shadow: 0 0 5px rgba(134, 134, 134, 0.4);
     }
 </style>
