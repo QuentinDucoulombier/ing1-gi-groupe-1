@@ -3,7 +3,17 @@
 <div>
 
 <?php
+    /*verif connexion et statut*/
     session_start();
+    if (!isset($_SESSION['email'])) {
+        header ('Location: /?page=404');
+    } else {
+        $user = getUser($_SESSION['email']);
+        if ($user[0]['type'] != "Etudiant") 
+        {
+            header ('Location: /?page=404');
+        }
+    }
     if(isset($_POST["choixChallenge"]))
     {
         $choixChallenge = $_POST["choixChallenge"];
