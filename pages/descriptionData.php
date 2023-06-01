@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="styles/component/descriptionData.css" />
 
-<div id="description">
+<div>
 
 <?php
     session_start();
@@ -55,23 +55,25 @@
                 '.$data["description"].'
             </div>
             <img src="../'.$data["imageEvent"].'" alt="image du projet"></img>
-        </div>
         
-        <div id="ressource"/>
-            <h3>Ressource du projet</h3>
+        
+            <div id="ressource"/>
+                <h3>Ressource du projet</h3>
 
-            URL d\'accès aux fichiers de description et des données du data challenge: </br>
-            <a href="'.$data["urlFichier"].'">'.$data["urlFichier"].'</a></br>
-            URL vidéo de présentation du projet: <br />
-            <iframe width="355" height="200" src="'.$embedLink.'" frameborder="0" allowfullscreen></iframe>
-            
-        </div>
-        <div id="consignes">
-            <h3>Consignes</h3>
-        </div>
-        <div id="conseils">
-            <h3>Conseils</h3>
-        </div>
+                URL d\'accès aux fichiers de description et des données du data challenge: </br>
+                <a href="'.$data["urlFichier"].'">'.$data["urlFichier"].'</a></br>
+                URL vidéo de présentation du projet: <br />
+                <iframe width="355" height="200" src="'.$embedLink.'" frameborder="0" allowfullscreen></iframe>
+                
+            </div>
+            <div id="consignes">
+                <h3>Consignes</h3>
+            </div>
+            <div id="conseils">
+                <h3>Conseils</h3>
+            </div>
+        
+        
     ';
     if($data["typeEvenement"] == "dataBattle") {
 
@@ -147,18 +149,18 @@
         ';
     }
 ?>
-    <div id="lienGithub">
-        <h3>Deposer votre lien github: </h3>
-        <form id="formGithub">
-            <input type="text" id="github" name="github" placeholder="lien github" />
-            <input type="submit" id="subgithub" name="subgithub" value="Deposer mon code"/>
-            
+        <div id="lienGithub">
+            <h3>Deposer votre lien github: </h3>
+            <form id="formGithub">
+                <input type="text" id="github" name="github" placeholder="lien github" />
+                <input type="submit" id="subgithub" name="subgithub" value="Deposer mon code"/>
+                
 
-        </form>
+            </form>
+
+
+        </div>
 
 
     </div>
-
-
-
 </div>

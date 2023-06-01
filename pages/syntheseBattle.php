@@ -16,10 +16,11 @@
 
         // La page s'affiche uniquement si l'utilisateur est un administrateur ou un gestionnaire du data Challenge
         if ($user[0]['type'] == "Administrateur"|| ($user[0]['type'] == "Gestionnaire" && checkGestionnaireProjet($user[0]['email'], $battle['nomEvenement']) )) {
-            echo '<h1>'. $battle['nomEvenement'] . '</h3>';
-            echo '<p>'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
+            echo '<h1 class="data-name">'. $battle['nomEvenement'] . '</h3>';
+            echo '<p class="date">'. $battle['dateD'].' - '.$battle['dateF'].'</p>';
 
             if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+                echo '          <div class="synthese"';
                 echo '          <a href="/?page=ModifierEvenement&evenement='.$idBattle.'"> ';
                 echo '              <button name="creation"> Modifier la battle </button> ';
                 echo '          </a>';
@@ -34,9 +35,12 @@
             echo ' <div id="liste-projets">';
             echo        $projets[0]['nomProjet'];
             if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+                echo ' <div class="project-name"';
+
                 echo '          <a href="/?page=modifierProjet&projet='.$projet[0]['idProjetData'].'"> ';
                 echo '              <button name="creation"> Modifier le projet </button> ';
                 echo '          </a>';
+                echo ' </div>';
             }
             echo ' </div>';
 
@@ -126,3 +130,4 @@
         }
     }
 ?>
+</div>

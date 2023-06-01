@@ -28,6 +28,7 @@ if (!isset($_GET["page"])){
         <link rel="stylesheet" href="styles/component/accueil.css" />
         <link rel="stylesheet" href="styles/component/profil.css" />
         <link rel="stylesheet" href="styles/component/form.css" />
+        <link rel="stylesheet" href="styles/component/synthese.css"/>
 
 
                 

@@ -13,10 +13,11 @@
 
         // La page s'affiche uniquement si l'utilisateur est un administrateur ou un gestionnaire du data Challenge
         if (($user[0]['type'] == "Administrateur") || ($user[0]['type'] == "Gestionnaire" && checkGestionnaireInterne($user[0]['email']) )) {
-            echo '<h1>'. $challenge['nomEvenement'] . '</h3>';
-            echo '<p>'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
+            echo '<h1 class="data-name">'. $challenge['nomEvenement'] . '</h3>';
+            echo '<p class="date">'. $challenge['dateD'].' - '.$challenge['dateF'].'</p>';
 
         if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
+            echo '          <div class="synthese"';
             echo '          <a href="/?page=ModifierEvenement&evenement='.$idChallenge.'"> ';
             echo '              <button name="creation"> Modifier le challenge </button> ';
             echo '          </a>';
@@ -28,11 +29,10 @@
         }
 
             echo '<h3> Liste des projets rattachés : </h3>';
-
             foreach ($projets as $projet){
                 echo ' <div id="liste-projets">';
                 echo '      <a class ="more-link" href="/?page=syntheseProjet&projet='.$projet['idProjetData'].'"> <button name="gestion"> Syntèse '.$projet['nomProjet'].' </button>  </a>';
-                echo ' </div>';
+                echo ' <div class="project-name"';
 
                 if (isset($_SESSION['email']) && $user[0]['type'] == "Administrateur") {
                     echo '          <a href="/?page=modifierProjet&projet='.$projet['idProjetData'].'"> ';
@@ -44,8 +44,9 @@
                 if (isset($_SESSION['email']) && ( ($user[0]['type'] == "Administrateur")) ) {
                     echo '              <button name="supprimer" id-projet="'.$projet['idProjetData'].'" onclick="supprimerProjet(this)"> Supprimer le projet </button>';
                 }
+                echo '          </div>';
+                echo ' </div>';
             }
-
             echo '<h3> Liste des équipes rattachées : </h3>';
 
             foreach ($equipes as $equipe){?>
@@ -79,5 +80,5 @@
 
     }
 ?>
-
+</div>
 <script src="scripts/manageEvenements.js" defer></script>
