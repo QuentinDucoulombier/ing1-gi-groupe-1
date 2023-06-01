@@ -32,7 +32,7 @@ foreach ($data as $equipe) {
 }
 
 ?>
-'<h1 id="test">Analyse code ProjetData <?php echo $idProjetData?></h1>
+<h1 id="test">Analyse code ProjetData <?php echo $idProjetData?></h1>
 <div class="chart1">
     <p>Comparaison nombre de lignes par équipe</p>
     <canvas id="myChart1"></canvas>
@@ -40,7 +40,7 @@ foreach ($data as $equipe) {
 <div class="chart2">
     <p>Comparaison nombre de fonctions par équipe</p>
     <canvas id="myChart2"></canvas>
-</div>'
+</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
@@ -91,6 +91,8 @@ foreach ($data as $equipe) {
 
     /* Style pour le conteneur du premier graphique */
     .chart1 {
+        width:400px;
+        height:400px;
         margin: 20px auto;
         text-align: center;
     }
@@ -104,7 +106,9 @@ foreach ($data as $equipe) {
 
     /* Style pour le conteneur du deuxième graphique */
     .chart2 {
-        margin: 20px auto;
+        width:400px;
+        height:400px;
+        margin: 40px auto;
         text-align: center;
     }
 
