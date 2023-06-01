@@ -1975,7 +1975,7 @@ function checkGestionnaireInterne($mail)
     try {
         $conn = connect();
         $sqlQuery = "SELECT COUNT(*) AS count
-                        FROM Utilisateur AS
+                        FROM Utilisateur
                         WHERE email = :mail AND LOWER(nomEntreprise) LIKE LOWER('IA Pau')";
         $statement = $conn->prepare($sqlQuery);
         $statement->bindParam(':mail', $mail);
