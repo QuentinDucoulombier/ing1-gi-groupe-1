@@ -2,6 +2,17 @@
 <div id=manageTeam>
     <?php
         session_start();
+        /*verif connexion et statut*/
+
+        if (!isset($_SESSION['email'])) {
+            header ('Location: /?page=404');
+        } else {
+            $user = getUser($_SESSION['email']);
+            if ($user[0]['type'] != "Etudiant" && isset($_SESSION["idTeam"])) 
+            {
+                header ('Location: /?page=404');
+            }
+        }
         $idEquipe = $_SESSION["idTeam"];
 
         $idProjet = $_SESSION["idProjet"];

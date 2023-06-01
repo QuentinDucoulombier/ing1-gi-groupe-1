@@ -75,8 +75,20 @@ if (isset($_SESSION['email'])) {
     </div>
     <div class="projects">
     <h2>Mes Projets</h2>
+    <?php
+    $projets = getProjetUser($email);
 
-    <h2>Mon équipe</h2>
+    echo "<table>";
+    echo "<tbody>";
+    foreach ($projets as $projet) {
+        echo "<tr>";
+        echo "<td>" . $projet['nomProjet'] . "</td>";
+        echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+    ?>
+    <h2>Mes équipes</h2>
     <?php
     // Appel de la fonction pour récupérer les équipes de l'utilisateur
     $resultats = getEquipeUser($email);
