@@ -122,14 +122,14 @@ CREATE TABLE Superviser(
 CREATE TABLE Auteur (
   id_auteur INT AUTO_INCREMENT PRIMARY KEY,
   idUtilisateur INT,
-  FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur)
+  FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur) ON DELETE CASCADE
 );
 
 /* Table destinataires */
 CREATE TABLE Destinataire (
   id_destinataire INT AUTO_INCREMENT PRIMARY KEY,
   idUtilisateur INT,
-  FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur)
+  FOREIGN KEY (idUtilisateur) REFERENCES Utilisateur(idUtilisateur) ON DELETE CASCADE
 );
 
 /* Table messages */
