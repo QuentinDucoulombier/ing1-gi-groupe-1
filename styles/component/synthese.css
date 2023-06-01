@@ -23,6 +23,7 @@
 }
 
 
+
 .project-name {
   display:inline;
 
@@ -74,7 +75,7 @@ button {
 }
 
 .questionnaire {
-  width: 50%;
+  width: 60%;
   margin-bottom: 20px;
   border: 1px solid #ccc;
   padding: 10px;

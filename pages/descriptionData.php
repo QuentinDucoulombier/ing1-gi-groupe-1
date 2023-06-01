@@ -78,9 +78,11 @@
             </div>
             <div id="consignes">
                 <h3>Consignes</h3>
+                <p>'.$data["consigne"].'</p>
             </div>
             <div id="conseils">
                 <h3>Conseils</h3>
+                <p>'.$data["conseil"].'</p>
             </div>
         
         

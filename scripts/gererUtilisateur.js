@@ -236,7 +236,15 @@ function ajouterEtudiant() {
     celluleNumeroTel.innerHTML = '<input type="text" id="nouveauNumeroTel" value="">';
 
     var celluleNiveauEtude = nouvelleLigne.insertCell();
-    celluleNiveauEtude.innerHTML = '<input type="text" id="nouveauNiveauEtude" value="">';
+    celluleNiveauEtude.innerHTML = 
+    `<div class="radioniveauEtude" style="display: flex;">
+        <input type="radio" id="L1" name="niveauEtude" value="L1" ><label for="L1">L1</label>
+        <input type="radio" id="L2" name="niveauEtude" value="L2" ><label for="L2">L2</label>
+        <input type="radio" id="L3" name="niveauEtude" value="L3" ><label for="L3">L3</label>
+        <input type="radio" id="M1" name="niveauEtude" value="M1" ><label for="M1">M1</label>
+        <input type="radio" id="M2" name="niveauEtude" value="M2" ><label for="M2">M2</label>
+        <input type="radio" id="D" name="niveauEtude" value="D" ><label for="D">D</label>
+    </div>`;
 
     var celluleEcole = nouvelleLigne.insertCell();
     celluleEcole.innerHTML = '<input type="text" id="nouvelleEcole" value="">';
@@ -260,7 +268,7 @@ function sauvegarderNouvelEtudiant() {
     var nouvelEmail = document.getElementById('nouvelEmail').value;
     var nouveauType = 'Etudiant';
     var nouveauNumeroTel = document.getElementById('nouveauNumeroTel').value;
-    var nouveauNiveauEtude = document.getElementById('nouveauNiveauEtude').value;
+    var nouveauNiveauEtude = document.querySelector('input[name="niveauEtude"]:checked').value;
     var nouvelleEcole = document.getElementById('nouvelleEcole').value;
     var nouvelleVille = document.getElementById('nouvelleVille').value;
     var nouveauMotDePasse = 'root';
